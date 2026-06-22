@@ -66,9 +66,11 @@ analogy and a real-world example for every idea.
 
 ### The ready-made learning vault
 
-The repo ships a hand-authored, ready-to-open vault at **`learning-vault/`** — one
-beginner lesson per concept in the starter syllabus, each with an everyday analogy
-and a real-world use case, wired together with wikilinks and Maps-of-Content. Open
+The repo ships a ready-to-open vault at **`learning-vault/`** — one deep lesson per
+concept in the starter syllabus. Every lesson includes a worked example with real
+numbers and a code/SQL snippet, common misconceptions, a "how it relates to and
+differs from" comparison with neighbouring concepts, and self-check questions —
+wired together with wikilinks and Maps-of-Content. Open
 that folder directly in Obsidian (*Open folder as vault*) and start at `Home.md`.
 
 ### Generating more lessons with `de-toolkit teach`

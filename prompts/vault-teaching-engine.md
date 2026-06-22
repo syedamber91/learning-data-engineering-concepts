@@ -40,8 +40,8 @@ THE TEACHING PANEL (every lesson passes through all five lenses)
    production system or company?" Supplies the concrete, named use case.
 3. THE HONEST SKEPTIC / MISCONCEPTION-BUSTER — Surfaces the traps beginners fall
    into, where popular tutorials oversimplify or mislead, and where the concept
-   breaks down. Kind in tone, ruthless about accuracy. (Light by default; full
-   when the WATCH-OUT toggle is ON.)
+   breaks down. Kind in tone, ruthless about accuracy. Always fills the COMMON
+   MISCONCEPTIONS section.
 4. THE CURRICULUM ARCHITECT — Maps the topic back onto the vault model
    (Area/Topic/Concept), wires [[wikilinks]] to prerequisites and related notes,
    and designs the memory hook. Keeps everything vault-compatible.
@@ -50,31 +50,52 @@ THE TEACHING PANEL (every lesson passes through all five lenses)
    final until this lens signs off. If it fails, rewrite simpler and try again.
 
 THE LESSON TEMPLATE (apply to EVERY sub-topic)
-Mandatory core — always include, in this order:
+This is a DEEP lesson, not a summary. ALL ten sections below are mandatory, in this
+order. A learner who reads only this lesson — with no other source — should come
+away genuinely understanding the concept and able to use it.
   1. IN ONE LINE — a plain-English definition with zero jargon.
   2. PICTURE THIS — an everyday analogy (e.g., "a database index is like the index
      at the back of a textbook: you jump to the page instead of reading all of it").
-  3. HOW IT ACTUALLY WORKS — ELI15, step by step, short sentences. Define each new
-     term the first time it appears.
-  4. IN THE REAL WORLD — a named, concrete use case (e.g., "how Netflix records
+  3. HOW IT ACTUALLY WORKS — the real mechanism, ELI15, step by step. Teach the
+     "why under the why": don't restate the one-liner — explain what is physically
+     happening and WHY it works that way. Define each new term the first time it
+     appears. Several short paragraphs, not one.
+  4. WORKED EXAMPLE — walk through ONE concrete case using REAL values/numbers
+     (e.g., a table with 1,000,000 rows; a B-tree with 4 levels; an actual SQL
+     query and the rows it returns). Where the concept allows, include a SHORT
+     code / SQL / command snippet in a fenced block (```sql, ```bash, ```python).
+     Show the input, the steps, and the result.
+  5. IN THE REAL WORLD — a named, concrete use case (e.g., "how Netflix records
      what you watched and moves it through an overnight pipeline into dashboards").
-  5. WHY YOU'D USE IT (AND WHEN NOT TO) — the trade-off in one short paragraph.
-  6. CONNECTS TO — [[wikilinks]] to prerequisite concepts and related concepts so
+  6. COMMON MISCONCEPTIONS — 2-3 specific traps beginners fall into, each stated as
+     "People think X — actually Y." Be ruthless about accuracy, kind in tone.
+  7. HOW IT RELATES & DIFFERS — the correlational + differential view. Name the 2-3
+     neighbouring concepts (via [[wikilinks]]) this is most often confused with or
+     paired with, and spell out how it RELATES to each and how it DIFFERS. A small
+     "X vs Y" contrast table or bullet list is ideal.
+  8. WHY YOU'D USE IT (AND WHEN NOT TO) — the trade-off in one short paragraph.
+  9. CHECK YOURSELF — a one-line memory hook/mnemonic, then exactly 3 self-test
+     questions, EACH followed by a short answer, so the learner can verify
+     understanding.
+  10. CONNECTS TO — [[wikilinks]] to prerequisite concepts and related concepts so
      the lesson drops straight into the Obsidian graph.
 
-Optional toggles (state ON/OFF at the start of a run; default OFF):
-  - WATCH OUT — 1-2 of the most common misconceptions for this sub-topic.
-  - LOCK IT IN — a mnemonic or tiny mental picture, plus 3 self-check questions
-                 (with brief answers) to test understanding.
+Depth target: aim for roughly 600-1000 words per sub-topic, at least two concrete
+examples, and a real snippet wherever the concept reasonably supports one. Long
+enough to truly teach; never padded. If you cannot fill a section honestly from the
+vault, say what is missing rather than inventing.
 
 PRESENTATION CONTRACT (non-negotiable formatting rules)
   - Teach TOPIC-BY-TOPIC, and within each topic, SUB-TOPIC-BY-SUB-TOPIC.
   - Reading level: a 15-year-old. Short sentences. No undefined jargon. Every new
     term gets a one-line gloss on first use.
-  - MANDATORY: every lesson contains at least one analogy AND at least one named,
-    real-world use case (step 4 of the template). A lesson missing a concrete
-    real-world use case is INVALID and must be rewritten before it ships — this is
-    not optional and cannot be skipped even when the vault content is thin.
+  - MANDATORY DEPTH: every lesson must include ALL ten template sections — in
+    particular a WORKED EXAMPLE with real numbers and (where the concept allows) a
+    code/SQL snippet, COMMON MISCONCEPTIONS, HOW IT RELATES & DIFFERS, and CHECK
+    YOURSELF (3 Q&A + memory hook). A lesson missing the worked example, the named
+    real-world use case, the misconceptions, the relates/differs comparison, or the
+    self-check is INVALID and must be rewritten before it ships — none of these are
+    optional, even when the vault content is thin.
   - Emit each lesson as VAULT-READY MARKDOWN: YAML frontmatter
     (title, area, topic, tags) followed by the lesson body, using [[wikilinks]] for
     cross-references — so it matches the existing vault note format and can be saved
@@ -139,10 +160,10 @@ EXECUTION INSTRUCTIONS
 2. Open a chat with your preferred Claude model, paste the prompt block above, and
    attach (or paste) the relevant vault notes / `data/content.json` as the source
    material.
-3. Optionally flip the toggles on by adding a line such as
-   `Toggles: WATCH OUT = ON, LOCK IT IN = ON` at the top of your message.
-4. The model returns an Index, then a Roadmap, then one file per Topic — each ready
-   to paste back into your Obsidian vault.
+3. The model returns an Index, then a Roadmap, then one file per Topic — each ready
+   to paste back into your Obsidian vault. Every lesson is deep by default: worked
+   example, misconceptions, a relates/differs comparison, and self-check questions
+   are all mandatory.
 
 The lessons are emitted in the same Markdown + frontmatter + `[[wikilink]]` shape
 that `src/de_toolkit/vault.py` already produces, so they live happily alongside the

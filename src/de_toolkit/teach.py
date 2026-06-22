@@ -67,18 +67,80 @@ def iter_selections(
                 yield Selection(a, t, cpt)
 
 
-def build_lesson_prompt(sel: Selection) -> str:
-    """Assemble the full prompt that produces a single lesson note."""
+LESSON_SKELETON = """\
+Output EXACTLY this structure (Markdown), filling every section deeply:
+
+---
+title: "<concept title>"
+area: "<area>"
+topic: "<topic>"
+tags: [<4-6 lowercase tags>]
+---
+
+# <concept title>
+
+## In one line
+## Picture this
+## How it actually works
+## Worked example
+## In the real world
+## Common misconceptions
+## How it relates & differs
+## Why you'd use it (and when not to)
+## Check yourself
+## Connects to
+
+Rules:
+- "Worked example" MUST use real numbers/values and, where the concept allows, a
+  short fenced code/SQL/command snippet (```sql, ```bash, ```python).
+- "Common misconceptions" lists 2-3 "People think X - actually Y." items.
+- "How it relates & differs" names 2-3 neighbouring concepts with [[wikilinks]] and
+  explains how this RELATES to and DIFFERS from each (a small contrast table is ideal).
+- "Check yourself" has a one-line memory hook then 3 questions, each with its answer.
+- "Connects to" is a line of [[wikilinks]].
+- Target ~600-1000 words. Reading level: a sharp 15-year-old. Output ONLY the
+  Markdown — no commentary before or after, no surrounding code fence.
+"""
+
+
+def _link_guide(catalog: Optional[Catalog], current: Concept) -> str:
+    """List the real wikilink targets so the model never invents broken links."""
+    if catalog is None:
+        return ""
+    lines = []
+    for a in catalog.areas:
+        for t in a.topics:
+            for cpt in t.concepts:
+                if cpt.title == current.title:
+                    continue
+                lines.append(f"- {cpt.title}: [[{slugify(cpt.title)}|{cpt.title}]]")
+    if not lines:
+        return ""
+    return (
+        "VAULT LINK TARGETS — these are the ONLY notes that exist in this vault.\n"
+        "When you cross-reference one (in 'How it relates & differs' or 'Connects "
+        "to'), use EXACTLY the wikilink shown. For any concept NOT in this list "
+        "(e.g. B-tree, full table scan), mention it in **bold** plain text, never "
+        "as a [[wikilink]], so the vault has zero broken links.\n"
+        + "\n".join(lines)
+        + "\n\n"
+    )
+
+
+def build_lesson_prompt(sel: Selection, catalog: Optional[Catalog] = None) -> str:
+    """Assemble the full prompt that produces a single deep lesson note."""
     payload = json.dumps(sel.concept.model_dump(mode="json"), indent=2)
     return (
         _engine_prompt()
         + "\n\n"
         + "=== YOUR TASK FOR THIS RUN ===\n"
-        + "Produce exactly ONE lesson for the concept below, following the LESSON "
-        + "TEMPLATE and PRESENTATION CONTRACT above. Output ONLY the vault-ready "
-        + "Markdown for the lesson (YAML frontmatter then body). Do not add "
-        + "commentary before or after the Markdown. Remember: a named real-world "
-        + "use case is mandatory.\n\n"
+        + "Produce exactly ONE deep lesson for the concept below, following the "
+        + "LESSON TEMPLATE and PRESENTATION CONTRACT above. All ten sections are "
+        + "mandatory — especially the Worked example (with real numbers/snippet), "
+        + "Common misconceptions, How it relates & differs, and Check yourself.\n\n"
+        + LESSON_SKELETON
+        + "\n"
+        + _link_guide(catalog, sel.concept)
         + f"Area: {sel.area.title}\n"
         + f"Topic: {sel.topic.title}\n"
         + "Concept (JSON from the vault):\n"
@@ -140,6 +202,23 @@ def run_claude(prompt: str, model: Optional[str] = None) -> str:
     return _strip_code_fence(proc.stdout.strip())
 
 
+def _inject_breadcrumb(markdown: str, area: str, topic: str) -> str:
+    """Insert the vault navigation breadcrumb right after the H1 title line."""
+    crumb = (
+        f"*Part of [[{slugify(topic)}-moc|{topic}]] · "
+        f"[[{slugify(area)}-moc|{area}]]*"
+    )
+    if crumb in markdown:
+        return markdown
+    lines = markdown.splitlines()
+    for i, line in enumerate(lines):
+        if line.startswith("# "):
+            lines[i + 1:i + 1] = ["", crumb]
+            return "\n".join(lines)
+    # No H1 found — prepend the breadcrumb so navigation still works.
+    return crumb + "\n\n" + markdown
+
+
 def _strip_code_fence(text: str) -> str:
     """Remove a single wrapping ``` / ```markdown fence if the model added one."""
     lines = text.splitlines()
@@ -194,10 +273,12 @@ def teach(
         target = sel.target(vault_dir)
         if dry_run:
             say(f"[dim]--- {sel.concept.title} -> {target} ---[/dim]")
-            say(build_lesson_prompt(sel))
+            say(build_lesson_prompt(sel, catalog))
             continue
         say(f"Teaching [bold]{sel.concept.title}[/bold]…")
-        _write(target, run_claude(build_lesson_prompt(sel), model))
+        lesson = run_claude(build_lesson_prompt(sel, catalog), model)
+        lesson = _inject_breadcrumb(lesson, sel.area.title, sel.topic.title)
+        _write(target, lesson)
         written.append(target)
         say(f"[green]✓[/green] {target}")
 

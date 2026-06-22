@@ -8,6 +8,7 @@ import pytest
 
 from de_toolkit.cli import _sample_catalog
 from de_toolkit.teach import (
+    _inject_breadcrumb,
     _strip_code_fence,
     build_lesson_prompt,
     build_roadmap_prompt,
@@ -20,6 +21,17 @@ def test_strip_code_fence():
     assert _strip_code_fence(fenced) == "---\ntitle: X\n---\nbody"
     plain = "---\ntitle: X\n---\nbody"
     assert _strip_code_fence(plain) == plain
+
+
+def test_inject_breadcrumb_after_h1():
+    md = "---\ntitle: Indexing\n---\n\n# Indexing\n\n## In one line\nAn index..."
+    out = _inject_breadcrumb(md, "Databases", "Relational Databases")
+    assert "[[relational-databases-moc|Relational Databases]]" in out
+    assert "[[databases-moc|Databases]]" in out
+    # breadcrumb sits immediately under the H1, before the first section
+    assert out.index("*Part of") < out.index("## In one line")
+    # idempotent
+    assert _inject_breadcrumb(out, "Databases", "Relational Databases") == out
 
 
 def test_sample_catalog_is_a_full_syllabus():
@@ -55,9 +67,23 @@ def test_lesson_prompt_includes_engine_and_concept():
     # Pulls in the reusable teaching mega-prompt...
     assert "Vault Teaching Engine" in prompt
     assert "PRESENTATION CONTRACT" in prompt
-    # ...and the specific concept payload + mandatory-use-case reminder.
+    # ...and the specific concept payload + the mandatory depth sections.
     assert "Indexing" in prompt
-    assert "real-world use case is mandatory" in prompt
+    assert "Worked example" in prompt
+    assert "Common misconceptions" in prompt
+    assert "How it relates & differs" in prompt
+    assert "Check yourself" in prompt
+
+
+def test_lesson_prompt_link_guide_uses_real_targets():
+    catalog = _sample_catalog()
+    sel = next(iter_selections(catalog, concept="Indexing"))
+    prompt = build_lesson_prompt(sel, catalog)
+    assert "VAULT LINK TARGETS" in prompt
+    # a real sibling concept appears as a proper slug wikilink target
+    assert "[[transactions-acid|Transactions & ACID]]" in prompt
+    # the current concept is excluded from its own link guide
+    assert "[[indexing|Indexing]]" not in prompt
 
 
 def test_roadmap_prompt_lists_areas():
