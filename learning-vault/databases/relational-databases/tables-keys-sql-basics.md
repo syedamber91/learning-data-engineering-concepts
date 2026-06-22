@@ -2,123 +2,243 @@
 title: "Tables, Keys & SQL Basics"
 area: "Databases"
 topic: "Relational Databases"
-tags: [sql, relational-databases, primary-key, foreign-key, data-modeling, querying]
+tags: [sql, relational-databases, primary-key, foreign-key, data-engineering, databases]
 ---
 
 # Tables, Keys & SQL Basics
 
 *Part of [[relational-databases-moc|Relational Databases]] · [[databases-moc|Databases]]*
 
-## In one line
+← Prev: [[big-o-time-complexity|Big-O / Time Complexity]] · Next: [[indexing|Indexing]] →
 
-A relational database organises data into tables of rows and columns, uses keys to link those tables together, and lets you ask questions about that data using SQL.
+## Recap — where we just were
 
-## Picture this
+In [[big-o-time-complexity|Big-O / Time Complexity]] you learned to read the efficiency grade on any algorithm — O(1) for instant lookups, O(n) for linear scans, and the logarithmic O(log n) trick that powers binary search. You even spotted that database indexes use exactly that halving trick under the hood. Now we step inside the database itself to understand what is actually *being* indexed: **tables**, the rows and columns inside them, and **SQL**, the language you use to ask questions of the data.
 
-Imagine a school office that keeps two paper binders. The first binder has one page per student — student ID, name, age. The second binder has one page per grade — which student earned which mark in which class. The student ID printed on every grade page is the connection: if you want to know a student's name AND their grade, you match the ID across both binders.
+---
 
-A relational database is exactly that office, but digital and fast. Tables are the binders, rows are the pages, columns are the fields on each page, and keys are the IDs that let you match records across tables.
+## Level 1 — The big idea
 
-## How it actually works
+A **relational database** is a system that stores data in **tables** — grids of rows and columns, like a very strict spreadsheet — and lets you link those tables together using shared keys. **SQL** (Structured Query Language) is the plain-English-ish language you use to read, add, change, or remove that data.
 
-**Tables** are the basic storage unit. A table has a fixed set of named columns (the "shape" of the data) and a growing list of rows (the actual data). Every cell in a row holds one value for one column — for example, a `students` table might have columns `student_id`, `name`, and `age`.
+**Everyday analogy:** Imagine a school's filing cabinet. One drawer holds one index card per student (name, student ID, year). A second drawer holds one card per class enrolment, with the student ID written on it so you know who enrolled. The student ID is the link between the two drawers. A relational database is that filing cabinet, turbocharged to handle millions of cards and answer queries in milliseconds.
 
-**The Primary Key (PK)** is a column (or combination of columns) whose value is unique for every row in that table — no duplicates, no blanks, ever. It is the row's permanent identity. Most databases auto-generate this as an incrementing integer (1, 2, 3 …) so you never have to think about uniqueness yourself.
+<!-- mermaid-source:
+graph TD
+    DB[Relational Database] --> T1[customers table]
+    DB --> T2[orders table]
+    T1 --> R1[id=1 Alice]
+    T1 --> R2[id=2 Bob]
+    T2 --> O1[order 101 belongs to customer 1]
+    T2 --> O2[order 102 belongs to customer 2]
+-->
+![[tables-keys-sql-basics-d1.svg]]
 
-**The Foreign Key (FK)** is how one table points at another. A `grades` table might have a column called `student_id` that must match a real `student_id` in the `students` table. The database enforces this rule: you cannot insert a grade for student ID 99 if no student with ID 99 exists. This guarantee is called **referential integrity** — the links between tables are never broken.
+The key insight: instead of one giant blob of data, you split information into focused tables and connect them with shared values. That discipline is exactly what the word *relational* means.
 
-**SQL** (Structured Query Language) is the language you use to talk to the database. It is *declarative*: you say **what** you want, not **how** to find it. The database figures out the efficient path. The four operations every beginner needs are:
+---
 
-- `SELECT` — read rows
-- `INSERT` — add rows
-- `UPDATE` — change values in existing rows
-- `DELETE` — remove rows
+## Level 2 — How it actually works
 
-## Worked example
+Now that you have the picture, let's trace three core building blocks: **columns and rows**, **primary keys**, and **foreign keys**.
 
-Suppose a school tracks students and their exam scores.
+### Columns and rows
+
+Every table has a fixed set of **columns** (the headings — what kind of thing is stored) and a growing set of **rows** (one record per real-world entity). Columns have a **data type** such as `INTEGER`, `TEXT`, or `DECIMAL`. The database enforces those types, so a phone-number column can never accidentally store a date.
+
+<!-- mermaid-source:
+graph TD
+    T[customers table] --> COLS[Columns define the shape]
+    T --> ROWS[Rows hold the data]
+    COLS --> C1[customer_id INTEGER]
+    COLS --> C2[name TEXT]
+    COLS --> C3[email TEXT]
+    ROWS --> R1[Row 1 - id 1 Alice alice@ex.com]
+    ROWS --> R2[Row 2 - id 2 Bob bob@ex.com]
+-->
+![[tables-keys-sql-basics-d2.svg]]
+
+### Primary key — the row's fingerprint
+
+A **primary key** (PK) is a column whose value is **unique for every row** and **never null**. It is the row's fingerprint — no two rows may share it.
+
+Why does uniqueness matter? Because every other table that wants to *reference* a customer needs a reliable, unambiguous way to say "I mean *this exact* customer, and no other." If two customers could share the same ID, that reference would be ambiguous and the whole system would break down.
+
+Most databases let you declare `PRIMARY KEY` on a column and then automatically reject any duplicate insert attempt.
+
+### Foreign key — the bridge between tables
+
+A **foreign key** (FK) is a column in one table whose values must match the primary key of *another* table. It is the bridge that makes databases *relational*.
+
+<!-- mermaid-source:
+graph LR
+    customers -->|customer_id is PK| PK_label[unique identifier per customer]
+    orders -->|order_id is PK| PK2_label[unique identifier per order]
+    orders -->|customer_id is FK - points to| customers
+-->
+![[tables-keys-sql-basics-d3.svg]]
+
+The database enforces **referential integrity** — a guarantee that your references are always valid: you cannot insert an order with `customer_id = 99` if no customer with ID 99 exists. This prevents *orphan records*, which are rows that reference something that no longer exists.
+
+### SQL: the four core commands
+
+SQL lets you do four things to data, often remembered as **CRUD**:
+
+| SQL keyword | What it does | Human translation |
+|---|---|---|
+| `SELECT` | Read rows | "Give me data" |
+| `INSERT` | Add a new row | "Store this" |
+| `UPDATE` | Change existing rows | "Fix this" |
+| `DELETE` | Remove rows | "Forget this" |
+
+<!-- mermaid-source:
+graph LR
+    SQL[SQL] --> S[SELECT - read data]
+    SQL --> I[INSERT - add a row]
+    SQL --> U[UPDATE - modify rows]
+    SQL --> D[DELETE - remove rows]
+-->
+![[tables-keys-sql-basics-d4.svg]]
+
+Every data engineering pipeline you will ever build uses these four verbs. They are the vocabulary of every database conversation.
+
+---
+
+## Level 3 — See it with real numbers
+
+Imagine a tiny e-commerce store. It has two tables.
+
+**customers** — 3 rows:
+
+| customer_id | name  | email             |
+|-------------|-------|-------------------|
+| 1           | Alice | alice@example.com |
+| 2           | Bob   | bob@example.com   |
+| 3           | Carla | carla@example.com |
+
+**orders** — 5 rows:
+
+| order_id | customer_id | total  |
+|----------|-------------|--------|
+| 101      | 1           | 49.99  |
+| 102      | 2           | 19.50  |
+| 103      | 1           | 89.00  |
+| 104      | 3           | 5.00   |
+| 105      | 1           | 120.00 |
+
+`customer_id` in `orders` is a foreign key — it points to `customer_id` in `customers`. Notice that Alice (id 1) has three orders, Bob one, and Carla one. Now let's run all four SQL commands against this data:
 
 ```sql
--- Create the students table
-CREATE TABLE students (
-    student_id  INT PRIMARY KEY,
-    name        VARCHAR(100),
-    age         INT
-);
+-- SELECT: find all orders placed by Alice (customer_id = 1)
+SELECT order_id, total
+FROM orders
+WHERE customer_id = 1;
+-- Result: rows 101 ($49.99), 103 ($89.00), 105 ($120.00)
 
--- Create the grades table, with a foreign key back to students
-CREATE TABLE grades (
-    grade_id    INT PRIMARY KEY,
-    student_id  INT REFERENCES students(student_id),
-    subject     VARCHAR(50),
-    score       INT
-);
+-- INSERT: add a new customer
+INSERT INTO customers (customer_id, name, email)
+VALUES (4, 'David', 'david@example.com');
+-- customers now has 4 rows
 
--- Insert 3 students
-INSERT INTO students VALUES (1, 'Aisha',  15);
-INSERT INTO students VALUES (2, 'Carlos', 16);
-INSERT INTO students VALUES (3, 'Priya',  15);
+-- UPDATE: Alice changed her email address
+UPDATE customers
+SET email = 'alice@newdomain.com'
+WHERE customer_id = 1;
+-- Only Alice's row changes; Bob and Carla are untouched
 
--- Insert some grades
-INSERT INTO grades VALUES (101, 1, 'Maths',   88);
-INSERT INTO grades VALUES (102, 1, 'Science', 75);
-INSERT INTO grades VALUES (103, 2, 'Maths',   92);
+-- DELETE: remove a cancelled order
+DELETE FROM orders
+WHERE order_id = 104;
+-- orders now has 4 rows; Carla's $5.00 order is gone
+```
 
--- Ask: what are Aisha's scores?
-SELECT s.name, g.subject, g.score
-FROM   students s
-JOIN   grades   g ON s.student_id = g.student_id
-WHERE  s.name = 'Aisha';
+**JOIN — the relational superpower.** The real power shows up when you read from *two tables at once* using a `JOIN`:
+
+```sql
+-- Show customer names alongside their orders
+SELECT customers.name, orders.order_id, orders.total
+FROM orders
+JOIN customers ON orders.customer_id = customers.customer_id;
 ```
 
 Result:
 
-| name  | subject | score |
-|-------|---------|-------|
-| Aisha | Maths   | 88    |
-| Aisha | Science | 75    |
+| name  | order_id | total  |
+|-------|----------|--------|
+| Alice | 101      | 49.99  |
+| Bob   | 102      | 19.50  |
+| Alice | 103      | 89.00  |
+| Alice | 105      | 120.00 |
 
-The `JOIN … ON` clause is the key-matching in action: the database finds every grade row where `grades.student_id` equals `students.student_id`, then filters for Aisha. Priya has no grades yet — she simply doesn't appear, which is correct.
+The database matched every row in `orders` to the `customers` row with the same `customer_id`. That matching step is exactly where [[indexing|Indexing]] becomes critical — without an index, the database has to scan every customer row for every single order row, an O(n²) operation you now know is catastrophic at scale.
 
-Try inserting `INSERT INTO grades VALUES (104, 99, 'Art', 70);` — the database will reject it because student 99 does not exist. That is referential integrity doing its job.
+---
 
-## In the real world
+## Level 4 — In the real world & common traps
 
-Shopify's order management system is a textbook example. There is a `customers` table (customer_id, name, email), an `orders` table (order_id, customer_id, order_date, total), and an `order_items` table (item_id, order_id, product_id, quantity, price). Every time you click "Buy", Shopify inserts a row into `orders` and one row per product into `order_items`, both pointing back to your `customer_id`. A support agent querying "show me all orders placed by customer 4821 in the last 30 days" runs a `SELECT … JOIN … WHERE` across exactly these tables — and gets the answer in milliseconds across millions of rows.
+### Named real-world use case
 
-## Common misconceptions
+Think of **Shopify's order management system**. Every merchant store has a `customers` table (millions of rows), an `orders` table (tens of millions of rows), a `products` table, and a `line_items` table connecting orders to the specific products purchased. When a customer checks out, one `INSERT` lands in `orders` and one `INSERT` per product lands in `line_items`. When the merchant opens their dashboard, a `SELECT ... JOIN` assembles the full order summary in milliseconds. Foreign keys ensure no order can reference a deleted product, and primary keys ensure no two orders ever collide — even when thousands of customers are checking out simultaneously.
 
-**People think the primary key should be something meaningful like a name or email — actually it just needs to be unique.** Names clash (two students named "Carlos") and emails change. An auto-incrementing integer (`1, 2, 3 …`) has no real-world meaning, which is a *feature*: it never changes and never collides.
+### Common misconceptions
 
-**People think a foreign key copies data from the other table — actually it only stores a reference (the ID).** The `grades` table does not store Aisha's name; it stores `student_id = 1`. The name lives in one place only (`students`). This is the whole point — change Aisha's name once and every grade instantly reflects it, because they all point to the same row.
+**People think:** "A spreadsheet and a database table are basically the same thing."
+**Actually:** A spreadsheet lets any cell hold any value at any time, and it breaks under concurrent edits. A database table enforces column types, primary key uniqueness, foreign key constraints, and handles thousands of simultaneous users without data corruption. The discipline is the point — the restrictions are features, not limitations.
 
-**People think SQL is a programming language like Python — actually it is a query language.** You declare the *result* you want ("give me students whose score > 80") and the database decides how to find it. There are no loops, no variables in basic SQL. This makes it simpler for data tasks, but it also means you cannot write general programs in it.
+**People think:** "SQL is just for reading data — SELECT is the important one."
+**Actually:** `INSERT`, `UPDATE`, and `DELETE` are equally critical. Every pipeline that *loads* data into a warehouse uses `INSERT`; every system that keeps records current uses `UPDATE`; and `DELETE` (or soft-delete patterns) prevents tables from growing without bound. `SELECT` is the window you look through; the other three are the machinery that keeps the warehouse stocked.
 
-## How it relates & differs
+**People think:** "If I put all my data in one big table I won't need to deal with foreign keys or JOINs."
+**Actually:** This is called **denormalization** — sometimes an intentional, useful choice (you will study the trade-off in [[normalization-vs-denormalization|Normalization vs Denormalization]]) but more often a slow-motion disaster. Alice's name would be repeated on every one of her 1,000 orders. Change her email once and you have to update 1,000 rows instead of one — and if you miss even one row, your data is now inconsistent. Splitting into related tables is not bureaucracy; it is how you keep data trustworthy.
 
-| Concept | Relates to Tables & Keys | Differs from Tables & Keys |
+---
+
+## Level 5 — Expert view
+
+### How this relates to — and differs from — neighbouring concepts
+
+| Concept | What it shares with Tables & SQL | Key difference |
 |---|---|---|
-| [[indexing\|Indexing]] | Primary keys almost always get an index automatically, so lookups by PK are instant. | Indexing is a *performance* layer on top of a table — it does not define structure or relationships, only speeds up searches. |
-| [[normalization-vs-denormalization\|Normalization vs Denormalization]] | Splitting data into multiple linked tables (students + grades) *is* normalization. Keys are what make that split reversible. | Normalization is the *design philosophy*; tables and keys are the *mechanics* that implement it. |
-| [[transactions-acid\|Transactions & ACID]] | Every `INSERT`, `UPDATE`, or `DELETE` SQL statement runs inside a transaction that guarantees the change is safe, complete, or rolled back. | Transactions & ACID describe *safety guarantees* around changes; tables and keys describe *structure and relationships*. |
+| [[arrays-hash-maps|Arrays & Hash Maps]] | Both store collections of items you can query | Arrays live in program memory and vanish when the program ends; tables persist to disk, survive restarts, and are shared across many programs and users simultaneously |
+| [[big-o-time-complexity|Big-O / Time Complexity]] | A JOIN without an index is an O(n²) nested-loop scan | Big-O grades the algorithm; the table structure determines *which* algorithm the database is forced to use |
+| [[indexing|Indexing]] | Both are core database mechanics | Tables define *what* data exists; indexes define *how fast* the database can find it — an index on `customer_id` turns the JOIN above from O(n²) to O(log n) |
+| [[transactions-acid|Transactions & ACID]] | Both operate on the same tables | ACID wraps SQL commands in a safety guarantee: either all of them succeed or none of them do — table rules alone cannot protect you if power cuts out mid-INSERT |
 
-## Why you'd use it (and when not to)
+### Trade-offs and edge cases
 
-Use a relational database when your data has clear relationships, when you need to avoid storing the same fact twice, and when you need reliable, consistent answers to questions that cross-reference multiple entities (orders + customers + products). The trade-off: relational databases demand that you design your schema upfront and enforce strict rules. When your data is unstructured (documents, images), changes shape constantly, or needs to scale to billions of writes per second across hundreds of servers, those strict rules become a bottleneck — and document stores or column-oriented databases become better choices.
+**When relational tables shine:**
+Data has clear relationships (customers → orders → products), you need to enforce integrity (no orphan records, no duplicate IDs), and queries are ad hoc — SQL is flexible enough to answer questions you have not thought of yet.
+
+**When to be careful:**
+- Deeply nested JOINs across many large tables hit O(n²) performance without careful indexing. The database can only be as fast as the algorithm it can choose, and no amount of hardware fixes a missing index.
+- Very wide tables — hundreds of columns — become difficult to maintain. Adding a column to a billion-row table can lock the entire table for minutes.
+- If every query always reads the same pre-joined shape, a [[star-schema|Star Schema]] or a pre-aggregated model may be far faster than rerunning the same JOIN millions of times per day.
+
+**The NULL trap — an expert-level gotcha:** SQL uses three-valued logic: TRUE, FALSE, and NULL (meaning "unknown"). `WHERE email = NULL` never returns any rows, because NULL is not equal to anything — not even to itself. You must write `WHERE email IS NULL`. This surprises almost every beginner and is responsible for a disproportionate share of subtle data bugs in production systems.
+
+---
 
 ## Check yourself
 
-**Memory hook:** "A table is a grid, a key is an ID, SQL is how you ask."
+**Memory hook:** "Tables store the facts, keys make the connections, SQL asks the questions."
 
-**Q1: What problem does a foreign key solve?**
-It ensures that a row in one table can only reference a row that actually exists in another table, preventing "orphan" records — grades with no matching student, orders with no matching customer.
+**Q1: What is the purpose of a primary key, and what two rules must it always obey?**
+A: A primary key uniquely identifies each row in a table. It must be unique (no two rows share the same value) and never null. It is the row's unambiguous fingerprint.
 
-**Q2: You have a `products` table with 1 million rows. What does `SELECT * FROM products WHERE product_id = 42;` return, and why is it fast?**
-It returns the single row where `product_id` is 42. It is fast because `product_id` is the primary key, and primary keys automatically get an index — the database jumps straight to that row rather than reading all 1 million.
+**Q2: Alice's `customer_id` is 1 in the `customers` table, and the `orders` table has a `customer_id` column pointing back to her. What is that column in `orders` called, and what does the database refuse to let you do because of it?**
+A: It is a **foreign key**. The database refuses to insert any order with a `customer_id` that does not exist in the `customers` table, preventing orphan records that reference nothing real.
 
-**Q3: Why is using a person's email address as a primary key risky?**
-Emails change. If a user updates their email, you would have to update it everywhere it is referenced as a foreign key across every related table — a cascade of changes that is error-prone and slow. An auto-incremented integer never changes, making updates safe and cheap.
+**Q3: You run `DELETE FROM orders WHERE customer_id = 2` against the Level 3 data. How many rows are deleted, and which ones survive?**
+A: Exactly one row is deleted — order 102 (Bob's only order, $19.50). All four of Alice's remaining orders and Carla's order survive untouched because their `customer_id` values are not 2.
+
+---
 
 ## Connects to
 
-[[indexing|Indexing]] · [[normalization-vs-denormalization|Normalization vs Denormalization]] · [[transactions-acid|Transactions & ACID]] · [[star-schema|Star Schema]] · [[big-o-time-complexity|Big-O / Time Complexity]]
+[[arrays-hash-maps|Arrays & Hash Maps]] · [[big-o-time-complexity|Big-O / Time Complexity]] · [[indexing|Indexing]] · [[transactions-acid|Transactions & ACID]] · [[normalization-vs-denormalization|Normalization vs Denormalization]] · [[star-schema|Star Schema]]
+
+---
+
+## Coming up next
+
+**[[indexing|Indexing]]** — Now that you know what a table is and how a JOIN works, you will discover why matching rows across two million-row tables without the right structure can grind a server to a halt, and how a **B-tree** index slices that cost from O(n²) down to O(log n) — exactly the halving trick that Big-O promised was coming.

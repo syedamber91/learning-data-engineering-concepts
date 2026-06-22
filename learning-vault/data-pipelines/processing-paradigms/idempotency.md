@@ -2,123 +2,227 @@
 title: "Idempotency"
 area: "Data Pipelines"
 topic: "Processing Paradigms"
-tags: [idempotency, data-pipelines, reliability, upserts, exactly-once]
+tags: [idempotency, data-pipelines, fault-tolerance, upserts, retries, exactly-once]
 ---
 
 # Idempotency
 
 *Part of [[processing-paradigms-moc|Processing Paradigms]] · [[data-pipelines-moc|Data Pipelines]]*
 
-## In one line
+← Prev: [[batch-vs-streaming|Batch vs Streaming]] · Next: [[dags-schedulers|DAGs & Schedulers]] →
 
-An idempotent operation always produces the same result, no matter how many times you run it — so running it once is identical to running it ten times.
+## Recap — where we just were
 
-## Picture this
+In [[batch-vs-streaming|Batch vs Streaming]] you learned that pipelines either collect data in big chunks and process them on a schedule, or handle each event the instant it arrives. Either way, one uncomfortable question looms: *what happens if the pipeline crashes halfway through?* You have two choices — skip the remaining work and lose data, or re-run from the beginning and risk processing some rows twice. Idempotency is the design principle that makes the second option safe.
 
-Imagine you press the button to call an elevator. Pressing it once makes the elevator come. Pressing it five more times in frustration does not send five elevators — you still get exactly one. The button is **idempotent**: the outcome is the same regardless of how many times you press it.
+---
 
-Now contrast that with a vending machine that charges your card every time you tap it. Tap it six times and you get charged six times. That is **not** idempotent — each extra run adds a new effect.
+## Level 1 — The big idea
 
-Data pipeline steps work exactly the same way. Some steps are "vending machines" (dangerous to repeat). Idempotency is the engineering discipline of turning them into "elevator buttons" (safe to repeat).
+An **idempotent** operation is one where running it once produces exactly the same result as running it ten times.
 
-## How it actually works
+The word comes from Latin *idem* (same) + *potens* (powerful). Same power, same result, no matter how many repetitions.
 
-When a data pipeline runs, things go wrong. Networks drop. Servers crash. A nightly job that started at 2 a.m. might die at 2:47 a.m. and restart automatically at 3 a.m. The question is: when it restarts, does it leave the data in a consistent state, or does it create chaos?
+**Everyday analogy — a "PAID" stamp:**
+When an accountant stamps an invoice "PAID", it doesn't matter if they stamp it once or accidentally five times. The invoice is still just *PAID* — not *PAID PAID PAID PAID PAID*. The stamp is idempotent.
 
-A non-idempotent step blindly **appends** new data every time it runs. Restart it after a half-finished run and you get duplicates, doubled totals, or corrupted records.
+A *non-idempotent* instruction would be "ADD $100 TO BALANCE". Run it five times by accident and you've added $500 instead of $100. That is the exact bug idempotency prevents in data pipelines.
 
-An idempotent step instead **overwrites or merges** using a stable, deterministic key — a unique identifier that was always going to be the same for that record (for example: `order_id`, a date + store combination, or a hash of the source row). The mechanism looks like this:
+<!-- mermaid-source:
+graph LR
+    A[Pipeline Step] -->|Run 1 time| B[Result: 500 rows]
+    A -->|Run 5 times| B
+    A -->|Run 100 times| B
+-->
+![[idempotency-d1.svg]]
 
-1. **Compute a deterministic key** for each record. The key must not change between runs — it is derived from the data itself, not from "when the job ran."
-2. **Use an upsert** (short for "update or insert"): if a row with that key already exists, update it to the new value; if it does not exist yet, insert it. Either way, after the operation the table contains exactly one row per key, with the correct values.
-3. **Optionally delete-then-reload** a bounded partition (e.g., all rows for `date = 2026-06-22`) before writing, which is another pattern that guarantees a clean slate.
+The key insight: **safe to retry = safe to operate at scale.** Crashes, network blips, and scheduler restarts happen constantly in production. Idempotency turns "re-run after failure" from a dangerous gamble into a reliable strategy.
 
-The result: run the step once, twice, or a hundred times — the final table looks identical every time.
+---
 
-## Worked example
+## Level 2 — How it actually works
 
-Suppose you have a pipeline that loads daily order totals from a source system into a `daily_sales` table. Each row represents one store's total for one day.
+Now that you have the intuition, let's look at the two concrete techniques that make a step idempotent.
 
-**Non-idempotent version (dangerous):**
+### Technique 1 — Deterministic keys
+
+Every event or row needs a **deterministic key**: an ID that is *computed from the event's content*, not generated randomly at write time. If the same event arrives twice, it produces the same key — and the database recognises the second arrival as a duplicate.
+
+For example: a payment event carries a `payment_id` supplied by the payment gateway. Whether your pipeline processes that event once or three times, `payment_id` is always identical. The database sees the same key and knows it already has this row.
+
+Without a deterministic key, each retry might call `uuid()` to generate a fresh ID, resulting in a new duplicate row every single time.
+
+### Technique 2 — Upserts
+
+An **upsert** (UPDATE + INSERT merged) tells the database: *"If a row with this key already exists, update it. If not, insert it."* Either way, the end state is one row with correct values — whether the step ran once or fifty times.
+
+<!-- mermaid-source:
+graph TD
+    E[Event arrives - possibly a retry] --> K[Compute deterministic key]
+    K --> U{Row with this key already exists?}
+    U -->|Yes| UP[UPDATE - overwrite with same values]
+    U -->|No| IN[INSERT new row]
+    UP --> R[Final state: exactly one row with correct values]
+    IN --> R
+-->
+![[idempotency-d2.svg]]
+
+Together, deterministic keys + upserts produce a pipeline where *re-running always converges on the same final state*.
+
+### The crash-and-retry scenario made concrete
+
+Imagine a nightly batch job processing 1,000,000 rows. At row 700,001 the server loses power. Without idempotency you face a dilemma: skip the remaining 300,000 rows (missing data) or re-run from scratch (the first 700,000 rows get processed twice, inflating totals). With idempotency, re-running is safe — the first 700,000 upserts find existing rows and overwrite them with identical values; the remaining 300,000 rows are inserted fresh. The table ends in exactly the right state.
+
+<!-- mermaid-source:
+sequenceDiagram
+    participant Job as Batch Job
+    participant DB as Database
+    Job->>DB: Upsert payment_id=001 amount=50.00
+    Job->>DB: Upsert payment_id=002 amount=75.00
+    Note over Job: Server crashes at row 700001
+    Job->>DB: Upsert payment_id=001 amount=50.00
+    Note over DB: Key exists - UPDATE with identical value
+    Job->>DB: Upsert payment_id=002 amount=75.00
+    Note over DB: Key exists - UPDATE with identical value
+    Job->>DB: Upsert payment_id=700001 amount=99.00
+    Note over DB: New key - INSERT
+-->
+![[idempotency-d3.svg]]
+
+The database lands in the same clean state as if the crash never happened.
+
+---
+
+## Level 3 — See it with real numbers
+
+**Scenario:** your e-commerce pipeline loads daily revenue into a `daily_revenue` table. The nightly job crashed at 2 AM and you need to re-run it safely against 500,000 rows.
+
+**Table structure:**
+
+| order_date | product_id | total_revenue |
+|---|---|---|
+| 2026-06-21 | 42 | 9 999.00 |
+| 2026-06-21 | 17 | 4 500.00 |
+
+The **composite key** `(order_date, product_id)` is deterministic — derived from the data itself.
+
+**Without idempotency (dangerous):**
 
 ```sql
--- Runs every morning. If it retries, it inserts duplicate rows.
-INSERT INTO daily_sales (store_id, sale_date, total_usd)
-VALUES (42, '2026-06-22', 15000.00);
+-- Non-idempotent: running twice inserts duplicate rows
+INSERT INTO daily_revenue (order_date, product_id, total_revenue)
+VALUES ('2026-06-21', 42, 9999.00);
+
+-- Run again after crash → two rows for the same date + product → totals doubled
 ```
 
-Run this twice on the same day and you get two rows for store 42 on 2026-06-22, giving a false total of $30,000.
-
-**Idempotent version (safe):**
+**With idempotency (safe to run any number of times):**
 
 ```sql
--- PostgreSQL upsert: insert or update if the key already exists.
-INSERT INTO daily_sales (store_id, sale_date, total_usd)
-VALUES (42, '2026-06-22', 15000.00)
-ON CONFLICT (store_id, sale_date)
-DO UPDATE SET total_usd = EXCLUDED.total_usd;
+INSERT INTO daily_revenue (order_date, product_id, total_revenue)
+VALUES ('2026-06-21', 42, 9999.00)
+ON CONFLICT (order_date, product_id)
+DO UPDATE SET total_revenue = EXCLUDED.total_revenue;
 ```
 
-Here `(store_id, sale_date)` is the deterministic key. Run this ten times: store 42 on 2026-06-22 still shows exactly $15,000. The retry is completely safe.
+Run once → one row, `total_revenue = 9999.00`.
+Run again after crash → same key found → row updated with `total_revenue = 9999.00` (unchanged).
+Run a third time → same outcome. One row, correct value, always.
 
-In Python with a pipeline framework the same logic might look like:
+**In Python (a streaming consumer handling retries):**
 
 ```python
-def load_daily_sales(store_id: int, sale_date: str, total_usd: float, conn):
-    conn.execute("""
-        INSERT INTO daily_sales (store_id, sale_date, total_usd)
+def process_payment_event(event, db):
+    # payment_id comes from the gateway - stable, not generated here
+    payment_id = event["payment_id"]
+
+    db.execute("""
+        INSERT INTO payments (payment_id, amount, status)
         VALUES (%s, %s, %s)
-        ON CONFLICT (store_id, sale_date)
-        DO UPDATE SET total_usd = EXCLUDED.total_usd
-    """, (store_id, sale_date, total_usd))
+        ON CONFLICT (payment_id)
+        DO UPDATE SET amount = EXCLUDED.amount,
+                      status = EXCLUDED.status
+    """, (payment_id, event["amount"], event["status"]))
+    # Calling this 10 times with the same event → 1 row, same values
 ```
 
-Call this function once or a thousand times — the table ends up in the same correct state.
+Input: `{"payment_id": "pay_001", "amount": 50.00, "status": "completed"}`
+After 1 call: 1 row in `payments`.
+After 10 calls: still 1 row, same values. Zero duplicates.
 
-## In the real world
+---
 
-Consider an e-commerce company running a nightly Airflow pipeline that aggregates the previous day's orders and writes them into a reporting database. The pipeline runs at midnight and usually finishes by 1 a.m.
+## Level 4 — In the real world & common traps
 
-One night the database connection drops at 12:47 a.m. after writing 80% of the rows. Airflow automatically retries the task at 1 a.m. Because every write step uses upserts keyed on `(order_id, partition_date)`, the retry simply overwrites the 80% already written (no harm done) and finishes the remaining 20%. By 1:20 a.m. the table is perfectly correct — no duplicates, no missing rows, no manual intervention required.
+**Real-world use case — Spotify's daily royalty pipeline**
 
-Without idempotency, the on-call engineer gets paged at 1 a.m. to manually delete the partial data and re-run the job by hand. Multiply that by dozens of pipelines and you have a fragile, sleepless data team.
+Every day, Spotify aggregates billions of play events into a `daily_plays` table used to calculate royalties for artists. If the nightly Spark job crashes at 3 AM and must restart, *every cent of royalty calculation must come out exactly the same*. Paying an artist twice because of a retry would be a legal and financial disaster.
 
-## Common misconceptions
+Spotify's pipeline uses a composite deterministic key `(track_id, date)` with upserts. The job can crash and restart as many times as needed — the final table always reflects one play per event, because duplicates are silently overwritten with identical values rather than stacked on top. **Backfills** — reprocessing six months of historical data to fix a bug — also rely entirely on idempotency: engineers re-run every day's job from scratch, confident the output will be correct and duplicate-free.
 
-**People think "idempotent" means "runs only once."**
-Actually, it means the opposite: it is *designed* to be run any number of times safely. The word describes a property of the operation, not how often it executes.
+**Common misconceptions**
 
-**People think retrying a failed step is always harmless.**
-Actually, retrying is only harmless if the step was deliberately designed to be idempotent. A naive `INSERT` that appends rows becomes more wrong with every retry. Safety must be built in — it is not the default.
+**People think: "Just delete and re-insert to avoid duplicates."**
+Actually: DELETE followed by INSERT is *two* operations. If the pipeline crashes between them, the row is gone and never re-inserted — you now have *missing* data, which is often worse than a duplicate. An upsert is a single atomic operation that cannot be half-executed.
 
-**People think idempotency is a database-only concern.**
-Actually, it applies everywhere: API calls (calling a payment processor twice charges the customer twice unless the API uses an idempotency key), file writes (appending to a log vs. overwriting it), and even cache invalidation. Anywhere an action has a side effect, idempotency is relevant.
+**People think: "Idempotency means rows are never touched twice."**
+Actually: idempotent steps *do* touch the same rows on retry — they just produce the same result each time. A row might be updated ten times with the same value. The *outcome* is stable, not the number of operations.
 
-## How it relates & differs
+**People think: "Streaming systems handle duplicate events automatically."**
+Actually: most message queues (including **Apache Kafka** in its default configuration) guarantee **at-least-once delivery** — meaning a message *may* be delivered more than once. The stream *processor* must implement idempotency itself using deterministic keys and upserts. The queue only guarantees delivery, not duplicate-safe processing.
 
-| Concept | How it relates | How it differs |
+---
+
+## Level 5 — Expert view
+
+### How idempotency relates to and differs from neighbouring concepts
+
+| Concept | What it guarantees | Where the guarantee lives |
 |---|---|---|
-| [[batch-vs-streaming\|Batch vs Streaming]] | Batch jobs process whole time windows and are commonly retried or backfilled; idempotency is what makes those re-runs safe | Batch vs Streaming is about *when* data is processed; idempotency is about *how* each step is designed to handle repetition |
-| [[dags-schedulers\|DAGs & Schedulers]] | Schedulers like Airflow automatically retry failed tasks; idempotency is the guarantee that makes automatic retries trustworthy | DAGs & Schedulers define *what runs and when*; idempotency defines *whether running it again is safe* |
-| [[data-quality-validation\|Data Quality & Validation]] | Idempotent pipelines prevent duplicates and partial writes, which are major data quality failures | Data Quality & Validation *detects* problems after the fact; idempotency *prevents* a class of problems by design |
+| **Idempotency** | Re-running the same step produces the same result | In your pipeline code and write logic |
+| **Exactly-once semantics** | Each event is processed exactly one time, end to end | In the messaging infrastructure itself |
+| **At-least-once delivery** | Every event is delivered, but possibly multiple times | In the message queue |
+| **Transactions & ACID** | A group of writes either all succeed or all fail atomically | In the database engine |
 
-## Why you'd use it (and when not to)
+**Idempotency vs. exactly-once semantics:** they solve the same user-visible problem from different directions. **Exactly-once** tries to prevent duplicates from ever entering the system; idempotency ensures that if duplicates *do* enter, they cause no harm on the way out. In practice, idempotency is easier to implement and more portable — it works regardless of which message queue, cloud provider, or database you use. Exactly-once guarantees are expensive, fragile, and sometimes unavailable in distributed systems.
 
-You should design for idempotency any time a pipeline step can fail and be retried — which is almost always. The cost is small (choose the right key, use upserts or partition-replace patterns) and the reliability gain is enormous: you can re-run any step, backfill historical dates, or recover from outages without manual cleanup. The main trade-off is that you need a reliable, stable key for each record; if no natural key exists you have to engineer a synthetic one (e.g., a hash of the source fields), which adds a little complexity. The only situations where idempotency is genuinely hard to achieve are truly stateful, order-dependent operations — for example, dispensing physical cash from an ATM — but in software data pipelines those cases are rare and should be flagged explicitly rather than ignored.
+**Idempotency vs. [[transactions-acid|Transactions & ACID]]:** ACID is a complement, not a substitute. A transaction guarantees that your upsert either fully completes or fully rolls back within *one* run — it says nothing about what happens if you run the same upsert again tomorrow. You need *both*: ACID for consistency within a single execution, idempotency for safety across multiple executions.
+
+**Idempotency and [[data-quality-validation|Data Quality & Validation]]:** validation is the verification layer on top. After a re-run, a quality check confirms that row counts and revenue totals match expectations, catching any case where idempotency broke down — for example, if a key collision caused silent data loss.
+
+### Trade-offs and edge cases
+
+**When idempotency is easy:** the source system provides a stable, unique ID (`payment_id`, `order_id`). Use it as the conflict key. Done.
+
+**When idempotency is hard:** the source provides no unique ID (raw sensor readings with identical timestamps, for example). You must synthesise a key by hashing the event content — and you must be certain two genuinely *different* readings never hash to the same value. A collision causes silent data loss with no error message.
+
+**Performance cost:** upserts are slightly slower than plain inserts because the database must check for an existing row before writing. On a 100-million-row table, this index lookup adds measurable latency. Engineers sometimes pre-sort and deduplicate events in application memory before writing, reducing the number of conflict checks the database must perform.
+
+**Scope of the guarantee:** some pipelines are idempotent *within* a single day's data but not across days — the key is `(date, product_id)`, so re-running a different date's job is safe, but supplying the wrong date parameter could overwrite correct historical data. The scope of your deterministic key defines the scope of your safety guarantee. Know the boundary.
+
+---
 
 ## Check yourself
 
-**Memory hook:** "Idempotent = elevator button. Press it once or press it ten times — you still get one elevator."
+**Memory hook:** *"A PAID stamp is idempotent — press it once or a hundred times, the invoice is still just PAID."*
 
-**Q1: What is a deterministic key and why does idempotency depend on one?**
-A deterministic key is a unique identifier computed from the data itself (not from the clock or a random number), so it is the same value every time the job runs for the same logical record. Idempotency depends on it because the upsert needs to know which existing row to overwrite; without a stable key you cannot safely merge, only blindly append.
+**Q1: What two techniques combine to make a pipeline step idempotent?**
+A: Deterministic keys (an ID derived from the data itself, not randomly generated at write time) and upserts (`INSERT … ON CONFLICT DO UPDATE`), so that re-running produces the same final state.
 
-**Q2: A pipeline inserts 1,000 rows, crashes, and restarts. After the restart it inserts the same 1,000 rows again. The table now has 2,000 rows. Is this step idempotent? What would fix it?**
-No, it is not idempotent — a correct idempotent run would leave exactly 1,000 rows. The fix is to replace the plain `INSERT` with an upsert (`INSERT ... ON CONFLICT DO UPDATE`) keyed on a natural unique column, or to delete the partition before reloading it.
+**Q2: Why is DELETE-then-INSERT not a safe substitute for an upsert?**
+A: DELETE and INSERT are two separate operations. If the pipeline crashes between them, the row is permanently gone. An upsert is a single atomic operation — it either completes fully or not at all, with no gap in between.
 
-**Q3: Why is idempotency called "critical for exactly-once semantics"?**
-"Exactly-once" means each logical record ends up in the output exactly one time, even if the pipeline runs more than once. Idempotency achieves this: because re-running overwrites rather than appends, the result is always as if the step ran exactly once, even if it actually ran several times.
+**Q3: If your message queue guarantees at-least-once delivery, is your pipeline automatically idempotent?**
+A: No. At-least-once delivery means duplicate events *will* arrive. Your pipeline must handle them with idempotent writes; the queue only promises delivery, not duplicate-safe processing.
+
+---
 
 ## Connects to
 
-[[batch-vs-streaming|Batch vs Streaming]] · [[dags-schedulers|DAGs & Schedulers]] · [[data-quality-validation|Data Quality & Validation]] · [[transactions-acid|Transactions & ACID]]
+[[batch-vs-streaming|Batch vs Streaming]] · [[transactions-acid|Transactions & ACID]] · [[data-quality-validation|Data Quality & Validation]] · [[dags-schedulers|DAGs & Schedulers]]
+
+---
+
+## Coming up next
+
+[[dags-schedulers|DAGs & Schedulers]] — now that your individual pipeline steps are safe to retry, you need a system to *sequence* and *schedule* them in the right order; DAGs encode those dependencies as a directed graph, and schedulers are the engines that walk that graph and fire each step at the right time.

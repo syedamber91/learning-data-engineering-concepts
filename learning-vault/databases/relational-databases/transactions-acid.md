@@ -2,154 +2,239 @@
 title: "Transactions & ACID"
 area: "Databases"
 topic: "Relational Databases"
-tags: [transactions, acid, databases, data-integrity, sql, relational-databases]
+tags: [transactions, acid, sql, relational-databases, data-integrity, databases]
 ---
 
 # Transactions & ACID
 
 *Part of [[relational-databases-moc|Relational Databases]] · [[databases-moc|Databases]]*
 
-## In one line
+← Prev: [[indexing|Indexing]] · Next: [[star-schema|Star Schema]] →
 
-A **transaction** is a bundle of database changes that either all happen together or none of them happen at all — and **ACID** is the name for the four promises a database makes to keep your data trustworthy.
+## Recap — where we just were
 
----
-
-## Picture this
-
-Imagine you're at an ATM withdrawing $200. Behind the scenes, two things must happen: your bank balance drops by $200, and the ATM spits out the cash. Now picture the power cutting out right after your balance drops but before the cash comes out. You'd lose $200 for nothing.
-
-A transaction is the rule that says: **both steps happen, or neither does.** The ATM either completes the whole exchange or rolls everything back to where it started — as if you never touched the machine.
-
-ACID is the four-part checklist the database runs to make sure that promise is real, not just hopeful.
+In [[indexing|Indexing]] you discovered how a B-tree lets the database leap to a matching row in O(log n) steps instead of scanning every row — turning a 100-second query into a sub-millisecond one. Now that the database can *find* data fast, a harder question surfaces: what happens when two updates must land together, or the server crashes halfway through a change? That is the problem transactions were built to solve.
 
 ---
 
-## How it actually works
+## Level 1 — The Big Idea
 
-### What is a transaction?
+A **transaction** is a wrapper that groups two or more database changes into a single all-or-nothing unit. Either every change inside the wrapper succeeds and gets saved permanently, or — if anything goes wrong — every change is erased as if it never happened.
 
-A transaction is a sequence of database operations (INSERTs, UPDATEs, DELETEs) that the database treats as **one indivisible unit of work**. You open a transaction with `BEGIN`, do your work, then either `COMMIT` (lock it in permanently) or `ROLLBACK` (undo everything back to before you started).
+**Everyday analogy:** Think of tapping your card at a checkout. The cashier scans every item, your card is charged, and the store's stock count drops by one. That whole sequence is one transaction. If your card is declined after items are scanned, nothing is taken — the store doesn't keep your money *and* put items back on the shelf, nor does it take your money without handing anything over. It is all-or-nothing.
 
-### The four ACID properties
+**ACID** is the four-letter acronym for the specific guarantees a transactional database makes to ensure your data stays correct:
 
-**A — Atomicity: "all or nothing"**
-Every operation inside a transaction is atomic — meaning it cannot be split. If step 3 of 5 fails, the database automatically undoes steps 1 and 2. There is no such thing as a half-finished transaction in a correct ACID database. The database achieves this by writing changes to a **write-ahead log (WAL)** — a record of "what I'm about to do" — before actually changing the data. If the system crashes mid-transaction, the WAL lets the database undo the incomplete work on restart.
+| Letter | Word | Plain meaning |
+|--------|------|---------------|
+| A | Atomic | All steps happen, or none do |
+| C | Consistent | Declared rules (constraints) are never broken |
+| I | Isolated | Parallel transactions can't see each other's unfinished work |
+| D | Durable | Once saved, data survives a power cut |
 
-**C — Consistency: "valid state to valid state"**
-Before the transaction starts, the data obeys all the rules you've defined (e.g., "a bank balance can never go below zero", "every order must reference a real customer"). After the transaction commits, the data must *still* obey all those rules. If your transaction would break a rule, the database refuses it and rolls back. Consistency is the property that keeps your data meaningful, not just technically stored.
+<!-- mermaid-source:
+graph TD
+    Start[BEGIN transaction] --> S1[Step 1 - Debit Alice]
+    S1 --> S2[Step 2 - Credit Bob]
+    S2 --> OK{All steps OK?}
+    OK -- Yes --> Commit[COMMIT - both changes saved]
+    OK -- No --> Rollback[ROLLBACK - both changes erased]
+-->
+![[transactions-acid-d1.svg]]
 
-**I — Isolation: "transactions don't trip over each other"**
-Many users hit a database at the same time. Isolation means each transaction behaves as if it were the *only* transaction running — it doesn't see another transaction's half-finished changes. In practice, databases offer several **isolation levels** (like `READ COMMITTED` or `SERIALIZABLE`) that trade a little isolation for more speed. Full isolation (`SERIALIZABLE`) is the safest but slowest; weaker levels are often good enough and much faster.
-
-**D — Durability: "committed means committed"**
-Once you `COMMIT`, the data is permanent. Even if the server crashes one millisecond after you commit, the data will be there when the server restarts. Databases achieve this by flushing the write-ahead log to disk before reporting success — not just holding it in fast-but-volatile RAM.
+The key insight: a transaction draws a boundary around work so the database never gets stuck in a half-done state.
 
 ---
 
-## Worked example
+## Level 2 — How it Actually Works
 
-**Scenario:** Alice has $500 in her account. She transfers $200 to Bob, who has $300.
+Now that you have the picture, let's climb inside each letter and see the real mechanism.
 
-Two SQL updates must happen. Without a transaction, a crash between them leaves the database broken (Alice loses $200; Bob gets nothing).
+### A — Atomicity: the all-or-nothing guarantee
+
+When you issue `BEGIN`, the database starts tracking every change you make. It does this by writing to an **undo log** — a record of every "before" image of each row you touch. If you reach `COMMIT`, all changes are written to permanent storage. If anything fails before that — a network cut, a disk error, your own `ROLLBACK` command — the engine replays the undo log backwards and restores every row to its pre-`BEGIN` state.
+
+<!-- mermaid-source:
+sequenceDiagram
+    participant App as Application
+    participant DB as Database Engine
+    participant UL as Undo Log
+
+    App->>DB: BEGIN
+    App->>DB: UPDATE accounts - debit Alice 200
+    DB->>UL: Save Alice old balance 1000
+    App->>DB: UPDATE accounts - credit Bob 200
+    DB->>UL: Save Bob old balance 500
+    App->>DB: COMMIT
+    DB-->>App: OK - both changes permanent
+    Note over UL: Undo log no longer needed
+-->
+![[transactions-acid-d2.svg]]
+
+If a crash happens anywhere before COMMIT, the database uses the undo log on restart to revert both rows — Alice goes back to $1,000, Bob stays at $500. No half-state survives.
+
+### C — Consistency: constraints always hold
+
+Consistency means the database only moves from one *valid* state to another. "Valid" is defined by the rules you declared: `NOT NULL`, foreign keys, `CHECK` constraints, `UNIQUE` constraints. If an update would break a rule, the entire transaction is rejected. Note carefully: the database enforces the rules *you wrote down*. If you forgot to add `CHECK (balance >= 0)`, the database will happily allow a negative balance. Consistency guards declared rules, not your business logic.
+
+### I — Isolation: parallel work stays private
+
+Dozens of users may hit your database at the same moment. Without isolation, User A could read Bob's balance *while* User B is mid-update — catching a half-written value. Isolation levels control how much concurrent transactions can see of each other. From weakest to strongest:
+
+**Read Uncommitted → Read Committed → Repeatable Read → Serializable**
+
+Most databases default to **Read Committed**: you only ever see data that another transaction has already committed. The database implements this by holding a short lock on rows being written, making readers wait the milliseconds until the writer commits or rolls back.
+
+<!-- mermaid-source:
+graph LR
+    TxA[Tx A - reading Bob balance] -- waits for lock --> DB[(Database)]
+    TxB[Tx B - updating Bob balance uncommitted] -- holds lock --> DB
+    DB -- releases lock on COMMIT --> TxA
+-->
+![[transactions-acid-d3.svg]]
+
+### D — Durability: commits survive crashes
+
+Once you receive a `COMMIT OK`, the data is safe even if the power dies one millisecond later. Databases achieve this with a **write-ahead log (WAL)**: before touching the actual data file, the engine appends the change to a sequential log on disk. Sequential writes are fast. On restart after a crash, the WAL is replayed to recover any committed changes that hadn't yet reached the main data file.
+
+<!-- mermaid-source:
+graph LR
+    App[Application] -- COMMIT --> WAL[Write-Ahead Log - disk]
+    WAL -- async flush --> Data[Main Data File - disk]
+    WAL -- replay on crash --> Data
+    App -- gets OK immediately after WAL write --> App
+-->
+![[transactions-acid-d4.svg]]
+
+---
+
+## Level 3 — See it with Real Numbers
+
+**Scenario:** A peer-to-peer payment app. Alice has $1,000; Bob has $500. Alice sends Bob $200. That single "send" action requires exactly two SQL updates.
+
+**Without a transaction — the danger:**
 
 ```sql
--- Start the transaction
+-- Step 1 executes
+UPDATE accounts SET balance = balance - 200 WHERE name = 'Alice';
+-- Alice: 1000 -> 800 (saved to disk)
+
+-- Server crashes HERE before Step 2 runs
+
+UPDATE accounts SET balance = balance + 200 WHERE name = 'Bob';
+-- Bob: never updated, still 500
+```
+
+After the crash: Alice has $800, Bob has $500. $200 has vanished permanently. The data is broken.
+
+**With a transaction — the safe version:**
+
+```sql
 BEGIN;
 
--- Step 1: deduct from Alice
-UPDATE accounts
-SET balance = balance - 200
-WHERE account_id = 'alice';
+-- Step 1: debit Alice
+UPDATE accounts SET balance = balance - 200 WHERE name = 'Alice';
+-- Alice row updated in memory only (not yet committed)
 
--- Step 2: add to Bob
-UPDATE accounts
-SET balance = balance + 200
-WHERE account_id = 'bob';
+-- Step 2: credit Bob
+UPDATE accounts SET balance = balance + 200 WHERE name = 'Bob';
+-- Bob row updated in memory only (not yet committed)
 
--- Only if BOTH steps succeed do we make it permanent
 COMMIT;
+-- NOW both rows are written permanently.
+-- Alice = 800, Bob = 700, total = 1300 (unchanged from before: 1000+500=1500 -> 800+700=1500)
 ```
 
-**What happens if step 2 fails** (e.g., Bob's account doesn't exist)?
+**Triggering a deliberate rollback** (Alice tries to overdraw):
 
 ```sql
 BEGIN;
 
-UPDATE accounts SET balance = balance - 200 WHERE account_id = 'alice';
--- Suppose this next line raises an error: account 'bob' not found
-UPDATE accounts SET balance = balance + 200 WHERE account_id = 'bob';
+UPDATE accounts SET balance = balance - 2000 WHERE name = 'Alice';
+-- Would take Alice to -1000, violating CHECK (balance >= 0)
 
--- The application catches the error and issues:
 ROLLBACK;
--- Alice's balance is restored to $500. No money lost.
+-- Alice's balance snaps back to 1000. Nothing was saved.
 ```
 
-Before the `COMMIT`, Alice's balance in the database is tentatively $300, but **no other user or query can see that intermediate value** (isolation). After the `ROLLBACK`, Alice's balance snaps back to $500 (atomicity). The database's constraint "balance >= 0" was never violated (consistency). And if we had committed, the change would survive a crash (durability).
+**Verify the plan with EXPLAIN:**
+
+```sql
+EXPLAIN (ANALYZE) UPDATE accounts SET balance = balance - 200 WHERE name = 'Alice';
+-- Shows cost, rows touched, whether an index was used — useful for auditing
+-- expensive transactions before they run on production data.
+```
+
+The total money in the system ($1,300) is identical before and after the successful commit. That equality is the consistency guarantee — no money created, none destroyed.
 
 ---
 
-## In the real world
+## Level 4 — In the Real World & Common Traps
 
-**E-commerce checkout at a store like Amazon:**
+### Real-world use case: last-seat race at a cinema booking site
 
-When you click "Place Order," at least three things must happen at once:
-1. Inventory count for the item drops by 1.
-2. A new row is inserted into the `orders` table.
-3. Your payment method is charged.
+A cinema has one seat left for a sold-out Saturday showing. Two users click "Buy" at the exact same millisecond. Without isolation, both users read "1 seat available," both pass the availability check, and both pay — the same seat sold twice, two angry customers, one refund nightmare.
 
-If step 2 succeeds but step 3 fails (your card is declined), the database must roll back the inventory deduction — otherwise the item would appear "sold" even though no purchase happened.
+With a properly isolated transaction, the second user's `UPDATE seats SET sold = TRUE WHERE seat_id = 42` finds the row already locked by the first transaction and waits. When the first user's transaction commits (seat now sold), the second user's transaction re-reads the row, finds `sold = TRUE`, and returns "Sorry, just sold out." One seat, one sale. That is isolation protecting real revenue and real trust.
 
-Amazon's order service wraps all three operations in a single transaction. The ACID guarantees mean that thousands of customers can check out simultaneously (isolation), no order is ever half-created (atomicity), and the inventory numbers stay accurate (consistency) even if a server node reboots mid-transaction (durability).
+This pattern appears identically in: hotel room booking, airline ticketing, flash-sale inventory, coupon code redemption — any system where a limited resource must be allocated exactly once under concurrent load.
 
----
+### Common misconceptions
 
-## Common misconceptions
+**People think: "Transactions are only for banking or fintech apps."**
+Actually: Any time two or more writes must land together — creating a user record *and* inserting a default settings row, placing an order *and* decrementing stock, logging an event *and* updating a counter — you need a transaction. The bank transfer is the most dramatic version of a universal pattern.
 
-**People think: "Transactions are just a way to group queries together for convenience."**
-Actually: Transactions are a *guarantee*, not a convenience feature. The grouping is meaningless without the four ACID properties. A database without ACID could "group" your queries and still leave your data corrupted if a crash occurred mid-group. The magic is in atomicity and durability — not the grouping itself.
+**People think: "ACID is free — just wrap everything in BEGIN/COMMIT and you're safe."**
+Actually: Isolation has a real cost. Holding locks while a transaction is open blocks every other transaction trying to touch those same rows. A transaction open for 30 seconds on a hot row creates a queue of stalled queries — a condition called **lock contention** — and can make your application feel frozen. Keep transactions as short as possible: open late, commit early.
 
-**People think: "Isolation means two transactions can never touch the same data at the same time."**
-Actually: Isolation means they don't see each other's *incomplete* changes — but concurrent access to the same rows is normal and allowed. Databases use techniques like **locks** (blocking access temporarily) and **MVCC** (multiversion concurrency control, where each transaction sees a consistent "snapshot" of the data) to allow safe concurrent access without forcing transactions to queue up one after another. Full serialization *does* force queuing, which is why weaker isolation levels exist.
-
-**People think: "ACID makes databases too slow for high-traffic apps."**
-Actually: Modern databases (PostgreSQL, MySQL InnoDB, Oracle) implement ACID very efficiently. The real performance cost is usually from *poorly written transactions* (e.g., a transaction that holds a lock for 30 seconds while waiting for a network call) rather than ACID itself. Many high-traffic systems — including banking, airline booking, and e-commerce — run ACID databases at massive scale every day.
+**People think: "Consistent means the data is correct."**
+Actually: Consistent means the database's *declared* rules — NOT NULL, foreign keys, CHECK constraints, UNIQUE constraints — are not violated. If your business rule is "a product's stock level can never go negative" but you forgot the CHECK constraint, the database will happily write −5. Consistency enforces the rules you wrote down, not the rules you thought about.
 
 ---
 
-## How it relates & differs
+## Level 5 — Expert View
 
-| Concept | Relates to Transactions & ACID | Differs from Transactions & ACID |
+### How Transactions & ACID relate to neighbouring concepts
+
+| Concept | What it shares with Transactions | How it differs |
 |---|---|---|
-| [[tables-keys-sql-basics\|Tables, Keys & SQL Basics]] | Transactions operate *on* tables and rely on primary/foreign keys to enforce consistency rules. | Tables & keys define *structure*; ACID defines *safety guarantees* during writes. |
-| [[idempotency\|Idempotency]] | Both protect against partial or repeated operations causing bad data. Transactions ensure all-or-nothing; idempotency ensures re-running the same operation is safe. | Idempotency is a property of your *application logic*; ACID is a property of the *database engine*. You need both in distributed systems. |
-| [[batch-vs-streaming\|Batch vs Streaming]] | Batch pipelines often wrap large bulk inserts in transactions to ensure all-or-nothing loading. | Transactions focus on short, tight units of work inside one database. Batch/streaming describes how data *moves* at a system level — often across many databases and services where ACID doesn't apply end-to-end. |
+| [[indexing\|Indexing]] | Both are internal database mechanisms | Indexes are about *speed* — finding rows fast; transactions are about *correctness* — changing rows safely. Orthogonal: a table can have great indexes and no transaction safety, or vice versa |
+| [[idempotency\|Idempotency]] | Both guard against bad states from repeated or partial operations | Idempotency is a property of the *caller* — "run me twice, same result"; a transaction is a guarantee of the *database* — "run my steps atomically once." They complement each other in pipeline design |
+| [[batch-vs-streaming\|Batch vs Streaming]] | Both appear heavily in data pipelines | In batch pipelines you can wrap an entire file load in one large transaction; in streaming, micro-transactions per event are common but isolation levels are often relaxed to **Read Committed** or weaker for throughput |
+
+### Trade-offs
+
+**Use a transaction** any time you touch more than one row or more than one table and both changes must be inseparable.
+
+**Be careful** with long-running transactions on frequently-updated rows. Lock contention compounds fast: 10 users each holding a lock for 2 seconds means the 11th user waits up to 20 seconds.
+
+**Serializable isolation** makes all concurrent transactions behave as if they ran strictly one at a time. It is the safest but slowest isolation level; the database must detect and resolve conflicts called **serialization anomalies**. Most production OLTP systems use **Read Committed** and design their writes carefully to avoid the gaps.
+
+**Distributed transactions** — spanning two separate databases or microservices — are dramatically harder. A **two-phase commit** protocol exists but is slow and failure-prone. Modern architectures often prefer eventual consistency patterns (sagas, outbox pattern) as a deliberate trade-off, accepting temporary inconsistency in exchange for availability. That trade-off is real, not free.
 
 ---
 
-## Why you'd use it (and when not to)
+## Check Yourself
 
-Use transactions whenever multiple writes must stay in sync — financial transfers, order creation, inventory management, user registration (insert user + insert profile + send welcome email trigger). Without ACID, any crash or error between steps leaves your data in an inconsistent, hard-to-recover state.
+**Memory hook:** *"ACID stops the database mid-sentence."* — Atomic (complete sentence or nothing), Consistent (grammar rules hold), Isolated (no one reads your draft), Durable (once published, it stays).
 
-When not to use them (or when to keep them tiny): Long-running transactions that hold locks for seconds or minutes can block other users and kill performance. Avoid wrapping slow external calls (API requests, file uploads) inside a transaction. Also, some ultra-high-throughput systems (certain analytics ingestion pipelines, append-only event logs) deliberately trade ACID for speed by using databases that relax or drop some guarantees — this is called **BASE** (Basically Available, Soft-state, Eventually consistent). That's a deliberate trade-off for scale, not a mistake.
+**Q1: What is the difference between ROLLBACK and COMMIT?**
+COMMIT permanently saves all changes made inside the transaction to disk. ROLLBACK discards every change, returning each touched row to the exact state it was in before BEGIN.
 
----
+**Q2: Why does isolation matter if only one user is active?**
+With a single user, isolation has no effect — there is nothing to isolate from. Isolation only matters the moment two or more transactions run concurrently and could read each other's half-written data.
 
-## Check yourself
-
-**Memory hook:** *"ACID keeps your data from becoming a mess — Atomic, Consistent, Isolated, Durable."* Think of a bank vault: you either move the whole safe, the vault stays legal, nobody else can peek inside while you're in there, and once it's locked it stays locked.
-
-**Q1: Alice transfers $200 to Bob. The database crashes after Alice's balance is deducted but before Bob's balance is updated. What does ACID guarantee happens next?**
-A: The transaction is rolled back. On restart, the database uses its write-ahead log to detect the incomplete transaction and restores Alice's original balance. No money is lost and no money is created.
-
-**Q2: What is the difference between Atomicity and Durability?**
-A: Atomicity is about the *middle* of a transaction — ensuring partial changes are never visible or permanent if something goes wrong. Durability is about the *end* — once a transaction commits, that change survives even a system crash. Atomicity prevents bad partial states; durability prevents losing good completed states.
-
-**Q3: Two users both try to buy the last concert ticket at the exact same moment. How does Isolation protect the data?**
-A: Each purchase transaction runs as if it were the only one. The database uses locks or MVCC so that only one transaction can claim the last ticket — the second transaction either waits, sees the updated (zero) inventory, and fails cleanly, or is blocked and retried. The database will never sell the same ticket twice due to isolation keeping them from seeing each other's uncommitted work.
+**Q3: Why can a long-running transaction hurt performance even if it eventually commits successfully?**
+While a transaction is open it holds locks on the rows it has modified. Other transactions needing those rows must wait. A transaction open for 30 seconds on a busy table can queue dozens of other queries, stalling the entire application — even though the data will eventually be correct.
 
 ---
 
 ## Connects to
 
-[[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[idempotency|Idempotency]] · [[batch-vs-streaming|Batch vs Streaming]] · [[data-quality-validation|Data Quality & Validation]] · [[indexing|Indexing]]
+[[indexing|Indexing]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[big-o-time-complexity|Big-O / Time Complexity]] · [[idempotency|Idempotency]] · [[batch-vs-streaming|Batch vs Streaming]] · [[data-quality-validation|Data Quality & Validation]]
+
+---
+
+## Coming up next
+
+[[star-schema|Star Schema]] — now that you know how a relational database keeps individual writes safe and correct, the next lesson zooms out to the *shape* of an entire database designed for analysis: a star schema, where one central fact table radiates out to surrounding dimension tables, making complex questions across millions of rows fast and easy to ask.
