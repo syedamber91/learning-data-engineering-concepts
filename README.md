@@ -49,6 +49,21 @@ de-toolkit status
 Then open the target folder in Obsidian (*Open folder as vault*) and turn on the
 graph view (Ctrl/Cmd+G).
 
+## Learning from the vault
+
+Building the vault gives you notes; the **Vault Teaching Engine** turns those notes
+into beginner-proof lessons. It is a reusable prompt that teaches the vault's
+data-engineering and software-engineering concepts **topic-by-topic and
+sub-topic-by-sub-topic**, pitched so a 15-year-old can follow, with an everyday
+analogy and a real-world example for every idea.
+
+- Prompt: [`prompts/vault-teaching-engine.md`](prompts/vault-teaching-engine.md)
+- It uses a five-lens teaching panel (Master Teacher, Working Engineer, Honest
+  Skeptic, Curriculum Architect, and a 15-Year-Old comprehension gate), produces a
+  learning **roadmap first**, then one lesson file per topic.
+- Lessons come out as the same Markdown + frontmatter + `[[wikilink]]` format this
+  toolkit produces, so they paste straight back into your Obsidian vault.
+
 ## Configuration
 
 Copy `.env.example` to `.env` to set a default vault path (`DE_VAULT_PATH`) and
