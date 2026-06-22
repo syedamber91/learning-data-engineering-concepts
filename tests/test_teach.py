@@ -7,8 +7,11 @@ from pathlib import Path
 import pytest
 
 from de_toolkit.cli import _sample_catalog
+from de_toolkit.diagrams import MERMAID_RE, rasterize_lesson
 from de_toolkit.teach import (
     _inject_breadcrumb,
+    _inject_nav,
+    _one_liner,
     _strip_code_fence,
     build_lesson_prompt,
     build_roadmap_prompt,
@@ -67,12 +70,62 @@ def test_lesson_prompt_includes_engine_and_concept():
     # Pulls in the reusable teaching mega-prompt...
     assert "Vault Teaching Engine" in prompt
     assert "PRESENTATION CONTRACT" in prompt
-    # ...and the specific concept payload + the mandatory depth sections.
+    # ...and the specific concept payload + the leveled, illustrated requirements.
     assert "Indexing" in prompt
-    assert "Worked example" in prompt
-    assert "Common misconceptions" in prompt
-    assert "How it relates & differs" in prompt
+    assert "Level 1 — The big idea" in prompt
+    assert "mermaid" in prompt
+    assert "Coming up next" in prompt
     assert "Check yourself" in prompt
+
+
+def test_lesson_prompt_threads_prerequisite_context():
+    catalog = _sample_catalog()
+    sel = next(iter_selections(catalog, concept="Indexing"))
+    prompt = build_lesson_prompt(
+        sel, catalog,
+        story_so_far="- Tables, Keys & SQL Basics: rows and columns",
+        prev_lesson_md="# Tables\n\n## Level 1\nA table stores rows.",
+        prev_title="Tables, Keys & SQL Basics",
+        next_title="Transactions & ACID",
+    )
+    assert "STORY SO FAR" in prompt
+    assert "Tables, Keys & SQL Basics" in prompt
+    assert "PREVIOUS_LESSON" in prompt
+    assert "Transactions & ACID" in prompt
+
+
+def test_inject_nav_adds_prev_next():
+    catalog = _sample_catalog()
+    course = list(iter_selections(catalog))
+    i = next(k for k, s in enumerate(course) if s.concept.title == "Indexing")
+    md = (
+        "---\ntitle: Indexing\n---\n\n# Indexing\n\n"
+        "*Part of [[x-moc|X]]*\n\n## Level 1 — The big idea\nstuff"
+    )
+    out = _inject_nav(md, course[i - 1], course[i + 1])
+    assert "← Prev: [[" in out and "Next: [[" in out
+    # nav sits between the breadcrumb and the first level
+    assert out.index("*Part of") < out.index("Prev:") < out.index("## Level 1")
+
+
+def test_one_liner_extracts_first_prose_sentence():
+    md = (
+        "---\ntitle: X\n---\n\n# X\n\n*Part of [[a]]*\n\n"
+        "## Level 1 — The big idea\n"
+        "An index is a sorted lookup structure. It makes reads fast."
+    )
+    assert _one_liner(md) == "An index is a sorted lookup structure"
+
+
+def test_rasterize_lesson_without_renderer_keeps_mermaid(tmp_path, monkeypatch):
+    # When mmdc is unavailable, blocks are left intact so Obsidian still renders them.
+    monkeypatch.setattr("de_toolkit.diagrams.mmdc_available", lambda: False)
+    md = "# X\n\n```mermaid\ngraph LR\n  A-->B\n```\n\nbody"
+    out, svgs, failures = rasterize_lesson(md, "x", tmp_path / "assets")
+    assert out == md
+    assert svgs == []
+    assert failures == 1
+    assert len(MERMAID_RE.findall(md)) == 1
 
 
 def test_lesson_prompt_link_guide_uses_real_targets():
