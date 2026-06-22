@@ -1,0 +1,21 @@
+# Local working output — keep the build-vault render and scratch output local.
+# (data/content.json is a curated starter syllabus and IS committed;
+#  learning-vault/ holds the authored lessons and IS committed.)
+/vault/
+/output/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Env / secrets
+.env
+
+# OS / editor
+.DS_Store

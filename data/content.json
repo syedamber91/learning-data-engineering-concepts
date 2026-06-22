@@ -1,0 +1,258 @@
+{
+  "title": "Data & Software Engineering Concepts",
+  "generated_at": "2026-06-22T14:44:30.086335Z",
+  "areas": [
+    {
+      "title": "Software Engineering Foundations",
+      "topics": [
+        {
+          "title": "Working with Code",
+          "concepts": [
+            {
+              "title": "Version Control with Git",
+              "body_text": "Git records snapshots of your code over time so many people can change it safely and you can undo mistakes.",
+              "source_url": "https://git-scm.com/about",
+              "resource_links": [],
+              "key_points": [
+                "Commits are saved snapshots",
+                "Branches isolate work in progress",
+                "Merging combines branches"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Code Review & Pull Requests",
+              "body_text": "A pull request proposes changes so teammates can read, comment on and approve them before they join the main code.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Catches bugs before release",
+                "Spreads knowledge across the team",
+                "Keeps a discussion trail"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        },
+        {
+          "title": "Code Quality",
+          "concepts": [
+            {
+              "title": "Automated Testing",
+              "body_text": "Tests are extra code that checks your real code still behaves correctly, run automatically on every change.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Unit tests check small pieces",
+                "Tests catch regressions early",
+                "Green tests build confidence to change code"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Clean Code & Refactoring",
+              "body_text": "Refactoring improves the shape of code (names, structure) without changing what it does, keeping it easy to read and extend.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Clear names beat clever tricks",
+                "Small functions are easier to test",
+                "Refactor under green tests"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Computer Science Basics",
+      "topics": [
+        {
+          "title": "Data Structures",
+          "concepts": [
+            {
+              "title": "Arrays & Hash Maps",
+              "body_text": "An array stores items in a numbered row; a hash map stores items by a key so you can fetch them almost instantly.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Arrays: fast by position",
+                "Hash maps: fast by key",
+                "Choice depends on how you look data up"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Big-O / Time Complexity",
+              "body_text": "Big-O describes how the work a piece of code does grows as the input gets bigger, ignoring constant details.",
+              "source_url": "https://en.wikipedia.org/wiki/Big_O_notation",
+              "resource_links": [],
+              "key_points": [
+                "O(1) constant, O(n) linear, O(n^2) quadratic",
+                "Predicts behaviour at scale",
+                "Guides which approach to pick"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Databases",
+      "topics": [
+        {
+          "title": "Relational Databases",
+          "concepts": [
+            {
+              "title": "Tables, Keys & SQL Basics",
+              "body_text": "Relational databases store data in tables of rows and columns; keys link tables and SQL is the language used to ask questions of the data.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Primary key uniquely identifies a row",
+                "Foreign key references another table",
+                "SELECT/INSERT/UPDATE/DELETE are core SQL"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Indexing",
+              "body_text": "An index is a sorted lookup structure that lets the database find rows without scanning the whole table.",
+              "source_url": "https://use-the-index-luke.com/",
+              "resource_links": [],
+              "key_points": [
+                "Speeds up reads, slows down writes",
+                "Works like a book's index",
+                "Pick columns you filter/join on"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Transactions & ACID",
+              "body_text": "A transaction groups several changes so they all succeed or all fail together; ACID names the guarantees that keep data correct.",
+              "source_url": "https://en.wikipedia.org/wiki/ACID",
+              "resource_links": [],
+              "key_points": [
+                "Atomic: all-or-nothing",
+                "Consistent, Isolated, Durable",
+                "Prevents half-finished updates"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Modeling",
+      "topics": [
+        {
+          "title": "Warehouse Modeling",
+          "concepts": [
+            {
+              "title": "Star Schema",
+              "body_text": "A star schema models data as a central fact table of measurements surrounded by dimension tables that describe them, optimised for analytics.",
+              "source_url": "https://en.wikipedia.org/wiki/Star_schema",
+              "resource_links": [],
+              "key_points": [
+                "Fact table holds measures and foreign keys",
+                "Dimensions hold descriptive attributes",
+                "Denormalised for fast reads"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Slowly Changing Dimensions",
+              "body_text": "SCD techniques decide how to handle a dimension attribute that changes over time (overwrite, keep history, or store the previous value).",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Type 1 overwrites, keeps no history",
+                "Type 2 adds a new row per change",
+                "Type 3 keeps a previous-value column"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Normalization vs Denormalization",
+              "body_text": "Normalization splits data to avoid duplication; denormalization deliberately duplicates it to make reads faster.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Normalize for clean writes",
+                "Denormalize for fast reads",
+                "Warehouses often denormalize"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Data Pipelines",
+      "topics": [
+        {
+          "title": "Processing Paradigms",
+          "concepts": [
+            {
+              "title": "Batch vs Streaming",
+              "body_text": "Batch processing handles a bounded chunk of data on a schedule; streaming processes never-ending data continuously with low latency.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Batch favours throughput",
+                "Streaming favours latency",
+                "Many systems use both (lambda/kappa)"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Idempotency",
+              "body_text": "An idempotent step produces the same result no matter how many times it runs, so retries and backfills are safe.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Use deterministic keys and upserts",
+                "Critical for exactly-once semantics",
+                "Makes failures recoverable"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        },
+        {
+          "title": "Orchestration",
+          "concepts": [
+            {
+              "title": "DAGs & Schedulers",
+              "body_text": "A DAG (directed acyclic graph) describes tasks and their order; a scheduler like Airflow runs them on time and in the right sequence.",
+              "source_url": "https://airflow.apache.org/",
+              "resource_links": [],
+              "key_points": [
+                "Nodes are tasks, edges are dependencies",
+                "Acyclic = no loops",
+                "Schedulers handle retries and timing"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            },
+            {
+              "title": "Data Quality & Validation",
+              "body_text": "Data quality checks verify incoming data is complete, valid and reasonable before it is trusted downstream.",
+              "source_url": null,
+              "resource_links": [],
+              "key_points": [
+                "Check nulls, ranges, uniqueness",
+                "Fail fast on bad data",
+                "Freshness matters as much as correctness"
+              ],
+              "updated_at": "2026-06-22T14:44:30.086221Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
