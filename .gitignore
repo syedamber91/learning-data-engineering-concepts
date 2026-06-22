@@ -1,0 +1,20 @@
+# Local working output — keep your vault and generated notes out of git.
+/vault/
+/output/
+/data/content.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Env / secrets
+.env
+
+# OS / editor
+.DS_Store
