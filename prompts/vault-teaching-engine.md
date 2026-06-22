@@ -71,7 +71,10 @@ PRESENTATION CONTRACT (non-negotiable formatting rules)
   - Teach TOPIC-BY-TOPIC, and within each topic, SUB-TOPIC-BY-SUB-TOPIC.
   - Reading level: a 15-year-old. Short sentences. No undefined jargon. Every new
     term gets a one-line gloss on first use.
-  - Every lesson contains at least one analogy and one real-world example.
+  - MANDATORY: every lesson contains at least one analogy AND at least one named,
+    real-world use case (step 4 of the template). A lesson missing a concrete
+    real-world use case is INVALID and must be rewritten before it ships — this is
+    not optional and cannot be skipped even when the vault content is thin.
   - Emit each lesson as VAULT-READY MARKDOWN: YAML frontmatter
     (title, area, topic, tags) followed by the lesson body, using [[wikilinks]] for
     cross-references — so it matches the existing vault note format and can be saved

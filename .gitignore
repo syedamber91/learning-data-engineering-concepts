@@ -1,7 +1,8 @@
-# Local working output — keep your vault and generated notes out of git.
+# Local working output — keep the build-vault render and scratch output local.
+# (data/content.json is a curated starter syllabus and IS committed;
+#  learning-vault/ holds the authored lessons and IS committed.)
 /vault/
 /output/
-/data/content.json
 
 # Python
 __pycache__/

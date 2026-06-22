@@ -64,11 +64,42 @@ analogy and a real-world example for every idea.
 - Lessons come out as the same Markdown + frontmatter + `[[wikilink]]` format this
   toolkit produces, so they paste straight back into your Obsidian vault.
 
+### The ready-made learning vault
+
+The repo ships a hand-authored, ready-to-open vault at **`learning-vault/`** — one
+beginner lesson per concept in the starter syllabus, each with an everyday analogy
+and a real-world use case, wired together with wikilinks and Maps-of-Content. Open
+that folder directly in Obsidian (*Open folder as vault*) and start at `Home.md`.
+
+### Generating more lessons with `de-toolkit teach`
+
+`de-toolkit teach` expands any concept in `data/content.json` into a full lesson
+using your **Claude Code subscription** — it shells out to the local `claude` CLI,
+so no API key is required (you just need Claude Code installed and logged in).
+
+```bash
+# Preview the exact prompt for one concept without calling Claude
+de-toolkit teach --dry-run --concept "Indexing"
+
+# Generate one lesson into ./learning-vault
+de-toolkit teach --concept "Indexing"
+
+# Generate a whole area, plus a roadmap/Home note
+de-toolkit teach --area "Databases" --roadmap
+
+# Generate every concept into a custom vault folder
+de-toolkit teach --vault-path ~/Obsidian/Learning
+```
+
+Filters (`--area`, `--topic`, `--concept`) are optional and case-insensitive; with
+none, every concept is generated. Use `--model` to pick the Claude model.
+
 ## Configuration
 
 Copy `.env.example` to `.env` to set a default vault path (`DE_VAULT_PATH`) and
-tune `DE_MAX_TAGS` / `DE_MAX_RELATED`. The `vault/`, `output/` and your
-generated `data/content.json` are gitignored so your notes stay local.
+tune `DE_MAX_TAGS` / `DE_MAX_RELATED`. The `build-vault` render (`vault/`) and
+scratch `output/` stay local (gitignored), while the curated `data/content.json`
+syllabus and the authored `learning-vault/` are committed.
 
 ## Content format
 
