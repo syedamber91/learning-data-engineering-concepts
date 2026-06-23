@@ -251,6 +251,191 @@
               "updated_at": "2026-06-22T14:44:30.086221Z"
             }
           ]
+        },
+        {
+          "title": "dbt (Data Build Tool)",
+          "concepts": [
+            {
+              "title": "What dbt Is & the T in ELT",
+              "body_text": "dbt is a transformation tool that lets you build data models as SQL SELECT statements; it owns the 'T' in ELT, running inside your warehouse after raw data has been loaded.",
+              "source_url": "https://docs.getdbt.com/docs/introduction",
+              "resource_links": [],
+              "key_points": [
+                "Transforms data already in the warehouse (ELT, not ETL)",
+                "Models are just SELECT statements dbt turns into tables and views",
+                "Brings software-engineering practices to analytics SQL"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "dbt Projects, Profiles & Targets",
+              "body_text": "A dbt project is a folder of models and configuration (dbt_project.yml); profiles.yml stores the warehouse connection, and a target chooses which environment (dev or prod) a run uses.",
+              "source_url": "https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles",
+              "resource_links": [],
+              "key_points": [
+                "dbt_project.yml configures the project; profiles.yml holds credentials",
+                "Targets switch between dev and prod connections",
+                "Keep secrets out of the project with environment variables"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Models & the ref() Function",
+              "body_text": "A model is a .sql file containing one SELECT statement; the ref() function references another model so dbt can build them in the right order and draw the lineage graph.",
+              "source_url": "https://docs.getdbt.com/docs/build/models",
+              "resource_links": [],
+              "key_points": [
+                "One model equals one SELECT equals one table or view",
+                "ref() creates dependencies and the build order",
+                "Never hard-code table names; always ref() other models"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Sources & the source() Function",
+              "body_text": "Sources declare the raw tables loaded into your warehouse so models can reference them with source(); they also enable freshness checks and document where data first enters dbt.",
+              "source_url": "https://docs.getdbt.com/docs/build/sources",
+              "resource_links": [],
+              "key_points": [
+                "Declare raw tables once in a sources YAML file",
+                "source() references raw data the way ref() references models",
+                "Source freshness checks catch stale upstream loads"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Materializations",
+              "body_text": "A materialization decides how dbt persists a model's result: a view (saved query), a table (full rebuild), ephemeral (inlined CTE), or incremental (append new rows).",
+              "source_url": "https://docs.getdbt.com/docs/build/materializations",
+              "resource_links": [],
+              "key_points": [
+                "view is cheap storage, recomputed on read",
+                "table gives fast reads but is rebuilt each run",
+                "Set materialized in config or dbt_project.yml"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Incremental Models",
+              "body_text": "Incremental models build a table once, then on later runs insert or update only new rows, using is_incremental() and a unique_key to avoid reprocessing the whole dataset.",
+              "source_url": "https://docs.getdbt.com/docs/build/incremental-models",
+              "resource_links": [],
+              "key_points": [
+                "Process only new or changed rows after the first run",
+                "is_incremental() guards the filter logic",
+                "unique_key drives merge and upsert behaviour"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Project Structure: Staging, Intermediate & Marts",
+              "body_text": "A common dbt layout layers models as staging (clean raw sources one-to-one), intermediate (reusable business logic), and marts (final analytics tables), keeping large projects readable.",
+              "source_url": "https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview",
+              "resource_links": [],
+              "key_points": [
+                "Staging cleans and renames raw columns",
+                "Intermediate holds shared transformation steps",
+                "Marts are the final star-schema tables users query"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Jinja Templating in dbt",
+              "body_text": "dbt compiles SQL through Jinja, a templating language that adds variables, loops, and if-statements so you can generate repetitive SQL instead of copying it by hand.",
+              "source_url": "https://docs.getdbt.com/docs/build/jinja-macros",
+              "resource_links": [],
+              "key_points": [
+                "Double braces print values; brace-percent runs logic",
+                "Loops generate repetitive SQL automatically",
+                "dbt compiles Jinja plus SQL into plain SQL before running"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Macros & Packages",
+              "body_text": "A macro is a reusable Jinja function that returns SQL; packages bundle macros and models from others (installed with dbt deps) so you can share and reuse logic across projects.",
+              "source_url": "https://docs.getdbt.com/docs/build/packages",
+              "resource_links": [],
+              "key_points": [
+                "Macros are like functions for SQL, keeping it DRY",
+                "Install community packages with dbt deps",
+                "dbt_utils is the most widely used package"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Seeds",
+              "body_text": "Seeds are small CSV files in your project that dbt loads into the warehouse as tables with dbt seed, ideal for static lookup data like country codes or category mappings.",
+              "source_url": "https://docs.getdbt.com/docs/build/seeds",
+              "resource_links": [],
+              "key_points": [
+                "Version-controlled CSVs become warehouse tables",
+                "Best for small, rarely-changing reference data",
+                "Not for large or frequently-updated data"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Snapshots & SCD Type 2",
+              "body_text": "Snapshots record how a row in a source table changes over time, implementing Slowly Changing Dimension Type 2 by stamping validity columns each time tracked values change.",
+              "source_url": "https://docs.getdbt.com/docs/build/snapshots",
+              "resource_links": [],
+              "key_points": [
+                "Capture the history of mutable source rows",
+                "Implements SCD Type 2 with valid_from and valid_to",
+                "timestamp and check strategies detect changes"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Tests",
+              "body_text": "dbt tests are assertions about your data: generic tests (unique, not_null, accepted_values, relationships) declared in YAML, and singular tests written as SQL that should return zero rows.",
+              "source_url": "https://docs.getdbt.com/docs/build/data-tests",
+              "resource_links": [],
+              "key_points": [
+                "Generic tests are reusable one-line YAML checks",
+                "Singular tests are SQL queries that must return no rows",
+                "A failing test stops the pipeline before bad data ships"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Documentation & Lineage",
+              "body_text": "dbt generates a documentation site from your YAML descriptions and model code, including an interactive lineage graph that shows how every table depends on the ones before it.",
+              "source_url": "https://docs.getdbt.com/docs/build/documentation",
+              "resource_links": [],
+              "key_points": [
+                "Describe models and columns in YAML",
+                "dbt docs generate builds a browsable site",
+                "The lineage DAG visualises end-to-end dependencies"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "The dbt build Workflow",
+              "body_text": "dbt build runs models, tests, snapshots, and seeds together in dependency order, stopping a path when a test fails; selection syntax lets you run just the part of the DAG you changed.",
+              "source_url": "https://docs.getdbt.com/reference/commands/build",
+              "resource_links": [],
+              "key_points": [
+                "build equals run plus test plus snapshot plus seed in DAG order",
+                "Selectors run only the models you changed",
+                "Failed tests block their downstream models"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            },
+            {
+              "title": "Deployment, Environments & CI",
+              "body_text": "In production dbt runs on a schedule against a prod target, often in dbt Cloud or an orchestrator; CI runs your models and tests on every pull request to catch breakage before merge.",
+              "source_url": "https://docs.getdbt.com/docs/deploy/deployments",
+              "resource_links": [],
+              "key_points": [
+                "Separate dev and prod targets and datasets",
+                "Schedule production runs via dbt Cloud or Airflow",
+                "CI builds and tests changed models on each pull request"
+              ],
+              "updated_at": "2026-06-23T00:00:00Z"
+            }
+          ]
         }
       ]
     }
