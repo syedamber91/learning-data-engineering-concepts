@@ -107,6 +107,41 @@ de-toolkit teach --vault-path ~/Obsidian/Learning
 Filters (`--area`, `--topic`, `--concept`) are optional and case-insensitive; with
 none, every concept is generated. Use `--model` to pick the Claude model.
 
+## PKM second-brain skills (claude-obsidian)
+
+The repo ships with the **[claude-obsidian](https://github.com/AgriciDaniel/claude-obsidian)**
+PKM plugin (MIT, pinned `v1.9.2`) vendored at `vendor/claude-obsidian/` and registered via
+`.claude/settings.json`. It adds a *complementary second-brain layer* on top of the course:
+when you run Claude Code from the repo root, skills/commands like `/wiki`, `/save`,
+`/autoresearch`, `wiki-query`, and `wiki-lint` become available.
+
+How the two layers relate (full contract in [`WIKI.md`](WIKI.md) and [`CLAUDE.md`](CLAUDE.md)):
+
+- **`learning-vault/`** — the authored course. The plugin **reads** it for context but never
+  edits it.
+- **`wiki/`** — where the plugin **writes** synthesized knowledge (`/save` conversations,
+  ingested sources, `/autoresearch` output) in **LYT mode** (`wiki/mocs/`, `wiki/notes/`),
+  cross-referencing the course.
+
+Useful from the repo root:
+
+```text
+what is dbt incremental materialization?   # wiki-query: answers from learning-vault/
+lint the wiki                              # wiki-lint: orphans + dead links
+/save                                      # file the current conversation into wiki/
+/autoresearch <topic>                      # autonomous research loop → wiki/
+```
+
+> **Headless vs. local Obsidian.** The file-based skills (`wiki-query`, `wiki-lint`,
+> `autoresearch`, `save`) work anywhere. The `wiki-cli` transport, hybrid retrieval
+> (`vendor/claude-obsidian/bin/setup-retrieve.sh`), and the `canvas` layer need a running
+> Obsidian on your machine and degrade gracefully without it. Auto-commit is **disabled**
+> (`.vault-meta/auto-commit.disabled`) — commits stay deliberate.
+>
+> Prefer to install it yourself instead of using the vendored copy? On a machine where
+> Obsidian runs: `/plugin marketplace add AgriciDaniel/claude-obsidian` then
+> `/plugin install claude-obsidian@agricidaniel-claude-obsidian`.
+
 ## Configuration
 
 Copy `.env.example` to `.env` to set a default vault path (`DE_VAULT_PATH`) and
