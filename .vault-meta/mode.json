@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "mode": "lyt",
+  "configured_at": "2026-06-23",
+  "config": {
+    "lyt": {
+      "moc_folder": "wiki/mocs/",
+      "notes_folder": "wiki/notes/"
+    }
+  }
+}

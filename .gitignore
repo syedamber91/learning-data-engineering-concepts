@@ -22,3 +22,13 @@ venv/
 
 # Local tool cache (mermaid-cli + headless Chrome) — never commit
 .toolcache/
+
+# claude-obsidian plugin runtime scratch — keep the wiki/ layer and the committed
+# config (.vault-meta/mode.json, .vault-meta/auto-commit.disabled), ignore the rest.
+.vault-meta/hook.log
+.vault-meta/transport.json
+.vault-meta/*.lock
+.vault-meta/locks/
+.vault-meta/bm25/
+.vault-meta/chunks/
+.raw/
