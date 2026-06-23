@@ -2,122 +2,237 @@
 title: "Data Quality & Validation"
 area: "Data Pipelines"
 topic: "Orchestration"
-tags: [data-quality, validation, orchestration, data-pipelines, pipeline-reliability, fail-fast]
+tags: [data-quality, validation, freshness, null-checks, pipelines, orchestration]
 ---
 
 # Data Quality & Validation
 
 *Part of [[orchestration-moc|Orchestration]] · [[data-pipelines-moc|Data Pipelines]]*
 
-## In one line
-Data quality checks are automated tests that inspect incoming data for completeness, correctness, and freshness before anything downstream is allowed to trust it.
+← Prev: [[dags-schedulers|DAGs & Schedulers]]
 
-## Picture this
-Imagine a conveyor belt at a chocolate factory. Before the chocolates are boxed and shipped to stores, a quality-control inspector checks each tray: Are any chocolates missing? Are they the right shape? Did they arrive at the right temperature? If a whole tray fails, it gets pulled off the line right there — not discovered by an angry customer later.
+## Recap — where we just were
 
-Data quality validation is that inspector. The "chocolates" are rows of data. The "store" is a dashboard, a machine-learning model, or a business report. The inspector sits at the entrance to your pipeline and refuses to let bad batches through.
+In [[dags-schedulers|DAGs & Schedulers]] you gave your pipeline a brain: a dependency map that the scheduler reads to fire tasks in the right order, run independent steps in parallel, and retry failures automatically. Your pipeline now knows *what* to run and *when* — but it never asks the one question that matters most: *is the data it is about to process actually correct?* That is exactly the job of data quality validation.
 
-## How it actually works
+---
 
-Every time new data arrives — say, a file of today's customer orders — your pipeline runs a set of checks before doing anything else. Think of these as a short to-do list for the inspector.
+## Level 1 — The big idea
 
-**1. Null checks — "Is anything missing?"**
-A null is a blank field, like an order row with no `customer_id`. If downstream code tries to join that row to a customer table, it silently fails or produces wrong results. The check asks: does this column have a value in every row where we expect one?
+**Data quality validation** means running a set of automated checks on incoming data *before* the pipeline trusts it and passes it downstream.
 
-**2. Range and type checks — "Does the value make sense?"**
-A negative `order_amount` or a `birth_year` of 1850 might be technically non-null, but they are almost certainly wrong. Range checks enforce business rules: prices must be positive, percentages must be between 0 and 100, dates can't be in the future.
+**Everyday analogy:** A school cafeteria receives 500 lunch boxes every morning. Before handing them out, a staff member checks: is every box labelled with a name? Is every box dated *today*, not last week? Are there any duplicate labels? If one box fails a check, it is pulled aside *before* it reaches a student — not discovered later when someone bites into a week-old sandwich.
 
-**3. Uniqueness checks — "Is this a duplicate?"**
-If `order_id` should be unique (one row per order), finding two rows with the same ID means either the source system double-fired an event or the pipeline ran twice. A uniqueness check catches that before it inflates revenue numbers.
+The pipeline equivalent is a **validation gate** — a task that sits right after raw data arrives and before any expensive transformation begins:
 
-**4. Freshness checks — "Is the data recent enough?"**
-A dataset can pass every other check and still be useless if it is three days old when you expected it updated an hour ago. Freshness checks look at a `loaded_at` timestamp or the `MAX(event_date)` in the table and ask: did new data actually arrive? A pipeline that silently stops feeding data — but reports "success" — is one of the sneakiest failure modes in data engineering.
+<!-- mermaid-source:
+graph LR
+    A[Raw Data Arrives] --> B[Validate]
+    B -->|All checks pass| C[Transform]
+    C --> D[Load to Warehouse]
+    B -->|Any check fails| E[Alert and Stop]
+-->
+![[data-quality-validation-d1.svg]]
 
-**5. Volume / anomaly checks — "Does the row count look sane?"**
-If yesterday's batch had 80,000 rows and today's has 12, something is probably wrong upstream. A simple threshold ("row count must be within 20% of the 7-day average") catches source-system outages before they become silent data gaps.
+Two things to notice immediately: validation happens *before* transformation (cheap to stop early), and on failure the pipeline *stops entirely* rather than silently continuing. That second point is called **fail fast**, and it is the single most important rule in data quality engineering.
 
-When a check fails, the pipeline should **fail fast**: stop immediately, alert someone, and refuse to load broken data. The cost of one failed pipeline run is small. The cost of three months of dashboards built on bad data is enormous.
+---
 
-## Worked example
+## Level 2 — How it actually works
 
-Suppose you receive a daily CSV of e-commerce orders and load it into a staging table called `stg_orders`. You run these checks before promoting the data to production:
+Now that you have the picture, let's look at the four kinds of checks that together catch most of what goes wrong with real data. Each one is a specific question you ask before trusting a batch.
+
+### 1. Completeness — null checks
+
+A **null** is a database value meaning "absent" or "unknown." If a sales record has no `order_id`, you cannot link it to anything else — it is useless, and any JOIN on that column will silently corrupt your results. A null check asks: *are required fields present in every row?*
+
+### 2. Validity — range checks
+
+Even when a value exists, it might be nonsense: a price of −$7, a customer age of 900, a rating of 47 out of 5. A **range check** asks: *are values within the expected bounds?* The bounds are defined by the data engineer based on what the business actually allows: "prices must be between $0.01 and $9,999."
+
+### 3. Uniqueness — duplicate checks
+
+Primary keys must be unique — you saw why in [[tables-keys-sql-basics|Tables, Keys & SQL Basics]]. If two rows share the same `order_id`, every downstream JOIN on that key silently doubles counts. A **uniqueness check** counts how many IDs appear more than once; the expected answer is always zero.
+
+### 4. Freshness — time checks
+
+This one surprises beginners. **Freshness** asks: *is the newest record recent enough to be useful?* If your pipeline should load data every six hours but the newest row is 30 hours old, the upstream job silently failed — and your dashboard is showing yesterday's numbers while users believe they are looking at live data. Stale data is just as dangerous as wrong data because the mistake is *invisible*.
+
+**All four checks act as parallel gates before the data is trusted:**
+
+<!-- mermaid-source:
+graph TD
+    A[Incoming Batch] --> B[Null Check]
+    A --> C[Range Check]
+    A --> D[Uniqueness Check]
+    A --> E[Freshness Check]
+    B --> F{All passed?}
+    C --> F
+    D --> F
+    E --> F
+    F -->|Yes| G[Data is trusted - proceed]
+    F -->|No| H[Fail fast - alert and stop]
+-->
+![[data-quality-validation-d2.svg]]
+
+Notice how this connects back to [[dags-schedulers|DAGs & Schedulers]]: the validation task is just one node in your DAG. When it fails, the scheduler automatically blocks every downstream task — you do not need to write any extra logic. The DAG's dependency structure does the propagation for you.
+
+<!-- mermaid-source:
+sequenceDiagram
+    participant S as Scheduler
+    participant V as Validate Task
+    participant T as Transform Task
+    participant L as Load Task
+    S->>V: Run
+    V-->>S: FAILED - range check 312 bad rows
+    S->>T: Blocked upstream failed
+    S->>L: Blocked upstream failed
+    S->>S: Fire on-call alert
+-->
+![[data-quality-validation-d3.svg]]
+
+---
+
+## Level 3 — See it with real numbers
+
+**Scenario:** an e-commerce company loads 500,000 order rows into a staging table every night at 2 AM. Four SQL checks run before any transformation touches the data.
+
+| Check | What it queries | Pass condition |
+|---|---|---|
+| Null check | rows where `order_id IS NULL` | count = 0 |
+| Range check | rows where `revenue <= 0 OR revenue > 9999` | count = 0 |
+| Uniqueness check | `order_id` values appearing more than once | 0 rows returned |
+| Freshness check | newest `created_at` value | within the last 26 hours |
 
 ```sql
--- 1. Null check: customer_id must never be null
-SELECT COUNT(*) AS null_customer_ids
-FROM stg_orders
-WHERE customer_id IS NULL;
--- Expected: 0  |  Found: 47  →  FAIL
+-- Check 1: No null order IDs
+SELECT COUNT(*) AS null_count
+FROM staging_orders
+WHERE order_id IS NULL;
+-- Pass: null_count = 0
 
--- 2. Range check: order_amount must be positive and < $50,000
-SELECT COUNT(*) AS bad_amounts
-FROM stg_orders
-WHERE order_amount <= 0 OR order_amount > 50000;
--- Expected: 0  |  Found: 3  →  FAIL
+-- Check 2: Revenue within expected bounds
+SELECT COUNT(*) AS bad_revenue_count
+FROM staging_orders
+WHERE revenue <= 0 OR revenue > 9999;
+-- Pass: bad_revenue_count = 0
 
--- 3. Uniqueness check: order_id must be unique
-SELECT COUNT(*) - COUNT(DISTINCT order_id) AS duplicates
-FROM stg_orders;
--- Expected: 0  |  Found: 0  →  PASS
+-- Check 3: No duplicate order IDs
+SELECT order_id, COUNT(*) AS cnt
+FROM staging_orders
+GROUP BY order_id
+HAVING cnt > 1;
+-- Pass: 0 rows returned
 
--- 4. Freshness check: at least one order in the last 25 hours
-SELECT MAX(order_created_at) AS latest_order
-FROM stg_orders;
--- Expected: within 25 hours of NOW()
--- Found: 2026-06-21 03:00 UTC  →  FAIL (data is stale)
-
--- 5. Volume check: today vs. 7-day average
--- 7-day avg = 62,000 rows; today = 9,800  →  FAIL (84% drop)
+-- Check 4: Data is fresh
+SELECT CASE
+    WHEN MAX(created_at) >= NOW() - INTERVAL '26 hours'
+    THEN 'PASS'
+    ELSE 'FAIL'
+END AS freshness_status
+FROM staging_orders;
+-- Pass: freshness_status = 'PASS'
 ```
 
-Three out of five checks fail. The pipeline halts, sends an alert to the on-call engineer, and does **not** write any data to the production `orders` table. The analyst's morning dashboard is delayed — but it shows yesterday's correct data instead of today's broken data. That is the right outcome.
+And here is the Python task that runs these checks inside Airflow and fails fast on the first problem:
 
-## In the real world
+```python
+from datetime import datetime, timedelta
 
-An online retailer runs a nightly pipeline that loads orders from their transaction database into a data warehouse. The finance team's revenue dashboard reads from that warehouse every morning at 08:00.
+def validate_orders(conn):
+    row_checks = [
+        ("Null check",
+         "SELECT COUNT(*) FROM staging_orders WHERE order_id IS NULL"),
+        ("Range check",
+         "SELECT COUNT(*) FROM staging_orders WHERE revenue <= 0 OR revenue > 9999"),
+        ("Uniqueness check",
+         "SELECT COUNT(*) FROM (SELECT order_id FROM staging_orders "
+         "GROUP BY order_id HAVING COUNT(*) > 1) t"),
+    ]
+    for name, sql in row_checks:
+        count = conn.execute(sql).fetchone()[0]
+        if count > 0:
+            raise ValueError(f"{name} FAILED: {count} offending rows found")
 
-In 2023, a bug in their payment processor briefly wrote `order_amount = 0` for all orders processed between 02:00 and 04:00. Without a range check, those zero-dollar orders would have made it into the warehouse, and the CFO would have seen overnight revenue drop by 40% — triggering a company-wide panic.
+    newest = conn.execute(
+        "SELECT MAX(created_at) FROM staging_orders"
+    ).fetchone()[0]
+    if newest < datetime.utcnow() - timedelta(hours=26):
+        raise ValueError(f"Freshness check FAILED: newest record is {newest}")
 
-With a range check (`order_amount > 0`), the pipeline caught 1,200 bad rows at 03:15, halted, and paged the data engineering team. The bug was reported to the payment vendor by 04:00. The pipeline re-ran with corrected data at 06:30, and the dashboard showed accurate numbers at 08:00. No panic, no bad decisions made on bad numbers.
+    print("All checks passed — 500,000 rows are trusted")
+```
 
-## Common misconceptions
+**What happens on night 47 when an application bug inserts `revenue = -1.00` for 312 orders?** The range check returns 312 (not zero), `validate_orders` raises a `ValueError`, the Airflow task turns red, the scheduler blocks every downstream task, and an alert fires in Slack — before a single bad number reaches the warehouse. Catching it cost one SQL query. Missing it could mean a week of corrupted revenue reports.
 
-**People think: "Data from our own internal systems is always clean."**
-Actually: Internal systems break, change schemas, and produce duplicates just as often as external feeds. A software deploy can silently change the format of a timestamp field overnight. Always validate, even from sources you own and trust.
+---
 
-**People think: "Freshness is just a nice-to-have — correctness is what matters."**
-Actually: Stale data that passes every correctness check is still wrong for its purpose. If your inventory pipeline hasn't updated since yesterday, a customer placing an order today might buy stock that is already sold out. Freshness is a full dimension of quality, not a bonus feature.
+## Level 4 — In the real world & common traps
 
-**People think: "Once data passes validation at ingestion, it stays valid forever."**
-Actually: Downstream transformations can introduce new nulls, duplicates, or out-of-range values. A bad JOIN can multiply rows and inflate counts. A `COALESCE` can replace a meaningful null with a misleading zero. Quality checks belong at every stage of the pipeline, not just the entrance.
+**Real-world use case — artist royalty pipelines at a music streaming company:**
 
-## How it relates & differs
+A streaming service processes hundreds of millions of play events per day. Before crediting an artist's stream count — which directly determines royalty payments — the pipeline runs quality checks: is `track_id` present on every event? Is `duration_ms` a positive integer under 3,600,000 (one hour — no single play can last longer)? Has the expected volume of events arrived in the last hour? A false zero caused by a missed freshness check costs the company hours of manual investigation. A falsely inflated count caused by duplicate events costs an artist real money. Both outcomes are prevented by the same four checks you just saw.
 
-| Concept | How it RELATES | How it DIFFERS |
-|---|---|---|
-| [[dags-schedulers\|DAGs & Schedulers]] | Validation tasks are nodes in the DAG; the scheduler runs them in dependency order and halts every downstream task if a check node fails. | DAGs are about *orchestrating* tasks. Quality checks are the *content* of specific tasks — the DAG doesn't care what a node does, only whether it succeeds or fails. |
-| [[transactions-acid\|Transactions & ACID]] | Both protect systems from bad data reaching production. ACID ensures a write is all-or-nothing at the database level. | ACID guarantees that a write either fully happens or fully doesn't — it says nothing about whether the *values* written are correct. A transaction can successfully commit 1,000 rows of nonsense. Quality checks catch the nonsense *before* the write. |
-| [[idempotency\|Idempotency]] | Idempotent pipelines (safe to re-run without side effects) pair naturally with quality checks: when a check fails and the source data is fixed, you can re-run from scratch without fear of double-counting. | Idempotency is about the *behavior of re-runs*. Quality validation is about the *correctness of input data*. They are complementary tools, not the same concept. |
+**Common misconceptions:**
 
-## Why you'd use it (and when not to)
+**People think: "Our data comes from our own production database — it must be correct."**
+Actually: application bugs, schema migrations, failed ETL retries, manual data-entry errors, and timezone mismatches all corrupt data in internal databases constantly. The source being internal gives you no immunity. Every data team eventually uncovers a months-long bad-data streak that nobody caught because the checks were not there.
 
-Use data quality validation whenever incorrect or missing data would cause a downstream decision, report, or model to be wrong — which is nearly always. The cost is low (SQL queries are cheap; a five-check suite adds seconds to a pipeline) and the protection is high.
+**People think: "Freshness is an ops concern, not a data quality concern."**
+Actually: stale data is incorrect data — it just fails along the time dimension rather than the value dimension. If your daily sales dashboard silently shows numbers from 30 hours ago, every business decision made from it is based on false information, even if every individual row is arithmetically perfect. Freshness is a first-class quality dimension.
 
-The one situation to be careful: overly strict thresholds in a **streaming** context can reject valid-but-unusual data in real time, creating customer-facing errors. In streaming pipelines, consider routing suspect records to a quarantine topic for human review rather than hard-failing the entire stream. Calibrate thresholds with historical data, and revisit them when the business changes (a flash sale will legitimately spike your row counts).
+**People think: "Running checks on 500,000 rows will make the pipeline too slow."**
+Actually: the four SQL checks above run in seconds on any modern columnar data warehouse (BigQuery, Redshift, Snowflake) because they are simple aggregations over one table with no joins. The cost of *skipping* the checks — a corrupted warehouse that takes days to diagnose and rebuild — is orders of magnitude higher than a five-second validation step.
+
+---
+
+## Level 5 — Expert view
+
+Now that you have seen data quality in action, it is worth placing it precisely on the map of everything you have already studied — because three neighbouring concepts are easy to confuse with it.
+
+| | Data Quality Validation | [[transactions-acid\|Transactions & ACID]] | [[idempotency\|Idempotency]] |
+|---|---|---|---|
+| **What it guards** | Correctness of incoming data | Correctness of writes to the DB | Safety of re-running a task |
+| **When it fires** | After ingestion, before processing | During the write itself | On every retry |
+| **Who writes the rules** | Data engineers, in pipeline code | DB engine or application layer | Task authors |
+| **What failure looks like** | Pipeline stops; alert fires | Write is rolled back automatically | Duplicate side-effect (if missing) |
+| **Scope** | An entire arriving batch | One atomic transaction | One task execution |
+
+**Key insight:** [[transactions-acid|Transactions & ACID]] is the database engine's promise that *writes it accepts* are internally consistent. Data quality validation is the pipeline engineer's gate that *data arriving at the system* is worth accepting in the first place. They guard different layers: ACID is inside the database; quality validation lives at the boundary where external data enters your pipeline.
+
+**Trade-offs to know:**
+
+*How strict to be?* Zero tolerance for any out-of-range row is the safest starting point, but it halts the pipeline over a single malformed record. Many teams relax specific thresholds once they have historical data showing what "normal noise" looks like: "allow up to 0.01 % null `product_id` values in ad-click events, because the ad-serving system occasionally omits it legitimately." The key rule: document every relaxed threshold and revisit it quarterly.
+
+*Blocking vs. warning?* Failing fast and blocking the pipeline is the default for production data that other teams query. For exploratory or low-stakes pipelines, you may choose to *warn* — log the issue, send a Slack alert, but let the pipeline continue with clean rows only. This is a deliberate trade-off, not a shortcut.
+
+*Checks at every stage?* Ideally you validate after extraction (first touch of raw data), after each major transformation, and before loading into any table other teams query. Over-checking wastes scheduler time; under-checking lets errors propagate. A practical starting rule: always validate after extraction and always validate before loading to a shared table.
+
+**Scale nuance:** On five billion rows, a `GROUP BY ... HAVING COUNT(*) > 1` uniqueness check can take minutes. Teams at that scale either sample the data (check a random 10 % of rows — fast and usually sufficient) or use probabilistic data structures like **Bloom filters** or **HyperLogLog** to estimate uniqueness without a full scan, trading absolute certainty for acceptable speed. Sampling introduces a small risk of missing low-frequency duplicates; the right choice depends on how costly a missed duplicate actually is.
+
+---
 
 ## Check yourself
 
-**Memory hook:** *"Check before you wreck"* — validate data at entry so broken values never reach production.
+**Memory hook:** *Garbage In, Garbage Out — catch it at the gate, not at the plate.*
 
-**Q1: What is the difference between a null check and a range check?**
-A null check asks whether a value exists at all (the field isn't blank). A range check assumes the value exists and asks whether it falls within acceptable bounds — for example, confirming that a price is greater than zero.
+**Q1: What does "fail fast" mean in a data pipeline, and why is it safer than letting the pipeline continue when a check fails?**
+A: Fail fast means stopping the pipeline the moment any quality check fails. It is safer because bad data that continues flows into transformation steps, gets loaded into the warehouse, and gets queried by dashboards — spreading the error and making the root cause harder to trace. Stopping early contains the damage to the staging table, where it is easy to identify and fix.
 
-**Q2: Why is freshness considered a quality dimension and not just a scheduling concern?**
-Because data that is technically correct but hours or days old can cause wrong decisions. Showing yesterday's stock levels to today's customers, or yesterday's revenue figures in this morning's board meeting, is a quality failure even if every value in the table is individually accurate. Freshness tells you whether the data is *current enough* to be trusted for its intended use.
+**Q2: Your daily pipeline loads sales data on a 6-hour schedule. The newest record in the staging table is 36 hours old and your freshness threshold is 26 hours. What should happen, and why?**
+A: The freshness check should fail and the pipeline should stop. If it continued, it would re-transform the same old data already in the warehouse and overwrite correct downstream tables with stale numbers. The alert tells the engineer to investigate why the upstream source stopped delivering — which is the real problem to fix.
 
-**Q3: If a quality check fails, what should a well-designed pipeline do?**
-Fail fast: stop immediately, refuse to write any data downstream, and alert the on-call engineer with enough detail (which check failed, how many rows were affected, what the threshold was) to diagnose the problem quickly. Never silently pass broken data through.
+**Q3: Why does a null check on `order_id` need to pass *before* you run a JOIN between the orders table and the products table?**
+A: A JOIN matches rows using the key column. Rows where `order_id` is null have no key to match on — they are either silently dropped (INNER JOIN) or produce rows full of nulls (LEFT JOIN). Either outcome corrupts the joined result. Confirming every `order_id` is present guarantees every row participates correctly before the join runs.
+
+---
 
 ## Connects to
 
-[[dags-schedulers|DAGs & Schedulers]] · [[idempotency|Idempotency]] · [[transactions-acid|Transactions & ACID]] · [[batch-vs-streaming|Batch vs Streaming]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]]
+[[dags-schedulers|DAGs & Schedulers]] · [[idempotency|Idempotency]] · [[transactions-acid|Transactions & ACID]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[batch-vs-streaming|Batch vs Streaming]]
+
+---
+
+## Coming up next
+
+The vault does not currently define a next concept after this one — you have reached the end of the catalogued course. The natural next topic to add would be **Data Lineage & Observability**: understanding *where* data came from at every step, *which* pipeline produced each number in your warehouse, and *how* to detect when something goes quietly wrong at scale without a failing task to alert you. Once that note is added to the vault, it picks up exactly where this lesson ends.

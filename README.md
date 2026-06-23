@@ -52,26 +52,37 @@ graph view (Ctrl/Cmd+G).
 ## Learning from the vault
 
 Building the vault gives you notes; the **Vault Teaching Engine** turns those notes
-into beginner-proof lessons. It is a reusable prompt that teaches the vault's
-data-engineering and software-engineering concepts **topic-by-topic and
-sub-topic-by-sub-topic**, pitched so a 15-year-old can follow, with an everyday
-analogy and a real-world example for every idea.
+into one **flowing, illustrated course**. It is a reusable prompt that teaches the
+vault's data-engineering and software-engineering concepts as a connected path —
+each lesson recaps the previous one and points to the next — pitched so a 15-year-old
+can follow.
 
 - Prompt: [`prompts/vault-teaching-engine.md`](prompts/vault-teaching-engine.md)
-- It uses a five-lens teaching panel (Master Teacher, Working Engineer, Honest
-  Skeptic, Curriculum Architect, and a 15-Year-Old comprehension gate), produces a
-  learning **roadmap first**, then one lesson file per topic.
+- Each lesson climbs a **ladder of levels** — Level 1 (first intuition) up to an
+  expert level (more levels for harder concepts) — so you can stop where you like or
+  push to mastery.
+- It uses a teaching panel plus an **editorial board** (a prolific author, a
+  voracious expert reader, and a professor who teaches rocket science to teenagers)
+  that reviews every note for accuracy, flow, and clarity.
+- Every lesson carries several **simple diagrams** (ByteByteGo-style boxes-and-arrows)
+  rendered to real SVG images from Mermaid, so flow is *seen*, not just read.
 - Lessons come out as the same Markdown + frontmatter + `[[wikilink]]` format this
-  toolkit produces, so they paste straight back into your Obsidian vault.
+  toolkit produces, so they save straight into your Obsidian vault.
 
 ### The ready-made learning vault
 
-The repo ships a ready-to-open vault at **`learning-vault/`** — one deep lesson per
-concept in the starter syllabus. Every lesson includes a worked example with real
-numbers and a code/SQL snippet, common misconceptions, a "how it relates to and
-differs from" comparison with neighbouring concepts, and self-check questions —
-wired together with wikilinks and Maps-of-Content. Open
-that folder directly in Obsidian (*Open folder as vault*) and start at `Home.md`.
+The repo ships a ready-to-open vault at **`learning-vault/`** — the starter syllabus
+taught as one continuous course. Each concept is a leveled lesson with a recap that
+bridges from the previous concept, several embedded diagrams (in `assets/`), a worked
+example with real numbers and a code/SQL snippet, common misconceptions, a "how it
+relates to and differs from" comparison, self-check questions, and a "coming up next"
+pointer — wired together with wikilinks and Maps-of-Content. Open that folder directly
+in Obsidian (*Open folder as vault*) and start at `Home.md`.
+
+> **Diagram rendering.** `de-toolkit teach` renders each lesson's Mermaid diagrams to
+> SVG using a local `mermaid-cli` (installed under `.toolcache/`, which is
+> git-ignored). If that renderer isn't available, lessons keep native ` ```mermaid `
+> blocks instead — Obsidian still renders those on desktop and mobile.
 
 ### Generating more lessons with `de-toolkit teach`
 

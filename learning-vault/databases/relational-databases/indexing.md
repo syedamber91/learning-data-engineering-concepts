@@ -2,110 +2,217 @@
 title: "Indexing"
 area: "Databases"
 topic: "Relational Databases"
-tags: [indexing, sql, performance, databases, query-optimization, relational-databases]
+tags: [indexing, sql, relational-databases, performance, data-engineering, databases]
 ---
 
 # Indexing
 
 *Part of [[relational-databases-moc|Relational Databases]] · [[databases-moc|Databases]]*
 
-## In one line
+← Prev: [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · Next: [[transactions-acid|Transactions & ACID]] →
 
-An index is a separate, sorted lookup structure the database builds on one or more columns so it can find matching rows in milliseconds instead of reading every single row in the table.
+## Recap — where we just were
 
-## Picture this
+In [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] you built your first mental model of a relational database: rows and columns, a primary key that fingerprints every row, a foreign key that bridges two tables, and the four SQL verbs — SELECT, INSERT, UPDATE, DELETE — that talk to all of it. You can now write `SELECT * FROM orders WHERE customer_id = 1`, but you haven't yet asked *how* the database actually finds those rows. Does it read every single row? Does it jump straight to the answer? That question is exactly what this lesson answers.
 
-Imagine you are holding a 1,000-page chemistry textbook and someone asks you to find every mention of "sodium." Without an index, you flip through every page — that is a **full table scan**. With the index at the back of the book, you look up "sodium," see "pages 47, 312, 789," and jump straight there. You read three pages instead of one thousand.
+---
 
-A database index works exactly like that back-of-book index: it is a sorted list of values from one column, each entry pointing to the physical location of the matching row. The database uses that list to skip directly to what you need.
+## Level 1 — The big idea
 
-## How it actually works
+A **database index** is a separate, sorted data structure the database keeps alongside your table. Its single job: let the engine jump straight to matching rows without reading every row in the table.
 
-When you create an index on a column, the database engine builds a separate data structure — almost always a **B-tree** (a self-balancing sorted tree, think of it as a very efficient sorted list you can search in logarithmic time) — that stores the indexed column's values in sorted order, each paired with a pointer to the full row on disk.
+**Everyday analogy:** Think of the index at the back of a textbook. When you need every page that mentions "foreign key," you don't re-read the whole book — you flip to the index, find "foreign key" in alphabetical order, and see "pages 14, 47, 203." A database index works identically: it's a sorted shortcut that points to the actual data.
 
-**The read path (fast):** You run `SELECT * FROM orders WHERE customer_id = 42`. Without an index the engine reads every row in `orders` to check `customer_id`. With an index on `customer_id`, the engine walks the B-tree — start at the root, go left or right based on whether 42 is smaller or larger than the current node's value, repeat — and reaches the matching entries in roughly log₂(n) comparisons. For a million-row table that is around 20 comparisons instead of 1,000,000. It then follows the pointers to fetch only those rows.
+<!-- mermaid-source:
+graph LR
+    Query[Query - filter on email] --> Index[Email index - sorted]
+    Index --> RowPtr[Row pointer - page 7 slot 2]
+    RowPtr --> Table[customers table - row fetched]
+-->
+![[indexing-d1.svg]]
 
-**The write path (slower):** Every `INSERT`, `UPDATE`, or `DELETE` now has two jobs: change the data in the main table *and* update every index that covers the changed columns. If you add an order for customer 42, the engine inserts the row in the table *and* inserts an entry into the `customer_id` index, re-balancing the B-tree if needed. More indexes = more maintenance work on every write.
+Without an index the database must do a **full table scan** — read every row top to bottom, like re-reading the whole textbook. With an index it leaps to the answer in a handful of steps. That leap is the entire story of indexing.
 
-**Selectivity matters:** An index on a column with only two values (`gender = 'M'` or `'F'`) saves almost nothing — the engine still has to read half the table. An index on `email` (nearly unique for every row) is extremely useful. High selectivity (many distinct values) = valuable index.
+---
 
-**Composite indexes:** You can index multiple columns together, e.g., `(customer_id, order_date)`. The database can use this index for queries that filter on `customer_id` alone, or on `customer_id` AND `order_date` together — but NOT on `order_date` alone (it is like an index sorted first by last name, then by first name: "Smith, Alice" is easy to find; finding everyone named "Alice" still requires reading the whole index).
+## Level 2 — How it actually works
 
-## Worked example
+Now that you have the picture, let's trace the mechanism.
 
-Suppose we have an `orders` table with 1,000,000 rows:
+### The B-tree: the engine under the index
+
+Most relational databases (PostgreSQL, MySQL, SQLite) store their default indexes in a structure called a **B-tree** (balanced tree). It arranges your indexed values as a tree where each level cuts the remaining candidates roughly in half — exactly the binary-search halving trick from [[big-o-time-complexity|Big-O / Time Complexity]].
+
+<!-- mermaid-source:
+graph TD
+    Root[Root - split point M] --> Left[Left branch A through L]
+    Root --> Right[Right branch N through Z]
+    Left --> LL[alice - bob - carol]
+    Left --> LR[dave - eve - frank]
+    Right --> RL[nina - omar - peter]
+    Right --> RR[quinn - rosa - sue]
+    LL --> P1[Row pointers on disk]
+    LR --> P2[Row pointers on disk]
+    RL --> P3[Row pointers on disk]
+    RR --> P4[Row pointers on disk]
+-->
+![[indexing-d2.svg]]
+
+To find a specific value the database starts at the root, asks "is my target before or after the split value here?", follows the correct branch, and repeats — until it reaches a leaf node holding the exact disk address of the row. This is O(log n): doubling the table size adds only one extra step.
+
+### What an index entry stores
+
+Each entry in the index holds two things:
+1. **The indexed value** — e.g., `"alice@example.com"`
+2. **A row pointer** — the physical address (page number + slot) of that row on disk
+
+The entries are kept in sorted order by the indexed value. That sort order is what makes the binary-search style navigation possible.
+
+### Step-by-step: a query hitting an index
+
+<!-- mermaid-source:
+sequenceDiagram
+    participant App as Application
+    participant DB as Database Engine
+    participant Idx as Index on email
+    participant Tbl as customers table
+
+    App->>DB: SELECT WHERE email = alice
+    DB->>Idx: Binary search for alice
+    Idx-->>DB: Found - row at page 4 slot 2
+    DB->>Tbl: Fetch page 4 slot 2
+    Tbl-->>DB: Row data
+    DB-->>App: Result returned
+-->
+![[indexing-d3.svg]]
+
+Without the index, steps 2 and 3 are replaced by "scan every row in the table one by one." That's fine with 10 rows; catastrophic with 10,000,000.
+
+---
+
+## Level 3 — See it with real numbers
+
+Your `customers` table has **1,000,000 rows**. You run:
 
 ```sql
-CREATE TABLE orders (
-    order_id    BIGINT PRIMARY KEY,
-    customer_id INT,
-    order_date  DATE,
-    total       DECIMAL(10,2)
-);
+SELECT name, email
+FROM customers
+WHERE email = 'alice@example.com';
 ```
 
-**Without an index — slow:**
+**Without an index on `email`:**
+- The database reads all 1,000,000 rows, checking each email value.
+- Big-O grade: **O(n)** — linear scan.
+- At 10,000 rows checked per second: ~100 seconds. The page times out.
+
+**With an index on `email`:**
+- A B-tree 20 levels deep can index over 1,000,000 values (2²⁰ = 1,048,576).
+- The database follows at most 20 comparisons to reach the row pointer.
+- Big-O grade: **O(log n)** — logarithmic.
+- Same hardware: sub-millisecond.
+
+Creating the index and verifying it works:
 
 ```sql
-SELECT * FROM orders WHERE customer_id = 42;
+-- Step 1: create the index (one-time cost)
+CREATE INDEX idx_customers_email ON customers(email);
+
+-- Step 2: run the query as normal — the planner picks up the index automatically
+SELECT name, email
+FROM customers
+WHERE email = 'alice@example.com';
+
+-- Step 3: confirm the index was used with EXPLAIN
+EXPLAIN SELECT name, email
+FROM customers
+WHERE email = 'alice@example.com';
+
+-- Good output — index was used:
+--   Index Scan using idx_customers_email on customers
+--   (cost=0.42..8.44 rows=1 width=40)
+
+-- Bad output — full scan, no index used:
+--   Seq Scan on customers
+--   (cost=0.00..18340.00 rows=1 width=40)
 ```
 
-The engine performs a full table scan: it reads all 1,000,000 rows, checks each `customer_id`, and returns the ~200 rows that match. On a typical disk, that might take 2–5 seconds.
+`EXPLAIN` shows the database's execution plan before it runs the query. `Index Scan` means the shortcut was taken. `Seq Scan` (sequential scan) means every row was read — your cue that an index is missing or the planner chose not to use it.
 
-**Adding the index:**
+---
 
-```sql
-CREATE INDEX idx_orders_customer ON orders (customer_id);
-```
+## Level 4 — In the real world & common traps
 
-The engine builds a B-tree on `customer_id`. The tree has roughly log₂(1,000,000) ≈ 20 levels. Now the same `SELECT` walks 20 nodes, finds 200 matching pointers, and fetches those 200 rows. Time drops to under 10 milliseconds — a 200–500x speedup.
+### Real-world use case: customer support at an e-commerce company
 
-**The write cost in action:**
+Imagine a shop like Amazon with 50 million orders. A customer-service agent types a customer's email address to pull up their order history. Without an index on `orders.customer_email`, the database reads all 50 million rows — the screen shows a spinner for 30 seconds and the agent's call queue grows. With an index, the same query returns in under 10 milliseconds. Indexes are almost always the first thing a data engineer or database administrator checks when a query is reported as slow. The rule of thumb used on real teams: **index columns you frequently filter on (`WHERE`), join on (`JOIN ON`), or sort on (`ORDER BY`).**
 
-```sql
-INSERT INTO orders (order_id, customer_id, order_date, total)
-VALUES (1000001, 99, '2026-06-22', 149.99);
-```
+### Common misconceptions
 
-Now the engine must (1) write the new row to the main table and (2) insert `customer_id = 99` into `idx_orders_customer` and rebalance the B-tree. With one index the overhead is small. With ten indexes on the same table, every insert touches eleven data structures.
+**People think: "More indexes = a faster database."**
+Actually: every index you add speeds up *reads* but slows down *writes*. On `INSERT`, `UPDATE`, and `DELETE`, the database must update every index covering that row. A write-heavy table with 10 indexes can be slower overall than the same table with 2. Choose indexes surgically, not generously.
 
-## In the real world
+**People think: "The database always uses my index."**
+Actually: the database's **query planner** — the internal component that decides how to execute a query — estimates whether the index is worth using at all. If a query touches more than roughly 5–10 % of the table anyway (e.g., `WHERE country = 'US'` when 80 % of your users are American), the planner may prefer a full table scan, because jumping to scattered disk locations via the index becomes slower than reading pages in order.
 
-An e-commerce company like Shopify processes millions of orders. Their support dashboard lets agents search orders by `customer_id`, `status`, and `created_at`. Without indexes on those columns, every search would scan hundreds of millions of rows — pages would time out. With carefully chosen indexes, each lookup returns in under 50 ms. The trade-off: the warehouse team runs millions of `INSERT`s per day, so the team audits indexes quarterly and drops ones that are no longer used by any query, because each dead index still slows down every write for free.
+**People think: "An index on column A helps with filtering on column B."**
+Actually: an index only accelerates queries that filter, join, or sort on the *exact column(s) indexed*. An index on `email` does nothing for `WHERE name = 'Alice'`. You need a separate index on `name`, or a **composite index** listing both columns — in the right order, which matters.
 
-## Common misconceptions
+---
 
-**People think: "More indexes = faster database." — Actually:** Every index you add speeds up reads but slows down every write (`INSERT`/`UPDATE`/`DELETE`) on that table. A table with 15 indexes on a write-heavy workload can be *slower overall* than the same table with 3 well-chosen indexes. Index every column that genuinely needs it, not every column that exists.
+## Level 5 — Expert view
 
-**People think: "A composite index on (A, B) works the same as two separate indexes on A and B." — Actually:** A composite index `(A, B)` is most efficient for queries that filter on A first (or A and B together). A query filtering only on B cannot use the leading column, so it may not use the composite index at all. Two separate indexes let each query use the most relevant one, but each has its own write overhead. They are different tools.
+### How indexing relates to and differs from neighbours
 
-**People think: "The database always uses an index if one exists." — Actually:** The query optimizer decides whether using the index is actually faster than a full table scan. If your query matches 80% of the rows, the optimizer knows it is cheaper to scan the table sequentially than to chase 800,000 individual pointers across disk. Indexes help most when queries are *selective* — returning a small fraction of rows.
-
-## How it relates & differs
-
-| Concept | Relates to Indexing | Differs from Indexing |
+| Concept | What it is | Relationship to indexing |
 |---|---|---|
-| [[tables-keys-sql-basics\|Tables, Keys & SQL Basics]] | A **primary key** is automatically indexed in most databases; indexes are built on top of the table structure you learn there | Keys define *identity and relationships*; indexes are a *performance tool* layered on top — you can index any column, not just keys |
-| [[transactions-acid\|Transactions & ACID]] | Write transactions must update indexes atomically alongside the table to maintain consistency | Transactions govern correctness and durability; indexes govern *speed of access* — they are separate concerns, though both live inside the database engine |
-| [[normalization-vs-denormalization\|Normalization vs Denormalization]] | A normalized schema with many tables often needs more indexes to make cross-table joins fast; denormalization reduces joins and may reduce index needs | Normalization is about *how you organize data*; indexing is about *how fast you find it* — you apply indexes to whatever schema you chose, normalized or not |
+| **Full table scan** | Reading every row in order | What indexing replaces for selective queries |
+| **B-tree** | The balanced-tree data structure under most indexes | The mechanism giving indexes O(log n) lookup |
+| **Hash index** | Alternative index using a hash map | O(1) equality lookup, but cannot handle range queries (`BETWEEN`, `>`, `<`) — no sorted order |
+| [[arrays-hash-maps\|Arrays & Hash Maps]] | In-memory data structures | A hash index is the disk-resident cousin of a hash map; same O(1) idea, same range-query blind spot |
+| [[big-o-time-complexity\|Big-O / Time Complexity]] | Efficiency grades | Full scan = O(n); index scan = O(log n) — the same contrast you already know, now applied to disk |
 
-## Why you'd use it (and when not to)
+### When to add an index
 
-Use indexes on columns you frequently filter (`WHERE`), join (`JOIN ... ON`), or sort (`ORDER BY`) — especially when those columns have high selectivity and the table is large (thousands of rows or more). Avoid indexes on small tables (a full scan of 500 rows is instantaneous), on columns with very few distinct values (low selectivity), or on columns that are written to constantly but rarely queried. Every index has a storage cost and a write-amplification cost; the payoff only appears when reads actually use it. Audit index usage with your database's built-in tools (`pg_stat_user_indexes` in PostgreSQL, `sys.dm_db_index_usage_stats` in SQL Server) and drop indexes that are never hit.
+- The column appears frequently in `WHERE`, `JOIN ON`, or `ORDER BY`.
+- The column has high **cardinality** — many distinct values (e.g., email address, user ID, order number). An index on a column with only two possible values is nearly useless because the planner will prefer a full scan anyway.
+- The table is large. Indexes rarely pay off on tables under a few thousand rows.
+
+### When NOT to add an index
+
+- The table is written to far more often than it is read (e.g., a high-frequency event log). Write overhead may outweigh the read benefit.
+- The column has very low cardinality (e.g., `status` with values `'active'` / `'inactive'`).
+
+### Composite indexes and the leftmost-prefix rule
+
+A **composite index** on `(last_name, first_name)` helps a query filtering on `last_name` alone, or on both columns together — but does *not* help a query filtering only on `first_name`. The leftmost column in the index definition must be present in the filter. This "leftmost-prefix rule" is one of the most common index mistakes in production systems.
+
+### Index maintenance
+
+Over time, as rows are inserted and deleted, a B-tree index can become fragmented — like a filing cabinet where folders are scattered across many drawers. Most databases provide an `ANALYZE` or `REINDEX` command to rebuild the index and refresh the planner's statistics about it.
+
+---
 
 ## Check yourself
 
-**Memory hook:** *"Index = book index: fast to look up, extra work every time the book is revised."*
+**Memory hook:** *An index is the back-of-book index — flip, find, fetch. Without it, read every page.*
 
-**Q1: If you add five indexes to a table, what happens to INSERT performance?**
-It gets slower. Every insert must update all five index data structures in addition to writing the main row. The more indexes, the more maintenance work per write.
+**Q1: Why does adding an index speed up `SELECT` but slow down `INSERT`?**
+A1: `SELECT` benefits because the index lets the planner jump to matching rows instead of scanning all of them. `INSERT` is slower because the database must update every index that covers the table — in addition to writing the new row itself.
 
-**Q2: You have a column `country` with only 3 distinct values in a 5-million-row table. Should you index it?**
-Almost certainly not. With only 3 values each query matches roughly 1.7 million rows — the optimizer will likely prefer a full table scan over chasing that many index pointers. Low-selectivity columns rarely benefit from indexing.
+**Q2: Your `products` table has 2,000,000 rows. A query with `WHERE category = 'Electronics'` returns 800,000 rows (40 % of the table). Would an index on `category` help?**
+A2: Probably not. The query planner estimates that fetching 40 % of rows via random index lookups would be slower than reading pages in order with a full table scan. Indexes pay off most when the result set is a tiny fraction of the table.
 
-**Q3: A composite index exists on `(last_name, first_name)`. Can a query `WHERE first_name = 'Alice'` use it efficiently?**
-No. The index is sorted by `last_name` first; entries for every "Alice" are scattered across the entire index. The database cannot narrow down using `first_name` alone without scanning the whole index — it needs a separate index on `first_name` for that query.
+**Q3: What two output terms from `EXPLAIN` tell you whether an index was used?**
+A3: `Index Scan` (or `Index Only Scan`) means the index was used. `Seq Scan` means the engine read the table row by row with no index.
+
+---
 
 ## Connects to
 
-[[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[transactions-acid|Transactions & ACID]] · [[normalization-vs-denormalization|Normalization vs Denormalization]] · [[big-o-time-complexity|Big-O / Time Complexity]] · [[data-quality-validation|Data Quality & Validation]]
+[[big-o-time-complexity|Big-O / Time Complexity]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[arrays-hash-maps|Arrays & Hash Maps]] · [[normalization-vs-denormalization|Normalization vs Denormalization]] · [[star-schema|Star Schema]]
+
+---
+
+## Coming up next
+
+[[transactions-acid|Transactions & ACID]] — now that you can find rows fast with indexes, the next question is: what happens when two people try to change the same row at the same moment, or a system crashes halfway through a bank transfer? Transactions and ACID guarantees are the database's answer to that problem.

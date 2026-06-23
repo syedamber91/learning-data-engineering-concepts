@@ -2,155 +2,244 @@
 title: "Slowly Changing Dimensions"
 area: "Data Modeling"
 topic: "Warehouse Modeling"
-tags: [slowly-changing-dimensions, scd, data-modeling, warehouse-modeling, history-tracking, dimensions]
+tags: [slowly-changing-dimensions, scd, data-warehouse, dimension-tables, data-modeling, history]
 ---
 
 # Slowly Changing Dimensions
 
 *Part of [[warehouse-modeling-moc|Warehouse Modeling]] · [[data-modeling-moc|Data Modeling]]*
 
-## In one line
+← Prev: [[star-schema|Star Schema]] · Next: [[normalization-vs-denormalization|Normalization vs Denormalization]] →
 
-A Slowly Changing Dimension (SCD) is a strategy for deciding what your data warehouse does when a piece of descriptive information — like a customer's address or job title — changes over time: do you erase the old value, add a new row, or keep one extra "previous" column?
+## Recap — where we just were
 
-## Picture this
+In [[star-schema|Star Schema]] you learned how a data warehouse splits tables into a central fact table (the numbers) surrounded by dimension tables (the descriptions). That design assumes dimensions are stable: a product's name, a customer's city, a store's region. But the real world changes — customers move, products get re-categorised, employees change job titles. The moment a dimension attribute changes, you face a choice the star schema blueprint does not answer for you: do you erase the old value, keep it alongside the new one, or do something in between? That is exactly the problem Slowly Changing Dimensions solve.
 
-Imagine you keep a paper address book. One day your friend Emma moves to a new city.
+---
 
-- **Type 1 (overwrite):** You erase her old address and write the new one. Simple — but you can never prove she ever lived anywhere else.
-- **Type 2 (add a row):** You add a second entry for Emma — "Emma (2022–2024, old city)" and "Emma (2025–present, new city)." The book gets longer, but the full history is there.
-- **Type 3 (extra column):** You cross out the old address and write the new one, but you keep a small note in the margin that says "previously: old city." One step of history, and no more.
+## Level 1 — The Big Idea
 
-That is the whole idea of SCDs — three different answers to the question: *what do we do when something quietly changes?*
+A **Slowly Changing Dimension (SCD)** is a dimension whose attributes change occasionally — not every millisecond, not never, but slowly over time. The word "slowly" matters: we are not talking about a stock price that changes thousands of times a day; we are talking about a customer who moves house once every few years.
 
-## How it actually works
+The core design challenge is: **when an attribute changes, should the old value survive or disappear?**
 
-In a data warehouse, dimension tables hold the **describing information** about your business objects — think customers, products, employees, or store locations. A dimension record is things like: name, city, loyalty tier, product category, department. These feel stable, but they *do* change — just slowly. (A customer upgrades from Silver to Gold. A product moves to a new category. An employee changes their job title.)
+Three numbered techniques answer this differently:
 
-The problem: your fact table (the table of events — sales, logins, orders) links to the dimension by a key. If a customer's tier changes and you silently update the dimension, every historical sale for that customer will now look like it was made by a Gold-tier customer — even the ones from two years ago when they were Silver. Your historical reports become quietly wrong.
+- **Type 1** — overwrite the old value. Simple. No history.
+- **Type 2** — add a new row. Full history, more complexity.
+- **Type 3** — add a new column for the previous value. Limited history, minimal complexity.
 
-**SCD Type 1 — Overwrite**
-Just update the row in place. The old value is gone forever. Use this when history genuinely does not matter — fixing a typo in a name, for example. It is the simplest option, but it destroys the past.
+**Everyday analogy:** Imagine your school yearbook caption changes when a classmate gets a new preferred name. The school has three choices: **reprint** the old caption (Type 1 — new name only, old name gone); **add a new page** with the new name and a date, leaving the old page intact (Type 2 — both versions exist); or **stick a sticker** over the old name with the new one, writing the old name in small print underneath (Type 3 — current name plus one prior name, side by side).
 
-**SCD Type 2 — Add a new row**
-When a value changes, you close the old row (stamp it with an end date and mark it inactive) and insert a brand-new row with the new value and a fresh start date. The old row stays. The fact table's old events still point to the old dimension row — so historical reports remain correct. This is the most common and most powerful SCD type in real warehouses, but it inflates the size of the dimension table over time.
+<!-- mermaid-source:
+graph TD
+    C[Dimension attribute changes]
+    C --> T1[Type 1 - Overwrite - no history kept]
+    C --> T2[Type 2 - New row added - full history kept]
+    C --> T3[Type 3 - New column added - one prior value kept]
+-->
+![[slowly-changing-dimensions-d1.svg]]
 
-**SCD Type 3 — Previous-value column**
-You add an extra column to the dimension row — something like `previous_city`. When the value changes, you copy the current value into `previous_city` and overwrite the current column. You keep exactly one step of history. This is compact, but it only ever remembers one change. If Emma moves twice, the first city is lost forever.
+---
 
-There are also hybrid types (Type 4, Type 6) that combine these, but Types 1, 2, and 3 are the foundation you need.
+## Level 2 — How It Actually Works
 
-## Worked example
+Now that you have the three strategies, let's open each one and see what physically happens to the database table.
 
-Say we have a `dim_customer` table in a warehouse. Emma started as a Silver loyalty member and was upgraded to Gold on 1 March 2025.
+### Type 1 — Overwrite
 
-**Before any change (baseline row):**
+You run a plain `UPDATE`. The old value is **destroyed**.
 
-```sql
--- dim_customer
-| customer_key | customer_id | name  | loyalty_tier | effective_date | expiry_date  | is_current |
-|--------------|-------------|-------|--------------|----------------|--------------|------------|
-| 1001         | C-42        | Emma  | Silver       | 2022-01-15     | 9999-12-31   | TRUE       |
-```
+<!-- mermaid-source:
+graph LR
+    B[Before: city = London] --> U[UPDATE SET city = Paris]
+    U --> A[After: city = Paris - London is gone forever]
+-->
+![[slowly-changing-dimensions-d2.svg]]
 
-A `customer_key` of 1001 is what the fact table (`fact_orders`) stores. All of Emma's old orders point to key 1001.
+Every historical fact row that ever joined to this dimension row will now *retroactively* read "Paris" — even the orders placed years ago when the customer lived in London. History is silently rewritten.
 
-**Type 1 — just overwrite:**
+**Use it when:** the change is a correction (a typo in a product name) or when history is genuinely irrelevant (a customer's latest contact email address — you only care about the current one).
 
-```sql
-UPDATE dim_customer
-SET loyalty_tier = 'Gold'
-WHERE customer_id = 'C-42';
-```
+---
 
-Result: the Silver row is gone. Emma's 2022 orders now look like Gold orders. Historical analysis is broken.
+### Type 2 — Add a new row
 
-**Type 2 — add a new row (the right way for history):**
+When a value changes, you perform a two-step operation:
 
-```sql
--- Step 1: close the old row
-UPDATE dim_customer
-SET expiry_date = '2025-02-28',
-    is_current  = FALSE
-WHERE customer_id = 'C-42'
-  AND is_current = TRUE;
+1. **Expire** the current row — set `is_current = false` and record an `expiry_date`.
+2. **Insert** a brand-new row with a **new surrogate key**, the new attribute value, `effective_date = today`, and `is_current = true`.
 
--- Step 2: insert the new row with a new surrogate key
-INSERT INTO dim_customer
-  (customer_key, customer_id, name, loyalty_tier, effective_date, expiry_date, is_current)
-VALUES
-  (1087, 'C-42', 'Emma', 'Gold', '2025-03-01', '9999-12-31', TRUE);
-```
+Old fact rows still point to the old surrogate key (e.g., `customer_key = 10`, city = London). New fact rows point to the new surrogate key (e.g., `customer_key = 15`, city = Paris). The fact table never changes; history is perfectly preserved.
 
-Now the table looks like this:
+<!-- mermaid-source:
+graph TD
+    D1[dim_customer - key=10 - London - is_current: false]
+    D2[dim_customer - key=15 - Paris - is_current: true]
+    F1[Old fact rows - joined to key=10 - London]
+    F2[New fact rows - joined to key=15 - Paris]
+    F1 --> D1
+    F2 --> D2
+-->
+![[slowly-changing-dimensions-d3.svg]]
 
-```
-| customer_key | customer_id | name  | loyalty_tier | effective_date | expiry_date  | is_current |
-|--------------|-------------|-------|--------------|----------------|--------------|------------|
-| 1001         | C-42        | Emma  | Silver       | 2022-01-15     | 2025-02-28   | FALSE      |
-| 1087         | C-42        | Emma  | Gold         | 2025-03-01     | 9999-12-31   | TRUE       |
-```
+**Use it when:** historical accuracy matters — e.g., you must know which region a customer was in *at the time of purchase*, not today.
 
-Emma's old orders still point to key 1001 (Silver). New orders will point to key 1087 (Gold). Historical analysis stays correct.
+---
 
-**Type 3 — previous-value column:**
+### Type 3 — Previous value column
 
-```sql
-ALTER TABLE dim_customer ADD COLUMN previous_loyalty_tier VARCHAR(20);
+You add one extra column — `prev_city` — beside the existing `city` column. When a change arrives, the current value moves to `prev_city` and the new value fills `city`.
 
-UPDATE dim_customer
-SET previous_loyalty_tier = loyalty_tier,
-    loyalty_tier           = 'Gold'
-WHERE customer_id = 'C-42';
-```
+<!-- mermaid-source:
+graph LR
+    B[Before: city=London - prev_city=null] --> U[Alice moves to Paris]
+    U --> A[After: city=Paris - prev_city=London]
+-->
+![[slowly-changing-dimensions-d4.svg]]
 
-Result: one row with `loyalty_tier = 'Gold'` and `previous_loyalty_tier = 'Silver'`. Compact — but if Emma later becomes Platinum, the Silver history vanishes.
+**Use it when:** you need a simple before/after comparison for exactly one change cycle, and you know only one level of history is ever needed.
 
-## In the real world
+**The hard limit:** if Alice moves again — say, from Paris to Berlin — London is overwritten in `prev_city` and is permanently lost. Type 3 cannot track a full history.
 
-E-commerce companies use SCD Type 2 constantly for their customer dimension. Suppose an online retailer wants to answer: "How much did customers spend *before* and *after* upgrading to Gold tier?" Without Type 2, that question is unanswerable — the old tier is gone. With Type 2, the analyst filters `fact_orders` on the date range and joins to the correct historical dimension row using the surrogate key. The correct tier-at-time-of-purchase is preserved.
+---
 
-A concrete example: a major retail analytics team might have a `dim_product` table where a product's department changes (e.g., a blender moves from "Appliances" to "Kitchen"). With Type 2, they can correctly attribute historical sales to the *original* department for year-over-year comparisons, rather than silently re-categorising the past.
+## Level 3 — See It with Real Numbers
 
-## Common misconceptions
+**Scenario:** `dim_customer` has one row for Alice. She lives in London. On 2025-03-01 she moves to Paris. Watch what each type does.
 
-**People think "slowly" means the change happens rarely — actually** it just means the change is gradual and not in every transaction. A customer's city might change once in ten years; a product price might change weekly. "Slowly" is relative to fact-table events (which happen by the millions). Both can be SCDs.
+**Starting table (all three types start here):**
 
-**People think you should always use Type 2 — actually** Type 1 is correct when history genuinely does not matter. Fixing a misspelled name, correcting a wrong phone number — these are data-quality fixes, not business events. Using Type 2 for typo corrections bloats the table and confuses analysts with "two Emmas."
-
-**People think the `customer_id` is the key you join on in the fact table — actually** in a Type 2 dimension you must join on the **surrogate key** (`customer_key`), not the natural business ID. If you join on `customer_id`, you will get multiple rows back (one per version) and produce duplicated or incorrect aggregations. This is one of the most common query bugs in warehouses.
-
-## How it relates & differs
-
-| Concept | How it RELATES | How it DIFFERS |
+| customer_key | name  | city   |
 |---|---|---|
-| [[star-schema\|Star Schema]] | SCDs live inside the dimension tables of a star schema. Type 2 is the standard way a star schema handles change over time. | The star schema is the *structure* (fact + dimension tables); SCD is the *strategy* for what happens when dimension data changes. |
-| [[normalization-vs-denormalization\|Normalization vs Denormalization]] | Type 2 dimensions are intentionally denormalised — you duplicate rows instead of pointing to a separate history table. | Normalisation avoids redundancy; Type 2 *embraces* controlled redundancy to make historical queries fast and simple. |
-| [[tables-keys-sql-basics\|Tables, Keys & SQL Basics]] | SCD Type 2 depends on surrogate keys (system-generated integers) to uniquely identify each version of a row, separate from the natural business ID. | The SQL basics concept teaches keys as identifiers; SCDs extend that by making you think about *which* key the fact table should store — the surrogate, not the natural key. |
+| 10           | Alice | London |
 
-## Why you'd use it (and when not to)
+---
 
-**Use Type 2** when historical accuracy of dimension attributes is business-critical — loyalty tiers, pricing bands, sales territories, job titles. Any report that asks "what was the value at the time of the event?" needs Type 2. The trade-off is a larger dimension table and more complex ETL logic to open and close rows correctly.
+**Type 1 — after the move:**
 
-**Use Type 1** when the attribute change is a correction, not a real-world event, or when no downstream report ever needs the old value. This is simpler and keeps the table small.
+```sql
+UPDATE dim_customer
+SET    city = 'Paris'
+WHERE  customer_key = 10;
+```
 
-**Use Type 3** sparingly — only when you need exactly one previous value and you are sure you will never need more than one step of history. It is a compromise that satisfies almost nobody in practice.
+| customer_key | name  | city  |
+|---|---|---|
+| 10           | Alice | Paris |
 
-Avoid Type 2 if your dimension changes extremely frequently (e.g., a product price updated hourly) — at that point the dimension has effectively become a fact and should be modelled differently, perhaps as a **Type 4** history table or a time-series fact.
+London is gone. Every historical sales row that joined to `customer_key = 10` now reads Paris — even orders placed in 2022.
+
+---
+
+**Type 2 — after the move:**
+
+```sql
+-- Step 1: expire the old row
+UPDATE dim_customer
+SET    is_current  = false,
+       expiry_date = '2025-02-28'
+WHERE  customer_key = 10;
+
+-- Step 2: insert the current row with a new key
+INSERT INTO dim_customer
+       (customer_key, name, city, effective_date, expiry_date, is_current)
+VALUES (15, 'Alice', 'Paris', '2025-03-01', '9999-12-31', true);
+```
+
+| customer_key | name  | city   | effective_date | expiry_date | is_current |
+|---|---|---|---|---|---|
+| 10           | Alice | London | 2024-01-01     | 2025-02-28  | false      |
+| 15           | Alice | Paris  | 2025-03-01     | 9999-12-31  | true       |
+
+Old fact rows still point to key 10 (London). New fact rows point to key 15 (Paris). No historical value is lost.
+
+---
+
+**Type 3 — after the move:**
+
+```sql
+UPDATE dim_customer
+SET    prev_city = city,
+       city      = 'Paris'
+WHERE  customer_key = 10;
+```
+
+| customer_key | name  | city  | prev_city |
+|---|---|---|---|
+| 10           | Alice | Paris | London    |
+
+One prior value is visible. A second move would erase London.
+
+---
+
+## Level 4 — In the Real World & Common Traps
+
+**Real-world use case:** A global e-commerce company needs to answer "What were sales by shipping region, per quarter, for the last three years?" Customers occasionally move between countries. Using **Type 2** means that orders placed when Alice lived in the UK are permanently attributed to the UK, while her orders after moving to France are attributed to France — giving the finance team a historically accurate regional breakdown for any quarter. Using Type 1 would silently re-attribute all of Alice's past UK orders to France the moment she moved, corrupting every historical report without a single error message.
+
+---
+
+**Misconceptions:**
+
+**People think: "Type 2 is always the right answer."**
+Actually: Type 2 is the most powerful option, but it carries real costs. Every query for "current" customers must filter `WHERE is_current = true`, or you will double-count every customer who has ever moved. The dimension table also grows a new row for every change — a customer who moves 10 times has 11 rows. Choose Type 2 only when historical accuracy on that specific attribute genuinely matters.
+
+**People think: "You can upgrade a Type 1 dimension to Type 2 later if you need history."**
+Actually: Once you have been overwriting values for months, the historical record is destroyed. You cannot reconstruct what city Alice was in on 2023-07-15 if you never stored it. Switching to Type 2 only captures history *from that point forward*. This is one of the most expensive mistakes in warehouse design — the SCD strategy must be chosen correctly at the start.
+
+**People think: "Type 3 gives you a full audit trail."**
+Actually: Type 3 only remembers *one* prior value per attribute. It is not an audit trail. If you need every change with a timestamp — a genuine audit log — Type 2 is the only option among the three classic types.
+
+---
+
+## Level 5 — Expert View
+
+### How the types relate and differ
+
+| Feature | Type 1 | Type 2 | Type 3 |
+|---|---|---|---|
+| History kept | None | Full | One prior value |
+| Table row count grows? | No | Yes — one row per change | No |
+| Query complexity | Lowest | Highest | Medium |
+| Storage cost | Lowest | Highest | Low |
+| Retroactive impact on old facts | Yes | No | Partial |
+| Best for | Error corrections | Accurate historical reporting | Simple before/after |
+
+### Trade-offs and edge cases
+
+**When Type 2 becomes expensive:** A dimension attribute that changes very frequently — like a user's "last active" timestamp or a product's real-time stock level — should *never* be Type 2. The table would grow by millions of rows per day. Reserve Type 2 for attributes that change rarely but whose history is business-critical: shipping country, job title, product category.
+
+**Surrogate keys are non-negotiable for Type 2.** You saw in [[star-schema|Star Schema]] that dimensions use a surrogate key (a plain integer) rather than a business key (like a customer's email). Type 2 is the sharpest reason why: Alice gets *two surrogate keys* (10 and 15), each representing a version of herself in time. If the primary key were her email address, you would be forced to store the same email twice and join on a string — fragile, slow, and incorrect.
+
+**Mixed SCDs in practice.** Real warehouses often combine types on a single dimension: most attributes are Type 1 (fix typos silently), while one or two critical attributes — `region`, `pricing_tier` — are Type 2. This keeps table growth manageable while preserving history exactly where it matters.
+
+**Type 2 and indexing:** As a Type 2 dimension grows (a five-year warehouse might have 10× as many rows as active entities), queries that need only current rows suffer unless a **partial index** on `is_current = true` is maintained. Without it, the database scans all expired rows too — turning a fast O(log n) lookup into a slow full scan. This directly applies what you learned in [[indexing|Indexing]].
+
+**Type 2 and atomicity:** The two-step Type 2 operation — expire the old row, insert the new row — must be wrapped in a single transaction. If the INSERT succeeds but the UPDATE to set `is_current = false` fails, you end up with two active rows for the same customer. Every report silently double-counts her. This is a classic [[transactions-acid|Transactions & ACID]] requirement: both steps commit together or neither does.
+
+---
 
 ## Check yourself
 
-**Memory hook:** *"Type 1 forgets, Type 2 remembers everything, Type 3 only remembers yesterday."*
+**Memory hook:** SCDs are a time-machine dial — Type 1 has no dial (overwrite and forget), Type 2 lets you travel back to any point in history, Type 3 only shows you one stop back.
 
-**Q1. A customer's email address was entered incorrectly. You fix the typo. Which SCD type should you use, and why?**
-Type 1. This is a data-quality correction, not a real business event. The old misspelled email never represented a true state you need to analyse historically. Overwriting is correct.
+**Q1: A product's SKU was entered with a typo. You fix it. Which SCD type is correct, and why?**
+A: Type 1. A typo is an error, not a meaningful historical state. There is no business reason to preserve the misspelled SKU — overwriting it is the right call.
 
-**Q2. A warehouse uses Type 2 for `dim_customer`. Emma (customer_id = C-42) now has two rows with surrogate keys 1001 and 1087. An analyst runs `SELECT SUM(amount) FROM fact_orders WHERE customer_id = 'C-42'` by joining `dim_customer` on `customer_id`. What goes wrong?**
-The join matches both dimension rows for Emma, so every fact row for Emma is duplicated in the result set. The `SUM` comes out roughly double the correct answer. The analyst must join on the surrogate key (`customer_key`) instead — each fact row stores exactly one surrogate key, so no duplication occurs.
+**Q2: Your dimension uses Type 1. An analyst asks: "How many customers were based in Germany when they placed their order in 2023?" Can you answer this accurately?**
+A: No. If any of those customers have since moved, their city has been overwritten. The 2023 location no longer exists in the database, so the question cannot be answered accurately.
 
-**Q3. What are the three pieces of metadata you typically add to a dimension row to implement Type 2?**
-`effective_date` (when this version became active), `expiry_date` (when it was superseded — often set to a far-future sentinel like `9999-12-31` for the current row), and `is_current` (a boolean flag making it easy to filter to the latest version without comparing dates).
+**Q3: In a Type 2 dimension, Alice has two rows (customer_key 10 — London, expired; customer_key 15 — Paris, current). A new order arrives today. Which surrogate key does the ETL pipeline use when writing the fact row?**
+A: customer_key 15 — the row where `is_current = true`. The pipeline must always resolve to the *current* surrogate key at load time, so that the new fact row correctly reflects Alice's present dimension record.
+
+---
 
 ## Connects to
 
-[[star-schema|Star Schema]] · [[normalization-vs-denormalization|Normalization vs Denormalization]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[batch-vs-streaming|Batch vs Streaming]] · [[idempotency|Idempotency]]
+[[star-schema|Star Schema]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]] · [[indexing|Indexing]] · [[transactions-acid|Transactions & ACID]] · [[normalization-vs-denormalization|Normalization vs Denormalization]]
+
+---
+
+## Coming up next
+
+[[normalization-vs-denormalization|Normalization vs Denormalization]] — you have now seen that a star schema deliberately *copies* attribute values directly into dimension rows (denormalization) instead of splitting them into extra tables. The next lesson digs into the theory behind that trade-off: what normalization is, why it was invented, and precisely when storing redundant data is the *right* engineering choice rather than a mistake.

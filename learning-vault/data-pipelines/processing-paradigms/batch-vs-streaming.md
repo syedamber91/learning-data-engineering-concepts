@@ -2,120 +2,248 @@
 title: "Batch vs Streaming"
 area: "Data Pipelines"
 topic: "Processing Paradigms"
-tags: [batch-processing, streaming, data-pipelines, latency, throughput, lambda-architecture]
+tags: [batch-processing, streaming, data-pipelines, lambda-architecture, latency, throughput]
 ---
 
 # Batch vs Streaming
 
 *Part of [[processing-paradigms-moc|Processing Paradigms]] · [[data-pipelines-moc|Data Pipelines]]*
 
-## In one line
-**Batch processing** collects data into a fixed pile and crunches it all at once on a schedule; **streaming** processes each piece of data the instant it arrives, one event at a time, without ever waiting.
+← Prev: [[normalization-vs-denormalization|Normalization vs Denormalization]] · Next: [[idempotency|Idempotency]] →
 
-## Picture this
-Imagine a restaurant at closing time. The manager gathers *all* the receipts from the whole day, then adds them up at midnight to get the daily total — that is **batch processing**: you wait, collect everything, then compute in one go.
+## Recap — where we just were
 
-Now picture a cashier with a running till that updates the total the moment each customer pays — that is **streaming**: every new event immediately changes the result, with no waiting for closing time.
+In [[normalization-vs-denormalization|Normalization vs Denormalization]] you made a deliberate choice about *how* to store data: keep every fact in one place (normalized) for safe writes, or duplicate facts across a wide table (denormalized) for fast reads. That tension — accuracy vs speed — resurfaces at the pipeline level. Now that you know how to shape your tables, the next question is: *when* should you process the data flowing into them? Should you wait and handle a large pile all at once, or should you handle each piece the instant it arrives? That is exactly what batch vs streaming answers.
 
-## How it actually works
+---
 
-**Batch processing** treats data as *bounded* — meaning the dataset has a defined beginning and end, like "all orders placed yesterday." A job is scheduled (say, at 2:00 AM), reads every record in that fixed chunk, performs the computation (totals, joins, transformations), writes the results somewhere, and then **stops**. Nothing runs again until the next scheduled window.
+## Level 1 — The Big Idea
 
-The key insight is why batch is so efficient at scale: reading a huge file sequentially from disk is one of the fastest things a computer can do. The system never has to pause and wait; it just ploughs through the data from start to finish. This gives batch excellent **throughput** — the amount of data processed per second.
+**Batch processing** collects a large, bounded chunk of data over time and processes the whole chunk in one go, triggered on a schedule.
 
-The cost is **latency** — the delay between an event happening in the real world and you seeing its result. If your batch job runs at 2 AM and processes yesterday's data, your results are already up to 24 hours old before anyone looks at them.
+**Streaming processing** handles each piece of data the moment it arrives — continuously, with no waiting.
 
-**Streaming** treats data as *unbounded* — a never-ending flow of events, like a river that never stops. The system stays alive permanently, listening for new events via a message queue (tools like **Apache Kafka** act like a post box: producers drop messages in, consumers pick them up). Each event is processed the moment it arrives, often within milliseconds.
+The core trade-off: **batch wins on throughput** (how much total work gets done efficiently), **streaming wins on latency** (how quickly a single result comes back).
 
-Streaming is harder to build for three reasons:
+**Everyday analogy — the laundromat:**
 
-1. **Out-of-order events** — a network packet from 3 seconds ago can arrive after one from 5 seconds ago. Your logic must handle this.
-2. **State management** — if you want a running total, you need to remember the previous total somewhere while processing the next event.
-3. **Fault tolerance** — if the process crashes mid-stream, you must resume without double-counting any event.
+- **Batch** = collect all your dirty clothes in a hamper for a week, then run one big load on Sunday morning. Efficient use of water and time, but if you need a clean shirt on Thursday, you are out of luck.
+- **Streaming** = wash each item the moment it gets dirty. You always have clean clothes available, but the machine runs constantly.
 
-Many real systems use **both** paradigms together in a pattern called **Lambda Architecture**: a streaming layer gives fast (but possibly approximate) results right now, while a batch layer runs nightly to produce accurate, corrected final numbers.
+Neither is universally better. You choose based on whether you need the shirt *right now* or whether saving effort matters more.
 
-## Worked example
+<!-- mermaid-source:
+graph LR
+    A[Data arrives] -->|wait and collect| B[Batch Job runs on schedule]
+    B --> C[Result available hours later]
 
-Suppose your e-commerce site takes 1,000,000 orders per day.
+    D[Data arrives] -->|process immediately| E[Stream Processor]
+    E --> F[Result available in milliseconds]
+-->
+![[batch-vs-streaming-d1.svg]]
 
-**Batch approach — nightly revenue report:**
+---
+
+## Level 2 — How it actually works
+
+Now that you have the intuition, let's open each approach and look at the actual machinery.
+
+### Batch processing — collect, trigger, process, output
+
+A batch pipeline follows a fixed rhythm: data accumulates in storage, a scheduler fires the job, the processor reads the whole dataset, and output lands in a warehouse or report.
+
+<!-- mermaid-source:
+graph TD
+    A[Data Source - orders, logs, sensor readings] -->|data lands in storage| B[Data Store - S3 or a database]
+    B -->|scheduler fires at midnight| C[Batch Processor - Spark or SQL job]
+    C -->|reads all of yesterdays rows| D[Transform and aggregate]
+    D --> E[Output - data warehouse or report]
+-->
+![[batch-vs-streaming-d2.svg]]
+
+A **scheduler** (the subject of [[dags-schedulers|DAGs & Schedulers]]) wakes the job at a fixed time — say, 2 AM every night. The job reads every row from the previous day, crunches the numbers, and writes the results. By morning the dashboard shows yesterday's totals. The data is complete and accurate, but always slightly stale.
+
+**Why batch still dominates many pipelines:** the input is fixed, so you can re-run the same job on the same file as many times as you need. It is easier to test, easier to debug, and one large pass through data is often cheaper than thousands of tiny operations.
+
+### Streaming processing — event arrives, process immediately, write result
+
+A streaming pipeline is event-driven: each new piece of data triggers processing the instant it lands.
+
+<!-- mermaid-source:
+graph LR
+    A[Event Source - click, payment, sensor] -->|publish| B[Message Queue - Kafka]
+    B -->|consume continuously| C[Stream Processor - Flink or Spark Streaming]
+    C -->|within milliseconds| D[Sink - live dashboard, alert, or database]
+-->
+![[batch-vs-streaming-d3.svg]]
+
+A **message queue** (like **Apache Kafka**) acts as a shock absorber: producers drop events in, the processor pulls them out one by one. The processor applies logic — filter, count, join — and writes the result immediately. If a fraudulent payment arrives, the fraud-detection pipeline can flag it within 50 milliseconds, before the charge clears.
+
+The critical structural difference: batch works on a *bounded* set (yesterday's file, which has a clear start and end). Streaming works on an *unbounded* stream — data keeps arriving forever, so the system must be designed never to stop.
+
+### When systems use both — Lambda and Kappa
+
+Because each paradigm has blind spots, large-scale systems often combine them.
+
+**Lambda architecture** runs a batch pipeline and a streaming pipeline in parallel, then merges their answers:
+
+<!-- mermaid-source:
+graph TD
+    S[Data Source] --> BL[Batch Layer - accurate but slow]
+    S --> SL[Speed Layer - fast but approximate]
+    BL --> SV[Serving Layer - merge results]
+    SL --> SV
+    SV --> Q[User Query]
+-->
+![[batch-vs-streaming-d4.svg]]
+
+The speed layer gives you a near-real-time estimate; the batch layer corrects it with accurate numbers a few hours later.
+
+**Kappa architecture** removes the batch layer entirely: use streaming only, but keep all raw events in a replayable log. If a bug forces you to reprocess history, you replay the log through the stream processor. One codebase, not two.
+
+---
+
+## Level 3 — See it with real numbers
+
+**Scenario:** an e-commerce site generates 500,000 order events per day. You need total revenue by product category.
+
+### Option A — nightly batch job
+
+Orders land in an S3 bucket as JSON files throughout the day. At 2 AM, a **PySpark** job reads all 500,000 rows:
 
 ```python
-# Triggered once at 2:00 AM by a scheduler (e.g. Airflow)
-import datetime
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import sum as spark_sum
 
-yesterday = (datetime.date.today() - datetime.timedelta(days=1)).isoformat()
+spark = SparkSession.builder.appName("daily-revenue").getOrCreate()
 
-result = db.query(
-    "SELECT SUM(amount) AS revenue FROM orders WHERE order_date = %s",
-    [yesterday]
+orders = spark.read.json("s3://orders/2026-06-22/*.json")
+
+revenue = (
+    orders
+    .groupBy("category")
+    .agg(spark_sum("price").alias("total_revenue"))
+    .orderBy("total_revenue", ascending=False)
 )
-# Result after scanning all 1,000,000 rows:
-# {"revenue": 482391.50}
 
-# Latency: data is up to 24 hours old when the report lands.
-# Throughput: 1,000,000 rows in one efficient sequential pass — fast and cheap.
-db.write("daily_revenue_summary", {"date": yesterday, "revenue": 482391.50})
+revenue.write.parquet("s3://reports/revenue/2026-06-22/")
 ```
 
-**Streaming approach — live revenue dashboard:**
+- **Input:** 500,000 rows of JSON, roughly 400 MB
+- **Run time:** ~4 minutes on a modest cluster
+- **Latency:** up to 26 hours — data from 00:01 waits until 2 AM the next night
+- **Output:** a clean Parquet file, accurate and complete, ready for the BI dashboard
+
+### Option B — continuous streaming job
+
+A **Spark Structured Streaming** job reads from **Kafka** as orders arrive and keeps a running total:
 
 ```python
-# Runs continuously, 24/7, listening to Kafka
-from kafka import KafkaConsumer
-import json
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import sum as spark_sum
 
-consumer = KafkaConsumer("orders-topic", bootstrap_servers="kafka:9092")
-running_total = 0.0
+spark = SparkSession.builder.appName("live-revenue").getOrCreate()
 
-for message in consumer:          # this loop never ends — orders keep arriving
-    order = json.loads(message.value)
-    running_total += order["amount"]
-    dashboard.update("live_revenue", running_total)
-# Latency: each order updates the dashboard within ~50–200 milliseconds.
-# Cost: always-on infrastructure, plus careful handling of crashes and replays.
+stream = (
+    spark.readStream
+    .format("kafka")
+    .option("kafka.bootstrap.servers", "kafka:9092")
+    .option("subscribe", "orders")
+    .load()
+)
+
+live = (
+    stream
+    .groupBy("category")
+    .agg(spark_sum("price").alias("running_revenue"))
+)
+
+live.writeStream.outputMode("complete").format("console").start().awaitTermination()
 ```
 
-The batch job is simpler and cheaper to operate. The streaming job keeps the dashboard current to the second, but demands more engineering to handle failures safely.
+- **Latency:** 50–200 ms end-to-end per event
+- **Output:** a live counter updating on the dashboard in near real time
+- **Trade-off:** the running total is an approximation until the pipeline has seen all events for the day; late-arriving events (network delays, retries) can cause slight undercounts mid-day
 
-## In the real world
+---
 
-**Spotify** uses both paradigms. Batch jobs run each night — and once a year — to compute your "Wrapped" statistics: total minutes listened, top artists, etc. A 24-hour delay is perfectly acceptable for a year-in-review card. Streaming jobs, by contrast, update the play-count leaderboard and "Now Playing" feed within seconds, because listeners expect those numbers to reflect what is happening right now. Neither paradigm replaces the other; they solve different problems.
+## Level 4 — In the real world & common traps
 
-## Common misconceptions
+### Named use case: Netflix overnight encoding vs live recommendations
 
-**People think** streaming is always better because faster is always better — **actually** streaming is significantly more complex and expensive to build and maintain. For a report that runs once a day, streaming adds engineering cost for zero benefit.
+Netflix runs **both** paradigms, each where it fits best:
 
-**People think** batch means "slow" — **actually** batch can process billions of rows faster than an equivalent streaming system because it uses optimised bulk-read patterns (reading entire files sequentially) that streaming cannot leverage.
+- **Batch:** every night, a **Spark** job scans billions of viewing records and re-trains the global recommendation model. The job takes hours and processes terabytes, but it does not need to be instant — the model just needs to be fresh by morning.
+- **Streaming:** the instant you finish an episode, a **Kafka**-**Flink** pipeline processes that event and refreshes "what to watch next" within one second. If Netflix waited for the overnight batch run, your recommendation would be 24 hours stale.
 
-**People think** you must choose one or the other — **actually** most mature data platforms run both. Streaming handles "need it now" cases; batch handles "need it exactly right" cases. Lambda Architecture exists precisely because neither alone is enough.
+Same company, same raw data, two paradigms chosen deliberately for different latency requirements.
 
-## How it relates & differs
+### Common misconceptions
 
-| Concept | How it RELATES | How it DIFFERS |
+**People think: "Streaming is always better — why would anyone use batch?"**
+Actually, batch is simpler to write, far easier to debug (the input is a fixed file you can inspect and replay), often cheaper to run, and produces more accurate results because it sees the *complete* dataset. For monthly invoices, payroll, or training machine-learning models, batch is the right tool. Streaming adds real engineering complexity you should only accept when low latency genuinely matters to the business.
+
+**People think: "Real-time streaming means zero latency."**
+Actually, "real-time" in data engineering typically means *milliseconds to seconds*, not zero. Every streaming pipeline still has network hops, serialization, processing windows, and write delays. Fifty milliseconds is excellent engineering. Zero milliseconds violates physics.
+
+**People think: "Lambda architecture is the safe, modern best practice."**
+Actually, Lambda means maintaining two separate codebases — one batch, one streaming — that must produce identical results. Any logic change must be made in both places, doubling the risk of bugs and silent divergence between layers. Many teams now prefer **Kappa architecture** specifically to avoid this maintenance burden.
+
+---
+
+## Level 5 — Expert view
+
+### How batch and streaming relate to neighbouring concepts
+
+| Concept | Relationship |
+|---|---|
+| [[dags-schedulers\|DAGs & Schedulers]] | Batch jobs are *triggered* by schedulers; a DAG defines the ordered steps inside a batch pipeline |
+| [[idempotency\|Idempotency]] | Essential in both paradigms: when a batch job retries or a stream processor replays an event, idempotency ensures you never double-count |
+| [[transactions-acid\|Transactions & ACID]] | Full ACID guarantees are expensive; streaming systems often weaken isolation for speed, making exactly-once delivery a hard engineering problem |
+| [[data-quality-validation\|Data Quality & Validation]] | Batch pipelines can validate the whole dataset in one pass; streaming pipelines must validate each row in flight, with incomplete context |
+
+### Trade-offs at a glance
+
+| Dimension | Batch | Streaming |
 |---|---|---|
-| [[dags-schedulers\|DAGs & Schedulers]] | Batch jobs are almost always triggered by a scheduler (e.g., an Airflow DAG fires at 2 AM). Streaming jobs also use orchestration to start and monitor the long-running process. | A DAG/scheduler is the *trigger mechanism*; batch vs streaming is about *how data is read and processed* — not just when the job starts. |
-| [[idempotency\|Idempotency]] | Both paradigms need idempotent (safe-to-replay) jobs. If a batch re-runs or a streaming consumer replays a message after a crash, the result must not be double-counted. | Idempotency is *more urgently critical* in streaming because mid-stream failures are frequent and the system must resume safely without corrupting running totals on the fly. |
-| [[data-quality-validation\|Data Quality & Validation]] | Both paradigms must validate incoming data (e.g., is `amount` a positive number? Is the `user_id` present?). | In batch, you can validate after collecting the whole window and quarantine bad rows in bulk. In streaming, you must validate each event *individually the moment it arrives* and decide immediately — drop it, flag it, or halt. |
+| Latency | Minutes to hours | Milliseconds to seconds |
+| Throughput efficiency | Very high — one optimized pass | High, but bounded by event rate and always-on overhead |
+| Operational complexity | Low — fixed input, easy replay | High — unbounded input, state management, fault recovery, watermarks |
+| Infrastructure cost | Efficient — spin up, run, shut down | Higher — always-on cluster |
+| Accuracy | High — sees the complete dataset | Lower initially — partial state until all events arrive |
+| Reprocessing on bug fix | Easy — re-run the job on the same file | Harder — must replay the full event log |
 
-## Why you'd use it (and when not to)
+### Edge cases and scale nuances
 
-Use **batch** when a stale answer is acceptable (end-of-day reports, monthly invoices, nightly ML model training) and when you want simplicity and low infrastructure cost. Use **streaming** when latency genuinely matters — fraud detection must fire within seconds of a suspicious transaction, not the following morning. The trap is over-engineering: if a one-hour-old answer is good enough for your use case, building a streaming pipeline is one of the most common and costly mistakes in data work. Ask "how old can this answer be?" before choosing.
+**Micro-batching:** **Spark Structured Streaming** does not actually process one event at a time. It collects events into tiny time windows (every 100 ms, for example) and runs a mini-batch over each window. This is fast enough for most "streaming" use cases while reusing the mature batch execution engine. True event-at-a-time processing — as in **Apache Flink** — achieves genuinely lower latency but is more complex to operate.
+
+**Watermarks:** a streaming processor computing a total over a five-minute window needs to know when it has seen *all* events for that window. But events arrive late — a mobile app might buffer clicks while offline and flush them minutes after the fact. A **watermark** is a configurable threshold: "treat any event arriving more than X seconds late as lost." Set it too tight and you silently drop valid data; set it too loose and results are delayed. There is no universally correct answer — it is a business decision about how much late data you can tolerate.
+
+**Backpressure:** if events arrive faster than the processor can handle, the backlog in the message queue grows. Batch jobs have no equivalent problem — the file simply waits. Well-designed streaming systems detect backpressure and slow down producers or scale up consumers automatically; poorly designed ones fall over under load spikes.
+
+---
 
 ## Check yourself
 
-**Memory hook:** Batch = bucket (fill it up completely, then pour it all out). Stream = tap (water flows the instant you open it).
+**Memory hook:** *Batch = Sunday laundry (efficient, scheduled, one big pile). Streaming = wash each item the moment it is dirty (instant, continuous, never stops).*
 
-**Q1: What does "bounded" mean in the context of batch processing, and why does it matter?**
-A: Bounded means the dataset has a defined start and end — for example, "all orders from yesterday." This matters because the batch job can read a fixed, known chunk of data all at once, which is what makes it efficient. Streaming data is unbounded — it has no end — so the job must run forever.
+**Q1: A bank needs to block a fraudulent credit-card charge within one second of it being made. Should it use batch or streaming, and why?**
+A: Streaming. A batch job introduces minutes to hours of latency, so the fraudulent charge would already be approved before the job ever runs. A streaming pipeline processes the payment event as it arrives and can block it in under a second.
 
-**Q2: Name two things that make streaming harder to build than batch.**
-A: (Any two of:) events can arrive out of order; the system must maintain state (e.g., a running total) across many individual events; the system must recover from crashes without double-counting records.
+**Q2: What is the main operational downside of a Lambda architecture?**
+A: You must maintain two separate codebases — a batch job and a streaming job — that must produce identical results. Any logic change must be applied in both places, which doubles the risk of divergence and bugs.
 
-**Q3: What is Lambda Architecture and why would you use it?**
-A: Lambda Architecture runs a streaming layer (fast, approximate answers in milliseconds) and a batch layer (slower, accurate answers) in parallel. You use it when you need both speed *and* correctness — the stream gives you a live dashboard, and the nightly batch job corrects any errors the stream introduced.
+**Q3: Why is exactly-once delivery in a streaming system difficult to achieve?**
+A: A processor can crash mid-event, forcing a replay of the last message. Without careful design, the same event is processed twice, corrupting counts or totals. Making replay safe requires [[idempotency|Idempotency]] — ensuring that processing the same event twice produces the same result as processing it once — which adds significant engineering complexity.
+
+---
 
 ## Connects to
 
-[[dags-schedulers|DAGs & Schedulers]] · [[idempotency|Idempotency]] · [[data-quality-validation|Data Quality & Validation]] · [[tables-keys-sql-basics|Tables, Keys & SQL Basics]]
+[[dags-schedulers|DAGs & Schedulers]] · [[idempotency|Idempotency]] · [[transactions-acid|Transactions & ACID]] · [[data-quality-validation|Data Quality & Validation]] · [[normalization-vs-denormalization|Normalization vs Denormalization]]
+
+---
+
+## Coming up next
+
+[[idempotency|Idempotency]] — now that you know pipelines can re-run (batch jobs retry on failure, streaming processors replay events), you immediately need to know how to make those re-runs safe; idempotency is the guarantee that running the same operation twice produces exactly the same result as running it once, and it is the property that makes both batch and streaming pipelines trustworthy at scale.

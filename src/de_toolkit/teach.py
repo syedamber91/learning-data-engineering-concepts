@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Iterator, Optional
 
 from .config import ROOT_DIR, resolve_vault_dir
+from .diagrams import mmdc_available, rasterize_lesson
 from .models import Area, Catalog, Concept, Topic
 from .vault import _write, slugify
 
@@ -68,7 +69,7 @@ def iter_selections(
 
 
 LESSON_SKELETON = """\
-Output EXACTLY this structure (Markdown), filling every section deeply:
+Output EXACTLY this shape (Markdown), as ONE flowing lesson that climbs in levels:
 
 ---
 title: "<concept title>"
@@ -79,26 +80,40 @@ tags: [<4-6 lowercase tags>]
 
 # <concept title>
 
-## In one line
-## Picture this
-## How it actually works
-## Worked example
-## In the real world
-## Common misconceptions
-## How it relates & differs
-## Why you'd use it (and when not to)
+## Recap — where we just were
+## Level 1 — The big idea
+## Level 2 — How it actually works
+## Level 3 — See it with real numbers
+## Level 4 — In the real world & common traps
+## Level 5 — Expert view
+<add Level 6 / Level 7 ONLY for genuinely hard concepts; a simple concept may stop at Level 3 or 4>
 ## Check yourself
 ## Connects to
+## Coming up next
 
 Rules:
-- "Worked example" MUST use real numbers/values and, where the concept allows, a
-  short fenced code/SQL/command snippet (```sql, ```bash, ```python).
-- "Common misconceptions" lists 2-3 "People think X - actually Y." items.
-- "How it relates & differs" names 2-3 neighbouring concepts with [[wikilinks]] and
-  explains how this RELATES to and DIFFERS from each (a small contrast table is ideal).
+- LEVELS ARE A LADDER. Level 1 is the first, gentlest intuition; each level goes one
+  step deeper and EXPLICITLY builds on the one before ("Now that you've seen…"). The
+  TOP level is genuinely expert-grade. Use as many levels as the concept needs (3 for
+  simple, up to 7 for hard) — do not pad, do not stop short.
+- DIAGRAMS ARE MANDATORY. Include several SIMPLE ```mermaid diagrams (e.g. `graph LR`,
+  `graph TD`, `sequenceDiagram`) — at least one in Level 1 and one in Level 2, plus
+  more wherever a picture explains flow better than words. Keep them small and clearly
+  labelled (think ByteByteGo: boxes and arrows showing how things flow). Prefer
+  `graph LR`/`graph TD`. Do NOT put quotes, semicolons, or markdown inside node text.
+- "Recap — where we just were" is 1-2 sentences bridging from the PREVIOUS lesson the
+  learner just finished (named below). For the very first lesson, frame the whole
+  course instead.
+- Level 3 MUST use real numbers/values and a short fenced code/SQL/command snippet
+  (```sql, ```bash, ```python) showing input -> steps -> result.
+- Level 4 names a real, concrete use case AND lists 2-3 "People think X - actually Y."
+  misconceptions.
+- The expert level(s) cover how this RELATES TO and DIFFERS FROM 2-3 neighbouring
+  concepts (a small contrast table is ideal), plus trade-offs and edge cases.
 - "Check yourself" has a one-line memory hook then 3 questions, each with its answer.
-- "Connects to" is a line of [[wikilinks]].
-- Target ~600-1000 words. Reading level: a sharp 15-year-old. Output ONLY the
+- "Connects to" is a line of [[wikilinks]]. "Coming up next" points to the NEXT
+  concept (named below) with its [[wikilink]] and one sentence on why it follows.
+- Target ~1200-2000 words. Reading level: a sharp 15-year-old. Output ONLY the
   Markdown — no commentary before or after, no surrounding code fence.
 """
 
@@ -127,20 +142,58 @@ def _link_guide(catalog: Optional[Catalog], current: Concept) -> str:
     )
 
 
-def build_lesson_prompt(sel: Selection, catalog: Optional[Catalog] = None) -> str:
-    """Assemble the full prompt that produces a single deep lesson note."""
+def build_lesson_prompt(
+    sel: Selection,
+    catalog: Optional[Catalog] = None,
+    story_so_far: str = "",
+    prev_lesson_md: str = "",
+    prev_title: Optional[str] = None,
+    next_title: Optional[str] = None,
+) -> str:
+    """Assemble the full prompt that produces a single deep, connected lesson note."""
     payload = json.dumps(sel.concept.model_dump(mode="json"), indent=2)
+    continuity = ""
+    if story_so_far:
+        continuity += (
+            "STORY SO FAR — concepts the learner has ALREADY studied (build on these,\n"
+            "do not re-teach them; reference them with [[wikilinks]] where useful):\n"
+            + story_so_far
+            + "\n\n"
+        )
+    if prev_title:
+        continuity += (
+            f"PREVIOUS lesson (recap and bridge FROM this one): {prev_title}\n"
+        )
+    if next_title:
+        continuity += (
+            f"NEXT lesson (point to it in 'Coming up next'): {next_title}\n"
+        )
+    if prev_lesson_md:
+        snippet = prev_lesson_md.strip()
+        if len(snippet) > 6000:
+            snippet = snippet[:6000] + "\n…[truncated]…"
+        continuity += (
+            "\nFULL TEXT OF THE PREVIOUS LESSON (so your Recap connects precisely — do\n"
+            "NOT repeat its content, just bridge from it):\n"
+            "<<<PREVIOUS_LESSON\n" + snippet + "\nPREVIOUS_LESSON\n"
+        )
+    if continuity:
+        continuity += "\n"
     return (
         _engine_prompt()
         + "\n\n"
         + "=== YOUR TASK FOR THIS RUN ===\n"
-        + "Produce exactly ONE deep lesson for the concept below, following the "
-        + "LESSON TEMPLATE and PRESENTATION CONTRACT above. All ten sections are "
-        + "mandatory — especially the Worked example (with real numbers/snippet), "
-        + "Common misconceptions, How it relates & differs, and Check yourself.\n\n"
+        + "Produce exactly ONE deep, illustrated lesson for the concept below, "
+        + "following the LESSON TEMPLATE and PRESENTATION CONTRACT above. It must read "
+        + "as the NEXT chapter of one continuous course: open with a Recap that bridges "
+        + "from the previous lesson, climb the levels, and close by pointing to the next "
+        + "concept. Mandatory: ascending Levels, several simple ```mermaid diagrams, "
+        + "real numbers + a code/SQL snippet, misconceptions, the relates/differs "
+        + "comparison, and self-check.\n\n"
         + LESSON_SKELETON
         + "\n"
         + _link_guide(catalog, sel.concept)
+        + continuity
         + f"Area: {sel.area.title}\n"
         + f"Topic: {sel.topic.title}\n"
         + "Concept (JSON from the vault):\n"
@@ -219,6 +272,51 @@ def _inject_breadcrumb(markdown: str, area: str, topic: str) -> str:
     return crumb + "\n\n" + markdown
 
 
+def _inject_nav(markdown: str, prev: Optional[Selection], nxt: Optional[Selection]) -> str:
+    """Add a prev/next navigation line just under the breadcrumb (or H1)."""
+    parts = []
+    if prev is not None:
+        parts.append(f"← Prev: [[{slugify(prev.concept.title)}|{prev.concept.title}]]")
+    if nxt is not None:
+        parts.append(f"Next: [[{slugify(nxt.concept.title)}|{nxt.concept.title}]] →")
+    if not parts:
+        return markdown
+    nav = " · ".join(parts)
+    if nav in markdown:
+        return markdown
+    lines = markdown.splitlines()
+    # Prefer placing it right after the breadcrumb line ("*Part of …*").
+    anchor = next((i for i, ln in enumerate(lines) if ln.startswith("*Part of")), None)
+    if anchor is None:
+        anchor = next((i for i, ln in enumerate(lines) if ln.startswith("# ")), None)
+    if anchor is None:
+        return nav + "\n\n" + markdown
+    lines[anchor + 1:anchor + 1] = ["", nav]
+    return "\n".join(lines)
+
+
+def _one_liner(markdown: str) -> str:
+    """Pull a one-sentence summary out of a generated lesson for the recap list."""
+    lines = markdown.splitlines()
+    in_body = False
+    for i, line in enumerate(lines):
+        # Start scanning after the first Level/intro heading.
+        if line.startswith("## "):
+            in_body = True
+            continue
+        if not in_body:
+            continue
+        text = line.strip()
+        if not text or text.startswith(("#", "*", "<", "!", "|", "-", ">", "```")):
+            continue
+        # First real prose sentence.
+        sentence = text.split(". ")[0].strip().rstrip(".")
+        if len(sentence) > 160:
+            sentence = sentence[:157] + "…"
+        return sentence
+    return ""
+
+
 def _strip_code_fence(text: str) -> str:
     """Remove a single wrapping ``` / ```markdown fence if the model added one."""
     lines = text.splitlines()
@@ -247,6 +345,13 @@ def teach(
     prompt(s) and intended target path(s) are printed instead.
     """
     vault_dir = resolve_vault_dir(vault_path or DEFAULT_VAULT)
+    assets_dir = vault_dir / "assets"
+
+    # The whole course, in fixed teaching order, regardless of the filters. This is
+    # the spine used to chain prerequisites and build prev/next navigation.
+    course = list(iter_selections(catalog))
+    pos = {id(s.concept): i for i, s in enumerate(course)}
+
     selections = list(iter_selections(catalog, area, topic, concept))
     if not selections:
         raise RuntimeError(
@@ -259,6 +364,12 @@ def teach(
         if console is not None:
             console.print(msg)
 
+    if not dry_run and not mmdc_available():
+        say(
+            "[yellow]![/yellow] mermaid-cli not found — diagrams will stay as native "
+            "```mermaid blocks (they still render in Obsidian, including mobile)."
+        )
+
     if roadmap:
         target = vault_dir / "Home.md"
         if dry_run:
@@ -269,17 +380,55 @@ def teach(
             written.append(target)
             say(f"[green]✓[/green] {target}")
 
+    # One-liner recaps of every lesson already taught this run (keyed by course index),
+    # so each new lesson gets a compact "story so far".
+    recaps: dict[int, str] = {}
+
+    def prev_lesson_text(idx: int, prev_sel: Optional[Selection]) -> str:
+        """Full text of the previous lesson — from this run or already on disk."""
+        if prev_sel is None:
+            return ""
+        path = prev_sel.target(vault_dir)
+        if path.exists():
+            return path.read_text(encoding="utf-8")
+        return ""
+
     for sel in selections:
+        idx = pos[id(sel.concept)]
+        prev_sel = course[idx - 1] if idx > 0 else None
+        next_sel = course[idx + 1] if idx + 1 < len(course) else None
         target = sel.target(vault_dir)
+
+        story = "\n".join(
+            f"- {course[i].concept.title}: {recaps[i]}"
+            for i in range(idx) if i in recaps and recaps[i]
+        )
+        prev_md = prev_lesson_text(idx, prev_sel)
+        prompt = build_lesson_prompt(
+            sel, catalog,
+            story_so_far=story,
+            prev_lesson_md=prev_md,
+            prev_title=prev_sel.concept.title if prev_sel else None,
+            next_title=next_sel.concept.title if next_sel else None,
+        )
+
         if dry_run:
             say(f"[dim]--- {sel.concept.title} -> {target} ---[/dim]")
-            say(build_lesson_prompt(sel, catalog))
+            say(prompt)
             continue
+
         say(f"Teaching [bold]{sel.concept.title}[/bold]…")
-        lesson = run_claude(build_lesson_prompt(sel, catalog), model)
+        lesson = run_claude(prompt, model)
         lesson = _inject_breadcrumb(lesson, sel.area.title, sel.topic.title)
+        lesson = _inject_nav(lesson, prev_sel, next_sel)
+        lesson, svgs, failed = rasterize_lesson(
+            lesson, slugify(sel.concept.title), assets_dir
+        )
         _write(target, lesson)
+        recaps[idx] = _one_liner(lesson)
+        written.extend(svgs)
         written.append(target)
-        say(f"[green]✓[/green] {target}")
+        note = f" (+{len(svgs)} diagrams" + (f", {failed} unrendered" if failed else "") + ")"
+        say(f"[green]✓[/green] {target}{note if svgs or failed else ''}")
 
     return written

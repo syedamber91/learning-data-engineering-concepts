@@ -19,3 +19,6 @@ venv/
 
 # OS / editor
 .DS_Store
+
+# Local tool cache (mermaid-cli + headless Chrome) — never commit
+.toolcache/
