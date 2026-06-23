@@ -9,7 +9,7 @@ tags: [data-quality, validation, freshness, null-checks, pipelines, orchestratio
 
 *Part of [[orchestration-moc|Orchestration]] · [[data-pipelines-moc|Data Pipelines]]*
 
-← Prev: [[dags-schedulers|DAGs & Schedulers]]
+← Prev: [[dags-schedulers|DAGs & Schedulers]] · Next: [[what-dbt-is-the-t-in-elt|What dbt Is & the T in ELT]] →
 
 ## Recap — where we just were
 
@@ -235,4 +235,4 @@ A: A JOIN matches rows using the key column. Rows where `order_id` is null have 
 
 ## Coming up next
 
-The vault does not currently define a next concept after this one — you have reached the end of the catalogued course. The natural next topic to add would be **Data Lineage & Observability**: understanding *where* data came from at every step, *which* pipeline produced each number in your warehouse, and *how* to detect when something goes quietly wrong at scale without a failing task to alert you. Once that note is added to the vault, it picks up exactly where this lesson ends.
+So far you have *moved*, *scheduled*, and *guarded* data — but you have not yet *transformed* it into the clean, analytics-ready tables that dashboards actually read. That is the job of a whole tool built around the ideas in this lesson. Up next, [[what-dbt-is-the-t-in-elt|What dbt Is & the T in ELT]] opens the dbt roadmap (see [[dbt-data-build-tool-moc|dbt (Data Build Tool)]]), where the same "fail fast on bad data" discipline you just learned becomes a first-class, version-controlled part of building every table.
