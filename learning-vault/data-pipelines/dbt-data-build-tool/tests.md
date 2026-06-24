@@ -69,7 +69,7 @@ graph TD
   D -->|more than zero| X[fail]
 ```
 
-Each test has a **severity**: `warn` or `error`. A `warn` logs the problem but lets the run continue. An `error` is a hard stop — it blocks downstream work. That blocking is enforced most strictly by the `dbt build` command in [[the-dbt-build-workflow|The dbt build Workflow]], which runs and tests models together and refuses to keep going past a broken model.
+Each test has a **severity**: `warn` or `error`. The default is `error`; you change it by adding `severity: warn` to the test in YAML. A `warn` logs the problem but lets the run continue. An `error` is a hard stop — it blocks downstream work. That blocking is enforced most strictly by the `dbt build` command in [[the-dbt-build-workflow|The dbt build Workflow]], which runs and tests models together and refuses to keep going past a broken model.
 
 ---
 

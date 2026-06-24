@@ -53,7 +53,7 @@ Each layer has clear conventions: a name prefix, a typical materialization, and 
 
 **Intermediate** (prefix `int_`). Reusable building blocks. An intermediate model combines staging models and holds business logic that more than one mart needs. If two marts both need "orders joined to their line items", you compute that once here instead of twice. These are often **ephemeral** (inlined at compile time) or views.
 
-**Marts** (prefix `fct_` for facts, `dim_` for dimensions). The final tables analysts and BI tools query. They are usually built as **tables** for fast reads, and shaped as a [[star-schema|Star Schema]]. Marts deliberately *denormalize* — they fold related data together so a query needs fewer joins. That is the opposite of an app database; see [[normalization-vs-denormalization|Normalization vs Denormalization]].
+**Marts** (prefix `fct_` for facts, `dim_` for dimensions). A **fact** table records events or measurements — one row per order, payment, or click — keyed to the entities involved; a **dimension** table describes those entities — one row per customer, product, or date — with their attributes. The final tables analysts and BI tools query. They are usually built as **tables** for fast reads, and shaped as a [[star-schema|Star Schema]]. Marts deliberately *denormalize* — they fold related data together so a query needs fewer joins. That is the opposite of an app database; see [[normalization-vs-denormalization|Normalization vs Denormalization]].
 
 A **materialization** is how dbt stores a model — as a view, a table, ephemeral, and so on (full detail in [[materializations|Materializations]]).
 

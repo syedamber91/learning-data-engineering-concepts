@@ -58,7 +58,7 @@ dbt already knows the order from `ref()` and `source()`. Each `ref('stg_orders')
 
 If a test on a node fails, every node **downstream** of it is marked **skipped**. dbt does not even try to build them. This is the "fail fast" idea from [[data-quality-validation|Data Quality & Validation]], but now enforced across the entire graph, not just at one model.
 
-The diagram below shows what happens when `stg_orders` passes its test but fails would block everything after it.
+The diagram below shows both paths: if `stg_orders` fails its test, every node after it is blocked; if it passes, the build continues.
 
 ```mermaid
 graph TD
