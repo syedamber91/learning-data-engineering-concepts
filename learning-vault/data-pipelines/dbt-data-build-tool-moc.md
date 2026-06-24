@@ -54,4 +54,13 @@ Work through the lessons top to bottom — each one recaps the one before and po
 
 ---
 
+<!-- manual cross-link into the synthesized layer; re-add if de-toolkit regenerates this MOC -->
+## Going deeper — synthesized companion notes
+
+AI-synthesized notes that build on the lessons above (see [[synthesized-moc|Synthesized Notes]]):
+
+- [[dbt-materializations-when-to-use-which|dbt Materializations — When to Use Which]] — pulls Phase 2 together: view vs table vs incremental vs ephemeral, and how incremental models actually work.
+
+---
+
 > Tip: open the graph view (Ctrl/Cmd+G) to see how these lessons connect to the wider vault — especially the modelling notes in [[data-modeling-moc|Data Modeling]].
