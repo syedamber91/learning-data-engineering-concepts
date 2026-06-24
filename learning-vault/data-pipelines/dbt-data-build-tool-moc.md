@@ -59,7 +59,12 @@ Work through the lessons top to bottom — each one recaps the one before and po
 
 AI-synthesized notes that build on the lessons above (see [[synthesized-moc|Synthesized Notes]]):
 
+- [[dbt-end-to-end-from-raw-to-reports|dbt End-to-End: From Raw Data to Reports]] — the whole course on one page: how a row flows from raw load through sources, staging, intermediate, marts, tests, and docs.
+- [[dbt-project-anatomy|dbt Project Anatomy: Files, Folders & Naming]] — a reference for `dbt_project.yml` vs `profiles.yml`, the standard folders, and the `stg_/int_/fct_/dim_` naming convention.
+- [[dbt-commands-run-build-test|dbt Commands: run vs build vs test (and when)]] — a decision guide for which command to run in which situation, plus selector syntax.
+- [[dbt-reuse-jinja-macros-packages|Reuse in dbt: Inline Jinja vs Macros vs Packages]] — when to inline Jinja, when to write a macro, and when to install a package.
 - [[dbt-materializations-when-to-use-which|dbt Materializations — When to Use Which]] — pulls Phase 2 together: view vs table vs incremental vs ephemeral, and how incremental models actually work.
+- [[dbt-flashcards|dbt Quick-Recall Flashcards]] — one or two recall prompts per lesson for fast review of the whole topic.
 
 ---
 

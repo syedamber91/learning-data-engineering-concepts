@@ -13,9 +13,24 @@ course. They read the lessons in `learning-vault/`, then connect or compare idea
 them. The authored lessons stay the source of truth; these are companions.
 
 ## Notes
+
+### dbt (Data Build Tool)
+Companion notes for the [[dbt-data-build-tool-moc|dbt roadmap]] — read after the 15 lessons as
+review, decision aids, and a recall layer.
+
+- [[dbt-end-to-end-from-raw-to-reports|dbt End-to-End: From Raw Data to Reports]] — the whole
+  pipeline on one page: how a row travels EL → sources → staging → intermediate → marts →
+  tests → docs.
+- [[dbt-project-anatomy|dbt Project Anatomy: Files, Folders & Naming]] — reference for the two
+  config files, the standard folders, and the `stg_/int_/fct_/dim_` naming convention.
+- [[dbt-commands-run-build-test|dbt Commands: run vs build vs test (and when)]] — decision
+  guide for which command to run when, plus selector syntax.
+- [[dbt-reuse-jinja-macros-packages|Reuse in dbt: Inline Jinja vs Macros vs Packages]] — the
+  three levels of reuse and when to climb to each.
 - [[dbt-materializations-when-to-use-which|dbt Materializations — When to Use Which]] —
-  compares view / table / incremental / ephemeral and explains how incremental models work,
-  synthesized from the Phase 2 dbt lessons.
+  compares view / table / incremental / ephemeral and explains how incremental models work.
+- [[dbt-flashcards|dbt Quick-Recall Flashcards]] — one or two recall prompts per lesson, for
+  spaced review of the whole topic.
 
 ## Vault maintenance
 - [[lint-report-2026-06-24|Vault Lint Report — 2026-06-24]] — health check: dead links and
