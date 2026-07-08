@@ -10,6 +10,13 @@ from .models import AtomicEntry, TopicEntry, WikiIndex
 
 INDEX_NAME = "index.yaml"
 
+_ATOMIC_DIR = {"entity": "entities", "concept": "concepts"}
+
+
+def atomic_dir(kind: str) -> str:
+    """Folder for an atomic note kind ('entity' -> 'entities', 'concept' -> 'concepts')."""
+    return _ATOMIC_DIR[kind]
+
 
 def load_index(root: Path) -> WikiIndex:
     path = root / INDEX_NAME
@@ -38,7 +45,7 @@ def register_atomic(index: WikiIndex, kind: str, slug: str, topic: str, stamp: s
     bucket = index.entities if kind == "entity" else index.concepts
     entry = bucket.get(slug)
     if entry is None:
-        entry = AtomicEntry(file=f"{kind}s/{slug}.md", topics=[], last_updated=stamp)
+        entry = AtomicEntry(file=f"{atomic_dir(kind)}/{slug}.md", topics=[], last_updated=stamp)
         bucket[slug] = entry
     if topic and topic not in entry.topics:
         entry.topics.append(topic)

@@ -25,6 +25,14 @@ def test_register_atomic_merges_topic_backrefs():
     assert idx.entities["lsm-tree"].topics == ["kafka", "spark"]  # deduped, ordered
 
 
+def test_register_atomic_uses_entities_dir_not_entitys():
+    idx = WikiIndex()
+    register_atomic(idx, "entity", "lsm-tree", "kafka", "2026-07-08")
+    register_atomic(idx, "concept", "log-compaction", "kafka", "2026-07-08")
+    assert idx.entities["lsm-tree"].file == "entities/lsm-tree.md"
+    assert idx.concepts["log-compaction"].file == "concepts/log-compaction.md"
+
+
 def test_index_roundtrip_on_disk(tmp_path):
     idx = WikiIndex()
     register_topic(idx, "kafka", 1, "2026-07-08")
