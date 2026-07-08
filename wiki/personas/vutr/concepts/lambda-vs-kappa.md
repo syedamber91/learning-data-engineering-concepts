@@ -1,0 +1,13 @@
+---
+persona: vutr
+kind: concept
+sources:
+- persona-snapshot
+last_updated: '2026-07-08'
+qc: passed
+slug: lambda-vs-kappa
+topics:
+- big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+---
+
+Lambda runs parallel batch and stream paths and reconciles them, while Kappa collapses everything onto a single streaming path. The case studies split cleanly: [[uber-lambda-kafka]] and [[linkedin-kafka-beam]] deliberately kept Lambda, whereas [[twitter-kappa-migration]] pivoted to Kappa and stabilized latency at ~10s with better throughput and 95%+ correctness match.

@@ -1,0 +1,28 @@
+---
+persona: vutr
+kind: topic
+sources:
+- persona-snapshot
+last_updated: '2026-07-08'
+qc: passed
+topic: data-engineering-career-roadmap-and-learning-philosophy
+---
+
+Related: [[three-biggest-mistakes]] · [[recommended-learning-order]] · [[fundamentals-that-never-become-obsolete]] · [[nine-se-skills-for-des]] · [[data-foundation-supports-business]] · [[senior-boring-signal]] · [[learn-only-tools-is-wrong]] · [[problem-first-tool-selection]] · [[why-before-what-learning-strategy]]
+
+## Comparisons
+The roadmap is really a single argument playing out across every entity. [[three-biggest-mistakes]] is the negative image of the [[recommended-learning-order]]: 'moving too fast with tools' violates putting Data Modeling first, the 'technical box' violates business communication, and 'Data Modeling is not my duty' is the exact opposite of leading the order with it.
+
+[[recommended-learning-order]] and [[fundamentals-that-never-become-obsolete]] answer different questions. The order is *sequence* — what to touch and when, with Cloud and AI deliberately last. The fundamentals are *durability* — what survives regardless of which tool in that sequence you happen to hold. Learn the sequence, but anchor on what would not change.
+
+[[nine-se-skills-for-des]] and [[senior-boring-signal]] both describe maturity but from opposite ends: the nine SE skills are the concrete craft (testing, CI/CD, observability), while the 'boring' senior signals (modeling, security, governance) are where that craft points once you stop chasing novelty. Both bend toward [[data-foundation-supports-business]] — the check that decides whether any of it produced business value or just garbage.
+
+## Open questions
+- If Cloud should be one of the last things you learn yet 'most JDs ask you to have Cloud experience,' how do you get hired early without becoming the 'Cloud user, not data engineer' the source warns against?
+- The order lists eleven-plus items ending in AI, but 'Using AI is not optional anymore' — how do you reconcile learning AI *last* with using it *now*?
+- The source says decision-making stays human and implementation is increasingly AI-assisted, but does not say where the line falls for a *junior* who has few decisions to make yet — how does an early-career DE avoid being the replaceable implementer?
+- 'Columnar always performs better than row format for analytical reads' is stated as a fundamental — the source does not address the write/OLTP side, so how universal is the claim meant to be?
+- How do you concretely 'expose for feedback' and materialize learning when your day job gives you no production system to deploy to?
+
+## Synthesis
+Vu's whole roadmap resolves to one move: learn things that would not change. [[recommended-learning-order]] front-loads Data Modeling and defers Cloud and AI precisely because [[fundamentals-that-never-become-obsolete]] outlast any tool, which is why [[learn-only-tools-is-wrong]] is the core warning of the AI era. His [[three-biggest-mistakes]] are just this principle violated in reverse, and [[problem-first-tool-selection]] plus [[why-before-what-learning-strategy]] are the working habits that keep you anchored to [[data-foundation-supports-business]] — because no matter how fancy the pipeline, if the foundation can't support the business, everything you built is garbage.
