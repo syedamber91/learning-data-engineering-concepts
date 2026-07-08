@@ -27,6 +27,24 @@ def test_query_returns_topic_and_linked_atomic(tmp_path):
     assert "LSM-trees batch writes." in out  # followed the [[lsm-tree]] link
 
 
+def test_query_emits_repeated_atomic_only_once(tmp_path):
+    idx = WikiIndex()
+    register_topic(idx, "kafka", 1, "2026-07-08")
+    register_atomic(idx, "entity", "lsm-tree", "kafka", "2026-07-08")
+    save_index(tmp_path, idx)
+    # the same atomic is referenced three times in the topic body
+    write_note(tmp_path, "topics/kafka.md",
+               NoteFrontmatter(persona="vutr", kind="topic", topic="kafka",
+                               sources=["s1"], last_updated="2026-07-08"),
+               "Related: [[lsm-tree]]\n\n## Comparisons\nsee [[lsm-tree]]\n\n## Synthesis\n[[lsm-tree]]")
+    write_note(tmp_path, "entities/lsm-tree.md",
+               NoteFrontmatter(persona="vutr", kind="entity", slug="lsm-tree",
+                               sources=["s1"], last_updated="2026-07-08", topics=["kafka"]),
+               "LSM body.")
+    out = query(tmp_path, "kafka")
+    assert out.count("## lsm-tree\nLSM body.") == 1  # emitted once, not three times
+
+
 def test_query_no_match_sentinel(tmp_path):
     _seed(tmp_path)
     assert "no matching" in query(tmp_path, "gardening").lower()

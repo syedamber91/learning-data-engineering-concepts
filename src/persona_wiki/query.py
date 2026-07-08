@@ -28,6 +28,7 @@ def _read_if_passed(path: Path) -> str:
 def query(root: Path, question: str) -> str:
     index = load_index(root)
     parts: List[str] = []
+    seen: set = set()  # each atomic is emitted at most once across the whole answer
     for topic in match_topics(question):
         if topic not in index.topics:
             continue
@@ -35,9 +36,13 @@ def query(root: Path, question: str) -> str:
         if not body:
             continue
         parts.append(f"# {topic}\n{body}")
-        for slug in _WIKILINK_RE.findall(body):
+        for slug in dict.fromkeys(_WIKILINK_RE.findall(body)):  # dedupe, keep order
+            if slug in seen:
+                continue
             for kind in ("entities", "concepts"):
                 atomic = _read_if_passed(root / kind / f"{slug}.md")
                 if atomic:
                     parts.append(f"## {slug}\n{atomic}")
+                    seen.add(slug)
+                    break
     return "\n\n".join(parts) if parts else _NO_MATCH
