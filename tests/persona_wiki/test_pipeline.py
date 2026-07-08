@@ -40,15 +40,45 @@ def test_pipeline_creates_and_registers(tmp_path):
     assert (tmp_path / "topics/kafka.md").exists()
 
 
-def test_qc_failure_excludes_from_index(tmp_path):
+def test_qc_failure_quarantines_and_excludes_from_index(tmp_path):
     src = Source(id="s1", text="Kafka internals.")
     update(tmp_path, "vutr", [src], _derive_then_fail_llm, "2026-07-08")
     idx = load_index(tmp_path)
-    # note written to disk but not blessed into the index
-    assert (tmp_path / "topics/kafka.md").exists()
+    # a rejected note never touches the canonical tree; it lands in _rejected/
+    assert not (tmp_path / "topics/kafka.md").exists()
     assert not has_topic(idx, "kafka")
-    fm_text = (tmp_path / "topics/kafka.md").read_text(encoding="utf-8")
-    assert "qc: failed" in fm_text
+    rejected = tmp_path / "_rejected/topics/kafka.md"
+    assert rejected.exists()
+    assert "qc: failed" in rejected.read_text(encoding="utf-8")
+
+
+def test_failed_revise_does_not_clobber_good_note(tmp_path):
+    # first ingest succeeds -> good canonical note
+    update(tmp_path, "vutr", [Source(id="s1", text="Kafka internals.")],
+           _derive_then_pass_llm, "2026-07-08")
+    good = (tmp_path / "topics/kafka.md").read_text(encoding="utf-8")
+    # a later revise whose QC fails must leave the good note untouched
+    update(tmp_path, "vutr", [Source(id="s2", text="Kafka tiered storage.")],
+           _derive_then_fail_llm, "2026-07-09")
+    after = (tmp_path / "topics/kafka.md").read_text(encoding="utf-8")
+    assert after == good
+    assert "qc: failed" not in after
+    assert has_topic(load_index(tmp_path), "kafka")
+
+
+def test_rerun_same_source_skips_llm(tmp_path):
+    calls = {"n": 0}
+
+    def counting_llm(prompt):
+        calls["n"] += 1
+        return _derive_then_pass_llm(prompt)
+
+    src = Source(id="s1", text="Kafka internals.")
+    update(tmp_path, "vutr", [src], counting_llm, "2026-07-08")
+    first = calls["n"]
+    result = update(tmp_path, "vutr", [src], counting_llm, "2026-07-09")
+    assert calls["n"] == first          # no further LLM calls on an already-ingested source
+    assert result["skipped"] == 1 and result["written"] == 0
 
 
 def test_broken_llm_counts_failure_no_partial(tmp_path):

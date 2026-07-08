@@ -20,11 +20,18 @@ output — safe to regenerate. It never modifies the authored course.
   Claude Code session — a nested `claude -p` call returns HTTP 401 (the parent
   session's credentials are not inherited by the child process).
 
-### Known limitation (follow-up)
+### Invariants & known limitation
 
-`bootstrap` currently saves `index.yaml`/`log.md` only after all sections
-finish, and does not catch a per-section LLM failure — so a single failed
-`claude` call aborts the whole run and leaves no partial output. `update`
-(the incremental path) already tolerates per-source failures. Making
-`bootstrap` resilient (per-section try/except + incremental save) is the
-first follow-up before running it over a full persona.
+- The canonical tree (`topics/`, `entities/`, `concepts/`) only ever holds
+  QC-passed notes. A bundle that fails QC is written under `_rejected/`
+  (with `qc: failed` + reason) and never overwrites a good note.
+- A source already recorded in a topic note is skipped on re-run — no repeat
+  LLM call, no rewrite.
+- `bootstrap` groups sections that share a topic slug, processes each group
+  under its own error boundary, and saves the index after every group, so one
+  failed `claude` call can't abort the run or clobber a sibling section.
+
+Known limitation (follow-up): when a shared entity/concept is re-derived from a
+second topic, its note *frontmatter* back-refs are unioned correctly, but its
+*body* is replaced with the latest derivation rather than LLM-merged across
+topics. Merging atomic bodies needs a dedicated LLM merge step.

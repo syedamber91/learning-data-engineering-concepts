@@ -39,3 +39,18 @@ def test_shared_entity_written_once_two_topics(tmp_path):
     assert idx.entities["lsm-tree"].topics == ["kafka", "spark"]
     assert (tmp_path / "topics/kafka.md").exists()
     assert (tmp_path / "topics/spark.md").exists()
+    # the entity note's own frontmatter must agree with the index (union, not clobber)
+    from persona_wiki.storage import parse_note
+    fm, _ = parse_note((tmp_path / "entities/lsm-tree.md").read_text(encoding="utf-8"))
+    assert fm.topics == ["kafka", "spark"]
+    assert fm.sources == ["s1", "s2"]
+
+
+def test_slug_is_normalized_so_wikilink_matches_file(tmp_path):
+    idx = WikiIndex()
+    # LLM emits a non-normalized slug; the file, the [[link]], and the index must agree
+    b = DerivativeBundle(entities=[EntityOut(slug="LSM Tree", body="b")], synthesis="s")
+    apply_bundle(tmp_path, "vutr", "kafka", b, ["s1"], idx, "2026-07-08")
+    assert (tmp_path / "entities/lsm-tree.md").exists()
+    assert "[[lsm-tree]]" in (tmp_path / "topics/kafka.md").read_text(encoding="utf-8")
+    assert "lsm-tree" in idx.entities
