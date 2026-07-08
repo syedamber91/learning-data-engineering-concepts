@@ -12,3 +12,5 @@ topics:
 ---
 
 The Lambda Architecture gives a low-latency estimate from a streaming path, then promises correctness later from a batch path. It does not actually solve completeness — it just papers over the gap by re-computing with batch.
+
+*See also: [[data-lake]] · [[data-warehouse]] · [[kappa-architecture]] · [[data-mesh]] · [[medallion-architecture]] · [[lakehouse]]*

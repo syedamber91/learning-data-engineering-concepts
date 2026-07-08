@@ -11,3 +11,5 @@ topics:
 ---
 
 Dimensional modeling, introduced in Ralph Kimball's 1996 The Data Warehouse Toolkit, follows a four-step process: select the business process, declare the grain, identify dimensions, then identify facts. Its ultimate goals are facilitating communication and guiding how we transform, organize, and serve data — not just query performance — and dimension attributes should stay as close to business terminology as possible.
+
+*See also: [[star-schema]] · [[grain-declaration]] · [[surrogate-keys]] · [[dbt]] · [[scd-type-2]] · [[scd-type-1-and-3]]*

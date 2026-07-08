@@ -11,3 +11,5 @@ topics:
 ---
 
 Kafka uses zero-copy via sendfile() to cut context switches from four to two, so data never has to be copied into the Kafka application itself. Zero-copy doesn't mean there are no copies at all — it only guarantees no unnecessary ones — and it works because the on-disk data format is kept identical from producer to consumer, avoiding decompress/recompress.
+
+*See also: [[kafka-origin]] · [[paypal-kafka-scale]] · [[tiered-storage-kip-405]] · [[linkedin-kafka-scale]] · [[logical-offset]] · [[acks-setting]]*

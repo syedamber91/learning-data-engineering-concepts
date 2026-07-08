@@ -11,3 +11,5 @@ topics:
 ---
 
 NSM (N-ary Storage Model), the classic row store, keeps a whole record together, which makes it ideal for OLTP where you want fast insertion and mutation. Its weakness is compression: since data from different columns lacks common patterns, you don't get much squeeze out of it.
+
+*See also: [[parquet]] · [[dsm]] · [[clickhouse]] · [[redshift]] · [[pax-hybrid-layout]] · [[oltp-vs-olap-access]]*

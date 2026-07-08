@@ -11,3 +11,5 @@ topics:
 ---
 
 Polars is a single-node engine that I'd recommend for medium-sized data that still fits in memory. It sits in the sweet spot between Pandas and Spark, giving you real performance without dragging in a distributed framework.
+
+*See also: [[spark]] · [[duckdb]] · [[apache-arrow]] · [[pandas]] · [[single-node-processing]]*

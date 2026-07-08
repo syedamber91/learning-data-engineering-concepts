@@ -12,3 +12,5 @@ topics:
 ---
 
 DuckDB is an embedded OLAP database that runs beside your application without a separate DBMS server, much like SQLite does for OLTP. It uses vectorized push-based execution inspired by MonetDB/X100, and I find it exciting precisely because it stands on the shoulders of giants — borrowing components from open-source projects and ideas from scientific publications.
+
+*See also: [[snowflake]] · [[photon]] · [[clickhouse]] · [[redshift]] · [[bigquery]] · [[google-napa]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 Kappa collapses everything into a single streaming pipeline and handles historical reprocessing by replaying Kafka offsets. It kills Lambda's dual-codebase problem, but the price is that you now need real stream-system expertise.
+
+*See also: [[data-lake]] · [[data-warehouse]] · [[lambda-architecture]] · [[data-mesh]] · [[medallion-architecture]] · [[lakehouse]]*

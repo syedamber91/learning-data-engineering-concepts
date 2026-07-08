@@ -11,3 +11,5 @@ topics:
 ---
 
 For a streaming pipeline, bad data goes to a dead-letter queue — the designated place to hold records that fail the rules rather than letting them corrupt the output. The batch equivalent is a dedicated dataset for the same purpose.
+
+*See also: [[source]] · [[checkpointing]] · [[middle-steps]] · [[sink]] · [[semantic-schema-change]] · [[missing-data-vs-duplicates]]*

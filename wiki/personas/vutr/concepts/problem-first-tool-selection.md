@@ -11,3 +11,5 @@ topics:
 ---
 
 Always go problem-first: business problem, then data modeling, then a tool-agnostic architecture, and only then choose the tools. Never start with tools.
+
+*See also: [[three-biggest-mistakes]] · [[nine-se-skills-for-des]] · [[recommended-learning-order]] · [[data-foundation-supports-business]] · [[fundamentals-that-never-become-obsolete]] · [[senior-boring-signal]]*

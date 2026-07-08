@@ -11,3 +11,5 @@ topics:
 ---
 
 RLE_DICTIONARY is Parquet's default and most commonly used encoding: unique values go into a dedicated dictionary page (PLAIN encoded), and the data pages then store integer indices via the RLE/Bit-Packing Hybrid. Here is the catch — Parquet aggressively applies it to every column type except BOOLEAN, and if the dictionary grows past a size threshold (e.g. 1MB) the writer falls back to another encoding.
+
+*See also: [[parquet-origin]] · [[footer-filemetadata]] · [[column-by-name]] · [[row-group]] · [[page]] · [[delta-encodings]]*

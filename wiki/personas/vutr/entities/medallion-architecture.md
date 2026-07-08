@@ -12,3 +12,5 @@ topics:
 ---
 
 The medallion architecture, also coined by Databricks, organizes data into bronze/silver/gold layers. To me it is more of a pattern than an architecture — a reusable solution to a specific problem, not the high-level blueprint of how data is ingested, stored, processed, and served. And don't mistake these layers for data modeling — arranging tables into tiers is not the same as defining how data is structured and related.
+
+*See also: [[star-schema]] · [[grain-declaration]] · [[surrogate-keys]] · [[dbt]] · [[scd-type-2]] · [[scd-type-1-and-3]]*

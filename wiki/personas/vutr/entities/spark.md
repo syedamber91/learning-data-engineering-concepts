@@ -11,3 +11,5 @@ topics:
 ---
 
 Spark is the distributed, multi-node processing framework — and my rule is don't run anything on it when you can process the data on a single machine. For a medium-sized dataset, Spark is simply overkill.
+
+*See also: [[polars]] · [[duckdb]] · [[apache-arrow]] · [[pandas]] · [[single-node-processing]]*

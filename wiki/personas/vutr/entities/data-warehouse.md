@@ -12,3 +12,5 @@ topics:
 ---
 
 In 1988 Barry Devlin and Paul Murphy introduced the 'business data warehouse,' and Bill Inmon later defined it as 'a subject-oriented, integrated, nonvolatile, and time-variant collection of data in support of management's decisions.' It is the foundational abstraction for centralizing analytical data.
+
+*See also: [[data-lake]] · [[kappa-architecture]] · [[lambda-architecture]] · [[data-mesh]] · [[medallion-architecture]] · [[lakehouse]]*

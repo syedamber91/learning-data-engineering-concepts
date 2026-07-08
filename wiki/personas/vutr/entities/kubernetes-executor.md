@@ -11,3 +11,5 @@ topics:
 ---
 
 The KubernetesExecutor spins up a dynamic pod per task, so for me it gives the best resource isolation, scalability, and fault tolerance. The trade-off is cold start cost, but it also lets different tasks carry different Python dependencies.
+
+*See also: [[assets]] · [[celery-executor]] · [[trigger-rules]] · [[local-executor]] · [[xcom]] · [[pools]]*

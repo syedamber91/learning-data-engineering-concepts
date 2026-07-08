@@ -11,3 +11,5 @@ topics:
 ---
 
 PayPal's Kafka deployment ran 85+ clusters, 1,500 brokers, and 20,000 topics, peaking at 1.3 trillion messages per day. It demonstrates that a second large enterprise independently pushed Kafka to trillion-message-per-day scale.
+
+*See also: [[kafka-origin]] · [[tiered-storage-kip-405]] · [[linkedin-kafka-scale]] · [[logical-offset]] · [[acks-setting]] · [[partition]]*

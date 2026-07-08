@@ -11,3 +11,5 @@ topics:
 ---
 
 Two competing warehouse design philosophies define the discipline: Kimball favors bottom-up design, building data marts first, while Inmon favors top-down design, building the centralized enterprise data warehouse first.
+
+*See also: [[hadoop-mapreduce]] · [[data-warehouse]] · [[relational-model]] · [[open-table-formats]] · [[data-mesh]] · [[elt-vs-etl]]*

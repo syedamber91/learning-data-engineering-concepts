@@ -11,3 +11,5 @@ topics:
 ---
 
 Parquet was born in the early 2010s as a joint effort between Twitter and Cloudera, with version 1.0 released in July 2013. It was designed from the start around the PAX hybrid layout rather than a purely columnar one, which is why its physical model still surprises people who assume 'columnar' means column-at-a-time on disk.
+
+*See also: [[rle-dictionary]] · [[footer-filemetadata]] · [[column-by-name]] · [[row-group]] · [[page]] · [[delta-encodings]]*

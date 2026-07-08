@@ -11,3 +11,5 @@ topics:
 ---
 
 Flink's MemorySegments are fixed-size 32KB blocks allocated at TaskManager startup. They exist to avoid per-record JVM object allocation, sidestepping the garbage-collection pressure that would otherwise dog a long-running stream job.
+
+*See also: [[spark-structured-streaming]] · [[apache-flink]] · [[dataflow-model]] · [[lambda-architecture]] · [[rocksdb-state-store]] · [[watermark]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 Netflix processes trillions of daily events and once ran 600,000 Hive tables with 250 million partitions, migrating roughly 1.5 million of them to Apache Iceberg. Its Maestro orchestrator drives 70,000 workflows and 500,000 job steps daily, with Flink as the standard for real-time pipelines and the WAP (write-audit-publish) pattern guarding data quality.
+
+*See also: [[doordash-flink-iceberg]] · [[linkedin-kafka-beam]] · [[uber-lambda-kafka]] · [[twitter-kappa-migration]] · [[meta-velox-tectonic]] · [[spotify-pubsub-scio]]*

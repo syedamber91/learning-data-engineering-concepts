@@ -11,3 +11,5 @@ topics:
 ---
 
 KRaft eliminated ZooKeeper from Kafka, folding metadata management into Kafka itself. It removes the external coordination dependency the cluster previously relied on.
+
+*See also: [[kafka-origin]] · [[paypal-kafka-scale]] · [[tiered-storage-kip-405]] · [[linkedin-kafka-scale]] · [[logical-offset]] · [[acks-setting]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 Model selection should be based on task-specific performance, not online benchmarks. The 'model of the year' usually keeps the title for only six months — if your AI strategy is 'set it and forget it,' you're already falling behind.
+
+*See also: [[rag]] · [[ai-agent]] · [[hnsw]] · [[vector-embedding]] · [[product-quantization]] · [[semantic-layer]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 Meta holds multiple exabytes of warehouse data and fought sprawl by narrowing from twelve different engines and six SQL dialects down to two dialects — MySQL for OLTP and PrestoSQL for OLAP. It built Velox, a C++ database-acceleration library, replaced HDFS with Tectonic, and runs Scribe, an internal message queue built over 18 years that ingests over 15TB/s and serves over 110TB/s.
+
+*See also: [[doordash-flink-iceberg]] · [[linkedin-kafka-beam]] · [[netflix-iceberg-maestro]] · [[uber-lambda-kafka]] · [[twitter-kappa-migration]] · [[spotify-pubsub-scio]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 The RLE/Bit-Packing Hybrid is how Parquet stores those dictionary indices: when the same value repeats 8 or more consecutive times it uses run-length encoding, otherwise it bit-packs them. BOOLEAN columns skip dictionary encoding entirely and use the RLE scheme directly.
+
+*See also: [[parquet-origin]] · [[rle-dictionary]] · [[footer-filemetadata]] · [[column-by-name]] · [[row-group]] · [[page]]*

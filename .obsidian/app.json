@@ -1,0 +1,9 @@
+{
+  "userIgnoreFilters": [
+    "vendor/",
+    ".worktrees/",
+    "docs/",
+    "prompts/",
+    "data/"
+  ]
+}

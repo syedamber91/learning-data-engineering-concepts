@@ -12,3 +12,5 @@ topics:
 ---
 
 OLTP systems are asked to 'find this one specific thing' and need a precise, map-like lookup; OLAP systems are asked to 'summarize these few attributes across everything' and demand efficient data elimination. A look-up index won't help much in OLAP, because when you scan billions of rows the bottleneck is minimizing the volume of data read from storage, not locating a single record.
+
+*See also: [[parquet]] · [[dsm]] · [[clickhouse]] · [[redshift]] · [[nsm]] · [[pax-hybrid-layout]]*

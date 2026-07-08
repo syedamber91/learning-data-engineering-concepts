@@ -11,3 +11,5 @@ topics:
 ---
 
 Sensors like S3KeySensor wait for an external condition before letting downstream work proceed. They are Airflow's poll-based way of reacting to the outside world.
+
+*See also: [[kubernetes-executor]] · [[assets]] · [[celery-executor]] · [[trigger-rules]] · [[local-executor]] · [[xcom]]*

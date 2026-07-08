@@ -11,3 +11,5 @@ topics:
 ---
 
 The sink is where I begin every pipeline design — more accurately, I start from the end users and the business purpose they need served. Its questions decide everything downstream: the shape of the output, how it's served, how stale data can be, the usage and retention patterns, and whether the sink can even support atomicity.
+
+*See also: [[source]] · [[checkpointing]] · [[middle-steps]] · [[dead-letter-queue]] · [[semantic-schema-change]] · [[missing-data-vs-duplicates]]*

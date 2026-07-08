@@ -11,3 +11,5 @@ topics:
 ---
 
 One Big Table (OBT) proves its value only when there's a careful data modeling layer beneath it. Putting all the data in one table from the start trades data understandability for query performance, which is terrible.
+
+*See also: [[star-schema]] · [[grain-declaration]] · [[surrogate-keys]] · [[dbt]] · [[scd-type-2]] · [[scd-type-1-and-3]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 You don't have to pick the lakehouse for every scenario — the decision must be made based on the organization's needs. Remember, every decision has a trade-off.
+
+*See also: [[data-lake]] · [[data-warehouse]] · [[kappa-architecture]] · [[lambda-architecture]] · [[data-mesh]] · [[medallion-architecture]]*

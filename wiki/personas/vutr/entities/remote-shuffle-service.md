@@ -11,3 +11,5 @@ topics:
 ---
 
 Uber's Spark RSS reverses the MapReduce shuffle paradigm: instead of reducers pulling same-partition data from many mappers, each mapper writes its same-partition data to one unique RSS server so the reducer fetches from a single place. In production this cut SSD wear-out from 3 months to nearly 3 years and dropped shuffle failure rates by 95%.
+
+*See also: [[sort-merge-join]] · [[spark-origin]] · [[spark-structured-streaming]] · [[shuffle-hash-join]] · [[catalyst-optimizer]] · [[pyspark]]*

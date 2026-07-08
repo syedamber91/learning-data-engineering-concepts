@@ -11,3 +11,5 @@ topics:
 ---
 
 Hudi was created by Uber to bring incremental processing to the data lake, after Uber faced challenges with data updates and deletions over HDFS. It commits atomically by creating a .completed file via object-storage conditional writes, and prioritizes incremental and real-time processing over the wide adoption enjoyed by Iceberg and Delta Lake.
+
+*See also: [[iceberg-metadata-layer]] · [[hudi-index]] · [[apache-iceberg]] · [[conditional-writes]] · [[hudi-timeline]] · [[open-table-formats]]*

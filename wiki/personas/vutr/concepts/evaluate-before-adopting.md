@@ -11,3 +11,5 @@ topics:
 ---
 
 Choosing a table format without careful evaluation is dangerous — if your boss picks Iceberg just because everyone is talking about it, run right away. Run an MVP evaluation against your actual business requirements before committing.
+
+*See also: [[iceberg-metadata-layer]] · [[hudi-index]] · [[apache-iceberg]] · [[conditional-writes]] · [[hudi-timeline]] · [[open-table-formats]]*

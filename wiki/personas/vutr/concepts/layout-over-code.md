@@ -11,3 +11,5 @@ topics:
 ---
 
 Much of a pipeline's speed comes from the files and their physical layout, not from the processing code. As I like to put it: most pipelines suck not because the code is bad, but because the files are — wrong [[row-group]] size, poor partitioning, or no compression can leave you with jobs that are roughly 5x slower and nobody knows why. Getting layout right (row group size, partitioning, encoding) is usually the higher-leverage lever than tuning the code.
+
+*See also: [[parquet-origin]] · [[rle-dictionary]] · [[footer-filemetadata]] · [[column-by-name]] · [[row-group]] · [[page]]*

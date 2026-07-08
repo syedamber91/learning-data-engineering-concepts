@@ -11,3 +11,5 @@ topics:
 ---
 
 Missing data is harder to catch than duplicates, because you don't actually know it's missing until you cross-check against the source. Duplicates announce themselves; absence stays silent.
+
+*See also: [[source]] · [[checkpointing]] · [[middle-steps]] · [[sink]] · [[dead-letter-queue]] · [[semantic-schema-change]]*

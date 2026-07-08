@@ -11,3 +11,5 @@ topics:
 ---
 
 Declaring the grain is the most critical decision in dimensional modeling: it defines what one row in the fact table represents. Every row in a fact table must sit at the same grain, so I settle this before I ever touch dimensions or facts.
+
+*See also: [[star-schema]] · [[surrogate-keys]] · [[dbt]] · [[scd-type-2]] · [[scd-type-1-and-3]] · [[dbt-origin-and-adoption]]*

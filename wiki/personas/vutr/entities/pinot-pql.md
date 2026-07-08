@@ -11,3 +11,5 @@ topics:
 ---
 
 PQL is Pinot's query language, and it is deliberately narrow: it does not support joins, nested queries, DDL, or record-level operations.
+
+*See also: [[druid-broker]] · [[star-tree-index]] · [[apache-druid]] · [[pinot-broker]] · [[apache-pinot]] · [[real-time-olap]]*

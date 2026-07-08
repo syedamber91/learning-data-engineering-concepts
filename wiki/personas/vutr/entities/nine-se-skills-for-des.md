@@ -11,3 +11,5 @@ topics:
 ---
 
 The nine software engineering skills every data engineer needs are writing understandable code, version control, environment separation, APIs, testing, CI/CD, observability, debugging, and dependency management with containerization. Software engineering is the discipline of building systems that keep working even when requirements change, bugs arise, and the original author has left.
+
+*See also: [[three-biggest-mistakes]] · [[recommended-learning-order]] · [[data-foundation-supports-business]] · [[fundamentals-that-never-become-obsolete]] · [[senior-boring-signal]] · [[why-before-what-learning-strategy]]*

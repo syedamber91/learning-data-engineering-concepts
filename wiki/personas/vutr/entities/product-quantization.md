@@ -11,3 +11,5 @@ topics:
 ---
 
 Product Quantization (PQ) chops each vector into sub-vectors and assigns each sub-vector to the index of its nearest centroid. It's a compression technique that helps tame the storage blow-up embeddings create.
+
+*See also: [[rag]] · [[ai-agent]] · [[hnsw]] · [[vector-embedding]] · [[semantic-layer]] · [[parquet]]*

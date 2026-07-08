@@ -11,3 +11,5 @@ topics:
 ---
 
 Spark was created at UC Berkeley's AMPLab in 2009, born to fix MapReduce's inefficiency for iterative machine-learning algorithms — the kind of workload that reuses the same dataset across many passes, where MapReduce's write-to-disk-between-stages model is punishing. That iterative-ML pressure is why in-memory reuse of the [[rdd]] sits at the heart of Spark's original design.
+
+*See also: [[sort-merge-join]] · [[spark-structured-streaming]] · [[remote-shuffle-service]] · [[shuffle-hash-join]] · [[catalyst-optimizer]] · [[pyspark]]*

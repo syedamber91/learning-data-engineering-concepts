@@ -11,3 +11,5 @@ topics:
 ---
 
 A CTE (Common Table Expression) lets you break down a complex problem into a series of logical, readable steps. Instead of nesting queries inside other queries — creating what's often called 'spaghetti code' — you get something you can actually follow.
+
+*See also: [[sort-merge-join]] · [[window-functions]] · [[relational-model]] · [[selection-operator]] · [[hash-join]] · [[group-by]]*

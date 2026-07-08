@@ -11,3 +11,5 @@ topics:
 ---
 
 When the source hard-deletes rows, the pipeline keeps accumulating records and slowly drifts away from the source — and nobody notices until someone manually reconciles months later. This is the quiet failure mode: missing data is harder to catch than duplicates because we don't know it's missing until we cross-check against the source.
+
+*See also: [[log-based-cdc]] · [[read-replica]] · [[query-based-cdc]] · [[write-ahead-log]] · [[secrets-manager]] · [[trigger-based-cdc]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 A semantic schema change is the hardest failure to catch: the column still exists and the type is unchanged, but its meaning has shifted. You only notice it when a dashboard starts showing a weird trend.
+
+*See also: [[source]] · [[checkpointing]] · [[middle-steps]] · [[sink]] · [[dead-letter-queue]] · [[missing-data-vs-duplicates]]*

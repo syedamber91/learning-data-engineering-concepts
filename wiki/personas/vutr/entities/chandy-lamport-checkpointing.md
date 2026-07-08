@@ -11,3 +11,5 @@ topics:
 ---
 
 Flink implements checkpointing using the Chandy-Lamport algorithm, which does not force the application to pause and de-couples checkpointing from data processing. This is what lets Flink take consistent snapshots without stalling the pipeline.
+
+*See also: [[spark-structured-streaming]] · [[apache-flink]] · [[flink-memorysegments]] · [[dataflow-model]] · [[lambda-architecture]] · [[rocksdb-state-store]]*

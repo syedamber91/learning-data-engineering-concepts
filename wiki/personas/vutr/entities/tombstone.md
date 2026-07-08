@@ -11,3 +11,5 @@ topics:
 ---
 
 Tombstones are markers that record a deletion in an LSM-tree; the record is not physically removed at delete time. The real removal is deferred until compaction sweeps through and drops the tombstoned data.
+
+*See also: [[compaction]] · [[bigquery-vortex]] · [[bloom-filter]] · [[b-tree]] · [[memtable]] · [[write-ahead-log]]*

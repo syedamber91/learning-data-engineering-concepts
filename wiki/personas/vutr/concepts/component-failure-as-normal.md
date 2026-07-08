@@ -11,3 +11,5 @@ topics:
 ---
 
 In these systems component failure is no longer treated as unexpected — hardware faults (disk, memory, power) and software faults (bugs, human errors) are assumed to happen constantly. That assumption is what forces monitoring, error detection, fault tolerance, and automatic recovery into the core design rather than bolting them on.
+
+*See also: [[s3-strong-consistency]] · [[hdfs-namenode-scaling-limit]] · [[hdfs]] · [[prefix-as-folders]] · [[amazon-s3]] · [[gfs]]*

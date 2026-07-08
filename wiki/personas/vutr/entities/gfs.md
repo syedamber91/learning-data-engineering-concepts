@@ -11,3 +11,5 @@ topics:
 ---
 
 Google File System uses a 64MB chunk size with three replicas by default, and its master keeps all metadata in memory, persisting it via an operation log and B-tree-like checkpoints. Notably, chunk location metadata is NOT stored on the master — it's polled from chunkservers at startup — and the master grants a 60-second lease to a primary replica, separating control flow from data flow.
+
+*See also: [[s3-strong-consistency]] · [[hdfs-namenode-scaling-limit]] · [[hdfs]] · [[prefix-as-folders]] · [[amazon-s3]] · [[gfs-record-append]]*

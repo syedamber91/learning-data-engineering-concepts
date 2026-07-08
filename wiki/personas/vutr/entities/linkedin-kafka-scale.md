@@ -11,3 +11,5 @@ topics:
 ---
 
 LinkedIn's own Kafka deployment (2019) ran at extreme scale: about 100 clusters, 4,000 brokers, 100,000 topics, 7,000,000 partitions, and 7 trillion messages per day. This is the origin deployment that shaped many of Kafka's design decisions.
+
+*See also: [[kafka-origin]] · [[paypal-kafka-scale]] · [[tiered-storage-kip-405]] · [[logical-offset]] · [[acks-setting]] · [[partition]]*

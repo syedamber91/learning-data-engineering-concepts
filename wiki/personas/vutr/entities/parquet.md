@@ -12,3 +12,5 @@ topics:
 ---
 
 Standard columnar formats like Parquet are problematic for vector workloads: they're bad for random access, and the wide columns of embeddings make row-group sizing difficult. So the columnar format that serves analytics well doesn't transfer cleanly to vector storage.
+
+*See also: [[dsm]] · [[clickhouse]] · [[redshift]] · [[nsm]] · [[pax-hybrid-layout]] · [[oltp-vs-olap-access]]*

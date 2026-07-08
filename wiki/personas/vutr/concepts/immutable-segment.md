@@ -11,3 +11,5 @@ topics:
 ---
 
 Both engines lean on immutable, columnar segments as their storage unit. Immutability is what lets Druid's historical nodes guarantee consistency during reads and parallelize efficiently, and it is why Pinot's segments can be treated as fixed, read-optimized units.
+
+*See also: [[druid-broker]] · [[pinot-pql]] · [[star-tree-index]] · [[apache-druid]] · [[pinot-broker]] · [[apache-pinot]]*

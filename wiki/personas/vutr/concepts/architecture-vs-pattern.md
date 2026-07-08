@@ -11,3 +11,5 @@ topics:
 ---
 
 An architecture is the high-level blueprint of how data is ingested, stored, processed, and served; a pattern is a reusable solution to a specific problem inside that architecture. That's why I file Medallion, Lambda, and Kappa as patterns, Modern Data Stack as a philosophy, and Data Fabric as mostly a marketing term.
+
+*See also: [[data-lake]] · [[data-warehouse]] · [[kappa-architecture]] · [[lambda-architecture]] · [[data-mesh]] · [[medallion-architecture]]*

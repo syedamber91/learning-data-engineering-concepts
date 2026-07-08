@@ -11,3 +11,5 @@ topics:
 ---
 
 RAG lets a model consult external knowledge instead of trying to bake facts in. Fine-tuning is inefficient for teaching new, rapidly-changing facts, so RAG solves that gap — but the choice isn't binary, and many systems combine both fine-tuning and RAG.
+
+*See also: [[ai-agent]] · [[hnsw]] · [[vector-embedding]] · [[product-quantization]] · [[semantic-layer]] · [[parquet]]*

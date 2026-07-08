@@ -11,3 +11,5 @@ topics:
 ---
 
 Rather than building a proprietary cache, Kafka leans on the OS filesystem and the kernel page cache to hold data before it is flushed to disk. This sidesteps JVM object overhead and GC pain, and takes advantage of the fact that sequential disk access can outperform random RAM access.
+
+*See also: [[kafka-origin]] · [[paypal-kafka-scale]] · [[tiered-storage-kip-405]] · [[linkedin-kafka-scale]] · [[logical-offset]] · [[acks-setting]]*

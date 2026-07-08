@@ -12,3 +12,5 @@ topics:
 ---
 
 ClickHouse originated at Yandex for Yandex Metrica (2009 internally, open-sourced 2016), and its MergeTree storage engine is LSM-inspired: data is written in sorted parts and background merges consolidate them. It uses a sparse primary index with one entry per granule (8192 rows by default), the granule being the smallest unit a scan or index lookup processes, plus vectorized execution with opportunistic code compilation. Unlike the PAX layout of BigQuery/Snowflake/Parquet, ClickHouse is true DSM — each column stored separately.
+
+*See also: [[parquet]] · [[dsm]] · [[redshift]] · [[nsm]] · [[pax-hybrid-layout]] · [[oltp-vs-olap-access]]*

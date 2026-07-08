@@ -11,3 +11,5 @@ topics:
 ---
 
 For databases, point the pipeline at a read replica so it reads from the replica while the master stays untouched. This is how you keep CDC from stealing capacity from the system of record.
+
+*See also: [[log-based-cdc]] · [[query-based-cdc]] · [[write-ahead-log]] · [[secrets-manager]] · [[trigger-based-cdc]] · [[silent-drift-from-hard-deletion]]*

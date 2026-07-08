@@ -11,3 +11,5 @@ topics:
 ---
 
 Window functions operate on a window of rows but do NOT collapse them — that's the key difference from GROUP BY. In the physical execution order they run alongside SELECT.
+
+*See also: [[sort-merge-join]] · [[relational-model]] · [[cte]] · [[selection-operator]] · [[hash-join]] · [[group-by]]*

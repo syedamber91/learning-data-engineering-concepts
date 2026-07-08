@@ -11,3 +11,5 @@ topics:
 ---
 
 The index is Hudi's key differentiator and the feature that sets it apart from Delta Lake or Iceberg. It maps hoodie keys to file groups (fileIds), so updates and deletes can be routed to the right files rather than scanned for.
+
+*See also: [[iceberg-metadata-layer]] · [[apache-iceberg]] · [[conditional-writes]] · [[hudi-timeline]] · [[open-table-formats]] · [[copy-on-write-vs-merge-on-read]]*

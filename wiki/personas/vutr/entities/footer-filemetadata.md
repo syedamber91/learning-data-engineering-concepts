@@ -11,3 +11,5 @@ topics:
 ---
 
 The footer stores the FileMetadata and is bookended by the magic number 'PAR1'. It's also where Parquet keeps the per-column-chunk min/max statistics that enable data skipping.
+
+*See also: [[parquet-origin]] · [[rle-dictionary]] · [[column-by-name]] · [[row-group]] · [[page]] · [[delta-encodings]]*

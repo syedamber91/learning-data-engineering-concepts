@@ -11,3 +11,5 @@ topics:
 ---
 
 To encode nested data, Parquet borrows definition levels and repetition levels from Google's Dremel/BigQuery model. These levels are how a flat columnar layout can faithfully reconstruct nested and repeated structures.
+
+*See also: [[parquet-origin]] · [[rle-dictionary]] · [[footer-filemetadata]] · [[column-by-name]] · [[row-group]] · [[page]]*

@@ -12,3 +12,5 @@ topics:
 ---
 
 In 2019 Zhamak Dehghani introduced the Data Mesh concept, a decentralized organizational approach to data ownership. It marks one of the more recent architectural shifts in the field's timeline.
+
+*See also: [[data-lake]] · [[data-warehouse]] · [[kappa-architecture]] · [[lambda-architecture]] · [[medallion-architecture]] · [[lakehouse]]*

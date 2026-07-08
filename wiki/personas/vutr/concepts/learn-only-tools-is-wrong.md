@@ -11,3 +11,5 @@ topics:
 ---
 
 Learning tools is not wrong, but learning only tools is wrong, because tools can become obsolete and be replaced — especially in the AI era where everything moves so fast. Fundamentals, by contrast, never become obsolete.
+
+*See also: [[three-biggest-mistakes]] · [[nine-se-skills-for-des]] · [[recommended-learning-order]] · [[data-foundation-supports-business]] · [[fundamentals-that-never-become-obsolete]] · [[senior-boring-signal]]*

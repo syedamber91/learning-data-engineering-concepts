@@ -11,3 +11,5 @@ topics:
 ---
 
 Batch processing is excellent in operational simplicity and gives a complete view, but its weakness is latency — it has to wait for the data to reach a threshold. Stream processing wins on latency and handles unbounded data, but pays for it with complexity: windowing, watermarks, state, and checkpointing.
+
+*See also: [[spark-structured-streaming]] · [[apache-flink]] · [[flink-memorysegments]] · [[dataflow-model]] · [[lambda-architecture]] · [[rocksdb-state-store]]*

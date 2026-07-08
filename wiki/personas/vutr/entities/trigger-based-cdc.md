@@ -11,3 +11,5 @@ topics:
 ---
 
 Trigger-based CDC installs database triggers that write changes into a shadow table as they happen. You pay for this with a double-write overhead on every mutation, since each change is now recorded twice.
+
+*See also: [[log-based-cdc]] · [[read-replica]] · [[query-based-cdc]] · [[write-ahead-log]] · [[secrets-manager]] · [[silent-drift-from-hard-deletion]]*

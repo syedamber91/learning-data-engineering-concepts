@@ -11,3 +11,5 @@ topics:
 ---
 
 Spark defers work until it must run it: transformations build a logical plan (a DAG) and nothing executes until an action or output operation is called. This is why a Spark DataFrame is lazy unlike a Pandas DataFrame — each DataFrame is a plan to compute a dataset, not the computed dataset itself, which is exactly what gives Catalyst room to optimize.
+
+*See also: [[sort-merge-join]] · [[spark-origin]] · [[spark-structured-streaming]] · [[remote-shuffle-service]] · [[shuffle-hash-join]] · [[catalyst-optimizer]]*

@@ -11,3 +11,5 @@ topics:
 ---
 
 Real-time OLAP is the workload that engines like Pinot and Druid target: keeping hot data in memory for high-QPS simple queries while leaning on NVMe for complex queries over larger data. Immutable, columnar segments are the shared backbone that makes consistent reads and efficient parallelization possible.
+
+*See also: [[druid-broker]] · [[pinot-pql]] · [[star-tree-index]] · [[apache-druid]] · [[pinot-broker]] · [[apache-pinot]]*

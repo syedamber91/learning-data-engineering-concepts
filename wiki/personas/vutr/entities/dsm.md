@@ -11,3 +11,5 @@ topics:
 ---
 
 DSM (Decomposition Storage Model) is the true column store, where each column's values are stored completely separately. Because every value in a column has the same length, the DBMS can locate the i-th value directly by computing first_element_address + i * element_size.
+
+*See also: [[parquet]] · [[clickhouse]] · [[redshift]] · [[nsm]] · [[pax-hybrid-layout]] · [[oltp-vs-olap-access]]*
