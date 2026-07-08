@@ -14,6 +14,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "typer>=0.9",
     "rich>=13.0",
+    "pyyaml>=6",
 ]
 
 [project.optional-dependencies]
@@ -21,6 +22,7 @@ dev = ["pytest>=7.4"]
 
 [project.scripts]
 de-toolkit = "de_toolkit.cli:app"
+persona-wiki = "persona_wiki.cli:app"
 
 [tool.setuptools.packages.find]
 where = ["src"]
