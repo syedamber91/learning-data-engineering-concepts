@@ -10,4 +10,3 @@ tags: [moc]
 ## Topics
 - [[processing-paradigms-moc|Processing Paradigms]]
 - [[orchestration-moc|Orchestration]]
-- [[dbt-data-build-tool-moc|dbt (Data Build Tool)]]

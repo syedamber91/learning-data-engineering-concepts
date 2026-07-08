@@ -9,7 +9,7 @@ tags: [data-quality, validation, freshness, null-checks, pipelines, orchestratio
 
 *Part of [[orchestration-moc|Orchestration]] · [[data-pipelines-moc|Data Pipelines]]*
 
-← Prev: [[dags-schedulers|DAGs & Schedulers]] · Next: [[what-dbt-is-the-t-in-elt|What dbt Is & the T in ELT]] →
+← Prev: [[dags-schedulers|DAGs & Schedulers]]
 
 ## Recap — where we just were
 
@@ -235,4 +235,4 @@ A: A JOIN matches rows using the key column. Rows where `order_id` is null have 
 
 ## Coming up next
 
-So far you have *moved*, *scheduled*, and *guarded* data — but you have not yet *transformed* it into the clean, analytics-ready tables that dashboards actually read. That is the job of a whole tool built around the ideas in this lesson. Up next, [[what-dbt-is-the-t-in-elt|What dbt Is & the T in ELT]] opens the dbt roadmap (see [[dbt-data-build-tool-moc|dbt (Data Build Tool)]]), where the same "fail fast on bad data" discipline you just learned becomes a first-class, version-controlled part of building every table.
+So far you have *moved*, *scheduled*, and *guarded* data. This closes the Data Pipelines track — the "fail fast on bad data" discipline you just learned is the habit to carry into every transformation tool you adopt.
