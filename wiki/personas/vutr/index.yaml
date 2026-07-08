@@ -1,0 +1,90 @@
+topics:
+  spark:
+    file: topics/spark.md
+    sources: 1
+    last_updated: '2026-07-08'
+  kafka:
+    file: topics/kafka.md
+    sources: 2
+    last_updated: '2026-07-09'
+  dbt:
+    file: topics/dbt.md
+    sources: 1
+    last_updated: '2026-07-08'
+entities:
+  rdd:
+    file: entities/rdd.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  catalyst-optimizer:
+    file: entities/catalyst-optimizer.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  aqe:
+    file: entities/aqe.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  logical-offset:
+    file: entities/logical-offset.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  page-cache:
+    file: entities/page-cache.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  zero-copy-sendfile:
+    file: entities/zero-copy-sendfile.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  consumer-offsets:
+    file: entities/consumer-offsets.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  star-schema:
+    file: entities/star-schema.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  scd-type-2:
+    file: entities/scd-type-2.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  surrogate-key:
+    file: entities/surrogate-key.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  tiered-storage:
+    file: entities/tiered-storage.md
+    topics:
+    - kafka
+    last_updated: '2026-07-09'
+concepts:
+  skew-oom:
+    file: concepts/skew-oom.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  partition-parallelism:
+    file: concepts/partition-parallelism.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  dimensional-modeling:
+    file: concepts/dimensional-modeling.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  etl-vs-elt:
+    file: concepts/etl-vs-elt.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
