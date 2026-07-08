@@ -85,3 +85,19 @@ def test_bootstrap_survives_a_failing_section(tmp_path):
     idx = load_index(tmp_path)
     assert "spark" in idx.topics and "kafka" not in idx.topics
     assert (tmp_path / "index.yaml").exists()
+
+
+def test_bootstrap_threads_slug_registry_to_later_groups(tmp_path):
+    # the second group's prompt must list slugs created by the first group,
+    # so later topics reuse them and cross-link instead of coining variants
+    prompts = []
+
+    def recording_llm(prompt):
+        prompts.append(prompt)
+        return _bootstrap_llm(prompt)  # creates entity 'linkedin' every group
+
+    bootstrap(tmp_path, "vutr", _MD, recording_llm, "2026-07-08")
+    assert len(prompts) == 2
+    assert "EXISTING WIKI SLUGS" not in prompts[0]   # nothing exists yet
+    assert "EXISTING WIKI SLUGS" in prompts[1]       # registry threaded
+    assert "linkedin" in prompts[1]                  # first group's entity visible

@@ -4,7 +4,7 @@ CLI via de_toolkit's ``run_claude``."""
 
 from __future__ import annotations
 
-from typing import Callable
+from typing import Callable, List, Optional
 
 from de_toolkit.teach import run_claude
 
@@ -25,7 +25,28 @@ _BUNDLE_CONTRACT = (
 )
 
 
-def build_derive_prompt(persona: str, topic: str, source_text: str, existing_note: str = "") -> str:
+def _registry_block(known_slugs: Optional[List[str]]) -> str:
+    """The cross-linking contract: show the wiki's existing slugs so the LLM
+    reuses them instead of coining near-duplicates, and links across topics."""
+    if not known_slugs:
+        return ""
+    return (
+        "\nEXISTING WIKI SLUGS — the wiki already has these entity/concept notes. "
+        "If something you would write matches one, REUSE that exact slug instead of "
+        "inventing a variant, and you may reference any of them as [[slug]] in your "
+        "comparisons/open_questions/synthesis even without redefining them (this is "
+        "what cross-links topics in the graph):\n"
+        + ", ".join(sorted(known_slugs)) + "\n"
+    )
+
+
+def build_derive_prompt(
+    persona: str,
+    topic: str,
+    source_text: str,
+    existing_note: str = "",
+    known_slugs: Optional[List[str]] = None,
+) -> str:
     revise = ""
     if existing_note:
         revise = (
@@ -39,17 +60,24 @@ def build_derive_prompt(persona: str, topic: str, source_text: str, existing_not
         "derivative kinds (entities, concepts, comparisons, open questions, "
         "synthesis) grounded strictly in the persona's positions.\n\n"
         + _BUNDLE_CONTRACT
+        + _registry_block(known_slugs)
         + revise
         + "\n\n<<<SOURCE\n" + source_text + "\nSOURCE\n"
     )
 
 
-def build_bootstrap_prompt(persona: str, topic: str, section_text: str) -> str:
+def build_bootstrap_prompt(
+    persona: str,
+    topic: str,
+    section_text: str,
+    known_slugs: Optional[List[str]] = None,
+) -> str:
     return (
         f"Split the following authored section of the '{persona}' persona on "
         f"'{topic}' into research-memory derivatives. Do not invent anything not "
         "present in the section.\n\n"
         + _BUNDLE_CONTRACT
+        + _registry_block(known_slugs)
         + "\n\n<<<SECTION\n" + section_text + "\nSECTION\n"
     )
 

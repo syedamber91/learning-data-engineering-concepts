@@ -74,8 +74,10 @@ def bootstrap(root: Path, persona: str, persona_md: str, llm: LLMFn, stamp: str)
     done = 0
     skipped: List[str] = []
     for slug, text in groups:
+        # slugs registered so far — later groups reuse them and cross-link
+        known = sorted(index.entities) + sorted(index.concepts)
         try:
-            raw = llm(build_bootstrap_prompt(persona, slug, text))
+            raw = llm(build_bootstrap_prompt(persona, slug, text, known_slugs=known))
             bundle = DerivativeBundle.parse_raw_json(raw)
             apply_bundle(root, persona, slug, bundle, ["persona-snapshot"], index, stamp)
         except Exception:  # one bad section must not abort the whole bootstrap

@@ -27,3 +27,18 @@ def test_qc_prompt_asks_for_verdict():
     p = build_qc_prompt("NOTE", "SOURCE")
     assert "NOTE" in p and "SOURCE" in p
     assert "passed" in p and "reason" in p
+
+
+def test_prompts_include_slug_registry_when_given():
+    known = ["lsm-tree", "page-cache-storage"]
+    d = build_derive_prompt("vutr", "kafka", "src", known_slugs=known)
+    b = build_bootstrap_prompt("vutr", "kafka", "sec", known_slugs=known)
+    for p in (d, b):
+        assert "EXISTING WIKI SLUGS" in p
+        assert "lsm-tree" in p and "page-cache-storage" in p
+        assert "REUSE" in p
+
+
+def test_prompts_omit_registry_when_absent():
+    assert "EXISTING WIKI SLUGS" not in build_derive_prompt("vutr", "kafka", "src")
+    assert "EXISTING WIKI SLUGS" not in build_bootstrap_prompt("vutr", "kafka", "sec")

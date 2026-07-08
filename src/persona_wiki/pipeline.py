@@ -61,8 +61,9 @@ def update(root: Path, persona: str, sources: List[Source], llm: LLMFn, stamp: s
                 continue
 
             existing = load_existing_topic_body(root, topic) if decision == "revise" else ""
+            known = sorted(index.entities) + sorted(index.concepts)
             try:
-                raw = llm(build_derive_prompt(persona, topic, src.text, existing))
+                raw = llm(build_derive_prompt(persona, topic, src.text, existing, known_slugs=known))
                 bundle = DerivativeBundle.parse_raw_json(raw)
             except ValueError:
                 failed += 1
