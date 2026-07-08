@@ -10,4 +10,4 @@ topics:
 - dbt
 ---
 
-SCD Type 2 (most used) inserts a new row per change with start_date/end_date (9999-12-31 for current) and a surrogate key via MD5 of the natural key. Type 1 overwrites; Type 3 adds columns.
+SCD Type 2 is the most-used slowly-changing-dimension pattern: on a change it inserts a new row and tracks history with start_date and end_date (9999-12-31 marks the current row), keyed by a surrogate MD5 of the natural key. In the end these are just labels (type n) — do what works for your requirements and don't worry about the naming.

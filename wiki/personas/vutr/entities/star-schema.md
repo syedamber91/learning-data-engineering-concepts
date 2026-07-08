@@ -10,4 +10,4 @@ topics:
 - dbt
 ---
 
-Kimball's star schema: a fact table at the center surrounded by denormalized dimension tables for query performance.
+The star schema puts a fact table at the center surrounded by dimension tables, deliberately denormalized for query performance. Kimball encourages me to keep low-level measurements in the fact table for flexibility, rather than pre-aggregating away detail I might later need.

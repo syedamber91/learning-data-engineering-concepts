@@ -10,4 +10,4 @@ topics:
 - spark
 ---
 
-An RDD has 5 properties: partitions, a compute function per partition, dependencies, an optional partitioner, and optional preferred locations. RDDs are immutable and lazily evaluated.
+The RDD is Spark's foundational abstraction, defined by five properties: a list of partitions, a compute function per partition, a list of dependencies, an optional partitioner for key-value RDDs, and optional preferred locations. RDDs are immutable and lazily evaluated — transformations only build up a DAG, and it's the actions that actually trigger execution.

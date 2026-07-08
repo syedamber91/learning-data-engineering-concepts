@@ -1,17 +1,69 @@
 topics:
+  airflow:
+    file: topics/airflow.md
+    sources: 1
+    last_updated: '2026-07-08'
   spark:
     file: topics/spark.md
     sources: 1
     last_updated: '2026-07-08'
   kafka:
     file: topics/kafka.md
-    sources: 2
-    last_updated: '2026-07-09'
+    sources: 1
+    last_updated: '2026-07-08'
+  iceberg:
+    file: topics/iceberg.md
+    sources: 1
+    last_updated: '2026-07-08'
+  parquet:
+    file: topics/parquet.md
+    sources: 1
+    last_updated: '2026-07-08'
   dbt:
     file: topics/dbt.md
     sources: 1
     last_updated: '2026-07-08'
 entities:
+  sequential-executor:
+    file: entities/sequential-executor.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  local-executor:
+    file: entities/local-executor.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  celery-executor:
+    file: entities/celery-executor.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  kubernetes-executor:
+    file: entities/kubernetes-executor.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  sensors:
+    file: entities/sensors.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  assets:
+    file: entities/assets.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  pools:
+    file: entities/pools.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  xcom:
+    file: entities/xcom.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
   rdd:
     file: entities/rdd.md
     topics:
@@ -22,8 +74,33 @@ entities:
     topics:
     - spark
     last_updated: '2026-07-08'
-  aqe:
-    file: entities/aqe.md
+  adaptive-query-execution:
+    file: entities/adaptive-query-execution.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  sort-merge-join:
+    file: entities/sort-merge-join.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  shuffle-hash-join:
+    file: entities/shuffle-hash-join.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  photon:
+    file: entities/photon.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  remote-shuffle-service:
+    file: entities/remote-shuffle-service.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  pyspark:
+    file: entities/pyspark.md
     topics:
     - spark
     last_updated: '2026-07-08'
@@ -32,8 +109,8 @@ entities:
     topics:
     - kafka
     last_updated: '2026-07-08'
-  page-cache:
-    file: entities/page-cache.md
+  page-cache-storage:
+    file: entities/page-cache-storage.md
     topics:
     - kafka
     last_updated: '2026-07-08'
@@ -42,13 +119,123 @@ entities:
     topics:
     - kafka
     last_updated: '2026-07-08'
-  consumer-offsets:
-    file: entities/consumer-offsets.md
+  partition:
+    file: entities/partition.md
     topics:
     - kafka
     last_updated: '2026-07-08'
+  consumer-offsets-topic:
+    file: entities/consumer-offsets-topic.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  acks-setting:
+    file: entities/acks-setting.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  kraft:
+    file: entities/kraft.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  tiered-storage-kip-405:
+    file: entities/tiered-storage-kip-405.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  apache-iceberg:
+    file: entities/apache-iceberg.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  delta-lake:
+    file: entities/delta-lake.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  apache-hudi:
+    file: entities/apache-hudi.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  hudi-index:
+    file: entities/hudi-index.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  hudi-timeline:
+    file: entities/hudi-timeline.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  iceberg-metadata-layer:
+    file: entities/iceberg-metadata-layer.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  copy-on-write-vs-merge-on-read:
+    file: entities/copy-on-write-vs-merge-on-read.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  conditional-writes:
+    file: entities/conditional-writes.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  row-group:
+    file: entities/row-group.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  column-chunk:
+    file: entities/column-chunk.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  page:
+    file: entities/page.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  footer-filemetadata:
+    file: entities/footer-filemetadata.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  rle-dictionary:
+    file: entities/rle-dictionary.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  rle-bit-packing-hybrid:
+    file: entities/rle-bit-packing-hybrid.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  delta-encodings:
+    file: entities/delta-encodings.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  definition-repetition-levels:
+    file: entities/definition-repetition-levels.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
   star-schema:
     file: entities/star-schema.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  grain-declaration:
+    file: entities/grain-declaration.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  surrogate-keys:
+    file: entities/surrogate-keys.md
     topics:
     - dbt
     last_updated: '2026-07-08'
@@ -57,34 +244,114 @@ entities:
     topics:
     - dbt
     last_updated: '2026-07-08'
-  surrogate-key:
-    file: entities/surrogate-key.md
+  scd-type-1-and-3:
+    file: entities/scd-type-1-and-3.md
     topics:
     - dbt
     last_updated: '2026-07-08'
-  tiered-storage:
-    file: entities/tiered-storage.md
+  dbt:
+    file: entities/dbt.md
     topics:
-    - kafka
-    last_updated: '2026-07-09'
+    - dbt
+    last_updated: '2026-07-08'
+  medallion-architecture:
+    file: entities/medallion-architecture.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  one-big-table:
+    file: entities/one-big-table.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
 concepts:
-  skew-oom:
-    file: concepts/skew-oom.md
+  idempotency:
+    file: concepts/idempotency.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  backfilling:
+    file: concepts/backfilling.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  orchestration-problem-space:
+    file: concepts/orchestration-problem-space.md
+    topics:
+    - airflow
+    last_updated: '2026-07-08'
+  lazy-evaluation:
+    file: concepts/lazy-evaluation.md
     topics:
     - spark
     last_updated: '2026-07-08'
-  partition-parallelism:
-    file: concepts/partition-parallelism.md
+  data-skew-oom:
+    file: concepts/data-skew-oom.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  shuffle-writes-to-disk:
+    file: concepts/shuffle-writes-to-disk.md
+    topics:
+    - spark
+    last_updated: '2026-07-08'
+  pull-over-push:
+    file: concepts/pull-over-push.md
     topics:
     - kafka
+    last_updated: '2026-07-08'
+  broker-side-validation:
+    file: concepts/broker-side-validation.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  cross-az-cost:
+    file: concepts/cross-az-cost.md
+    topics:
+    - kafka
+    last_updated: '2026-07-08'
+  open-table-format:
+    file: concepts/open-table-format.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  occ-on-object-storage:
+    file: concepts/occ-on-object-storage.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  evaluate-before-adopting:
+    file: concepts/evaluate-before-adopting.md
+    topics:
+    - iceberg
+    last_updated: '2026-07-08'
+  pax-hybrid-layout:
+    file: concepts/pax-hybrid-layout.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  predicate-pushdown:
+    file: concepts/predicate-pushdown.md
+    topics:
+    - parquet
+    last_updated: '2026-07-08'
+  cpu-bound-lakehouse:
+    file: concepts/cpu-bound-lakehouse.md
+    topics:
+    - parquet
     last_updated: '2026-07-08'
   dimensional-modeling:
     file: concepts/dimensional-modeling.md
     topics:
     - dbt
     last_updated: '2026-07-08'
-  etl-vs-elt:
-    file: concepts/etl-vs-elt.md
+  elt-vs-etl:
+    file: concepts/elt-vs-etl.md
+    topics:
+    - dbt
+    last_updated: '2026-07-08'
+  data-modeling-is-not-dbt-modeling:
+    file: concepts/data-modeling-is-not-dbt-modeling.md
     topics:
     - dbt
     last_updated: '2026-07-08'

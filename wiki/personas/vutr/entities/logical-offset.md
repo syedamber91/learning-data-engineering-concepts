@@ -10,4 +10,4 @@ topics:
 - kafka
 ---
 
-A Kafka message has no explicit message ID; it is addressed by its logical offset, avoiding the overhead of maintaining index structures.
+A message stored in Kafka has no explicit message ID; instead each message is addressed by its logical offset. This deliberately avoids the overhead of maintaining index structures that map message IDs to actual message locations.
