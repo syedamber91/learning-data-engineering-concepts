@@ -21,3 +21,8 @@ The three CDC flavors sit on a clean impact-versus-complexity spectrum. [[query-
 
 ## Synthesis
 The source is the one part of the pipeline you don't fully control, so the CDC choice is really a choice about how lightly you can touch it — [[log-based-cdc]] reading the [[write-ahead-log]] off a [[read-replica]] is the gentlest, while [[query-based-cdc]] is simplest but blind to deletes. That blindness feeds directly into [[silent-drift-from-hard-deletion]], the failure mode that stays invisible until a manual reconciliation. Underneath it all, consumption is a [[pull-model-consumption]] even in Kafka, and the operational discipline — [[secrets-manager]] plus least privilege — is what keeps the whole thing safe to run.
+
+## Related topics
+- [[lsm-tree-storage-engines]] — Log-based CDC reads the source database's write-ahead log — the same durability journal an LSM-tree uses to guard its in-memory memtable.
+- [[kafka]] — Even a Kafka consumer is pull-model consumption, and Kafka is the canonical transport onto which CDC change streams are published.
+- [[data-pipeline-design-framework]] — CDC is the source stage of a pipeline — the part you don't control — and its DELETE-blindness feeds the missing-data detection problem the framework warns about.

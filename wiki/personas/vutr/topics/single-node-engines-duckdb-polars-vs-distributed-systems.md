@@ -20,3 +20,8 @@ There's a natural spectrum by dataset size. [[pandas]] handles small data but ru
 
 ## Synthesis
 The story here is that modern hardware has quietly rehabilitated [[single-node-processing]]: with 128GB RAM, fast NVMe, and SIMD, one machine now covers workloads that used to demand a cluster. [[duckdb]] and [[polars]] are the engines built for this moment — interoperating zero-copy through [[apache-arrow]] and filling the medium-data gap where [[pandas]] is too limited and [[spark]] is overkill. My standing rule stands: don't run on a multi-node framework what you can process on a single machine.
+
+## Related topics
+- [[apache-arrow]] — DuckDB and Polars interoperate zero-copy through Arrow, sharing in-memory data without re-serialization to fill the medium-data gap.
+- [[spark]] — Spark is the distributed system these single-node engines are weighed against — reserved for genuinely distributed workloads where Polars and DuckDB are too small.
+- [[olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks]] — DuckDB is the embedded, vectorized, PAX-based OLAP engine profiled among the warehouse-scale engines — SQLite-for-analytics on one node.

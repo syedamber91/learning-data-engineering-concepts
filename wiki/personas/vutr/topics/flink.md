@@ -26,3 +26,10 @@ On philosophy, [[dataflow-model]] and [[lambda-architecture]] answer the complet
 
 ## Synthesis
 The through-line here is that stream processing is a trade against batch's completeness for latency, and every design choice flows from that ([[batch-vs-stream-tradeoff]]). [[apache-flink]] leans fully into streaming — [[chandy-lamport-checkpointing]] without pausing, explicit [[flink-memorysegments]] memory — while [[spark-structured-streaming]] keeps micro-batching and bounded data as first-class, which is why it comfortably handles the majority of near-real-time needs. Correctness ultimately lives at the edges: a [[watermark]] is only an estimate, and true exactly-once depends on [[exactly-once-needs-idempotent-sink]]. Underneath it all, the [[dataflow-model]] argues we should stop assuming completeness at all — a sharper answer than [[lambda-architecture]]'s estimate-then-correct hedge.
+
+## Related topics
+- [[big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter]] — DoorDash's move toward open-source Kafka+Flink (one pod per Flink app, 30M msgs/sec) is a headline case for Flink at production scale.
+- [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — Lambda vs Kappa is the streaming-architecture axis, and Flink's Dataflow-model reframing of completeness is a sharper answer than Lambda's estimate-then-correct hedge.
+- [[data-pipeline-design-framework]] — The framework's dead-letter-queue routing and exactly-once correctness map onto Flink's stream processing, where exactly-once needs an idempotent sink.
+- [[kafka]] — Flink is the low-latency stream processor that consumes Kafka's log, and true exactly-once depends on watermarks plus an idempotent sink at the streaming boundary.
+- [[spark]] — The central axis is Flink vs Spark Structured Streaming — a true streaming engine versus micro-batching — and they share the RocksDB state backend.

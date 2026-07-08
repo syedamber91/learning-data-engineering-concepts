@@ -24,3 +24,9 @@ Related: [[apache-arrow]] · [[arrow-ipc]] · [[arrow-flight]] · [[record-batch
 
 ## Synthesis
 The through-line here is that [[apache-arrow]] fixed a memory problem, not a disk problem: before it, every system paid CPU to serialize and deserialize at each boundary, and [[zero-copy-data-sharing]] made that tax largely disappear. The supporting machinery — immutable [[record-batch]] units for safe concurrency, [[simd-memory-alignment]] for vectorized speed, plus [[arrow-ipc]] and [[arrow-flight]] to move the format across files and networks unchanged — is why so much of the modern stack sits on it. Fairly speaking, as Vu puts it, the data engineering field would look different without Arrow.
+
+## Related topics
+- [[single-node-engines-duckdb-polars-vs-distributed-systems]] — DuckDB and Polars interoperate zero-copy through Arrow, sharing in-memory data without re-serialization to fill the medium-data gap.
+- [[parquet]] — Arrow and Parquet are complementary layers — Arrow specifies how data sits in memory while Parquet specifies how it sits on disk.
+- [[olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks]] — Vectorized OLAP engines like DuckDB, ClickHouse, Snowflake, and BigQuery leverage Arrow's aligned, SIMD-friendly in-memory format.
+- [[spark]] — Arrow-optimized PySpark UDFs use Arrow to claw back the Py4J serialization overhead that plain Python UDFs pay.

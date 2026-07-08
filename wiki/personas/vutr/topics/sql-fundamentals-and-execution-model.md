@@ -25,3 +25,10 @@ And on the algebra side, the [[selection-operator]] (σ) maps to WHERE, not SELE
 
 ## Synthesis
 The through-line here is that SQL's surface syntax hides its real machinery. The [[sql-execution-order]] explains why WHERE (the [[selection-operator]] σ, not SELECT) runs before GROUP BY, and why [[group-by]] collapses rows while [[window-functions]] don't. Underneath, the [[query-lifecycle]] turns your text into a physical plan that chooses among [[nested-loop-join]], [[sort-merge-join]], and [[hash-join]] based on table size, sortedness, and indexes. And the workload matters: [[oltp-vs-olap-access]] shows that the map-like lookup which serves OLTP is the wrong tool for OLAP's scan-and-summarize queries — the honest lesson being, as I learned the hard way, everybody speaks SQL in the data world.
+
+## Related topics
+- [[dbt]] — dbt is Jinja + SQL that pushes transformation inside the warehouse, so its models are ultimately SQL execution that everybody in the data world speaks.
+- [[history-of-data-engineering]] — The relational model is the historical root shared by both notes, the foundation everything since has built on.
+- [[llms-ai-agents-and-vector-databases]] — Text-to-SQL lets an LLM generate queries, though Vu doubts AI can handle the data-modeling judgment behind good SQL.
+- [[storage-models-nsm-dsm-pax-and-column-store]] — OLTP-vs-OLAP access is the shared hinge — a map-like lookup serves OLTP while scan-and-summarize OLAP drives the columnar storage choice.
+- [[spark]] — Spark's Catalyst planner chooses among the same physical joins — nested-loop, sort-merge, hash/broadcast — that the SQL execution model describes.

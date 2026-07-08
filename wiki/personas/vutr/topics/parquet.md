@@ -32,3 +32,9 @@ Related: [[parquet-origin]] · [[column-by-name]] · [[row-group]] · [[column-c
 
 ## Synthesis
 Parquet's real story starts at its [[parquet-origin]] — a Twitter-Cloudera collaboration whose v1.0 shipped in July 2013 — and it was a [[pax-hybrid-layout]] from the outset: it partitions horizontally into [[row-group]]s, then columnar into [[column-chunk]]s, down to the [[page]] where [[rle-dictionary]] and other encodings do the physical work most people never inspect. The [[column-chunk]] min/max statistics in the [[footer-filemetadata]] are what make [[predicate-pushdown]] possible, columns resolve by name via [[column-by-name]] (so reordering is safe schema evolution), and — per [[layout-over-code]] — much of a pipeline's speed comes from getting row group size and encoding right rather than from the code, with poor layout costing ~5x. But the ground has shifted: under the [[cpu-bound-lakehouse]] paradigm, I/O is cheap and the CPU is the constraint, which is why Parquet's compression defaults and its weak random access are now being questioned.
+
+## Related topics
+- [[apache-arrow]] — Arrow and Parquet are complementary layers — Arrow specifies how data sits in memory while Parquet specifies how it sits on disk.
+- [[iceberg]] — Iceberg is a table format layered over Parquet data files, centralizing the min/max statistics that the Parquet footer already carries.
+- [[llms-ai-agents-and-vector-databases]] — Vu argues Parquet is a bad fit for vector embeddings because its poor random access and wide-column row-groups mismatch the high-dimensional random-access workload.
+- [[storage-models-nsm-dsm-pax-and-column-store]] — Parquet is a PAX-hybrid layout — row-groups first, then columnar — the leaky 'columnar' label the storage-models note dissects.

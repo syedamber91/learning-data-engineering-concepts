@@ -25,3 +25,8 @@ Related: [[llm]] · [[rag]] · [[ai-agent]] · [[vector-embedding]] · [[hnsw]] 
 
 ## Synthesis
 The through-line: an [[llm]] is a language probability distribution, not a fact store, so real AI systems bolt facts on from outside — via [[rag]] and via an [[ai-agent]] that loops the model with tools. Underneath all of it, [[vector-embedding]] is the backbone, which is why index and compression structures like [[hnsw]] and [[product-quantization]] matter and why [[parquet]] doesn't fit. And on the consumption side I stay skeptical — [[model-selection]] must track a six-month-shifting frontier, and [[text-to-sql]] plus the [[semantic-layer]] remind us that data-modeling judgment is the part I doubt AI does well.
+
+## Related topics
+- [[parquet]] — Vu argues Parquet is a bad fit for vector embeddings because its poor random access and wide-column row-groups mismatch the high-dimensional random-access workload.
+- [[sql-fundamentals-and-execution-model]] — Text-to-SQL lets an LLM generate queries, though Vu doubts AI can handle the data-modeling judgment behind good SQL.
+- [[data-engineering-career-roadmap-and-learning-philosophy]] — The roadmap defers AI to last yet insists 'using AI is not optional,' and both notes stress that data-modeling decision-making stays human.

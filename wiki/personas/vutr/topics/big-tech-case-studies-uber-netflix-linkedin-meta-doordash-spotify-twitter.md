@@ -28,3 +28,10 @@ Google Cloud is a recurring destination: [[twitter-kappa-migration]] (Dataflow/B
 
 ## Synthesis
 Across these seven case studies, scale forces the same recurring choices: how to reconcile batch and stream ([[lambda-vs-kappa]]), and how to escape [[batch-reprocessing-blindness]] where a system reprocesses whole partitions because it can't tell what changed. The messaging layer is contested — [[linkedin-kafka-beam]] birthed Kafka and [[uber-lambda-kafka]] runs it at trillions of messages/day, yet [[spotify-pubsub-scio]] and [[meta-velox-tectonic]] routed around Kafka entirely. The durable lesson is consolidation and maturity over novelty: [[meta-velox-tectonic]] collapsed twelve engines into two SQL dialects, and [[netflix-iceberg-maestro]] and [[doordash-flink-iceberg]] both bet on Iceberg for the table format that finally makes incremental processing tractable.
+
+## Related topics
+- [[airflow]] — Netflix's Maestro and the other case studies are production orchestration systems solving the same DAG-scheduling problem space Airflow was built for.
+- [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — The case studies are a live proving ground for the Lambda-vs-Kappa debate — LinkedIn/Uber kept Lambda while Twitter migrated to Kappa.
+- [[kafka]] — LinkedIn invented Kafka and Uber runs it at trillions of messages/day, while Spotify and Meta deliberately routed around it — the case studies map Kafka's real adoption boundary.
+- [[iceberg]] — Netflix migrated ~1.5M Hive tables to Iceberg and DoorDash chose Iceberg over Delta for Flink maturity, making Iceberg the table-format winner in these studies.
+- [[flink]] — DoorDash's move toward open-source Kafka+Flink (one pod per Flink app, 30M msgs/sec) is a headline case for Flink at production scale.

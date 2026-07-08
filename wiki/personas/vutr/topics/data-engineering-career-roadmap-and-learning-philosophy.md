@@ -26,3 +26,10 @@ The roadmap is really a single argument playing out across every entity. [[three
 
 ## Synthesis
 Vu's whole roadmap resolves to one move: learn things that would not change. [[recommended-learning-order]] front-loads Data Modeling and defers Cloud and AI precisely because [[fundamentals-that-never-become-obsolete]] outlast any tool, which is why [[learn-only-tools-is-wrong]] is the core warning of the AI era. His [[three-biggest-mistakes]] are just this principle violated in reverse, and [[problem-first-tool-selection]] plus [[why-before-what-learning-strategy]] are the working habits that keep you anchored to [[data-foundation-supports-business]] — because no matter how fancy the pipeline, if the foundation can't support the business, everything you built is garbage.
+
+## Related topics
+- [[dbt]] — The roadmap front-loads data modeling as a fundamental, and Vu's insistence that dbt modeling is not data modeling is the same warning against confusing tools with the durable craft.
+- [[storage-models-nsm-dsm-pax-and-column-store]] — The roadmap cites 'columnar always performs better for analytical reads' as a fundamental that never becomes obsolete — the core claim of the storage-models note.
+- [[data-pipeline-design-framework]] — Problem-first tool selection and clarifying-questions-before-tools are the working habits the pipeline-design framework enacts before reaching for Spark or Kafka.
+- [[history-of-data-engineering]] — The learning philosophy of anchoring on fundamentals that outlast tools is grounded in the field's history of reinvented abstractions.
+- [[llms-ai-agents-and-vector-databases]] — The roadmap defers AI to last yet insists 'using AI is not optional,' and both notes stress that data-modeling decision-making stays human.

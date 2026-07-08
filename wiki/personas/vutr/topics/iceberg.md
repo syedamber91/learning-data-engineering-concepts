@@ -8,7 +8,7 @@ qc: passed
 topic: iceberg
 ---
 
-Related: [[apache-iceberg]] · [[delta-lake]] · [[apache-hudi]] · [[hudi-index]] · [[hudi-timeline]] · [[iceberg-metadata-layer]] · [[copy-on-write-vs-merge-on-read]] · [[conditional-writes]] · [[open-table-format]] · [[occ-on-object-storage]] · [[evaluate-before-adopting]]
+Related: [[apache-iceberg]] · [[delta-lake]] · [[apache-hudi]] · [[hudi-index]] · [[hudi-timeline]] · [[iceberg-metadata-layer]] · [[copy-on-write-vs-merge-on-read]] · [[conditional-writes]] · [[open-table-formats]] · [[occ-on-object-storage]] · [[evaluate-before-adopting]]
 
 ## Comparisons
 The three formats diverge most at the commit path. [[apache-iceberg]] does an atomic pointer swap in the catalog; [[delta-lake]] uses a put-if-absent write to `_delta_log`; [[apache-hudi]] creates a `.completed` file. All three rest on [[conditional-writes]] because object storage gives Durability for free but no multi-object atomic transaction — see [[occ-on-object-storage]].
@@ -26,4 +26,11 @@ The three formats diverge most at the commit path. [[apache-iceberg]] does an at
 - The source asserts you should run an MVP evaluation ([[evaluate-before-adopting]]) against real requirements — but which requirements are the decisive ones (engine fit, update pattern, transaction rate), and how do you weigh them?
 
 ## Synthesis
-Under the hood these are all the same bet: put a separate, database-free metadata layer on object storage ([[open-table-format]]) and get ACID from [[conditional-writes]], since Durability is free but multi-object atomicity is not ([[occ-on-object-storage]]). Where they split is the commit mechanism and update model — [[apache-iceberg]]'s pointer swap and centralizing statistics, [[delta-lake]]'s put-if-absent plus deletion vectors and Z-ordering, and [[apache-hudi]]'s [[hudi-index]] and [[hudi-timeline]] built for incremental processing. The right choice is workload- and engine-specific, which is exactly why [[evaluate-before-adopting]] matters: run an MVP against your real requirements rather than following the hype.
+Under the hood these are all the same bet: put a separate, database-free metadata layer on object storage ([[open-table-formats]]) and get ACID from [[conditional-writes]], since Durability is free but multi-object atomicity is not ([[occ-on-object-storage]]). Where they split is the commit mechanism and update model — [[apache-iceberg]]'s pointer swap and centralizing statistics, [[delta-lake]]'s put-if-absent plus deletion vectors and Z-ordering, and [[apache-hudi]]'s [[hudi-index]] and [[hudi-timeline]] built for incremental processing. The right choice is workload- and engine-specific, which is exactly why [[evaluate-before-adopting]] matters: run an MVP against your real requirements rather than following the hype.
+
+## Related topics
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — Iceberg's open table formats sit directly on object storage, deriving free Durability from S3 while needing conditional writes because S3 gives no multi-object atomicity.
+- [[big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter]] — Netflix migrated ~1.5M Hive tables to Iceberg and DoorDash chose Iceberg over Delta for Flink maturity, making Iceberg the table-format winner in these studies.
+- [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — Open table formats like Iceberg bolt ACID onto cheap object storage, which is exactly the mechanism that makes the lakehouse reconcile lake and warehouse.
+- [[history-of-data-engineering]] — Open table formats like Iceberg are the present-day chapter of the history, reviving a clean-table-abstraction goal from 15+ years earlier.
+- [[parquet]] — Iceberg is a table format layered over Parquet data files, centralizing the min/max statistics that the Parquet footer already carries.

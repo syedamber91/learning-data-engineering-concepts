@@ -8,7 +8,7 @@ qc: passed
 topic: lsm-tree-storage-engines
 ---
 
-Related: [[memtable]] · [[wal]] · [[sstable]] · [[bloom-filter]] · [[compaction]] · [[tombstone]] · [[b-tree]] · [[bigquery-vortex]] · [[sequential-vs-random-io]] · [[write-amplification-tradeoff]]
+Related: [[memtable]] · [[write-ahead-log]] · [[sstable]] · [[bloom-filter]] · [[compaction]] · [[tombstone]] · [[b-tree]] · [[bigquery-vortex]] · [[sequential-vs-random-io]] · [[write-amplification-tradeoff]]
 
 ## Comparisons
 ## LSM-tree vs B-Tree
@@ -30,4 +30,11 @@ Within [[compaction]], Size-Tiered (merge SSTables of similar size) is write-opt
 - How aggressively should [[tombstone]] accumulation drive compaction scheduling before deleted data bloats read paths?
 
 ## Synthesis
-An LSM-tree wins by keeping a sorted [[memtable]] in memory (not an append-only log), guarding it with a [[wal]], and flushing to immutable [[sstable]] files — turning random writes into sequential I/O, which is decisive given [[sequential-vs-random-io]]. Reads stay tolerable because a [[bloom-filter]] skips SSTables that definitely lack a key, while [[compaction]] merges files and resolves [[tombstone]] deletes in the background. Against a [[b-tree]], this is fundamentally a [[write-amplification-tradeoff]]: accept potentially higher read/space cost to win on writes — a pattern now surfacing in OLAP systems like [[bigquery-vortex]].
+An LSM-tree wins by keeping a sorted [[memtable]] in memory (not an append-only log), guarding it with a [[write-ahead-log]], and flushing to immutable [[sstable]] files — turning random writes into sequential I/O, which is decisive given [[sequential-vs-random-io]]. Reads stay tolerable because a [[bloom-filter]] skips SSTables that definitely lack a key, while [[compaction]] merges files and resolves [[tombstone]] deletes in the background. Against a [[b-tree]], this is fundamentally a [[write-amplification-tradeoff]]: accept potentially higher read/space cost to win on writes — a pattern now surfacing in OLAP systems like [[bigquery-vortex]].
+
+## Related topics
+- [[apache-pinot-druid-and-real-time-olap]] — Their immutable-segment storage with background merges mirrors the LSM-tree pattern of turning writes into immutable sorted files resolved by compaction.
+- [[change-data-capture-cdc-and-data-sourcing]] — Log-based CDC reads the source database's write-ahead log — the same durability journal an LSM-tree uses to guard its in-memory memtable.
+- [[kafka]] — Kafka is a log-structured, write-optimized engine — logical offsets over sequential disk I/O — the same append-first bet an LSM-tree makes against random writes.
+- [[olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks]] — ClickHouse's MergeTree and Google Napa lean on LSM-trees, and BigQuery's Vortex WOS-to-ROS transition is the LSM pattern surfacing in OLAP.
+- [[storage-models-nsm-dsm-pax-and-column-store]] — LSM-trees and the NSM/DSM/PAX models are the two axes of physical storage design — write path versus column layout — that OLAP engines combine.

@@ -24,3 +24,10 @@ By contrast, [[amazon-s3]] abandons the single-coordinator model entirely: it's 
 
 ## Synthesis
 The through-line across [[gfs]], [[hdfs]], and [[amazon-s3]] is that they all start from [[component-failure-as-normal]] — failure is assumed, so recovery is designed in. Where GFS and HDFS bind their scalability to a single RAM-resident metadata coordinator (the reason for [[hdfs-namenode-scaling-limit]]), [[amazon-s3]] disaggregates into hundreds of microservices over a flat prefix keyspace, which is how [[object-storage-as-backbone]] became true and HDFS handed over the data-lake crown. The remaining maturity gap — consistency — was closed by [[s3-strong-consistency]] in December 2020, cementing object storage as the default substrate for modern data architecture.
+
+## Related topics
+- [[airflow]] — Airflow's KubernetesExecutor runs tasks as isolated pods on the same distributed-file-system/object-storage substrate, and its scaling trade-offs mirror the coordinator-bound designs of GFS/HDFS.
+- [[iceberg]] — Iceberg's open table formats sit directly on object storage, deriving free Durability from S3 while needing conditional writes because S3 gives no multi-object atomicity.
+- [[history-of-data-engineering]] — Hadoop/HDFS was the big-data detour in the history of the field before object storage displaced it as the data-lake backbone.
+- [[kafka]] — Diskless Kafka designs (AutoMQ, WarpStream) push the write-ahead log onto S3/EBS, reacting to the same cross-AZ economics of distributed storage.
+- [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — Cheap object storage is the substrate that makes the data lake and lakehouse possible in the architecture debate.

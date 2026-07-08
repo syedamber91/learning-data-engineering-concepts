@@ -158,11 +158,6 @@ entities:
     topics:
     - spark
     last_updated: '2026-07-08'
-  structured-streaming:
-    file: entities/structured-streaming.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
   rdd:
     file: entities/rdd.md
     topics:
@@ -193,6 +188,7 @@ entities:
     file: entities/photon.md
     topics:
     - spark
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
     last_updated: '2026-07-08'
   remote-shuffle-service:
     file: entities/remote-shuffle-service.md
@@ -309,16 +305,6 @@ entities:
     topics:
     - storage-models-nsm-dsm-pax-and-column-store
     last_updated: '2026-07-08'
-  pax:
-    file: entities/pax.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
-  column-store:
-    file: entities/column-store.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
   clickhouse:
     file: entities/clickhouse.md
     topics:
@@ -403,11 +389,6 @@ entities:
     - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
     - single-node-engines-duckdb-polars-vs-distributed-systems
     last_updated: '2026-07-08'
-  databricks-photon:
-    file: entities/databricks-photon.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
   google-napa:
     file: entities/google-napa.md
     topics:
@@ -415,11 +396,6 @@ entities:
     last_updated: '2026-07-08'
   memtable:
     file: entities/memtable.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  wal:
-    file: entities/wal.md
     topics:
     - lsm-tree-storage-engines
     last_updated: '2026-07-08'
@@ -487,6 +463,7 @@ entities:
     file: entities/medallion-architecture.md
     topics:
     - dbt
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
     last_updated: '2026-07-08'
   one-big-table:
     file: entities/one-big-table.md
@@ -536,11 +513,6 @@ entities:
     topics:
     - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
     last_updated: '2026-07-08'
-  medallion:
-    file: entities/medallion.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
   three-biggest-mistakes:
     file: entities/three-biggest-mistakes.md
     topics:
@@ -580,6 +552,7 @@ entities:
     file: entities/spark-structured-streaming.md
     topics:
     - flink
+    - spark
     last_updated: '2026-07-08'
   chandy-lamport-checkpointing:
     file: entities/chandy-lamport-checkpointing.md
@@ -610,6 +583,7 @@ entities:
     file: entities/relational-model.md
     topics:
     - sql-fundamentals-and-execution-model
+    - history-of-data-engineering
     last_updated: '2026-07-08'
   selection-operator:
     file: entities/selection-operator.md
@@ -816,6 +790,7 @@ entities:
     file: entities/write-ahead-log.md
     topics:
     - change-data-capture-cdc-and-data-sourcing
+    - lsm-tree-storage-engines
     last_updated: '2026-07-08'
   read-replica:
     file: entities/read-replica.md
@@ -847,11 +822,6 @@ entities:
     topics:
     - apache-arrow
     last_updated: '2026-07-08'
-  relational-model-and-sql:
-    file: entities/relational-model-and-sql.md
-    topics:
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
   hadoop-mapreduce:
     file: entities/hadoop-mapreduce.md
     topics:
@@ -861,6 +831,7 @@ entities:
     file: entities/open-table-formats.md
     topics:
     - history-of-data-engineering
+    - iceberg
     last_updated: '2026-07-08'
   apache-pinot:
     file: entities/apache-pinot.md
@@ -949,11 +920,6 @@ concepts:
     topics:
     - kafka
     last_updated: '2026-07-08'
-  open-table-format:
-    file: concepts/open-table-format.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
   occ-on-object-storage:
     file: concepts/occ-on-object-storage.md
     topics:
@@ -970,15 +936,11 @@ concepts:
     - storage-models-nsm-dsm-pax-and-column-store
     - sql-fundamentals-and-execution-model
     last_updated: '2026-07-08'
-  pax-vs-dsm-distinction:
-    file: concepts/pax-vs-dsm-distinction.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
   pax-hybrid-layout:
     file: concepts/pax-hybrid-layout.md
     topics:
     - parquet
+    - storage-models-nsm-dsm-pax-and-column-store
     last_updated: '2026-07-08'
   predicate-pushdown:
     file: concepts/predicate-pushdown.md
@@ -1029,6 +991,7 @@ concepts:
     file: concepts/elt-vs-etl.md
     topics:
     - dbt
+    - history-of-data-engineering
     last_updated: '2026-07-08'
   data-modeling-is-not-dbt-modeling:
     file: concepts/data-modeling-is-not-dbt-modeling.md
@@ -1152,11 +1115,6 @@ concepts:
     last_updated: '2026-07-08'
   kimball-vs-inmon:
     file: concepts/kimball-vs-inmon.md
-    topics:
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
-  etl-to-elt-shift:
-    file: concepts/etl-to-elt-shift.md
     topics:
     - history-of-data-engineering
     last_updated: '2026-07-08'

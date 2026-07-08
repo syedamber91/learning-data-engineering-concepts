@@ -22,3 +22,9 @@ Against Elasticsearch, [[apache-pinot]] claims 4x less memory, 8x less disk, and
 
 ## Synthesis
 [[apache-pinot]] and [[apache-druid]] are two takes on [[real-time-olap]] that agree on the fundamentals — [[immutable-segment]] columnar storage, memory for high-QPS simple queries, NVMe for heavier ones — but split on architecture. Druid's [[druid-broker]] protects freshness by refusing to cache real-time-node results, while Pinot bets on structural speed via the [[star-tree-index]] and bit-compressed forward indices, accepting a deliberately narrow [[pinot-pql]] as the cost. The recurring theme is that immutability buys consistency and parallelism, and that these engines earn their QPS by trading query-surface generality for latency.
+
+## Related topics
+- [[olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks]] — Pinot and Druid are real-time OLAP engines built on the same columnar, immutable-segment internals as the warehouse-scale OLAP engines.
+- [[storage-models-nsm-dsm-pax-and-column-store]] — Pinot and Druid store data as immutable columnar segments, an application of the DSM/column-store storage model for fast analytical scans.
+- [[kafka]] — Real-time OLAP engines ingest streaming events from Kafka to serve low-latency queries over fresh data.
+- [[lsm-tree-storage-engines]] — Their immutable-segment storage with background merges mirrors the LSM-tree pattern of turning writes into immutable sorted files resolved by compaction.

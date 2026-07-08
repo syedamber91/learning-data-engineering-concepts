@@ -22,3 +22,8 @@ The executor choice is the central trade-off. [[sequential-executor]] is dev/tes
 
 ## Synthesis
 Airflow's design — rooted in its 2014 Airbnb origin ([[airflow-origin]]) — is really about mapping the eight-category [[orchestration-problem-space]] onto concrete levers: executors for resource allocation, [[sensors]] and [[assets]] for data awareness, [[pools]] and priority_weight for concurrency, and [[backfilling]] for historical reprocessing. Dynamic workflows get their own toolkit: [[conditional-operators]] (BranchPythonOperator, ShortCircuitOperator) for runtime routing, [[trigger-rules]] such as all_done for status-relative execution, and [[trigger-dag-run-operator]] for composing across DAGs. The executor spectrum — from [[sequential-executor]] up to [[kubernetes-executor]] — is the axis where isolation and scalability trade against operational cost. But none of it holds up unless every task is idempotent end-to-end ([[idempotency]]), because that's what makes retries, backfills, and reruns safe.
+
+## Related topics
+- [[data-pipeline-design-framework]] — Airflow orchestrates the source-middle-sink pipeline the framework describes, and both hinge on idempotency to make retries, backfills, and reruns safe.
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — Airflow's KubernetesExecutor runs tasks as isolated pods on the same distributed-file-system/object-storage substrate, and its scaling trade-offs mirror the coordinator-bound designs of GFS/HDFS.
+- [[big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter]] — Netflix's Maestro and the other case studies are production orchestration systems solving the same DAG-scheduling problem space Airflow was built for.
