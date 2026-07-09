@@ -305,3 +305,25 @@ def test_cli_learn_dry_run_lists_order_no_llm(tmp_path):
 def test_cli_learn_help_lists_command():
     res = _runner.invoke(app, ["--help"])
     assert res.exit_code == 0 and "learn" in res.output
+
+
+def test_topic_order_reads_related_line(tmp_path):
+    from persona_wiki.learn import topic_order
+    (tmp_path / "topics").mkdir()
+    (tmp_path / "topics" / "kafka.md").write_text(
+        "---\npersona: vutr\nkind: topic\nlast_updated: '2026-07-10'\n---\n\n"
+        "Related: [[broker-log]] · [[producer-batching]] · [[consumer-pull]]\n\n## Synthesis\nx",
+        encoding="utf-8")
+    assert topic_order(tmp_path, "kafka") == ["broker-log", "producer-batching", "consumer-pull"]
+
+
+def test_topic_order_missing_note_is_empty(tmp_path):
+    from persona_wiki.learn import topic_order
+    assert topic_order(tmp_path, "kafka") == []
+
+
+def test_concept_order_with_preferred():
+    from persona_wiki.learn import concept_order
+    avail = {"consumer-pull": "a", "broker-log": "b", "zz-extra": "c"}
+    assert concept_order(avail, ["broker-log", "consumer-pull", "not-there"]) == \
+        ["broker-log", "consumer-pull", "zz-extra"]

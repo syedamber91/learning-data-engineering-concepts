@@ -7,7 +7,7 @@ import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .index import atomic_dir, load_index, register_atomic, save_index
 from .llm import LLMFn
@@ -42,10 +42,25 @@ def load_topic_concepts(vutr_root: Path, topic: str) -> Dict[str, str]:
     return out
 
 
-def concept_order(available: Dict[str, str]) -> List[str]:
-    """SPARK_ORDER restricted to available slugs, then any extra slugs appended."""
-    ordered = [s for s in SPARK_ORDER if s in available]
-    extra = sorted(s for s in available if s not in SPARK_ORDER)
+def topic_order(root: Path, topic: str) -> List[str]:
+    """Concept slugs in the order the topic note's Related: line lists them."""
+    from .qc import wikilinks
+    p = root / "topics" / f"{topic}.md"
+    if not p.exists():
+        return []
+    for line in p.read_text(encoding="utf-8").splitlines():
+        if line.startswith("Related:"):
+            return wikilinks(line)
+    return []
+
+
+def concept_order(available: Dict[str, str],
+                  preferred: Optional[List[str]] = None) -> List[str]:
+    """Preferred order restricted to available slugs, extras appended sorted.
+    Defaults to SPARK_ORDER (the original curated Spark curriculum)."""
+    pref = preferred if preferred is not None else SPARK_ORDER
+    ordered = [s for s in pref if s in available]
+    extra = sorted(s for s in available if s not in ordered)
     return ordered + extra
 
 
@@ -274,7 +289,8 @@ def learn(learn_root: Path, vutr_root: Path, topic: str, llm: LLMFn, stamp: str,
           max_retries: int = 2) -> dict:
     learn_root.mkdir(parents=True, exist_ok=True)
     concepts = load_topic_concepts(vutr_root, topic)
-    order = concept_order(concepts)
+    preferred = topic_order(vutr_root, topic)
+    order = concept_order(concepts, preferred or None)
     idx_of = {slug: i + 1 for i, slug in enumerate(order)}
     levels = _prior_levels(learn_root)
     index = load_index(learn_root)
