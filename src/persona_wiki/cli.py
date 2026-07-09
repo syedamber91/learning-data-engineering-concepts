@@ -11,6 +11,7 @@ import typer
 from .bootstrap import bootstrap as run_bootstrap
 from .bootstrap import parse_persona_sections
 from .config import persona_root, resolve_vault_dir
+from .learn import concept_order, learn as run_learn, load_topic_concepts
 from .llm import default_llm
 from .pipeline import Source, update as run_update
 from .query import query as run_query
@@ -65,3 +66,28 @@ def query(
 ) -> None:
     """Route a question to the relevant persona-wiki notes."""
     typer.echo(run_query(_root(vault_dir, persona), question))
+
+
+@app.command()
+def learn(
+    learner: str = typer.Option("alex", "--learner"),
+    source: str = typer.Option("vutr", "--from"),
+    topic: str = typer.Option("spark", "--topic"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+    max_retries: int = typer.Option(2, "--max-retries"),
+    dry_run: bool = typer.Option(False, "--dry-run"),
+) -> None:
+    """Have a learner persona learn a topic from a source persona's wiki."""
+    vault = resolve_vault_dir(vault_dir)
+    vutr_root = persona_root(vault, source)
+    learn_root = persona_root(vault, learner) / topic
+    if dry_run:
+        order = concept_order(load_topic_concepts(vutr_root, topic))
+        typer.echo(f"{learner} would learn {len(order)} '{topic}' concepts from {source}:")
+        for i, slug in enumerate(order, 1):
+            typer.echo(f"  {i}. {slug}")
+        return
+    result = run_learn(learn_root, vutr_root, topic, default_llm, date.today().isoformat(),
+                       max_retries=max_retries)
+    typer.echo(f"{learner} mastered {result['mastered']}/{result['total']} "
+               f"({result['pct']}%); failed={result['failed']}")

@@ -22,6 +22,9 @@ class NoteFrontmatter(BaseModel):
     topic: Optional[str] = None    # topic notes
     slug: Optional[str] = None     # atomic notes
     topics: List[str] = Field(default_factory=list)  # atomic back-refs
+    learner: Optional[str] = None       # learner-persona notes (Alex)
+    source_note: Optional[str] = None   # the vutr slug this understanding came from
+    mastery: Optional[str] = None       # "learning" | "familiar" | "mastered"
 
 
 class EntityOut(BaseModel):
