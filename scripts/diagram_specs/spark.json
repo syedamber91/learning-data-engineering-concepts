@@ -1,6 +1,6 @@
 {
  "spark-origin": {
-  "aha": "MapReduce keeps saving to disk every loop \u2014 Spark just keeps the data in memory and reuses it!",
+  "aha": "MapReduce keeps saving to disk every loop — Spark just keeps the data in memory and reuses it!",
   "diagram": {
    "w": 560,
    "h": 210,
@@ -82,7 +82,29 @@
      "t": "reuse (fast)"
     }
    ]
-  }
+  },
+  "hi": [
+   "disk",
+   "in memory",
+   "iterative"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "disk = slow,\nmemory = fast",
+    "sketch": "disk"
+   },
+   {
+    "near": "teach",
+    "t": "reuse, don't\nre-read!",
+    "sketch": "loop"
+   },
+   {
+    "near": "answer",
+    "t": "wiki gap",
+    "sketch": "arrow-down"
+   }
+  ]
  },
  "rdd": {
   "aha": "Transformations just build a plan (the DAG). The ACTION is what actually presses 'go'.",
@@ -144,10 +166,33 @@
      "t": "Spark runs it"
     }
    ]
-  }
+  },
+  "hi": [
+   "five things",
+   "immutable",
+   "lazy",
+   "action"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "5 properties",
+    "sketch": "star"
+   },
+   {
+    "near": "teach",
+    "t": "nothing runs\nyet!",
+    "sketch": "bang"
+   },
+   {
+    "near": "alex",
+    "t": "lineage =\nrebuild it",
+    "sketch": "loop"
+   }
+  ]
  },
  "lazy-evaluation": {
-  "aha": "Being lazy is a feature \u2014 you can only optimize the whole plan if you wait until you've seen all of it.",
+  "aha": "Being lazy is a feature — you can only optimize the whole plan if you wait until you've seen all of it.",
   "diagram": {
    "w": 822,
    "h": 150,
@@ -220,10 +265,27 @@
      "t": "whole plan"
     }
    ]
-  }
+  },
+  "hi": [
+   "lazy",
+   "DAG",
+   "optimize"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "wait → see the\nwhole plan",
+    "sketch": "loop"
+   },
+   {
+    "near": "teach",
+    "t": "then optimize",
+    "sketch": "arrow"
+   }
+  ]
  },
  "catalyst-optimizer": {
-  "aha": "Correct & typed \u2192 move less data \u2192 pick the cheapest algorithm \u2192 compile to fast code. Four gates, in order.",
+  "aha": "Correct & typed → move less data → pick the cheapest algorithm → compile to fast code. Four gates, in order.",
   "diagram": {
    "w": 652,
    "h": 150,
@@ -261,7 +323,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "CodeGen\n\u2192 bytecode",
+     "t": "CodeGen\n→ bytecode",
      "c": "green"
     }
    ],
@@ -269,23 +331,40 @@
     {
      "a": "n0",
      "b": "n1",
-     "t": "\u2192"
+     "t": "→"
     },
     {
      "a": "n1",
      "b": "n2",
-     "t": "\u2192"
+     "t": "→"
     },
     {
      "a": "n2",
      "b": "n3",
-     "t": "\u2192"
+     "t": "→"
     }
    ]
-  }
+  },
+  "hi": [
+   "four phases",
+   "cost model",
+   "bytecode"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "4 gates,\nin order",
+    "sketch": "stack"
+   },
+   {
+    "near": "teach",
+    "t": "less data\n= faster",
+    "sketch": "bang"
+   }
+  ]
  },
  "adaptive-query-execution": {
-  "aha": "The shuffle 'pause' is a checkpoint \u2014 Spark peeks at the real data, then fixes the plan for what's left.",
+  "aha": "The shuffle 'pause' is a checkpoint — Spark peeks at the real data, then fixes the plan for what's left.",
   "diagram": {
    "w": 822,
    "h": 170,
@@ -305,7 +384,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "Run stage \u2192\nshuffle",
+     "t": "Run stage →\nshuffle",
      "c": "amber"
     },
     {
@@ -358,10 +437,27 @@
      "t": ""
     }
    ]
-  }
+  },
+  "hi": [
+   "runtime",
+   "query-stage boundary",
+   "real"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "the pause\n= a peek",
+    "sketch": "loop"
+   },
+   {
+    "near": "teach",
+    "t": "fix what's\nleft",
+    "sketch": "arrow"
+   }
+  ]
  },
  "executor-memory-model": {
-  "aha": "Execution can steal from cache, not the other way round \u2014 because cache is rebuildable and live work isn't.",
+  "aha": "Execution can steal from cache, not the other way round — because cache is rebuildable and live work isn't.",
   "diagram": {
    "w": 520,
    "h": 210,
@@ -416,10 +512,32 @@
     {
      "a": "exe",
      "b": "sto",
-     "t": "reclaims \u2192"
+     "t": "reclaims →"
     }
    ]
-  }
+  },
+  "hi": [
+   "300MB",
+   "0.6",
+   "reclaim"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "exec steals\nfrom cache",
+    "sketch": "arrow"
+   },
+   {
+    "near": "teach",
+    "t": "cache =\nrebuildable",
+    "sketch": "loop"
+   },
+   {
+    "near": "answer",
+    "t": "won't fix\nskew!",
+    "sketch": "bang"
+   }
+  ]
  },
  "shuffle-writes-to-disk": {
   "aha": "'In-memory Spark' still spills the shuffle to disk. reduceByKey shrinks the data before it crosses the wire.",
@@ -442,7 +560,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "SHUFFLE\n\u2192 DISK",
+     "t": "SHUFFLE\n→ DISK",
      "c": "amber"
     },
     {
@@ -467,10 +585,32 @@
      "t": "read"
     }
    ]
-  }
+  },
+  "hi": [
+   "DISK",
+   "200",
+   "reduceByKey"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "'in-memory'\nmyth!",
+    "sketch": "bang"
+   },
+   {
+    "near": "teach",
+    "t": "spills to disk",
+    "sketch": "disk"
+   },
+   {
+    "near": "teach",
+    "t": "shrink before\nthe shuffle",
+    "sketch": "arrow"
+   }
+  ]
  },
  "data-skew-oom": {
-  "aha": "More memory \u2260 fewer bags. One person still has to lift the one 300-lb suitcase. Repack it into many bags.",
+  "aha": "More memory ≠ fewer bags. One person still has to lift the one 300-lb suitcase. Repack it into many bags.",
   "diagram": {
    "w": 540,
    "h": 200,
@@ -481,7 +621,7 @@
      "y": 20,
      "w": 130,
      "h": 50,
-     "t": "Hot key \u2192|skewed partition",
+     "t": "Hot key →|skewed partition",
      "c": "amber"
     },
     {
@@ -535,7 +675,7 @@
     {
      "a": "mem",
      "b": "one",
-     "t": "still 1 lump \u2717"
+     "t": "still 1 lump ✗"
     },
     {
      "a": "oom",
@@ -543,10 +683,32 @@
      "t": "real fix"
     }
    ]
-  }
+  },
+  "hi": [
+   "one indivisible lump",
+   "OutOfMemoryError",
+   "break the partition"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "one 300-lb\nbag",
+    "sketch": "suitcase"
+   },
+   {
+    "near": "teach",
+    "t": "+memory ≠\nsplit!",
+    "sketch": "bang"
+   },
+   {
+    "near": "alex",
+    "t": "repack into\nmany bags",
+    "sketch": "stack"
+   }
+  ]
  },
  "sort-merge-join": {
-  "aha": "SMJ can spill to disk, so it never dies \u2014 that's why it's the default over the OOM-prone hash join.",
+  "aha": "SMJ can spill to disk, so it never dies — that's why it's the default over the OOM-prone hash join.",
   "table": [
    [
     "strategy",
@@ -558,24 +720,41 @@
     "Broadcast Hash",
     "ship small table (&lt;10MB) to all",
     "no shuffle",
-    "1 \u2014 fastest"
+    "1 — fastest"
    ],
    [
     "Sort-Merge",
     "sort both, merge-walk",
-    "spills to disk \u2192 safe",
-    "2 \u2014 default"
+    "spills to disk → safe",
+    "2 — default"
    ],
    [
     "Shuffle-Hash",
     "in-memory hash table",
     "OOM (can't spill)",
-    "3 \u2014 fallback"
+    "3 — fallback"
    ]
+  ],
+  "hi": [
+   "spill to disk",
+   "safe default",
+   "BROADCAST"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "can spill =\nnever dies",
+    "sketch": "disk"
+   },
+   {
+    "near": "teach",
+    "t": "safe default",
+    "sketch": "star"
+   }
   ]
  },
  "shuffle-hash-join": {
-  "aha": "A hash table has to fit whole in RAM \u2014 no half-building. One fat partition = boom.",
+  "aha": "A hash table has to fit whole in RAM — no half-building. One fat partition = boom.",
   "diagram": {
    "w": 652,
    "h": 150,
@@ -613,7 +792,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "skew \u2192\nOOM",
+     "t": "skew →\nOOM",
      "c": "amber"
     }
    ],
@@ -634,7 +813,24 @@
      "t": "if too big"
     }
    ]
-  }
+  },
+  "hi": [
+   "hash table",
+   "entirely in memory",
+   "OutOfMemoryError"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "must fit\nwhole in RAM",
+    "sketch": "bang"
+   },
+   {
+    "near": "teach",
+    "t": "skew → boom",
+    "sketch": "bolt"
+   }
+  ]
  },
  "data-locality": {
   "aha": "Send the code to the data, not the data to the code. Every rung down = a slower hop.",
@@ -648,7 +844,7 @@
      "y": 8,
      "w": 170,
      "h": 34,
-     "t": "PROCESS_LOCAL \u2014 same JVM",
+     "t": "PROCESS_LOCAL — same JVM",
      "c": "green"
     },
     {
@@ -657,7 +853,7 @@
      "y": 54,
      "w": 170,
      "h": 34,
-     "t": "NODE_LOCAL \u2014 same machine",
+     "t": "NODE_LOCAL — same machine",
      "c": "teal"
     },
     {
@@ -675,7 +871,7 @@
      "y": 146,
      "w": 170,
      "h": 34,
-     "t": "RACK_LOCAL \u2014 same rack",
+     "t": "RACK_LOCAL — same rack",
      "c": "amber"
     },
     {
@@ -684,7 +880,7 @@
      "y": 192,
      "w": 170,
      "h": 34,
-     "t": "ANY \u2014 anywhere",
+     "t": "ANY — anywhere",
      "c": "gray"
     }
    ],
@@ -710,10 +906,27 @@
      "t": "slowest"
     }
    ]
-  }
+  },
+  "hi": [
+   "moving code is cheap",
+   "PROCESS_LOCAL",
+   "straggler"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "send code\nto the data",
+    "sketch": "arrow"
+   },
+   {
+    "near": "teach",
+    "t": "each rung\n= slower",
+    "sketch": "stack"
+   }
+  ]
  },
  "jvm-object-overhead": {
-  "aha": "4 bytes of data \u2192 48 bytes of 'box'. Times a billion rows. THAT's why they ditched JVM objects for columns.",
+  "aha": "4 bytes of data → 48 bytes of 'box'. Times a billion rows. THAT's why they ditched JVM objects for columns.",
   "diagram": {
    "w": 652,
    "h": 150,
@@ -742,7 +955,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "\u00d7 billions\nof rows",
+     "t": "× billions\nof rows",
      "c": "amber"
     },
     {
@@ -751,7 +964,7 @@
      "y": 54,
      "w": 118,
      "h": 52,
-     "t": "\u2192 columnar\noff-heap",
+     "t": "→ columnar\noff-heap",
      "c": "green"
     }
    ],
@@ -772,7 +985,29 @@
      "t": "the tax"
     }
    ]
-  }
+  },
+  "hi": [
+   "48",
+   "per object",
+   "columnar"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "4b → 48b!",
+    "sketch": "bang"
+   },
+   {
+    "near": "teach",
+    "t": "× billions\nof rows",
+    "sketch": "stack"
+   },
+   {
+    "near": "teach",
+    "t": "→ go\ncolumnar",
+    "sketch": "arrow"
+   }
+  ]
  },
  "pyspark": {
   "aha": "Row-by-row Python UDFs pay a toll at every crossing. Arrow sends a whole busload at once.",
@@ -820,10 +1055,27 @@
      "t": "Arrow batch = fast"
     }
    ]
-  }
+  },
+  "hi": [
+   "Py4J",
+   "serialize",
+   "Arrow"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "a toll every\ncrossing",
+    "sketch": "bang"
+   },
+   {
+    "near": "teach",
+    "t": "Arrow = whole\nbusload",
+    "sketch": "arrow"
+   }
+  ]
  },
  "spark-structured-streaming": {
-  "aha": "Treat the stream as a series of tiny 'bounded' tables \u2192 the batch engine (and all its optimizations) just works.",
+  "aha": "Treat the stream as a series of tiny 'bounded' tables → the batch engine (and all its optimizations) just works.",
   "diagram": {
    "w": 652,
    "h": 150,
@@ -874,7 +1126,7 @@
     {
      "a": "n1",
      "b": "n2",
-     "t": "\u2192"
+     "t": "→"
     },
     {
      "a": "n2",
@@ -882,7 +1134,24 @@
      "t": "reuse"
     }
    ]
-  }
+  },
+  "hi": [
+   "bounded",
+   "same",
+   "Catalyst"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "stream = tiny\ntables",
+    "sketch": "stack"
+   },
+   {
+    "near": "teach",
+    "t": "reuse the\nbatch engine",
+    "sketch": "loop"
+   }
+  ]
  },
  "photon": {
   "aha": "They picked 'vectorized & interpreted' over codegen because it was faster to BUILD and debug, not just to run.",
@@ -900,13 +1169,30 @@
     "batch over packed columns (not row-oriented)"
    ],
    [
-    "JNI bridge C++\u2194JVM",
+    "JNI bridge C++↔JVM",
     "measured overhead only 0.06%"
    ]
+  ],
+  "hi": [
+   "C++",
+   "columnar",
+   "0.06%"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "faster to build\n& debug",
+    "sketch": "bang"
+   },
+   {
+    "near": "teach",
+    "t": "JNI just\n0.06%",
+    "sketch": "star"
+   }
   ]
  },
  "remote-shuffle-service": {
-  "aha": "Stop making every reducer chase every mapper. Funnel each partition to one server \u2014 calmer disks, fewer failures.",
+  "aha": "Stop making every reducer chase every mapper. Funnel each partition to one server — calmer disks, fewer failures.",
   "diagram": {
    "w": 520,
    "h": 210,
@@ -979,6 +1265,28 @@
      "t": "one fetch"
     }
    ]
-  }
+  },
+  "hi": [
+   "ONE",
+   "3 months",
+   "95%"
+  ],
+  "margins": [
+   {
+    "near": "teach",
+    "t": "many→many\nbecomes\nmany→one",
+    "sketch": "arrow"
+   },
+   {
+    "near": "teach",
+    "t": "calmer\ndisks",
+    "sketch": "disk"
+   },
+   {
+    "near": "answer",
+    "t": "failover?\ngap",
+    "sketch": "arrow-down"
+   }
+  ]
  }
 }

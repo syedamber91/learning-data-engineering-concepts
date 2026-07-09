@@ -49,7 +49,16 @@ def md_inline(s: str) -> str:
     return s
 
 
-def render_body(body: str) -> str:
+def highlight(htmlstr: str, terms) -> str:
+    """Wrap the first occurrence of each key term in a scribble-underline mark
+    (only outside existing tags)."""
+    for term in terms or []:
+        htmlstr = re.sub(r"(?i)(" + re.escape(term) + r")(?![^<]*>)",
+                         r'<span class="mark">\1</span>', htmlstr, count=1)
+    return htmlstr
+
+
+def render_body(body: str, hi=None) -> str:
     out = []
     for para in re.split(r"\n\s*\n", body.strip()):
         para = para.strip()
@@ -60,7 +69,7 @@ def render_body(body: str) -> str:
             out.append("<ul>" + "".join(f"<li>{md_inline(l.lstrip()[2:])}</li>" for l in lines) + "</ul>")
         else:
             out.append(f"<p>{md_inline(para)}</p>")
-    return "\n".join(out)
+    return highlight("\n".join(out), hi)
 
 
 BEATS = [("vutr teaches:", "teach", "vutr", "teaches"),
@@ -109,13 +118,24 @@ def build(transcript: str, specs: dict, learner: str, topic: str) -> str:
                f'<figcaption>{cap}</figcaption></figure>') if visual else ""
         aha = (f'<p class="aha"><span class="ahatag">the moment it clicks</span>{esc(d["aha"])}</p>'
                if d.get("aha") else "")
+        hi = d.get("hi", [])
+        margins_for = {}
+        for mn in d.get("margins", []):
+            margins_for.setdefault(mn.get("near", "teach"), []).append(mn)
         blocks = []
         for marker, content in split_beats(body):
             _, cls, who, verb = next(b for b in BEATS if b[0] == marker)
             who_html = f'<span class="who {cls}">{who}</span> ' if who else ""
-            blocks.append(f'<div class="beat {cls}"><div class="beatlabel">{who_html}'
-                          f'<span class="verb">{verb}</span></div>'
-                          f'<div class="beattext">{render_body(content)}</div></div>')
+            mcol = ""
+            for mn in margins_for.get(cls, []):
+                sk = (f'<span class="doodle" data-sketch="{esc(mn.get("sketch",""))}"></span>'
+                      if mn.get("sketch") else "")
+                mcol += f'<div class="mnote">{sk}<span class="mtext">{esc(mn["t"])}</span></div>'
+            blocks.append(
+                f'<div class="beat {cls}"><div class="beatmain">'
+                f'<div class="beatlabel">{who_html}<span class="verb">{verb}</span></div>'
+                f'<div class="beattext">{render_body(content, hi)}</div></div>'
+                f'<aside class="beatmargin">{mcol}</aside></div>')
         cards.append(f'<section class="card" id="c{num}">'
                      f'<header class="cardhead"><span class="cnum" data-n="{num}"></span>'
                      f'<h2>{esc(slug)}</h2><span class="badge">{esc(level)}</span></header>'
@@ -162,17 +182,27 @@ th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;
 td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;}tr td:first-child{font-weight:600;color:var(--indigo);}
 .aha{font-family:var(--hand);font-size:1.55rem;line-height:1.3;color:var(--teal);margin:0 0 20px;background:linear-gradient(transparent 60%,#FBE9C9 60%);display:inline;padding:0 3px;}
 .ahatag{display:block;font-family:var(--sans);font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:var(--amber);margin-bottom:1px;font-weight:600;-webkit-text-fill-color:var(--amber);}
-.beat{border-left:3px solid var(--line);padding:2px 0 2px 18px;margin:0 0 20px;}
+.beat{display:grid;grid-template-columns:1fr 176px;gap:20px;border-left:3px solid var(--line);padding:2px 0 2px 18px;margin:0 0 22px;align-items:start;}
 .beat.teach{border-color:var(--teal);}.beat.answer{border-color:var(--teal);border-left-style:dashed;}
 .beat.alex{border-color:var(--amber);}
 .beat.verdict{border-color:var(--green);background:#EBF3EC;border-left-style:solid;padding:12px 16px;border-radius:0 8px 8px 0;}
 .beatlabel{font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:.1em;margin:0 0 5px;color:var(--muted);}
 .who{font-weight:600;}.who.teach,.who.answer{color:var(--teal);}.who.alex{color:var(--amber);}.verb{color:var(--muted);}
 .beattext p{margin:0 0 12px;}.beattext p:last-child{margin-bottom:0;}.beat.verdict .beattext{font-size:.95rem;}
+.mark{position:relative;font-weight:600;white-space:nowrap;}
+.beatmargin{padding-top:22px;}
+.mnote{display:flex;gap:7px;align-items:flex-start;margin:0 0 16px;font-family:var(--hand);
+ font-size:1.28rem;line-height:1.14;color:var(--amber);}
+.mnote .doodle{flex:none;width:40px;height:34px;}
+.mnote .doodle svg{display:block;}
+.mnote .mtext{padding-top:3px;}
 .wl{font-family:var(--mono);font-size:.8em;background:#EEF0F5;color:var(--indigo);padding:1px 6px;border-radius:5px;white-space:nowrap;}
 code{font-family:var(--mono);font-size:.85em;background:#F0EEE8;padding:1px 5px;border-radius:4px;}
 ul{margin:0 0 12px;padding-left:22px;}li{margin:0 0 4px;}
 .footer{padding:34px 0 0;color:var(--muted);font-family:var(--sans);font-size:12.5px;border-top:2px dashed var(--line);margin-top:16px;}
+@media(max-width:780px){.beat{grid-template-columns:1fr;gap:8px;}
+ .beatmargin{padding-top:0;display:flex;flex-wrap:wrap;gap:14px;border-top:1px dashed var(--line);margin-top:4px;padding-top:10px;}
+ .mnote{margin:0;font-size:1.15rem;}}
 @media(max-width:640px){h1{font-size:1.9rem;}.wrap{font-size:16.5px;}}
 </style>
 """
@@ -235,7 +265,24 @@ _JS = r"""
     var w=el.offsetWidth||60;var svg=document.createElementNS(NS,"svg");svg.setAttribute("width",w);svg.setAttribute("height","8");
     svg.setAttribute("viewBox","0 0 "+w+" 8");svg.style.position="absolute";svg.style.left="0";svg.style.bottom="-5px";el.appendChild(svg);
     var rc=rough.svg(svg);svg.appendChild(rc.line(2,4,w-2,5,{stroke:"#B26A15",roughness:2.3,strokeWidth:2,bowing:3}));});}
-  function go(){document.querySelectorAll(".diagram").forEach(render);circles();underlines();}
+  function doodles(){document.querySelectorAll(".doodle").forEach(function(el){
+    var name=el.getAttribute("data-sketch"),svg=document.createElementNS(NS,"svg");
+    svg.setAttribute("viewBox","0 0 44 36");svg.setAttribute("width","40");svg.setAttribute("height","34");el.appendChild(svg);
+    var rc=rough.svg(svg),A="#B26A15",I="#3B3E86",o={stroke:A,roughness:1.7,strokeWidth:1.8};
+    function head(x,y,a){svg.appendChild(rc.line(x,y,x-8*Math.cos(a-0.4),y-8*Math.sin(a-0.4),{stroke:A,roughness:.8,strokeWidth:1.8}));
+      svg.appendChild(rc.line(x,y,x-8*Math.cos(a+0.4),y-8*Math.sin(a+0.4),{stroke:A,roughness:.8,strokeWidth:1.8}));}
+    if(name==="bang"){svg.appendChild(rc.line(22,4,22,23,{stroke:A,roughness:1.6,strokeWidth:3}));svg.appendChild(rc.circle(22,31,4,{fill:A,fillStyle:"solid",stroke:A}));}
+    else if(name==="arrow-down"){svg.appendChild(rc.line(22,4,22,28,o));head(22,30,Math.PI/2);}
+    else if(name==="arrow"){svg.appendChild(rc.line(4,18,38,18,o));head(40,18,0);}
+    else if(name==="loop"){svg.appendChild(rc.ellipse(22,18,34,26,{stroke:A,roughness:1.9,strokeWidth:1.8}));head(35,10,-1.1);}
+    else if(name==="star"){var p=[],cx=22,cy=18;for(var i=0;i<11;i++){var r=i%2?6:15,a=-Math.PI/2+i*Math.PI/5;p.push([cx+r*Math.cos(a),cy+r*Math.sin(a)]);}svg.appendChild(rc.linearPath(p,{stroke:A,roughness:1.4,strokeWidth:1.6}));}
+    else if(name==="disk"){svg.appendChild(rc.ellipse(22,10,30,10,{stroke:I,roughness:1.4,strokeWidth:1.6}));svg.appendChild(rc.line(7,10,7,26,{stroke:I,roughness:1,strokeWidth:1.6}));svg.appendChild(rc.line(37,10,37,26,{stroke:I,roughness:1,strokeWidth:1.6}));svg.appendChild(rc.ellipse(22,26,30,10,{stroke:I,roughness:1.4,strokeWidth:1.6}));}
+    else if(name==="stack"){[0,7,14].forEach(function(dy){svg.appendChild(rc.rectangle(8,6+dy,28,8,{stroke:I,roughness:1.4,strokeWidth:1.5}));});}
+    else if(name==="suitcase"){svg.appendChild(rc.rectangle(7,13,30,20,{stroke:A,roughness:1.4,strokeWidth:1.8}));svg.appendChild(rc.line(17,13,17,7,o));svg.appendChild(rc.line(17,7,27,7,o));svg.appendChild(rc.line(27,7,27,13,o));}
+    else if(name==="bolt"){svg.appendChild(rc.linearPath([[26,3],[14,20],[23,20],[16,33],[34,14],[24,14]],{stroke:A,roughness:1.2,strokeWidth:1.8}));}
+    else{svg.appendChild(rc.circle(22,18,10,{stroke:A,roughness:1.7,strokeWidth:1.8}));}
+  });}
+  function go(){document.querySelectorAll(".diagram").forEach(render);circles();doodles();underlines();}
   if(document.readyState!=="loading")go();else document.addEventListener("DOMContentLoaded",go);
 })();
 </script>
