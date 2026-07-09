@@ -190,3 +190,30 @@ repo under `docs/superpowers/`.
    Dispatch ONE Agent per concept that role-plays the whole exchange (closed-book on that
    concept's source) and writes a `ConceptResult` JSON; a thin driver then feeds those through
    the real `learn.py` capture functions. 16 agents, not 64 calls.
+
+### Rendering a learner topic as an artifact — the STANDARD (keep it)
+
+The user confirmed the illustrated format ("perfectly rendered — keep future renderings like
+this only"). Reusable renderer: `scripts/render_learning_artifact.py`
+(`python scripts/render_learning_artifact.py --learner alex --topic <topic>` → self-contained
+HTML → publish with the Artifact tool). Required shape, do not regress:
+
+- **Full transcript dialogue** for every concept (teach / reflect / answer / verdict) —
+  never distill it to bullets.
+- **A hand-drawn diagram or table per concept**, opening the concept as a figure. Diagrams draw
+  in-browser via **rough.js** (`scripts/assets/roughjs.js`, inlined) — boxes with arrows +
+  arrowheads and handwritten edge labels; ~50/50 visual-to-text.
+- **Handwriting** via **Caveat** (`scripts/assets/caveat.b64`, inlined woff2 data URI) for the
+  "moment it clicks" pull-quote and accents. Notebook paper background, role-coded beats
+  (vutr=teal, Alex=amber, verdict=green), circled hand-drawn concept numbers, concept index.
+- **Self-contained** — rough.js + font inlined; the Artifact CSP blocks all external hosts, and
+  **Mermaid cannot render there** (no CDN, no mmdc), so the rough.js engine is the way.
+
+Per-topic diagrams are hand-authored one-per-concept in
+`scripts/diagram_specs/<topic>.json` (`{ "<slug>": {"aha","diagram"|"table"} }`,
+node colors teal/amber/green/indigo/gray, split labels with `|` or `\n`). `spark.json` is the
+worked example.
+
+**rough.js SVG gotcha (this was the "diagrams have no arrows" bug):** in SVG mode
+`rc.rectangle/line/circle` *return* elements — you MUST `svg.appendChild(...)` them. Appending
+only the text labels renders labels floating with no shapes.

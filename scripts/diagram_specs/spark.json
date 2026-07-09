@@ -1,0 +1,984 @@
+{
+ "spark-origin": {
+  "aha": "MapReduce keeps saving to disk every loop \u2014 Spark just keeps the data in memory and reuses it!",
+  "diagram": {
+   "w": 560,
+   "h": 210,
+   "nodes": [
+    {
+     "id": "m1",
+     "x": 12,
+     "y": 16,
+     "w": 110,
+     "h": 46,
+     "t": "MapReduce|step 1",
+     "c": "gray"
+    },
+    {
+     "id": "md",
+     "x": 170,
+     "y": 16,
+     "w": 90,
+     "h": 46,
+     "t": "DISK",
+     "c": "amber"
+    },
+    {
+     "id": "m2",
+     "x": 300,
+     "y": 16,
+     "w": 110,
+     "h": 46,
+     "t": "step 2|(re-read)",
+     "c": "gray"
+    },
+    {
+     "id": "s1",
+     "x": 12,
+     "y": 128,
+     "w": 110,
+     "h": 46,
+     "t": "Spark|step 1",
+     "c": "teal"
+    },
+    {
+     "id": "sm",
+     "x": 170,
+     "y": 128,
+     "w": 90,
+     "h": 46,
+     "t": "MEMORY",
+     "c": "green"
+    },
+    {
+     "id": "s2",
+     "x": 300,
+     "y": 128,
+     "w": 110,
+     "h": 46,
+     "t": "step 2|(reuse)",
+     "c": "teal"
+    }
+   ],
+   "edges": [
+    {
+     "a": "m1",
+     "b": "md",
+     "t": "write"
+    },
+    {
+     "a": "md",
+     "b": "m2",
+     "t": "read (slow)"
+    },
+    {
+     "a": "s1",
+     "b": "sm",
+     "t": "keep"
+    },
+    {
+     "a": "sm",
+     "b": "s2",
+     "t": "reuse (fast)"
+    }
+   ]
+  }
+ },
+ "rdd": {
+  "aha": "Transformations just build a plan (the DAG). The ACTION is what actually presses 'go'.",
+  "diagram": {
+   "w": 652,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Transform-\nations",
+     "c": "teal"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "DAG\n(lazy plan)",
+     "c": "indigo"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Action\ncount/collect",
+     "c": "amber"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Execution\nruns the DAG",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": "build"
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "triggered by"
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "Spark runs it"
+    }
+   ]
+  }
+ },
+ "lazy-evaluation": {
+  "aha": "Being lazy is a feature \u2014 you can only optimize the whole plan if you wait until you've seen all of it.",
+  "diagram": {
+   "w": 822,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Transform-\nations",
+     "c": "teal"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "build DAG\n(nothing runs)",
+     "c": "indigo"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Action",
+     "c": "amber"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Catalyst\noptimizes",
+     "c": "teal"
+    },
+    {
+     "id": "n4",
+     "x": 692,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Run",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": ""
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": ""
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "triggers"
+    },
+    {
+     "a": "n3",
+     "b": "n4",
+     "t": "whole plan"
+    }
+   ]
+  }
+ },
+ "catalyst-optimizer": {
+  "aha": "Correct & typed \u2192 move less data \u2192 pick the cheapest algorithm \u2192 compile to fast code. Four gates, in order.",
+  "diagram": {
+   "w": 652,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Analysis\nresolve names",
+     "c": "indigo"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Logical Opt\nless data",
+     "c": "teal"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Physical\ncost model",
+     "c": "teal"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "CodeGen\n\u2192 bytecode",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": "\u2192"
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "\u2192"
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "\u2192"
+    }
+   ]
+  }
+ },
+ "adaptive-query-execution": {
+  "aha": "The shuffle 'pause' is a checkpoint \u2014 Spark peeks at the real data, then fixes the plan for what's left.",
+  "diagram": {
+   "w": 822,
+   "h": 170,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Plan\n(estimates)",
+     "c": "gray"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Run stage \u2192\nshuffle",
+     "c": "amber"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Stage\nboundary",
+     "c": "indigo"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Read REAL\nstats",
+     "c": "teal"
+    },
+    {
+     "id": "n4",
+     "x": 692,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Re-optimize\nrest",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": ""
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": ""
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "pause"
+    },
+    {
+     "a": "n3",
+     "b": "n4",
+     "t": ""
+    }
+   ]
+  }
+ },
+ "executor-memory-model": {
+  "aha": "Execution can steal from cache, not the other way round \u2014 because cache is rebuildable and live work isn't.",
+  "diagram": {
+   "w": 520,
+   "h": 210,
+   "nodes": [
+    {
+     "id": "heap",
+     "x": 12,
+     "y": 10,
+     "w": 496,
+     "h": 40,
+     "t": "Executor heap",
+     "c": "gray"
+    },
+    {
+     "id": "res",
+     "x": 12,
+     "y": 70,
+     "w": 120,
+     "h": 120,
+     "t": "Reserved|300MB|(fixed)",
+     "c": "amber"
+    },
+    {
+     "id": "uni",
+     "x": 150,
+     "y": 70,
+     "w": 358,
+     "h": 30,
+     "t": "Unified pool  =  0.6 fraction",
+     "c": "indigo"
+    },
+    {
+     "id": "exe",
+     "x": 150,
+     "y": 112,
+     "w": 175,
+     "h": 78,
+     "t": "Execution|shuffles/joins/sorts",
+     "c": "teal"
+    },
+    {
+     "id": "sto",
+     "x": 333,
+     "y": 112,
+     "w": 175,
+     "h": 78,
+     "t": "Storage|cache (evictable)",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "exe",
+     "b": "sto",
+     "t": "reclaims \u2192"
+    }
+   ]
+  }
+ },
+ "shuffle-writes-to-disk": {
+  "aha": "'In-memory Spark' still spills the shuffle to disk. reduceByKey shrinks the data before it crosses the wire.",
+  "diagram": {
+   "w": 482,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Map tasks",
+     "c": "teal"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "SHUFFLE\n\u2192 DISK",
+     "c": "amber"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Reduce tasks",
+     "c": "teal"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": "write (200\npartitions)"
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "read"
+    }
+   ]
+  }
+ },
+ "data-skew-oom": {
+  "aha": "More memory \u2260 fewer bags. One person still has to lift the one 300-lb suitcase. Repack it into many bags.",
+  "diagram": {
+   "w": 540,
+   "h": 200,
+   "nodes": [
+    {
+     "id": "hot",
+     "x": 12,
+     "y": 20,
+     "w": 130,
+     "h": 50,
+     "t": "Hot key \u2192|skewed partition",
+     "c": "amber"
+    },
+    {
+     "id": "one",
+     "x": 190,
+     "y": 20,
+     "w": 120,
+     "h": 50,
+     "t": "ONE task",
+     "c": "indigo"
+    },
+    {
+     "id": "oom",
+     "x": 360,
+     "y": 20,
+     "w": 120,
+     "h": 50,
+     "t": "OutOfMemory",
+     "c": "amber"
+    },
+    {
+     "id": "mem",
+     "x": 190,
+     "y": 128,
+     "w": 120,
+     "h": 46,
+     "t": "+ more memory",
+     "c": "gray"
+    },
+    {
+     "id": "fix",
+     "x": 360,
+     "y": 128,
+     "w": 150,
+     "h": 46,
+     "t": "FIX: split the|partition",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "hot",
+     "b": "one",
+     "t": "all rows"
+    },
+    {
+     "a": "one",
+     "b": "oom",
+     "t": "too big"
+    },
+    {
+     "a": "mem",
+     "b": "one",
+     "t": "still 1 lump \u2717"
+    },
+    {
+     "a": "oom",
+     "b": "fix",
+     "t": "real fix"
+    }
+   ]
+  }
+ },
+ "sort-merge-join": {
+  "aha": "SMJ can spill to disk, so it never dies \u2014 that's why it's the default over the OOM-prone hash join.",
+  "table": [
+   [
+    "strategy",
+    "builds",
+    "on skew",
+    "priority"
+   ],
+   [
+    "Broadcast Hash",
+    "ship small table (&lt;10MB) to all",
+    "no shuffle",
+    "1 \u2014 fastest"
+   ],
+   [
+    "Sort-Merge",
+    "sort both, merge-walk",
+    "spills to disk \u2192 safe",
+    "2 \u2014 default"
+   ],
+   [
+    "Shuffle-Hash",
+    "in-memory hash table",
+    "OOM (can't spill)",
+    "3 \u2014 fallback"
+   ]
+  ]
+ },
+ "shuffle-hash-join": {
+  "aha": "A hash table has to fit whole in RAM \u2014 no half-building. One fat partition = boom.",
+  "diagram": {
+   "w": 652,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Shuffle\nby key",
+     "c": "teal"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Build hash\ntable (small side)",
+     "c": "indigo"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Must fit\nin memory",
+     "c": "amber"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "skew \u2192\nOOM",
+     "c": "amber"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": ""
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "every partition"
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "if too big"
+    }
+   ]
+  }
+ },
+ "data-locality": {
+  "aha": "Send the code to the data, not the data to the code. Every rung down = a slower hop.",
+  "diagram": {
+   "w": 440,
+   "h": 250,
+   "nodes": [
+    {
+     "id": "a",
+     "x": 150,
+     "y": 8,
+     "w": 170,
+     "h": 34,
+     "t": "PROCESS_LOCAL \u2014 same JVM",
+     "c": "green"
+    },
+    {
+     "id": "b",
+     "x": 150,
+     "y": 54,
+     "w": 170,
+     "h": 34,
+     "t": "NODE_LOCAL \u2014 same machine",
+     "c": "teal"
+    },
+    {
+     "id": "c",
+     "x": 150,
+     "y": 100,
+     "w": 170,
+     "h": 34,
+     "t": "NO_PREF",
+     "c": "indigo"
+    },
+    {
+     "id": "d",
+     "x": 150,
+     "y": 146,
+     "w": 170,
+     "h": 34,
+     "t": "RACK_LOCAL \u2014 same rack",
+     "c": "amber"
+    },
+    {
+     "id": "e",
+     "x": 150,
+     "y": 192,
+     "w": 170,
+     "h": 34,
+     "t": "ANY \u2014 anywhere",
+     "c": "gray"
+    }
+   ],
+   "edges": [
+    {
+     "a": "a",
+     "b": "b",
+     "t": "farther"
+    },
+    {
+     "a": "b",
+     "b": "c",
+     "t": ""
+    },
+    {
+     "a": "c",
+     "b": "d",
+     "t": ""
+    },
+    {
+     "a": "d",
+     "b": "e",
+     "t": "slowest"
+    }
+   ]
+  }
+ },
+ "jvm-object-overhead": {
+  "aha": "4 bytes of data \u2192 48 bytes of 'box'. Times a billion rows. THAT's why they ditched JVM objects for columns.",
+  "diagram": {
+   "w": 652,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "4-byte\nstring",
+     "c": "teal"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "48-byte\nJVM object",
+     "c": "amber"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "\u00d7 billions\nof rows",
+     "c": "amber"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "\u2192 columnar\noff-heap",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": "header+ref+pad"
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "per object"
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "the tax"
+    }
+   ]
+  }
+ },
+ "pyspark": {
+  "aha": "Row-by-row Python UDFs pay a toll at every crossing. Arrow sends a whole busload at once.",
+  "diagram": {
+   "w": 520,
+   "h": 170,
+   "nodes": [
+    {
+     "id": "py",
+     "x": 12,
+     "y": 60,
+     "w": 130,
+     "h": 52,
+     "t": "Python process",
+     "c": "amber"
+    },
+    {
+     "id": "bridge",
+     "x": 195,
+     "y": 60,
+     "w": 110,
+     "h": 52,
+     "t": "Py4J",
+     "c": "indigo"
+    },
+    {
+     "id": "jvm",
+     "x": 360,
+     "y": 60,
+     "w": 148,
+     "h": 52,
+     "t": "JVM (Catalyst|+ Tungsten)",
+     "c": "teal"
+    }
+   ],
+   "edges": [
+    {
+     "a": "py",
+     "b": "bridge",
+     "t": "per-row = slow"
+    },
+    {
+     "a": "bridge",
+     "b": "jvm",
+     "t": "Arrow batch = fast"
+    }
+   ]
+  }
+ },
+ "spark-structured-streaming": {
+  "aha": "Treat the stream as a series of tiny 'bounded' tables \u2192 the batch engine (and all its optimizations) just works.",
+  "diagram": {
+   "w": 652,
+   "h": 150,
+   "nodes": [
+    {
+     "id": "n0",
+     "x": 12,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "Stream",
+     "c": "amber"
+    },
+    {
+     "id": "n1",
+     "x": 182,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "tiny bounded\nmicro-batches",
+     "c": "teal"
+    },
+    {
+     "id": "n2",
+     "x": 352,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "same Catalyst\nplan",
+     "c": "indigo"
+    },
+    {
+     "id": "n3",
+     "x": 522,
+     "y": 54,
+     "w": 118,
+     "h": 52,
+     "t": "batch engine\nruns it",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "n0",
+     "b": "n1",
+     "t": "treat as"
+    },
+    {
+     "a": "n1",
+     "b": "n2",
+     "t": "\u2192"
+    },
+    {
+     "a": "n2",
+     "b": "n3",
+     "t": "reuse"
+    }
+   ]
+  }
+ },
+ "photon": {
+  "aha": "They picked 'vectorized & interpreted' over codegen because it was faster to BUILD and debug, not just to run.",
+  "table": [
+   [
+    "choice",
+    "why Databricks picked it"
+   ],
+   [
+    "Vectorized (interpreted)",
+    "weeks to prototype (vs 2 months); print-debug native C++"
+   ],
+   [
+    "Columnar in-memory",
+    "batch over packed columns (not row-oriented)"
+   ],
+   [
+    "JNI bridge C++\u2194JVM",
+    "measured overhead only 0.06%"
+   ]
+  ]
+ },
+ "remote-shuffle-service": {
+  "aha": "Stop making every reducer chase every mapper. Funnel each partition to one server \u2014 calmer disks, fewer failures.",
+  "diagram": {
+   "w": 520,
+   "h": 210,
+   "nodes": [
+    {
+     "id": "m1",
+     "x": 12,
+     "y": 16,
+     "w": 90,
+     "h": 38,
+     "t": "mapper",
+     "c": "teal"
+    },
+    {
+     "id": "m2",
+     "x": 12,
+     "y": 86,
+     "w": 90,
+     "h": 38,
+     "t": "mapper",
+     "c": "teal"
+    },
+    {
+     "id": "m3",
+     "x": 12,
+     "y": 156,
+     "w": 90,
+     "h": 38,
+     "t": "mapper",
+     "c": "teal"
+    },
+    {
+     "id": "rss",
+     "x": 200,
+     "y": 86,
+     "w": 130,
+     "h": 38,
+     "t": "ONE RSS server|(partition P)",
+     "c": "indigo"
+    },
+    {
+     "id": "red",
+     "x": 400,
+     "y": 86,
+     "w": 100,
+     "h": 38,
+     "t": "reducer",
+     "c": "green"
+    }
+   ],
+   "edges": [
+    {
+     "a": "m1",
+     "b": "rss",
+     "t": ""
+    },
+    {
+     "a": "m2",
+     "b": "rss",
+     "t": "write"
+    },
+    {
+     "a": "m3",
+     "b": "rss",
+     "t": ""
+    },
+    {
+     "a": "rss",
+     "b": "red",
+     "t": "one fetch"
+    }
+   ]
+  }
+ }
+}
