@@ -294,12 +294,14 @@ def main():
     ap.add_argument("--learner", default="alex")
     ap.add_argument("--topic", default="spark")
     ap.add_argument("--vault-dir", default=None, help="repo root; defaults to two levels up")
+    ap.add_argument("--transcript", default=None, help="explicit transcript.md path (overrides the vault-path default)")
     ap.add_argument("--specs", default=None, help="diagram specs JSON; defaults to scripts/diagram_specs/<topic>.json")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
     root = Path(a.vault_dir).expanduser().resolve() if a.vault_dir else HERE.parent
-    transcript = (root / "wiki/personas" / a.learner / a.topic / "transcript.md").read_text(encoding="utf-8")
+    tpath = Path(a.transcript).expanduser() if a.transcript else (root / "wiki/personas" / a.learner / a.topic / "transcript.md")
+    transcript = tpath.read_text(encoding="utf-8")
     specs_path = Path(a.specs) if a.specs else HERE / "diagram_specs" / f"{a.topic}.json"
     specs = json.loads(specs_path.read_text(encoding="utf-8")) if specs_path.exists() else {}
     out = Path(a.out) if a.out else HERE / f"{a.learner}-{a.topic}-illustrated.html"
