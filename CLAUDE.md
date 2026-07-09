@@ -130,3 +130,63 @@ These are real failures from building this feature. Do not relearn them the hard
 - **A fast-forward merge aborts if the target working tree has uncommitted changes** to files
   the merge touches (this repo's `main` carries pre-existing vendor mode-bit noise). `git stash`
   them (recoverable), FF, then leave the stash for the human — don't discard.
+
+## Learner personas — Alex (`src/persona_wiki/learn.py`)
+
+A second-agent loop where the `alex` learner (a 15-year-old) learns a topic from a source
+persona's wiki, closed-book, going 0→100 and capturing his learning into his own growing
+wiki (`wiki/personas/alex/<topic>/`: concept notes in his voice + optional Mermaid, `qa/`,
+`open-questions.md`, `mastery.md`, `transcript.md`, `index.yaml`, `log.md`). CLI:
+`persona-wiki learn --learner alex --from vutr --topic spark`. The loop is
+teach → reflect → answer → score per concept, behind the same injected LLM seam. This is the
+concrete demonstration of the article's "agents query, maintain, and grow the wiki" claim.
+Built + run for Apache Spark (16 concepts). Design/plan in the sibling `knowledge-toolkit`
+repo under `docs/superpowers/`.
+
+### Hard-won lessons — READ BEFORE building or grading a learner loop
+
+1. **Mastery is DEPTH, not coverage.** Do not mark a concept "mastered" because the learner
+   restated a note's key points — that's recall. Real mastery is mechanism-level WHY/HOW.
+   Grading on coverage silently inflates a learner to 100% on shallow material. Score against
+   "did the learner reconstruct the *mechanism* and push past recall," not "did he echo the
+   note."
+
+2. **A learner cannot exceed the depth of the source.** Learning Spark from vutr's *atomic
+   summary* notes capped Alex at ~6% depth (breadth, no HOW). Re-teaching from vutr's *full
+   mechanism-rich* material lifted him to 100% — same learner, same code, deeper source. The
+   lever for raising mastery is **deepen the source, then re-learn**, not push the learner
+   harder. That 6%→100% jump *is* the living-wiki loop; the learner's `open-questions` (what
+   the source didn't cover) are the exact roadmap for what to deepen next.
+
+3. **Closed-book + honest gap-flagging is the whole point.** The teacher/scorer must stay
+   inside the source and route anything the source doesn't cover to `open-questions.md` as a
+   *wiki gap* — never fabricate depth. This keeps the learner's knowledge provably sourced AND
+   surfaces the deepening backlog. A "grounding guard" (claims not in the source → open
+   questions, not the concept body) is mandatory.
+
+4. **Agents freelance the level enum.** Ask for `{mastered|familiar|learning}` and agents
+   return `"solid"`, `"deep"`, `"strong"`, `"shaky"`, `"STRONG_GRASP"`, `"solid-surface"`,
+   `"partial"`, … The assembly step MUST normalize freeform → the enum by keyword, and you must
+   re-check the normalizer whenever a new round introduces new vocabulary (round 2's "deep"/
+   "strong" all mean depth-mastery; round 1's "shaky"/"surface" mean surface recall).
+
+5. **Agents return a string where a list is expected.** `gaps`/`questions`/`answers`/
+   `unverified` sometimes come back as a bare string; iterating it yields per-character garbage
+   (`- wiki gap: T` / `h` / `e`). Always coerce with an `as_list()` helper (list→list,
+   non-empty str→`[str]`, else `[]`).
+
+6. **Two capture shapes, both needed.** `qa/<nnn>-<slug>.md` are atomic/queryable; a single
+   append-ordered `transcript.md` is the human-readable end-to-end dialogue. Keep both — a
+   reviewer reads the transcript; an agent queries the qa notes. Upsert transcript sections by
+   `## <n>. <slug>` so a re-run replaces rather than duplicates.
+
+7. **Diagrammatic learning is token-cheap and gated.** One optional native ```mermaid``` block
+   per concept note, ONLY where the concept has real flow/structure (RDD→DAG→action, the join
+   decision tree, the executor memory split). The prompt says "add mermaid ONLY if it clarifies
+   flow/structure, else omit" — and the writer must not emit an empty fence when omitted.
+
+8. **Real-run transport: one agent per concept, deterministic assembly.** The loop's four LLM
+   steps × N concepts is wasteful as separate calls and can't run via nested `claude -p` (401).
+   Dispatch ONE Agent per concept that role-plays the whole exchange (closed-book on that
+   concept's source) and writes a `ConceptResult` JSON; a thin driver then feeds those through
+   the real `learn.py` capture functions. 16 agents, not 64 calls.
