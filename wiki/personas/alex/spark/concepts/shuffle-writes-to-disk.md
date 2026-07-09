@@ -10,15 +10,18 @@ topics:
 - spark
 learner: alex
 source_note: shuffle-writes-to-disk
-mastery: learning
+mastery: mastered
 ---
 
-Alex: So even though Spark is famous for being in-memory, the shuffle step actually writes to disk. And the default is 200 shuffle partitions no matter the data size, so I should tune that. And reduceByKey is better than groupByKey because it cuts the data down before the shuffle instead of after.
+So the shuffle is Spark's step for regrouping data by key across the cluster — and here's the trap: even though Spark is sold as 'in-memory,' the shuffle actually WRITES to disk, because the map side has to dump its intermediate results somewhere durable for the reduce side to fetch. On top of that, Spark always cuts the shuffled data into 200 partitions by default no matter how big the data is, so you have to tune spark.sql.shuffle.partitions to fit your actual size. And reduceByKey beats groupByKey because it shrinks the data on each node BEFORE the shuffle, so there's less to write to disk and less to send over the wire — groupByKey shuffles everything raw and only combines afterward.
 
 ```mermaid
-flowchart LR
-  M[Map stage] -->|reduceByKey shrinks data before shuffle| S[Shuffle: writes to DISK, not memory<br/>split into 200 partitions by default]
-  S --> R[Reduce stage]
+graph LR
+  A[Map tasks produce key-value data] --> B[Shuffle write: intermediate data spilled to DISK]
+  B --> C[Reduce tasks fetch shuffled data over network]
+  C --> D[Split into 200 partitions by default - must tune spark.sql.shuffle.partitions]
+  A -. reduceByKey pre-combines on each node BEFORE shuffle .-> B
+  A -. groupByKey ships all raw values, combines only AFTER shuffle .-> C
 ```
 
 *Source: [[shuffle-writes-to-disk]] (vutr)*

@@ -10,17 +10,17 @@ topics:
 - spark
 learner: alex
 source_note: data-locality
-mastery: familiar
+mastery: mastered
 ---
 
-*What Alex understood:* Alex: So Spark would rather run the work where the data already is than move the data, because moving data is expensive. It has a ranked wishlist of how close the data is, from same-process (PROCESS_LOCAL) all the way down to anywhere (ANY), and it waits a moment for a good spot before dropping to a worse one. And separately, if a task is dragging, Spark runs a second copy elsewhere and takes the faster one so a single slow machine doesn't hold everything up. That preferred spot comes from the RDD's fifth property.
+*What Alex understood:* Data sits in partitions across the cluster and tasks need to run near their data because moving code is cheap but moving data is expensive. The scheduler places each task at the closest locality it can get: PROCESS_LOCAL (data in the same executor process, no transfer), then NODE_LOCAL (same machine, different process, no network hop), then NO_PREF (no preference, place anywhere), then RACK_LOCAL (different machine but same rack, faster local network), then ANY (anywhere else, farthest and slowest). Nearer wins because each step out means shipping data over slower links. And if one task lags (a straggler), speculative execution launches a duplicate on another executor and takes whichever finishes first.
 
 ## Follow-up questions
 
-**Alex:** When Spark can't get PROCESS_LOCAL right away, does it immediately jump to ANY, or does it wait first?
+**Alex:** If the scheduler wants PROCESS_LOCAL but no slot is free inside the executor that holds the data, does it wait for a slot to open or immediately fall back to a farther locality level like NODE_LOCAL?
 
-**vutr:** vutr: Good questions. First one: no, it doesn't jump straight to ANY. The note says Spark waits briefly for a better level before falling back to a worse one, so it steps down the ranking rather than leaping to the bottom. Second one: they're separate. The locality ranking (PROCESS_LOCAL down to ANY) is about WHERE to place a task. Speculative execution is a different, companion mechanism about slow tasks: when a task runs unusually slow, Spark re-submits a duplicate copy to another executor and takes whichever finishes first, to hedge against a straggler.
+**vutr:** vutr: Good instinct — this is exactly the real tension. Spark does not instantly give up on the best locality. There is a small waiting window (a locality-wait timeout) where the scheduler holds the task briefly hoping a slot frees up at the preferred level; if nothing opens in time, it relaxes one step down the hierarchy — PROCESS_LOCAL to NODE_LOCAL, and so on outward to ANY. It is a trade-off between paying a little idle-wait cost versus paying the data-movement cost of running farther away. The source itself only gives you the ordering nearest-to-farthest, so treat the timeout-and-fallback detail as the mechanism behind that ordering rather than something stated verbatim in this text.
 
-**Alex:** Is speculative execution the same thing as the locality ranking, or a separate mechanism?
+**Alex:** With speculative execution, when the original straggler and its re-submitted duplicate are both running, what happens to the losing copy's work once the faster one finishes?
 
-**vutr:** (the wiki does not cover this — see open questions)
+**vutr:** vutr: When the faster copy finishes its task, that task's result is accepted and the stage moves on, so the slower copy is now redundant — its output is no longer needed and it gets killed/abandoned. The point of speculative execution is purely to stop one straggler from holding up the whole stage; you deliberately 'waste' some duplicate compute to buy back wall-clock time. The source states the mechanism (slow tasks re-submitted to another executor) but does not spell out the cancellation of the loser, so that part is my explanation of how it necessarily resolves, not a direct quote.

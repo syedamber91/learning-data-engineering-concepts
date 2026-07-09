@@ -13,6 +13,23 @@ source_note: spark-origin
 mastery: mastered
 ---
 
-Okay so let me try — Spark was born at a Berkeley lab in 2009 because the older thing, MapReduce, was really slow for machine-learning jobs that keep looping over the same data. MapReduce was slow because it kept saving stuff to disk after every step, and disk is slow. Spark fixed that by keeping the data in memory instead so you don't pay that disk cost every loop, and that in-memory reuse idea is basically the core of the RDD.
+Okay, let me say it back in mechanism terms, not just 'Spark is faster.' The core pain was that MapReduce, for an algorithm that loops over the same data many times (like training an ML model), dumped each round's results to DISK and then the next round had to read them back from disk. So every iteration ate a write-to-disk AND a read-from-disk, on data you literally already had in hand. Spark's fix is to hold that dataset in memory as an RDD and REUSE it across iterations — so the next pass reads from RAM instead of paying the disk round-trip. The disk write-between-iterations was the bottleneck; keeping the RDD resident in memory is what removes it. And an RDD isn't magic storage — it's immutable and lazy: transformations just build up a DAG plan, and only an action actually kicks off the compute.
+
+```mermaid
+flowchart TB
+  subgraph MR["MapReduce: iterative ML"]
+    A1["Iteration 1 compute"] --> D1[("write to DISK")]
+    D1 --> A2["Iteration 2: read from DISK"]
+    A2 --> D2[("write to DISK")]
+    D2 --> A3["Iteration 3: read from DISK"]
+  end
+  subgraph SP["Spark: in-memory RDD reuse"]
+    B1["Iteration 1 compute"] --> M[["RDD kept in MEMORY"]]
+    M --> B2["Iteration 2: reuse from RAM"]
+    B2 --> M
+    M --> B3["Iteration 3: reuse from RAM"]
+  end
+  note["Penalty removed: no disk write+read between passes over the SAME data"]
+```
 
 *Source: [[spark-origin]] (vutr)*

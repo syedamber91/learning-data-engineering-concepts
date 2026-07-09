@@ -10,17 +10,17 @@ topics:
 - spark
 learner: alex
 source_note: remote-shuffle-service
-mastery: learning
+mastery: mastered
 ---
 
-*What Alex understood:* Alex: So normally the reducers have to grab their matching data from tons of different mappers, which is messy and wears out the disks fast. Uber's RSS reverses it: every mapper dumps its same-partition data onto one RSS server, so each reducer just picks it up from that single spot. And that made the disks last way longer (3 months to ~3 years) and cut shuffle failures by 95 percent.
+*What Alex understood:* So let me play it back: regular Spark shuffle is 'reducer, go collect your partition's pieces from all these different mappers' — lots of tiny writes on the mapper side and lots of fragile fetches on the reducer side. Uber flips it: every mapper sends same-partition data to ONE RSS server, so a partition lives in one place, and the reducer just grabs it from that single server. Fewer, bigger writes = less SSD churn (3 months to ~3 years of life), and one fetch target instead of many = 95% fewer shuffle failures. The 'aha' is that it's not a new disk or more memory — it's re-routing WHERE the writes land so the disk sees a calmer, more consolidated write pattern.
 
 ## Follow-up questions
 
-**Alex:** In the old MapReduce shuffle, who is doing the pulling and who is doing the writing, and how is that different in RSS?
+**Alex:** You said SSD wear-out went from 3 months to 3 years — is that because RSS writes LESS total data, or because it writes the SAME amount but in a friendlier pattern? I want to know if it's volume or shape.
 
-**vutr:** vutr: In the old MapReduce shuffle, the reducers do the pulling — each reducer pulls its same-partition data from many mappers. In RSS it's reversed: the mappers do the writing, each one writing its same-partition data to one unique RSS server, and the reducer fetches from that single place instead of from many mappers.
+**vutr:** Sharp instinct to separate the two. Based on the source, the total shuffle data itself isn't described as shrinking — the job still produces the same partitioned output. What changes is the SHAPE and destination of the writes: consolidating same-partition data onto one RSS server replaces a swarm of tiny, scattered per-mapper writes with fewer, larger, more consolidated writes. SSD endurance is spent on write churn and rewrite amplification, so a friendlier write pattern is what buys the jump from 3 months to nearly 3 years. So: mostly shape, not raw volume. (Note: the source states the outcome numbers but does not spell out the byte-level mechanics, so the 'friendlier pattern' reasoning is the standard explanation, not a verbatim claim from the text.)
 
-**Alex:** Why would writing to one RSS server instead of many mappers help the SSDs last longer?
+**Alex:** If every mapper for a partition now funnels into ONE RSS server, doesn't that one server become a bottleneck or a single point of failure for that partition? How does concentrating everything not just move the risk instead of removing it?
 
-**vutr:** vutr: The note doesn't spell out the exact disk-level reason, but it does tell us the result: with RSS, SSD wear-out went from about 3 months to nearly 3 years. So sending same-partition data to one RSS server instead of scattering the work across many mappers is what reduced the wear — the note gives us the outcome even though it doesn't detail the physical mechanism.
+**vutr:** Exactly the right worry — you're noticing that consolidation can relocate risk. Here's what the source actually supports: it says failure rates dropped by 95%, which tells us that in practice the one-server-per-partition design failed far LESS than the old many-mappers fan-out, not more. The intuition is that a reducer succeeding used to require reaching many mappers, and any one flaky mapper connection could break the fetch; depending on a single RSS server means far fewer connections that can fail. So the net risk went down, not up. BUT — the source does NOT describe how RSS handles an RSS server itself dying (replication, failover, re-computation), so whether the single point of failure is fully solved is something I can't confirm from this material. Good gap to flag rather than guess.

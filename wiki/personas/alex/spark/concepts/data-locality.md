@@ -10,17 +10,17 @@ topics:
 - spark
 learner: alex
 source_note: data-locality
-mastery: familiar
+mastery: mastered
 ---
 
-Alex: So Spark would rather run the work where the data already is than move the data, because moving data is expensive. It has a ranked wishlist of how close the data is, from same-process (PROCESS_LOCAL) all the way down to anywhere (ANY), and it waits a moment for a good spot before dropping to a worse one. And separately, if a task is dragging, Spark runs a second copy elsewhere and takes the faster one so a single slow machine doesn't hold everything up. That preferred spot comes from the RDD's fifth property.
+Data sits in partitions across the cluster and tasks need to run near their data because moving code is cheap but moving data is expensive. The scheduler places each task at the closest locality it can get: PROCESS_LOCAL (data in the same executor process, no transfer), then NODE_LOCAL (same machine, different process, no network hop), then NO_PREF (no preference, place anywhere), then RACK_LOCAL (different machine but same rack, faster local network), then ANY (anywhere else, farthest and slowest). Nearer wins because each step out means shipping data over slower links. And if one task lags (a straggler), speculative execution launches a duplicate on another executor and takes whichever finishes first.
 
 ```mermaid
-graph TD
-    A[PROCESS_LOCAL: same JVM] --> B[NODE_LOCAL: same node, different process]
-    B --> C[NO_PREF: no locality preference]
-    C --> D[RACK_LOCAL: same rack]
-    D --> E[ANY: anywhere]
+graph LR
+  A["PROCESS_LOCAL<br/>data in same executor JVM — no transfer"] --> B["NODE_LOCAL<br/>same machine, different process — no network hop"]
+  B --> C["NO_PREF<br/>no locality preference — place anywhere"]
+  C --> D["RACK_LOCAL<br/>same rack, different machine — faster local network"]
+  D --> E["ANY<br/>anywhere else — farthest, slowest transfer"]
 ```
 
 *Source: [[data-locality]] (vutr)*
