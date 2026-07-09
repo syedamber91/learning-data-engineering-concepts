@@ -91,3 +91,58 @@ def learn(
                        max_retries=max_retries)
     typer.echo(f"{learner} mastered {result['mastered']}/{result['total']} "
                f"({result['pct']}%); failed={result['failed']}")
+
+
+@app.command()
+def ingest(
+    persona: str = typer.Option("vutr", "--persona"),
+    topic: str = typer.Option(..., "--topic"),
+    posts_dir: str = typer.Option(..., "--posts-dir"),
+    include: Optional[str] = typer.Option(None, "--include"),
+    propose: Optional[str] = typer.Option(None, "--propose", help="comma keywords; print candidates and exit"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+) -> None:
+    """Copy captured posts into the persona's raw/<topic>/ layer."""
+    from .ingest import ingest as run_ingest, load_include, propose_include
+    root = _root(vault_dir, persona)
+    posts = Path(posts_dir).expanduser()
+    if propose:
+        for name in propose_include(posts, [k.strip() for k in propose.split(",")]):
+            typer.echo(name)
+        raise typer.Exit(0)
+    if not include:
+        typer.echo("either --propose or --include is required", err=True)
+        raise typer.Exit(2)
+    stamp = date.today().isoformat()
+    res = run_ingest(posts, root, topic, load_include(Path(include)), stamp)
+    typer.echo(f"copied {len(res.copied)}, skipped {len(res.skipped)} -> {res.manifest.parent}")
+
+
+@app.command()
+def synthesize(
+    persona: str = typer.Option("vutr", "--persona"),
+    topic: str = typer.Option(..., "--topic"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+) -> None:
+    """Synthesize mechanism-depth concept notes from raw/<topic>/."""
+    from .synthesize import synthesize as run_synthesize
+    root = _root(vault_dir, persona)
+    stamp = date.today().isoformat()
+    res = run_synthesize(root, topic, default_llm, stamp)
+    typer.echo(f"written={len(res.written)} skipped={len(res.skipped)} "
+               f"quarantined={len(res.quarantined)} gaps={sum(len(v) for v in res.source_gaps.values())}")
+
+
+@app.command()
+def status(
+    persona: str = typer.Option("vutr", "--persona"),
+    learner: str = typer.Option("alex", "--learner"),
+    topic: str = typer.Option(..., "--topic"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+) -> None:
+    """Report current/stale/missing per pipeline stage (for stage-skip)."""
+    from .status import stage_status
+    root = _root(vault_dir, persona)
+    learner_root = _root(vault_dir, learner)
+    for stage, val in stage_status(root, learner_root, topic).items():
+        typer.echo(f"{stage}: {val}")
