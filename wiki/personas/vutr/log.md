@@ -6,3 +6,5 @@ Append-only change history.
 - 2026-07-08 — 10 duplicate notes merged (226 total)
 - 2026-07-10 — 20 kafka concept(s) synthesized from raw (246 total)
 - 2026-07-10 — 3 superseded snapshot-only kafka note(s) removed (243 total)
+- 2026-07-11 — 19 spark concept(s) synthesized from raw (262 total)
+- 2026-07-11 — 16 superseded snapshot-only spark note(s) removed (backfilled from raw/spark) (246 total)

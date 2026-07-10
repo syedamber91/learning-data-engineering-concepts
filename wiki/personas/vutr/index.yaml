@@ -5,8 +5,8 @@ topics:
     last_updated: '2026-07-08'
   spark:
     file: topics/spark.md
-    sources: 1
-    last_updated: '2026-07-08'
+    sources: 15
+    last_updated: '2026-07-11'
   kafka:
     file: topics/kafka.md
     sources: 21
@@ -147,58 +147,6 @@ entities:
     file: entities/conditional-operators.md
     topics:
     - airflow
-    last_updated: '2026-07-08'
-  spark-origin:
-    file: entities/spark-origin.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  executor-memory-model:
-    file: entities/executor-memory-model.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  rdd:
-    file: entities/rdd.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  catalyst-optimizer:
-    file: entities/catalyst-optimizer.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  adaptive-query-execution:
-    file: entities/adaptive-query-execution.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  sort-merge-join:
-    file: entities/sort-merge-join.md
-    topics:
-    - spark
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  shuffle-hash-join:
-    file: entities/shuffle-hash-join.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  photon:
-    file: entities/photon.md
-    topics:
-    - spark
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  remote-shuffle-service:
-    file: entities/remote-shuffle-service.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  pyspark:
-    file: entities/pyspark.md
-    topics:
-    - spark
     last_updated: '2026-07-08'
   kafka-origin:
     file: entities/kafka-origin.md
@@ -548,12 +496,6 @@ entities:
     topics:
     - flink
     last_updated: '2026-07-08'
-  spark-structured-streaming:
-    file: entities/spark-structured-streaming.md
-    topics:
-    - flink
-    - spark
-    last_updated: '2026-07-08'
   chandy-lamport-checkpointing:
     file: entities/chandy-lamport-checkpointing.md
     topics:
@@ -880,31 +822,6 @@ concepts:
     topics:
     - airflow
     last_updated: '2026-07-08'
-  data-locality:
-    file: concepts/data-locality.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  jvm-object-overhead:
-    file: concepts/jvm-object-overhead.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  lazy-evaluation:
-    file: concepts/lazy-evaluation.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  data-skew-oom:
-    file: concepts/data-skew-oom.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
-  shuffle-writes-to-disk:
-    file: concepts/shuffle-writes-to-disk.md
-    topics:
-    - spark
-    last_updated: '2026-07-08'
   occ-on-object-storage:
     file: concepts/occ-on-object-storage.md
     topics:
@@ -1213,3 +1130,98 @@ concepts:
     topics:
     - kafka
     last_updated: '2026-07-10'
+  spark-origin-and-mapreduce-limitations:
+    file: concepts/spark-origin-and-mapreduce-limitations.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  rdd-fundamentals-and-properties:
+    file: concepts/rdd-fundamentals-and-properties.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  lazy-evaluation-transformations-actions:
+    file: concepts/lazy-evaluation-transformations-actions.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  spark-application-architecture-and-execution-modes:
+    file: concepts/spark-application-architecture-and-execution-modes.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  jobs-stages-tasks-dag-and-dependencies:
+    file: concepts/jobs-stages-tasks-dag-and-dependencies.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  data-locality-and-speculative-execution:
+    file: concepts/data-locality-and-speculative-execution.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  catalyst-optimizer-phases:
+    file: concepts/catalyst-optimizer-phases.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  adaptive-query-execution:
+    file: concepts/adaptive-query-execution.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  executor-memory-model-and-caching:
+    file: concepts/executor-memory-model-and-caching.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  tungsten-and-jvm-object-overhead:
+    file: concepts/tungsten-and-jvm-object-overhead.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  data-skew-and-oom:
+    file: concepts/data-skew-and-oom.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  shuffle-writes-to-disk-and-external-shuffle-service:
+    file: concepts/shuffle-writes-to-disk-and-external-shuffle-service.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  sort-merge-join-vs-shuffle-hash-join:
+    file: concepts/sort-merge-join-vs-shuffle-hash-join.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  broadcast-join-and-bucket-join:
+    file: concepts/broadcast-join-and-bucket-join.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  resource-allocation-and-scheduling-modes:
+    file: concepts/resource-allocation-and-scheduling-modes.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  pyspark-architecture-and-py4j:
+    file: concepts/pyspark-architecture-and-py4j.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  python-udf-overhead-and-arrow-optimization:
+    file: concepts/python-udf-overhead-and-arrow-optimization.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  spark-connect-architecture:
+    file: concepts/spark-connect-architecture.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
+  photon-vectorized-engine:
+    file: concepts/photon-vectorized-engine.md
+    topics:
+    - spark
+    last_updated: '2026-07-11'
