@@ -1,0 +1,23 @@
+---
+persona: vutr
+kind: concept
+sources:
+- raw/kafka/stream-kafka-topic-to-the-iceberg.md
+- raw/kafka/bufstream-stream-kafka-messages-to.md
+- raw/kafka/groupby-28-tableflow-the-streamtable.md
+last_updated: '2026-07-10'
+qc: passed
+slug: kafka-iceberg-zero-etl
+topics:
+- kafka
+---
+
+The misconception is that getting Kafka data into your lakehouse is a solved problem — just "add a connector." In practice, every Kafka topic feeding analytics needs its own ETL pipeline built on Kafka Connect, Spark, or Flink: consume the messages, write them into files, push the files to the data lake. You own everything — defining the job logic, operating and monitoring a fleet of Spark/Flink tasks (many topics means many jobs), handling dirty or corrupted data, managing schema changes, and keeping the Iceberg table's physical layout healthy (compacting small files, cleaning obsolete data and metadata). Kafka itself can't help, because the broker sees your messages as an array of bytes — it perceives no schema or semantics.
+
+Zero-ETL is the answer that emerged from Kafka's architectural evolution: shared-nothing → tiered storage ([[tiered-storage-kip-405]], where the broker still holds recent data locally) → shared storage, where data lives 100% in object storage ([[automq-wal-shared-storage]], [[warpstream-stateless-agent-architecture]], Bufstream, Confluent Freight Clusters, Redpanda Cloud Topics) → **shared data**, where the same data is available via Kafka's API *and* served as Iceberg tables. AutoMQ was the first in the industry to publicly propose this shared-data architecture; Confluent's Tableflow announcement — what Jack Vanlightly called the stream/table, Kafka/Iceberg duality — pushed the same idea. Once brokers already write to object storage, converting topics to tables becomes the broker's job, not yours.
+
+Walk AutoMQ's Table Topic mechanism (open-sourced in PR-2513, released alongside AWS S3 Tables). The user sets one config, `automq.table.topic.enable`. Producers keep using the Kafka protocol; brokers write to the topic first, then convert to Iceberg in the background after batch accumulation. Two components do the work: a **Coordinator** per Table Topic, bound to partition 0, manages sync progress and table commits — centralizing commits so independent workers don't create commit conflicts and metadata inflation; **Workers**, one per AutoMQ partition in the same process, convert Kafka records to Parquet, upload to S3, and commit metadata to the Iceberg catalog. Schema comes from Kafka's Schema Registry acting as a quality gate: non-conforming messages are rejected at produce time, and on schema change the broker uses the message's schema version to fetch the new schema and evolve the Iceberg table without interruption — the single source of truth replaces schemas hardcoded across Flink/Spark jobs ([[broker-side-schema-and-semantic-validation]] is the same argument applied to validation). Users can set the table's partition scheme (`automq.table.topic.partition.by=[month(date)]`) and get upserts via key-based delta files. Binding each worker to a partition keeps Iceberg reads/writes inside one AZ, avoiding cross-AZ fees. Current limits: AWS only, with REST, Glue, Nessie, or Hive Metastore catalogs.
+
+Bufstream goes one step further: instead of copying Kafka data into Iceberg (Tableflow's approach, which duplicates storage for two purposes), Bufstream **only** stores the Iceberg table — one copy serves both consumers and query engines. Its write path: brokers land messages in intake files; with the archive format set to `iceberg`, the background process rewrites intake files directly into Iceberg. The writer fetches the latest schema from the Buf Schema Registry and caches it, forms the Iceberg schema (keeping schema state in the metadata store to handle evolution), checks the catalog for changes, derives the Parquet schema, writes the data files, then the manifest files, manifest lists, and metadata files, and finally updates the catalog's current-metadata pointer. Consumers polling for messages are served row by row from the same table. That 2-for-1 effectively eliminates Kafka storage cost on top of Bufstream's already-cheaper economics ($4,625/month object storage vs $42,025 for Kafka's EBS volumes in Buf's 288-partition, 1 GiB/s benchmark).
+
+The trade-off is the one shared by every object-storage design ([[diskless-kafka-trade-off-framework]]): latency. Bufstream's benchmark shows 260 ms median and 500 ms p99 end-to-end; you can shrink batches for lower latency, but more frequent PUT requests raise cost. Zero-ETL doesn't make the stream/table conversion free — it moves it into the broker, where batching, schema, and layout are managed once instead of per pipeline.

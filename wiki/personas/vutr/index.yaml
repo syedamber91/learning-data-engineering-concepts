@@ -9,8 +9,8 @@ topics:
     last_updated: '2026-07-08'
   kafka:
     file: topics/kafka.md
-    sources: 1
-    last_updated: '2026-07-08'
+    sources: 21
+    last_updated: '2026-07-10'
   iceberg:
     file: topics/iceberg.md
     sources: 1
@@ -905,21 +905,6 @@ concepts:
     topics:
     - spark
     last_updated: '2026-07-08'
-  pull-over-push:
-    file: concepts/pull-over-push.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  broker-side-validation:
-    file: concepts/broker-side-validation.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  cross-az-cost:
-    file: concepts/cross-az-cost.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
   occ-on-object-storage:
     file: concepts/occ-on-object-storage.md
     topics:
@@ -1128,3 +1113,103 @@ concepts:
     topics:
     - apache-pinot-druid-and-real-time-olap
     last_updated: '2026-07-08'
+  log-segments-and-offset-addressing:
+    file: concepts/log-segments-and-offset-addressing.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  page-cache-sequential-io-and-zero-copy:
+    file: concepts/page-cache-sequential-io-and-zero-copy.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  message-batching-and-compression:
+    file: concepts/message-batching-and-compression.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  producer-send-path-and-acks:
+    file: concepts/producer-send-path-and-acks.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  message-key-partitioning-strategies:
+    file: concepts/message-key-partitioning-strategies.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  pull-based-consumption-and-offset-commit:
+    file: concepts/pull-based-consumption-and-offset-commit.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  consumer-groups-and-partition-assignment:
+    file: concepts/consumer-groups-and-partition-assignment.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  consumer-group-rebalancing:
+    file: concepts/consumer-group-rebalancing.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  leader-follower-replication:
+    file: concepts/leader-follower-replication.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  partition-reassignment-and-cluster-balancing:
+    file: concepts/partition-reassignment-and-cluster-balancing.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  zookeeper-to-kraft-metadata-management:
+    file: concepts/zookeeper-to-kraft-metadata-management.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  tiered-storage-kip-405:
+    file: concepts/tiered-storage-kip-405.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  automq-wal-shared-storage:
+    file: concepts/automq-wal-shared-storage.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  warpstream-stateless-agent-architecture:
+    file: concepts/warpstream-stateless-agent-architecture.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  diskless-kafka-trade-off-framework:
+    file: concepts/diskless-kafka-trade-off-framework.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  broker-side-schema-and-semantic-validation:
+    file: concepts/broker-side-schema-and-semantic-validation.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  kafka-iceberg-zero-etl:
+    file: concepts/kafka-iceberg-zero-etl.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  zero-downtime-migration-dual-write:
+    file: concepts/zero-downtime-migration-dual-write.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  northguard-segment-level-replication:
+    file: concepts/northguard-segment-level-replication.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
+  linkedin-multi-tier-clusters-and-audit:
+    file: concepts/linkedin-multi-tier-clusters-and-audit.md
+    topics:
+    - kafka
+    last_updated: '2026-07-10'
