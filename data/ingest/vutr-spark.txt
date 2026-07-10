@@ -1,0 +1,16 @@
+# vutr / spark — reviewed include list (2026-07-10, spark backfill run)
+10-minutes-to-learn-apache-spark.md
+a-closer-look-into-databrickss-photon.md
+how-is-databricks-spark-different.md
+i-spent-4-hours-learning-apache-spark.md
+i-spent-6-hours-learning-pyspark.md
+i-spent-8-hours-learning-apache-spark.md
+if-youre-learning-apache-spark-this.md
+is-this-feature-a-revolution-in-spark.md
+no-cluster-no-setup-a-spark-practice.md
+the-fastest-way-to-learn-apache-spark.md
+the-fastest-way-to-learn-spark-is.md
+the-overview-of-apache-spark.md
+video-what-is-apache-spark.md
+why-apache-spark-rdd-is-immutable.md
+why-did-databricks-build-the-photon.md
