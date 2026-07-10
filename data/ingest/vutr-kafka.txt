@@ -1,0 +1,25 @@
+# vutr / kafka — reviewed include list (2026-07-10)
+# core kafka series
+apache-kafka-part-1-overview.md
+apache-kafka-producer.md
+apache-kafka-consumer.md
+apache-kafka-important-designs.md
+if-youre-learning-kafka-this-article.md
+kafka-migration-with-zero-downtime.md
+the-company-that-created-kafka-is.md
+# kafka-on-object-storage / diskless ecosystem
+how-do-we-run-kafka-100-on-the-object.md
+i-spent-8-hours-researching-warpstream.md
+bufstream-stream-kafka-messages-to.md
+is-your-data-valid-why-bufstream.md
+automq-achieving-auto-partition-reassignment.md
+how-automq-reduces-nearly-100-of.md
+how-to-choose-the-right-diskless.md
+stream-kafka-topic-to-the-iceberg.md
+# production case studies (kafka-dense)
+groupby-5-the-story-of-s3-kafka-at.md
+groupby-42-paypal-scaling-kafka.md
+groupby-43-uber-kafka-the-tiered.md
+groupby-28-tableflow-the-streamtable.md
+how-did-linkedin-handle-7-trillion.md
+doordashs-real-time-processing-system.md

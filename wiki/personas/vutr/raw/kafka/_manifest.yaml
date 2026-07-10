@@ -1,0 +1,84 @@
+apache-kafka-consumer.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/apache-kafka-consumer.md
+apache-kafka-important-designs.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/apache-kafka-important-designs.md
+apache-kafka-part-1-overview.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/apache-kafka-part-1-overview.md
+apache-kafka-producer.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/apache-kafka-producer.md
+automq-achieving-auto-partition-reassignment.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/automq-achieving-auto-partition-reassignment.md
+bufstream-stream-kafka-messages-to.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/bufstream-stream-kafka-messages-to.md
+doordashs-real-time-processing-system.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/doordashs-real-time-processing-system.md
+groupby-28-tableflow-the-streamtable.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/groupby-28-tableflow-the-streamtable.md
+groupby-42-paypal-scaling-kafka.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/groupby-42-paypal-scaling-kafka.md
+groupby-43-uber-kafka-the-tiered.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/groupby-43-uber-kafka-the-tiered.md
+groupby-5-the-story-of-s3-kafka-at.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/groupby-5-the-story-of-s3-kafka-at.md
+how-automq-reduces-nearly-100-of.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/how-automq-reduces-nearly-100-of.md
+how-did-linkedin-handle-7-trillion.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/how-did-linkedin-handle-7-trillion.md
+how-do-we-run-kafka-100-on-the-object.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/how-do-we-run-kafka-100-on-the-object.md
+how-to-choose-the-right-diskless.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/how-to-choose-the-right-diskless.md
+i-spent-8-hours-researching-warpstream.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/i-spent-8-hours-researching-warpstream.md
+if-youre-learning-kafka-this-article.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/if-youre-learning-kafka-this-article.md
+is-your-data-valid-why-bufstream.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/is-your-data-valid-why-bufstream.md
+kafka-migration-with-zero-downtime.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/kafka-migration-with-zero-downtime.md
+stream-kafka-topic-to-the-iceberg.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/stream-kafka-topic-to-the-iceberg.md
+the-company-that-created-kafka-is.md:
+  copied: '2026-07-10'
+  source: /Users/syedamberiqbal/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian
+    Vault/Substack/posts/vutr/the-company-that-created-kafka-is.md
