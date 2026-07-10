@@ -3,7 +3,7 @@ persona: alex
 kind: concept
 sources:
 - vutr/adaptive-query-execution
-last_updated: '2026-07-09'
+last_updated: '2026-07-10'
 qc: passed
 slug: adaptive-query-execution
 topics:
@@ -13,24 +13,10 @@ source_note: adaptive-query-execution
 mastery: mastered
 ---
 
-Here's how I'd say it back. A normal Spark query gets planned ONCE at the start, and the planner is guessing at data sizes with a cost model. AQE (new in Spark 3.0) refuses to commit to those guesses. The trick is the query-stage boundary. A shuffle or broadcast exchange splits the plan into stages, and because the map side of a shuffle has to fully finish and write to disk before the reduce side reads, there's a forced pause there. That pause is a checkpoint where Spark can peek at the shuffle output that was really written and get REAL statistics — actual total size, actual per-partition sizes — instead of estimates. Then it re-optimizes the rest of the plan before running it. With the real numbers it can: coalesce the dumb fixed 200 shuffle partitions down to a sensible number if the data is small; flip a Sort Merge Join into a Broadcast Hash Join if a side really came in under the 10MB broadcast threshold; and split a skewed partition apart so one monster task doesn't OOM. So the whole idea is: the exchange boundary buys a pause, the pause buys real statistics, and real statistics buy a smarter plan for the part that hasn't run yet.
+Wait, so — okay, I think I had it backwards. I thought Spark basically wrote out the *entire* route before the trip even started, like typing an address into GPS once and just driving blind even if there's traffic. But that's not it. It's more like a road trip where Spark is only allowed to check traffic conditions at rest stops — and the rest stops are the stage boundaries, because that's the point where every car (partition) has already arrived and the results are physically written down. Spark can't peek at traffic mid-highway, only at the stop, because the next leg of the trip literally can't start until everyone's pulled in anyway. So AQE isn't adding a new pause — it's just finally using a pause that was already happening.
 
-```mermaid
-flowchart TD
-    A[Catalyst plans query with ESTIMATED stats] --> B[Run first stage]
-    B --> C{Shuffle or broadcast exchange?}
-    C -->|Yes| D[Query-stage boundary: map side writes to disk / broadcast built]
-    D --> E[PAUSE at boundary]
-    E --> F[Read REAL runtime statistics: true output size + per-partition sizes]
-    F --> G[Re-optimize remaining plan]
-    G --> H[Coalesce 200 shuffle partitions to right-sized count]
-    G --> I[Switch join strategy: SMJ to Broadcast Hash Join under 10MB]
-    G --> J[Handle skew: split skewed partition apart]
-    H --> K[Run next stage with improved plan]
-    I --> K
-    J --> K
-    K --> C
-    C -->|No more stages| L[Final result]
-```
+And then at that rest stop it does three things. If the 200 default shuffle partitions turn out to be way more lanes than it needs — like the TPC-H example where 200 collapsed into basically one — it merges them so it's not paying overhead moving between a bunch of near-empty lanes. If one lane got way overloaded instead, it splits it so one truck isn't holding up the whole convoy. And for joins, it's not guessing anymore whether the small side fits in memory — pre-Spark-3 it always played it safe with sort-merge join because a shuffle-hash join that guesses wrong just crashes (OOM) if a partition is bigger than expected from skew, while sort-merge can just spill to disk. Now that it has the real post-shuffle size at the rest stop, it can actually risk the faster hash join, or even upgrade to a broadcast join, when the real numbers say it's safe.
+
+The part that clicked hardest: this isn't AQE being magic, it's AQE cashing in a pause Spark was going to take anyway.
 
 *Source: [[adaptive-query-execution]] (vutr)*
