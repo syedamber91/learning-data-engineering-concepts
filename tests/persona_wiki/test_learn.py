@@ -156,7 +156,7 @@ def test_write_concept_note_frontmatter_provenance(tmp_path):
 
 
 def test_write_qa_note_is_numbered(tmp_path):
-    p = write_qa_note(tmp_path, 2, _result(), "2026-07-09")
+    p = write_qa_note(tmp_path, "spark", 2, _result(), "2026-07-09")
     assert p == tmp_path / "qa/002-rdd.md"
     text = p.read_text(encoding="utf-8")
     assert "why lazy?" in text and "builds a DAG" in text
@@ -183,7 +183,7 @@ def test_write_mastery_table_and_percent(tmp_path):
     order = ["spark-origin", "rdd", "lazy-evaluation", "catalyst-optimizer"]
     levels = {"spark-origin": "mastered", "rdd": "mastered",
               "lazy-evaluation": "familiar", "catalyst-optimizer": "mastered"}
-    p = write_mastery(tmp_path, order, levels, "2026-07-09")
+    p = write_mastery(tmp_path, "spark", order, levels, "2026-07-09")
     text = p.read_text(encoding="utf-8")
     assert "| rdd | mastered |" in text
     assert "75%" in text and "3 mastered / 4" in text
@@ -195,8 +195,8 @@ def test_transcript_section_and_no_duplicate(tmp_path):
     r = ConceptResult(slug="rdd", explanation="RDDs are lazy.", restatement="RDD = lazy",
                       questions=["why lazy?"], answers=["builds a DAG"], mermaid="graph TD;A-->B",
                       level="mastered", reason="covered it")
-    upsert_transcript(tmp_path, 2, r)
-    upsert_transcript(tmp_path, 2, r)
+    upsert_transcript(tmp_path, "spark", 2, r)
+    upsert_transcript(tmp_path, "spark", 2, r)
     text = (tmp_path / "transcript.md").read_text(encoding="utf-8")
     assert text.count("## 2. rdd") == 1
     assert "RDDs are lazy." in text and "RDD = lazy" in text
@@ -327,3 +327,16 @@ def test_concept_order_with_preferred():
     avail = {"consumer-pull": "a", "broker-log": "b", "zz-extra": "c"}
     assert concept_order(avail, ["broker-log", "consumer-pull", "not-there"]) == \
         ["broker-log", "consumer-pull", "zz-extra"]
+
+
+def test_concept_order_restrict_drops_extras():
+    """A topic-note-driven curriculum is authoritative: cross-tagged concepts
+    not in the preferred list are excluded, not appended."""
+    from persona_wiki.learn import concept_order
+    avail = {"broker-log": "a", "producer": "b", "stale-cross-tag": "c"}
+    # default: extras appended
+    assert concept_order(avail, ["broker-log", "producer"]) == \
+        ["broker-log", "producer", "stale-cross-tag"]
+    # restrict: extras dropped
+    assert concept_order(avail, ["broker-log", "producer"], restrict=True) == \
+        ["broker-log", "producer"]

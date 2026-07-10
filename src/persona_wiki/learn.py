@@ -55,11 +55,20 @@ def topic_order(root: Path, topic: str) -> List[str]:
 
 
 def concept_order(available: Dict[str, str],
-                  preferred: Optional[List[str]] = None) -> List[str]:
+                  preferred: Optional[List[str]] = None,
+                  restrict: bool = False) -> List[str]:
     """Preferred order restricted to available slugs, extras appended sorted.
-    Defaults to SPARK_ORDER (the original curated Spark curriculum)."""
+    Defaults to SPARK_ORDER (the original curated Spark curriculum).
+
+    With ``restrict=True`` the preferred list is authoritative: cross-tagged
+    concepts not named in it are dropped rather than appended. Used when the
+    curriculum comes from a topic note's Related line (spec §5), so stale
+    snapshot-era notes that merely share the topic tag never enter the course.
+    """
     pref = preferred if preferred is not None else SPARK_ORDER
     ordered = [s for s in pref if s in available]
+    if restrict:
+        return ordered
     extra = sorted(s for s in available if s not in ordered)
     return ordered + extra
 
@@ -181,7 +190,7 @@ def write_concept_note(learn_root: Path, topic: str, r: ConceptResult, stamp: st
     return write_note(learn_root, f"{atomic_dir('concept')}/{r.slug}.md", fm, render_concept_body(r))
 
 
-def write_qa_note(learn_root: Path, order_idx: int, r: ConceptResult, stamp: str) -> Path:
+def write_qa_note(learn_root: Path, topic: str, order_idx: int, r: ConceptResult, stamp: str) -> Path:
     qa_lines = ["## Follow-up questions"]
     for i, q in enumerate(r.questions):
         a = r.answers[i] if i < len(r.answers) else "(the wiki does not cover this — see open questions)"
@@ -192,7 +201,7 @@ def write_qa_note(learn_root: Path, order_idx: int, r: ConceptResult, stamp: str
     )
     fm = NoteFrontmatter(
         persona="alex", kind="concept", slug=f"{order_idx:03d}-{r.slug}",
-        sources=[f"vutr/{r.slug}"], last_updated=stamp, topics=["spark"],
+        sources=[f"vutr/{r.slug}"], last_updated=stamp, topics=[topic],
         learner="alex", source_note=r.slug, mastery=r.level,
     )
     return write_note(learn_root, f"qa/{order_idx:03d}-{r.slug}.md", fm, body)
@@ -224,13 +233,13 @@ def append_open_questions(learn_root: Path, r: ConceptResult, stamp: str) -> Non
     _safe_write(learn_root, "open-questions.md", text.rstrip() + "\n" + "\n".join(lines) + "\n")
 
 
-def write_mastery(learn_root: Path, order: List[str], levels: Dict[str, str], stamp: str) -> Path:
+def write_mastery(learn_root: Path, topic: str, order: List[str], levels: Dict[str, str], stamp: str) -> Path:
     n = len(order)
     mastered = sum(1 for s in order if levels.get(s) == "mastered")
     pct = round(100 * mastered / n) if n else 0
     rows = "\n".join(f"| {s} | {levels.get(s, 'not started')} |" for s in order)
     text = (
-        "# Alex's Spark mastery\n\n"
+        f"# Alex's {topic.title()} mastery\n\n"
         f"**Overall: {pct}% ({mastered} mastered / {n})** — updated {stamp}\n\n"
         "| concept | level |\n|---|---|\n" + rows + "\n"
     )
@@ -239,10 +248,11 @@ def write_mastery(learn_root: Path, order: List[str], levels: Dict[str, str], st
 
 # ---------------------------------------------------------------- capture: transcript
 
-_TRANSCRIPT_HEADER = (
-    "# Alex learns Apache Spark — transcript\n\n"
-    "*Full dialogue of the learning run, in order. See [[mastery]].*\n"
-)
+def _transcript_header(topic: str) -> str:
+    return (
+        f"# Alex learns {topic.title()} — transcript\n\n"
+        "*Full dialogue of the learning run, in order. See [[mastery]].*\n"
+    )
 
 
 def _transcript_section(order_idx: int, r: ConceptResult) -> str:
@@ -258,9 +268,9 @@ def _transcript_section(order_idx: int, r: ConceptResult) -> str:
     )
 
 
-def upsert_transcript(learn_root: Path, order_idx: int, r: ConceptResult) -> Path:
+def upsert_transcript(learn_root: Path, topic: str, order_idx: int, r: ConceptResult) -> Path:
     path = learn_root / "transcript.md"
-    text = path.read_text(encoding="utf-8") if path.exists() else _TRANSCRIPT_HEADER
+    text = path.read_text(encoding="utf-8") if path.exists() else _transcript_header(topic)
     section = _transcript_section(order_idx, r)
     pat = re.compile(rf"(?ms)^## {order_idx}\. {re.escape(r.slug)}\b.*?(?=^## |\Z)")
     if pat.search(text):
@@ -290,7 +300,9 @@ def learn(learn_root: Path, vutr_root: Path, topic: str, llm: LLMFn, stamp: str,
     learn_root.mkdir(parents=True, exist_ok=True)
     concepts = load_topic_concepts(vutr_root, topic)
     preferred = topic_order(vutr_root, topic)
-    order = concept_order(concepts, preferred or None)
+    # A topic note's Related line is the authoritative curriculum — drop any
+    # concept merely cross-tagged with this topic (e.g. stale snapshot notes).
+    order = concept_order(concepts, preferred or None, restrict=bool(preferred))
     idx_of = {slug: i + 1 for i, slug in enumerate(order)}
     levels = _prior_levels(learn_root)
     index = load_index(learn_root)
@@ -307,18 +319,18 @@ def learn(learn_root: Path, vutr_root: Path, topic: str, llm: LLMFn, stamp: str,
                 continue
             levels[slug] = r.level
             write_concept_note(learn_root, topic, r, stamp)
-            write_qa_note(learn_root, idx_of[slug], r, stamp)
+            write_qa_note(learn_root, topic, idx_of[slug], r, stamp)
             append_open_questions(learn_root, r, stamp)
-            upsert_transcript(learn_root, idx_of[slug], r)
+            upsert_transcript(learn_root, topic, idx_of[slug], r)
             register_atomic(index, "concept", slug, topic, stamp)
         if all(levels.get(s) == "mastered" for s in order):
             break
 
     save_index(learn_root, index)
-    write_mastery(learn_root, order, levels, stamp)
+    write_mastery(learn_root, topic, order, levels, stamp)
     total = len(order)
     mastered = sum(1 for s in order if levels.get(s) == "mastered")
     pct = round(100 * mastered / total) if total else 0
     log_ingest(learn_root / "log.md", index.total(),
-               f"{mastered}/{total} Spark concepts mastered", stamp)
+               f"{mastered}/{total} {topic} concepts mastered", stamp)
     return {"total": total, "mastered": mastered, "pct": pct, "failed": failed}
