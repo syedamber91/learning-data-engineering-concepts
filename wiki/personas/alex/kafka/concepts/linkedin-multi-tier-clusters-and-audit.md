@@ -1,0 +1,18 @@
+---
+persona: alex
+kind: concept
+sources:
+- vutr/linkedin-multi-tier-clusters-and-audit
+last_updated: '2026-07-10'
+qc: passed
+slug: linkedin-multi-tier-clusters-and-audit
+topics:
+- kafka
+learner: alex
+source_note: linkedin-multi-tier-clusters-and-audit
+mastery: mastered
+---
+
+Wait, so the whole point is that LinkedIn's cleverness isn't 'we bought 4,000 brokers' — it's how they organized them. Let me try it with my own picture. Imagine a school with campuses in different cities. Each campus has its own mailroom for each *kind* of mail — one for monitoring mail, one for logging mail, one for tracking mail. Students and teachers (producers and consumers) only ever walk to the mailroom on their own campus, never drive to another city. Then for the stuff that needs a whole-school view — like building the search index, which needs everyone's data — there's a central sorting facility per mail category (the aggregate cluster), and couriers haul mail from every campus mailroom to it. So the flow is producer → local cluster → aggregate cluster → consumer, and the cross-city driving is done only by the couriers, never by the students. But that means the courier service itself becomes a real system you have to run — they first used Mirror Maker, it couldn't keep up, so they built Brooklin to replace it. And because mail now takes multiple hops, you can't just *assume* it all arrived — so they count it like a bus driver counts kids: every producer keeps a tally of messages sent per time window and publishes the tally into a special auditing topic, and audit consumers reading alongside the real consumers publish their own tallies into that same topic. If the two tallies disagree, you know something's wrong, and the header metadata in every message (timestamp, physical server, service) tells you exactly which service and host to blame. The third piece is basically 'how to keep your own edited copy of the textbook in sync with the official edition': keep the internal branch close to Apache Kafka, push normal features upstream first then cherry-pick back, but land emergency production fixes internally first and upstream them later.
+
+*Source: [[linkedin-multi-tier-clusters-and-audit]] (vutr)*
