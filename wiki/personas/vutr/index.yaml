@@ -1225,3 +1225,13 @@ concepts:
     topics:
     - spark
     last_updated: '2026-07-11'
+  isolation-levels-and-mvcc:
+    file: concepts/isolation-levels-and-mvcc.md
+    topics:
+    - transactions
+    last_updated: '2026-07-15'
+  raft-backed-coordination:
+    file: concepts/raft-backed-coordination.md
+    topics:
+    - consensus
+    last_updated: '2026-07-15'
