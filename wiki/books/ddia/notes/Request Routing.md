@@ -28,6 +28,4 @@ Once a dataset is partitioned and rebalancing moves partitions around, a client 
 - [[Rebalancing Partitions]] — the churn that makes routing hard
 - [[Membership and Coordination Services]] — Chapter 9's deep dive on ZooKeeper-style services
 - [[Fault-Tolerant Consensus]] — the agreement problem underneath routing metadata
-
-## Related in the other wiki
 - [[consumer-groups-and-partition-assignment]] — this note's routing question (who authoritatively knows the partition-to-node map, and how do participants learn about changes) recurs at consumer-group scope in Kafka: the Group Coordinator holds authoritative membership while the group leader computes and propagates the partition assignment.

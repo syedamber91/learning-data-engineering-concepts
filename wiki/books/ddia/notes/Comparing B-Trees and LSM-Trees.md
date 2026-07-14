@@ -40,6 +40,4 @@ The contrasts here map to RocksDB/LevelDB/Cassandra/HBase (LSM side) versus Inno
 - [[SSTables and LSM-Trees]] — mechanism behind the log-structured column
 - [[Describing Performance]] — percentile latency framing used here
 - [[Compaction]] — the background process driving both LSM costs and gains
-
-## Related in the other wiki
 - [[lsm-tree-storage-engines]] — Vu's own LSM-vs-B-tree comparison (his "Comparisons" section) independently reaches the same write-vs-read trade-off this chapter formalizes via write amplification.

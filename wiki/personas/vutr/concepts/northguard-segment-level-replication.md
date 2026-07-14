@@ -28,6 +28,5 @@ Metadata gets the same decentralizing treatment. Instead of a controller ([[zook
 The trade-off is brutal honesty about compatibility. Most Kafka alternatives keep the Kafka protocol non-negotiable and swap in object storage ([[diskless-kafka-trade-off-framework]], [[warpstream-stateless-agent-architecture]]); LinkedIn concluded the Kafka protocol couldn't deliver their goals, kept local disk for latency, and paid for it with a hard migration — Xinfra, a virtualized Pub/Sub layer over both systems, using dual writes with producers migrated before consumers ([[zero-downtime-migration-dual-write]]). Northguard wins load balancing; it loses the ecosystem. That's why it likely won't replace Kafka outside LinkedIn — few companies have LinkedIn's latency and throughput requirements, or its resources.
 
 ## Related in the other wiki
-
 - [[Implementation of Replication Logs]] — DDIA catalogs the wire formats a replication log can take (WAL shipping, logical logs, etc.); Northguard's redesign shows a real system choosing the unit of replication (segment vs. whole partition) as an equally consequential design axis.
 - [[Replication]] — DDIA's Replication concept lays out why keeping copies in sync is hard in general; Northguard is a real-world redesign of that sync mechanism at finer (segment) granularity to fix Kafka's operational problems at LinkedIn scale.

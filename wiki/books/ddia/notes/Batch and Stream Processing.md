@@ -36,8 +36,6 @@ Spark (microbatches), Apache Flink (stream-first batch), Storm (lambda's speed l
 - [[Fault Tolerance]] — exactly-once machinery in stream processors
 - [[The Output of Batch Workflows]] — what derived outputs look like
 - [[State, Streams, and Immutability]] — immutable event logs underlying lambda
-
-## Related in the other wiki
 - [[lambda-architecture]] — vutr's sharper verdict that Lambda "does not actually solve completeness — it just papers over the gap," complementing this note's account of lambda's dual-codebase costs.
 - [[kappa-architecture]] — vutr's name for the "unification instead" alternative this note describes: replaying history through one stream-processing codebase via log replay.
 - [[lambda-vs-kappa]] — vutr's production case studies (Uber/LinkedIn kept Lambda, Twitter pivoted to Kappa) showing how real teams resolved the trade-off this note lays out.

@@ -26,6 +26,5 @@ That double cost is exactly what the newer architectures attack. Tiered storage 
 The correct mental model, then: leader-follower replication is how shared-nothing Kafka buys durability and failover on local disks, at the price of network-heavy rebalancing and doubled cross-AZ fees. Whether that price is worth paying is precisely the question the diskless generation was built to reopen.
 
 ## Related in the other wiki
-
 - [[Leaders and Followers]] — DDIA's chapter explains the general single-leader replication model — writes serialized through one leader, followers apply in order — that Kafka's partition leader/follower mechanism is a concrete instance of.
 - [[Replication]] — DDIA's Replication concept frames the fault-tolerance/read-scaling trade-offs this Kafka-specific mechanism instantiates in a single, concrete leader-based system.

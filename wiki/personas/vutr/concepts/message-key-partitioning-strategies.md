@@ -29,3 +29,4 @@ Downstream, the partitioning choice is also a parallelism choice: a topic's part
 ## Related in the other wiki
 - [[Partitioning by Hash of Key]] — DDIA's hash-partitioning trade-offs (stable hash function required, range queries sacrificed, hot spots reduced but not eliminated) are the general theory behind why Kafka's non-null-key partitioner always routes the same key to the same partition.
 - [[Sharding]] — DDIA uses "sharding" as a synonym for splitting a dataset across nodes by key; Kafka's message-key routing is that same idea under its own vocabulary, with the key hash acting as the shard key.
+- [[Detecting Concurrent Writes]] — DDIA's version-vector machinery exists because leaderless stores let multiple replicas accept writes for the same key at once; routing every message for a key to a single partition with a single sequential writer is how Kafka avoids needing that machinery at all.

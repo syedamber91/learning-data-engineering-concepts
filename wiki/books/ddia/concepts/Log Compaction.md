@@ -28,5 +28,4 @@ self-sufficient.
 - [[Uses of Stream Processing]]
 
 ## Related in the other wiki
-
 - [[compaction]] — Vu's note describes the SSTable-merging mechanics (Size-Tiered vs. Leveled) of the same log-compaction idea DDIA describes abstractly as keeping only the latest value per key.

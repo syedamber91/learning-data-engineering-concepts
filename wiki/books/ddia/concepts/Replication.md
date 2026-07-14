@@ -46,6 +46,5 @@ partition) and underpins [[Linearizability]] questions in Ch 9.
 - [[Use Cases for Multi-Leader Replication]]
 
 ## Related in the other wiki
-
 - [[leader-follower-replication]] — Kafka's leader-follower partition replication is a concrete single-leader implementation of the general replication trade-offs (durability vs. cost) this concept note surveys.
 - [[northguard-segment-level-replication]] — Northguard shows how the general replication concept's fault-tolerance goal can be pursued at a different granularity (segments, not whole partitions) to solve real operational problems at LinkedIn's scale.

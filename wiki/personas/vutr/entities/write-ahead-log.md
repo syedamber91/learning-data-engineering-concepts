@@ -16,5 +16,4 @@ The write-ahead log's core principle is that a data change must be recorded in t
 *See also: [[log-based-cdc]] · [[read-replica]] · [[query-based-cdc]] · [[secrets-manager]] · [[trigger-based-cdc]] · [[silent-drift-from-hard-deletion]]*
 
 ## Related in the other wiki
-
 - [[Write-Ahead Log]] — DDIA traces the WAL principle back to B-tree crash recovery and forward to replication logs, CDC, and event sourcing — the general form of the durability guarantee this note applies specifically to LSM-trees and log-based CDC.

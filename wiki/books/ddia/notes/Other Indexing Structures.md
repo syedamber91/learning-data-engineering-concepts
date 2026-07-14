@@ -41,7 +41,5 @@ InnoDB, SQL Server, PostGIS/PostgreSQL, HyperDex, Lucene, Memcached, VoltDB, Mem
 - [[Partitioning and Secondary Indexes]] — how these indexes shard across nodes
 - [[SSTables and LSM-Trees]] — Lucene's term dictionary uses this layout
 - [[Many-to-One and Many-to-Many Relationships]] — why joins need secondary indexes
-
-## Related in the other wiki
 - [[write-amplification-tradeoff]] — the clustered/covering-index trade-off here (read speed bought with write overhead and extra storage) is the same pay-now-for-read-later tax Vu frames as write amplification for B+Trees vs LSM-trees.
 - [[sequential-vs-random-io]] — the in-memory databases described here are the extreme case of this concept's I/O gap: no disk seeks at all once the index and data both live in RAM.

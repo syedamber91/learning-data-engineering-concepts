@@ -30,6 +30,4 @@ sources:
 - [[Batch Processing with Unix Tools]] — the single-machine philosophy this generalizes
 - [[Beyond MapReduce]] — dataflow engines that fix its performance problems
 - [[Partitioning by Hash of Key]] — the Chapter 6 mechanism reused in the shuffle
-
-## Related in the other wiki
 - [[hadoop-mapreduce]] — vutr's brief history of MapReduce's decline (Google dropped it internally by 2014) after enterprises struggled to tailor processing logic to its rigid paradigm.

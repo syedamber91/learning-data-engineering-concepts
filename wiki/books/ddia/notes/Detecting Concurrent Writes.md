@@ -44,3 +44,6 @@ Cassandra (LWW-only), Riak (optional LWW, siblings, CRDTs, dotted version vector
 - [[Handling Write Conflicts]] — the multi-leader twin of this problem
 - [[Multi-Leader Replication Topologies]] — where causal ordering first broke down
 - [[Ordering and Causality]] — happens-before generalized in Chapter 9
+
+## Related in the other wiki
+- [[message-key-partitioning-strategies]] — Kafka sidesteps this note's concurrent-write problem by construction rather than detection: routing every message for a given key to one partition, consumed by exactly one consumer, gives that key a single sequential writer, so there is no concurrent write to reconcile with version vectors in the first place.

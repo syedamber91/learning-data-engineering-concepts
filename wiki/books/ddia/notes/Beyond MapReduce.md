@@ -28,7 +28,5 @@ sources:
 - [[MapReduce and Distributed Filesystems]] — the baseline these systems improve on
 - [[Batch Processing with Unix Tools]] — dataflow engines are the return of Unix pipes
 - [[Processing Streams]] — the stream-processing continuation of this arc
-
-## Related in the other wiki
 - [[rdd-fundamentals-and-properties]] — vutr's mechanical breakdown of the RDD lineage-based recomputation this note names as Spark's answer to MapReduce's forced disk materialization.
 - [[jobs-stages-tasks-dag-and-dependencies]] — vutr's concrete account of how Spark's DAGScheduler draws stage boundaries at shuffle points, the mechanism behind this note's claim that dataflow engines "only sort where needed."
