@@ -1,0 +1,1157 @@
+book: Designing Data-Intensive Applications
+chapters:
+  Ch 11 - Stream Processing:
+    file: chapters/Ch 11 - Stream Processing.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Ch 10 - Batch Processing:
+    file: chapters/Ch 10 - Batch Processing.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Ch 07 - Transactions:
+    file: chapters/Ch 07 - Transactions.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Ch 01 - Reliable, Scalable, and Maintainable Applications:
+    file: chapters/Ch 01 - Reliable, Scalable, and Maintainable Applications.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Ch 08 - The Trouble with Distributed Systems:
+    file: chapters/Ch 08 - The Trouble with Distributed Systems.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Ch 06 - Partitioning:
+    file: chapters/Ch 06 - Partitioning.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Ch 05 - Replication:
+    file: chapters/Ch 05 - Replication.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Ch 02 - Data Models and Query Languages:
+    file: chapters/Ch 02 - Data Models and Query Languages.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Ch 04 - Encoding and Evolution:
+    file: chapters/Ch 04 - Encoding and Evolution.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Part III - Derived Data:
+    file: chapters/Part III - Derived Data.md
+    sources:
+    - partI.md
+    last_updated: '2026-07-15'
+  Part II - Distributed Data:
+    file: chapters/Part II - Distributed Data.md
+    sources:
+    - partI.md
+    last_updated: '2026-07-15'
+  Part I - Foundations of Data Systems:
+    file: chapters/Part I - Foundations of Data Systems.md
+    sources:
+    - partI.md
+    last_updated: '2026-07-15'
+  Ch 03 - Storage and Retrieval:
+    file: chapters/Ch 03 - Storage and Retrieval.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Ch 12 - The Future of Data Systems:
+    file: chapters/Ch 12 - The Future of Data Systems.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Ch 09 - Consistency and Consensus:
+    file: chapters/Ch 09 - Consistency and Consensus.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+topics:
+  Partitioning of Key-Value Data:
+    file: notes/Partitioning of Key-Value Data.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Unbundling Databases:
+    file: notes/Unbundling Databases.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Serializability:
+    file: notes/Serializability.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Scalability:
+    file: notes/Scalability.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Transmitting Event Streams:
+    file: notes/Transmitting Event Streams.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Formats for Encoding Data:
+    file: notes/Formats for Encoding Data.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Problems with Replication Lag:
+    file: notes/Problems with Replication Lag.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Unreliable Clocks:
+    file: notes/Unreliable Clocks.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  MapReduce and Distributed Filesystems:
+    file: notes/MapReduce and Distributed Filesystems.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Data Structures That Power Your Database:
+    file: notes/Data Structures That Power Your Database.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Unreliable Networks:
+    file: notes/Unreliable Networks.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Faults and Partial Failures:
+    file: notes/Faults and Partial Failures.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Column-Oriented Storage:
+    file: notes/Column-Oriented Storage.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Multi-Leader Replication:
+    file: notes/Multi-Leader Replication.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Thinking About Data Systems:
+    file: notes/Thinking About Data Systems.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Linearizability:
+    file: notes/Linearizability.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Graph-Like Data Models:
+    file: notes/Graph-Like Data Models.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Batch Processing with Unix Tools:
+    file: notes/Batch Processing with Unix Tools.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Transaction Processing or Analytics:
+    file: notes/Transaction Processing or Analytics.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Processing Streams:
+    file: notes/Processing Streams.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Aiming for Correctness:
+    file: notes/Aiming for Correctness.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Ordering Guarantees:
+    file: notes/Ordering Guarantees.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Consistency Guarantees:
+    file: notes/Consistency Guarantees.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Leaderless Replication:
+    file: notes/Leaderless Replication.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Reliability:
+    file: notes/Reliability.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Doing the Right Thing:
+    file: notes/Doing the Right Thing.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Partitioning and Replication:
+    file: notes/Partitioning and Replication.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Beyond MapReduce:
+    file: notes/Beyond MapReduce.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Databases and Streams:
+    file: notes/Databases and Streams.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Maintainability:
+    file: notes/Maintainability.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Query Languages for Data:
+    file: notes/Query Languages for Data.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Modes of Dataflow:
+    file: notes/Modes of Dataflow.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Distributed Transactions and Consensus:
+    file: notes/Distributed Transactions and Consensus.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Request Routing:
+    file: notes/Request Routing.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Data Integration:
+    file: notes/Data Integration.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Leaders and Followers:
+    file: notes/Leaders and Followers.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Knowledge, Truth, and Lies:
+    file: notes/Knowledge, Truth, and Lies.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Weak Isolation Levels:
+    file: notes/Weak Isolation Levels.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Relational Model Versus Document Model:
+    file: notes/Relational Model Versus Document Model.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  The Slippery Concept of a Transaction:
+    file: notes/The Slippery Concept of a Transaction.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Rebalancing Partitions:
+    file: notes/Rebalancing Partitions.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Partitioning and Secondary Indexes:
+    file: notes/Partitioning and Secondary Indexes.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+concepts:
+  Graphs and Iterative Processing:
+    file: notes/Graphs and Iterative Processing.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  MapReduce Job Execution:
+    file: notes/MapReduce Job Execution.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Enforcing Constraints:
+    file: notes/Enforcing Constraints.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Solutions for Replication Lag:
+    file: notes/Solutions for Replication Lag.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Graph Queries in SQL:
+    file: notes/Graph Queries in SQL.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Consistent Prefix Reads:
+    file: notes/Consistent Prefix Reads.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Partitioning Secondary Indexes by Document:
+    file: notes/Partitioning Secondary Indexes by Document.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Aggregation - Data Cubes and Materialized Views:
+    file: notes/Aggregation - Data Cubes and Materialized Views.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Predictive Analytics:
+    file: notes/Predictive Analytics.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Evolvability - Making Change Easy:
+    file: notes/Evolvability - Making Change Easy.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Stars and Snowflakes - Schemas for Analytics:
+    file: notes/Stars and Snowflakes - Schemas for Analytics.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  The Cypher Query Language:
+    file: notes/The Cypher Query Language.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Message-Passing Dataflow:
+    file: notes/Message-Passing Dataflow.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Synchronous Versus Asynchronous Replication:
+    file: notes/Synchronous Versus Asynchronous Replication.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Preventing Lost Updates:
+    file: notes/Preventing Lost Updates.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Partitioned Logs:
+    file: notes/Partitioned Logs.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  State, Streams, and Immutability:
+    file: notes/State, Streams, and Immutability.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Describing Performance:
+    file: notes/Describing Performance.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Reading Your Own Writes:
+    file: notes/Reading Your Own Writes.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  The Meaning of ACID:
+    file: notes/The Meaning of ACID.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Observing Derived State:
+    file: notes/Observing Derived State.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Privacy and Tracking:
+    file: notes/Privacy and Tracking.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Two-Phase Locking (2PL):
+    file: notes/Two-Phase Locking (2PL).md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Other Indexing Structures:
+    file: notes/Other Indexing Structures.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  High-Level APIs and Languages:
+    file: notes/High-Level APIs and Languages.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Composing Data Storage Technologies:
+    file: notes/Composing Data Storage Technologies.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Synchronous Versus Asynchronous Networks:
+    file: notes/Synchronous Versus Asynchronous Networks.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Designing Applications Around Dataflow:
+    file: notes/Designing Applications Around Dataflow.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Monotonic Reads:
+    file: notes/Monotonic Reads.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Triple-Stores and SPARQL:
+    file: notes/Triple-Stores and SPARQL.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Membership and Coordination Services:
+    file: notes/Membership and Coordination Services.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Human Errors:
+    file: notes/Human Errors.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Parallel Query Execution:
+    file: notes/Parallel Query Execution.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Event Sourcing:
+    file: notes/Event Sourcing.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Snapshot Isolation and Repeatable Read:
+    file: notes/Snapshot Isolation and Repeatable Read.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  The Merits of Schemas:
+    file: notes/The Merits of Schemas.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Clock Synchronization and Accuracy:
+    file: notes/Clock Synchronization and Accuracy.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Reasoning About Time:
+    file: notes/Reasoning About Time.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Relying on Synchronized Clocks:
+    file: notes/Relying on Synchronized Clocks.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  The Truth Is Defined by the Majority:
+    file: notes/The Truth Is Defined by the Majority.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Sloppy Quorums and Hinted Handoff:
+    file: notes/Sloppy Quorums and Hinted Handoff.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Approaches for Coping with Load:
+    file: notes/Approaches for Coping with Load.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Thrift and Protocol Buffers:
+    file: notes/Thrift and Protocol Buffers.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Simple Log Analysis:
+    file: notes/Simple Log Analysis.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Process Pauses:
+    file: notes/Process Pauses.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  The Output of Batch Workflows:
+    file: notes/The Output of Batch Workflows.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Setting Up New Followers:
+    file: notes/Setting Up New Followers.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Ordering and Causality:
+    file: notes/Ordering and Causality.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  What Makes a System Linearizable:
+    file: notes/What Makes a System Linearizable.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Operability - Making Life Easy for Operations:
+    file: notes/Operability - Making Life Easy for Operations.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Data Warehousing:
+    file: notes/Data Warehousing.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Monotonic Versus Time-of-Day Clocks:
+    file: notes/Monotonic Versus Time-of-Day Clocks.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  The Unix Philosophy:
+    file: notes/The Unix Philosophy.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  The Birth of NoSQL:
+    file: notes/The Birth of NoSQL.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Write Skew and Phantoms:
+    file: notes/Write Skew and Phantoms.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Uses of Stream Processing:
+    file: notes/Uses of Stream Processing.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  The Foundation - Datalog:
+    file: notes/The Foundation - Datalog.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Declarative Queries on the Web:
+    file: notes/Declarative Queries on the Web.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Partitioning by Key Range:
+    file: notes/Partitioning by Key Range.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Many-to-One and Many-to-Many Relationships:
+    file: notes/Many-to-One and Many-to-Many Relationships.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Property Graphs:
+    file: notes/Property Graphs.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Materialization of Intermediate State:
+    file: notes/Materialization of Intermediate State.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Strategies for Rebalancing:
+    file: notes/Strategies for Rebalancing.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Combining Specialized Tools by Deriving Data:
+    file: notes/Combining Specialized Tools by Deriving Data.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Sort Order in Column Storage:
+    file: notes/Sort Order in Column Storage.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Reduce-Side Joins and Grouping:
+    file: notes/Reduce-Side Joins and Grouping.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Handling Write Conflicts:
+    file: notes/Handling Write Conflicts.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  JSON, XML, and Binary Variants:
+    file: notes/JSON, XML, and Binary Variants.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Software Errors:
+    file: notes/Software Errors.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Timeouts and Unbounded Delays:
+    file: notes/Timeouts and Unbounded Delays.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Operations - Automatic or Manual Rebalancing:
+    file: notes/Operations - Automatic or Manual Rebalancing.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  MapReduce Querying:
+    file: notes/MapReduce Querying.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Stream Joins:
+    file: notes/Stream Joins.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Avro:
+    file: notes/Avro.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Multi-Leader Replication Topologies:
+    file: notes/Multi-Leader Replication Topologies.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Detecting Faults:
+    file: notes/Detecting Faults.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Dataflow Through Services - REST and RPC:
+    file: notes/Dataflow Through Services - REST and RPC.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Limitations of Quorum Consistency:
+    file: notes/Limitations of Quorum Consistency.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Comparing Hadoop to Distributed Databases:
+    file: notes/Comparing Hadoop to Distributed Databases.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Read Committed:
+    file: notes/Read Committed.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Writing to the Database When a Node Is Down:
+    file: notes/Writing to the Database When a Node Is Down.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Serializable Snapshot Isolation (SSI):
+    file: notes/Serializable Snapshot Isolation (SSI).md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  B-Trees:
+    file: notes/B-Trees.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Simplicity - Managing Complexity:
+    file: notes/Simplicity - Managing Complexity.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Writing to Column-Oriented Storage:
+    file: notes/Writing to Column-Oriented Storage.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  SSTables and LSM-Trees:
+    file: notes/SSTables and LSM-Trees.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Relying on Linearizability:
+    file: notes/Relying on Linearizability.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Batch and Stream Processing:
+    file: notes/Batch and Stream Processing.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Partitioning Secondary Indexes by Term:
+    file: notes/Partitioning Secondary Indexes by Term.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Dataflow Through Databases:
+    file: notes/Dataflow Through Databases.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Skewed Workloads and Relieving Hot Spots:
+    file: notes/Skewed Workloads and Relieving Hot Spots.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  The End-to-End Argument for Databases:
+    file: notes/The End-to-End Argument for Databases.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Relational Versus Document Databases Today:
+    file: notes/Relational Versus Document Databases Today.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Implementation of Replication Logs:
+    file: notes/Implementation of Replication Logs.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Atomic Commit and Two-Phase Commit (2PC):
+    file: notes/Atomic Commit and Two-Phase Commit (2PC).md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Use Cases for Multi-Leader Replication:
+    file: notes/Use Cases for Multi-Leader Replication.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Single-Object and Multi-Object Operations:
+    file: notes/Single-Object and Multi-Object Operations.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Column Compression:
+    file: notes/Column Compression.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  The Cost of Linearizability:
+    file: notes/The Cost of Linearizability.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Handling Node Outages:
+    file: notes/Handling Node Outages.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Hash Indexes:
+    file: notes/Hash Indexes.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Are Document Databases Repeating History:
+    file: notes/Are Document Databases Repeating History.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Byzantine Faults:
+    file: notes/Byzantine Faults.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Total Order Broadcast:
+    file: notes/Total Order Broadcast.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Implementing Linearizable Systems:
+    file: notes/Implementing Linearizable Systems.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Partitioning by Hash of Key:
+    file: notes/Partitioning by Hash of Key.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Language-Specific Formats:
+    file: notes/Language-Specific Formats.md
+    sources:
+    - ch04.md
+    last_updated: '2026-07-15'
+  Actual Serial Execution:
+    file: notes/Actual Serial Execution.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  System Model and Reality:
+    file: notes/System Model and Reality.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Hardware Faults:
+    file: notes/Hardware Faults.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  How Important Is Reliability:
+    file: notes/How Important Is Reliability.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Timeliness and Integrity:
+    file: notes/Timeliness and Integrity.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  The Object-Relational Mismatch:
+    file: notes/The Object-Relational Mismatch.md
+    sources:
+    - ch02.md
+    last_updated: '2026-07-15'
+  Map-Side Joins:
+    file: notes/Map-Side Joins.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Trust, but Verify:
+    file: notes/Trust, but Verify.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  Fault-Tolerant Consensus:
+    file: notes/Fault-Tolerant Consensus.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Messaging Systems:
+    file: notes/Messaging Systems.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Keeping Systems in Sync:
+    file: notes/Keeping Systems in Sync.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Detecting Concurrent Writes:
+    file: notes/Detecting Concurrent Writes.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Cloud Computing and Supercomputing:
+    file: notes/Cloud Computing and Supercomputing.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Change Data Capture:
+    file: notes/Change Data Capture.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Sequence Number Ordering:
+    file: notes/Sequence Number Ordering.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Describing Load:
+    file: notes/Describing Load.md
+    sources:
+    - ch01.md
+    last_updated: '2026-07-15'
+  Network Faults in Practice:
+    file: notes/Network Faults in Practice.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Comparing B-Trees and LSM-Trees:
+    file: notes/Comparing B-Trees and LSM-Trees.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Distributed Transactions in Practice:
+    file: notes/Distributed Transactions in Practice.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Fault Tolerance:
+    file: notes/Fault Tolerance.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Read Repair:
+    file: concepts/Read Repair.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Replication:
+    file: concepts/Replication.md
+    sources:
+    - ch05.md
+    - ch06.md
+    - ch11.md
+    last_updated: '2026-07-15'
+  Log-Based Message Broker:
+    file: concepts/Log-Based Message Broker.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  ACID:
+    file: concepts/ACID.md
+    sources:
+    - ch07.md
+    last_updated: '2026-07-15'
+  Compaction:
+    file: concepts/Compaction.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Log Compaction:
+    file: concepts/Log Compaction.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  Vector Clocks:
+    file: concepts/Vector Clocks.md
+    sources:
+    - glossary.md
+    last_updated: '2026-07-15'
+  Etcd:
+    file: concepts/Etcd.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Denormalization:
+    file: concepts/Denormalization.md
+    sources:
+    - ch02.md
+    - ch07.md
+    last_updated: '2026-07-15'
+  Consensus:
+    file: concepts/Consensus.md
+    sources:
+    - ch05.md
+    - ch08.md
+    - ch09.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Anti-Entropy:
+    file: concepts/Anti-Entropy.md
+    sources:
+    - ch05.md
+    - ch11.md
+    last_updated: '2026-07-15'
+  Write-Ahead Log:
+    file: concepts/Write-Ahead Log.md
+    sources:
+    - ch03.md
+    last_updated: '2026-07-15'
+  Materialized Views:
+    file: concepts/Materialized Views.md
+    sources:
+    - ch11.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Leader Election:
+    file: concepts/Leader Election.md
+    sources:
+    - glossary.md
+    last_updated: '2026-07-15'
+  Secondary Indexes:
+    file: concepts/Secondary Indexes.md
+    sources:
+    - ch03.md
+    - ch06.md
+    - ch07.md
+    last_updated: '2026-07-15'
+  Isolation Levels:
+    file: concepts/Isolation Levels.md
+    sources:
+    - glossary.md
+    last_updated: '2026-07-15'
+  Bloom Filters:
+    file: concepts/Bloom Filters.md
+    sources:
+    - glossary.md
+    last_updated: '2026-07-15'
+  Apache Kafka:
+    file: concepts/Apache Kafka.md
+    sources:
+    - ch01.md
+    - ch11.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Lamport Timestamps:
+    file: concepts/Lamport Timestamps.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Version Vectors:
+    file: concepts/Version Vectors.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  HDFS:
+    file: concepts/HDFS.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Dataflow:
+    file: concepts/Dataflow.md
+    sources:
+    - ch04.md
+    - ch10.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Schema Evolution:
+    file: concepts/Schema Evolution.md
+    sources:
+    - ch02.md
+    - ch04.md
+    last_updated: '2026-07-15'
+  Fencing Tokens:
+    file: concepts/Fencing Tokens.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Hot Spots:
+    file: concepts/Hot Spots.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Backpressure:
+    file: concepts/Backpressure.md
+    sources:
+    - ch11.md
+    last_updated: '2026-07-15'
+  CAP Theorem:
+    file: concepts/CAP Theorem.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Two-Phase Commit:
+    file: concepts/Two-Phase Commit.md
+    sources:
+    - ch07.md
+    - ch09.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Sharding:
+    file: concepts/Sharding.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  MapReduce:
+    file: concepts/MapReduce.md
+    sources:
+    - ch02.md
+    - ch10.md
+    last_updated: '2026-07-15'
+  Clock Skew:
+    file: concepts/Clock Skew.md
+    sources:
+    - ch08.md
+    last_updated: '2026-07-15'
+  Exactly-Once Semantics:
+    file: concepts/Exactly-Once Semantics.md
+    sources:
+    - ch11.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Causality:
+    file: concepts/Causality.md
+    sources:
+    - ch09.md
+    last_updated: '2026-07-15'
+  Eventual Consistency:
+    file: concepts/Eventual Consistency.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Strong Consistency:
+    file: concepts/Strong Consistency.md
+    sources:
+    - glossary.md
+    last_updated: '2026-07-15'
+  Quorum:
+    file: concepts/Quorum.md
+    sources:
+    - ch05.md
+    - ch08.md
+    last_updated: '2026-07-15'
+  Hadoop:
+    file: concepts/Hadoop.md
+    sources:
+    - ch10.md
+    last_updated: '2026-07-15'
+  Partitioning:
+    file: concepts/Partitioning.md
+    sources:
+    - ch06.md
+    last_updated: '2026-07-15'
+  Split Brain:
+    file: concepts/Split Brain.md
+    sources:
+    - ch05.md
+    last_updated: '2026-07-15'
+  Derived Data:
+    file: concepts/Derived Data.md
+    sources:
+    - ch10.md
+    - ch11.md
+    - ch12.md
+    last_updated: '2026-07-15'
+  Idempotence:
+    file: concepts/Idempotence.md
+    sources:
+    - ch12.md
+    last_updated: '2026-07-15'
+  ZooKeeper:
+    file: concepts/ZooKeeper.md
+    sources:
+    - ch06.md
+    - ch09.md
+    last_updated: '2026-07-15'
