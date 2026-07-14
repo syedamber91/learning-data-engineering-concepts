@@ -31,3 +31,4 @@ Event Store is a dedicated database for this style, but a conventional database 
 - [[Change Data Capture]] — the database-level sibling of this idea
 - [[State, Streams, and Immutability]] — the philosophy underlying both
 - [[Uses of Stream Processing]] — event-sourced state as a materialized view
+- [[log-based-cdc]] — vutr's entity on reading the database's write-ahead log directly; event sourcing is this note's application-layer sibling, writing immutable intent events straight to the log instead of extracting row changes from one.

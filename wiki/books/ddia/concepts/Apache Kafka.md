@@ -35,3 +35,6 @@ Main appearances: [[Partitioned Logs]] and [[Databases and Streams]] (Ch 11),
 - [[Thinking About Data Systems]]
 - [[Transmitting Event Streams]]
 - [[Uses of Stream Processing]]
+
+## Related in the other wiki
+- [[kafka]] — vutr's topic note is the production history behind this page's one-paragraph sketch: LinkedIn's original design bet, the acks/ISR durability contract, and the recent diskless rewrites (WarpStream, AutoMQ, Bufstream) that go beyond anything this concept page describes.

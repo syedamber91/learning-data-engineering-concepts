@@ -44,3 +44,6 @@ LevelDB and RocksDB are embeddable LSM libraries (LevelDB is an alternative Riak
 - [[Comparing B-Trees and LSM-Trees]] — head-to-head performance analysis
 - [[Writing to Column-Oriented Storage]] — column stores reuse the LSM write path
 - [[Partitioned Logs]] — logs as a cross-system data backbone
+
+## Related in the other wiki
+- [[lsm-tree-storage-engines]] — vutr's own synthesis of the LSM write path (sorted memtable, WAL, SSTable flush, bloom filter, compaction) mirrors this note's mechanism, extended with Vu's OLAP-engine examples like BigQuery Vortex.

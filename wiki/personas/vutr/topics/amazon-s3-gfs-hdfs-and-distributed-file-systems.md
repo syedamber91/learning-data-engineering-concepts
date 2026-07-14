@@ -31,3 +31,5 @@ The through-line across [[gfs]], [[hdfs]], and [[amazon-s3]] is that they all st
 - [[history-of-data-engineering]] — Hadoop/HDFS was the big-data detour in the history of the field before object storage displaced it as the data-lake backbone.
 - [[kafka]] — Diskless Kafka designs (AutoMQ, WarpStream) push the write-ahead log onto S3/EBS, reacting to the same cross-AZ economics of distributed storage.
 - [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — Cheap object storage is the substrate that makes the data lake and lakehouse possible in the architecture debate.
+- [[Hadoop]] — DDIA's account of the Hadoop ecosystem (HDFS + MapReduce, "Unix philosophy at datacenter scale") that this note's HDFS thread traces forward into object storage displacing it.
+- [[HDFS]] — DDIA's mechanics of HDFS's blocks, replication, and NameNode placement — the design whose RAM-bound metadata coordinator this note identifies as the source of the NameNode scaling limit.

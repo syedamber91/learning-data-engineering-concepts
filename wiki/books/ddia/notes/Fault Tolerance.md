@@ -30,3 +30,5 @@ Spark Streaming, Apache Flink, Google Cloud Dataflow, VoltDB, [[Apache Kafka]] (
 - [[Distributed Transactions in Practice]] — why XA across systems disappointed
 - [[Partitioned Logs]] — replayable offsets that make retries and idempotence possible
 - [[The Output of Batch Workflows]] — the batch fault model being emulated
+- [[exactly-once-needs-idempotent-sink]] — this note's idempotence tactic (storing the triggering Kafka offset with each write so replays are detected and skipped) is a concrete instance of vutr's general rule that exactly-once ultimately depends on an idempotent sink.
+- [[chandy-lamport-checkpointing]] — this note's description of Flink injecting barriers for periodic state snapshots without pausing the stream is exactly the Chandy-Lamport algorithm vutr's entity note names.

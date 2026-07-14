@@ -30,3 +30,5 @@ Search/click analysis mirrors ad-click attribution (Google's Photon); Twitter's 
 - [[Reasoning About Time]] — window choice and ordering underpin join semantics
 - [[Describing Load]] — the Twitter timeline problem joined here
 - [[Fault Tolerance]] — recovering the join state these operators accumulate
+- [[flink]] — vutr's topic frames Flink as the true streaming engine that actually executes stream-stream/stream-table joins like these, recovering their accumulated state via Chandy-Lamport checkpointing rather than batch-style restarts.
+- [[watermark]] — the eager-vs-relaxed watermark trade-off vutr describes is the concrete timing mechanism behind this note's claim that a windowed stream-stream join's answer depends on event ordering.

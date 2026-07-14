@@ -35,3 +35,6 @@ Book home ground: [[MapReduce and Distributed Filesystems]] and
 - [[The Unix Philosophy]]
 - [[Transaction Processing or Analytics]]
 - [[Unbundling Databases]]
+
+## Related in the other wiki
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — vutr's account of what came after Hadoop's HDFS: object storage (S3) displacing it as the data-lake backbone once its single-coordinator design hit scaling limits.

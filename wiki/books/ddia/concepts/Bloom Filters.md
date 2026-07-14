@@ -20,3 +20,6 @@ ecosystem.
 - [[Data Structures That Power Your Database]]
 - [[SSTables and LSM-Trees]]
 - [[Uses of Stream Processing]]
+
+## Related in the other wiki
+- [[bloom-filter]] — Vu's entity note on the same probabilistic "definitely not present" guarantee, framed around skipping an SSTable read entirely in an LSM-tree.

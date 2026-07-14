@@ -29,3 +29,7 @@ Growth in query throughput calls for more CPUs; growth in data calls for more di
 - [[Partitioning of Key-Value Data]] — the schemes whose boundaries rebalancing preserves or splits
 - [[Request Routing]] — routing must track every rebalance
 - [[Setting Up New Followers]] — Chapter 5's analogous data-copying-without-downtime problem
+
+## Related in the other wiki
+- [[partition-reassignment-and-cluster-balancing]] — Kafka's broker-side partition reassignment wrestles with exactly this note's three requirements (fair load, no downtime, minimal data moved), and shows three different answers — the error-prone native tool, Cruise Control's plan-only automation, and AutoMQ's data-free metadata edit.
+- [[consumer-group-rebalancing]] — a distinct flavor of the same problem: instead of migrating partition data between storage nodes, Kafka reassigns partition *ownership* between consumers, and this note's availability-during-rebalance requirement maps to Kafka's eager (whole group stops) vs. cooperative (only affected partitions pause) distinction.

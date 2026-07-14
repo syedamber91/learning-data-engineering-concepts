@@ -30,3 +30,5 @@ Snowplow logs the three timestamps for mobile analytics; the Dataflow model form
 - [[Monotonic Versus Time-of-Day Clocks]] — the timestamp source events rely on
 - [[Uses of Stream Processing]] — analytics, the main consumer of windows
 - [[Fault Tolerance]] — replays that widen the event/processing-time gap
+- [[watermark]] — vutr's precise definition (max observed event time minus a threshold) is the mechanism behind this note's "watermark-style messages" for declaring a window done despite possible stragglers.
+- [[dataflow-model]] — this note's own examples credit "the Dataflow model" with formalizing watermarks and corrections, which vutr's entity note traces to the model's core principle of never assuming completeness.

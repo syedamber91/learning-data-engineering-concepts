@@ -44,3 +44,6 @@ Every major relational database (e.g., MySQL's InnoDB, SQL Server, PostgreSQL) i
 - [[Comparing B-Trees and LSM-Trees]] — when each one wins
 - [[Write-Ahead Log]] — crash-recovery backbone of in-place updates
 - [[Other Indexing Structures]] — clustered/covering indexes built on B-trees
+
+## Related in the other wiki
+- [[b-tree]] — Vu's condensed entity note on the same in-place, page-splitting design, framed specifically around its write-amplification cost relative to an LSM-tree.

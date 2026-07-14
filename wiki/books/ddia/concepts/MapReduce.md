@@ -42,3 +42,6 @@ by dataflow engines in [[Beyond MapReduce]]. Appears early as a query pattern in
 - [[Simple Log Analysis]]
 - [[The Output of Batch Workflows]]
 - [[The Unix Philosophy]]
+
+## Related in the other wiki
+- [[spark-origin-and-mapreduce-limitations]] — vutr's account of why Spark was built to replace exactly this map/shuffle/reduce model and its disk-based retry fault tolerance.

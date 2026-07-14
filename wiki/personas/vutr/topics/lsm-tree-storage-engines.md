@@ -38,3 +38,5 @@ An LSM-tree wins by keeping a sorted [[memtable]] in memory (not an append-only 
 - [[kafka]] — Kafka is a log-structured, write-optimized engine — logical offsets over sequential disk I/O — the same append-first bet an LSM-tree makes against random writes.
 - [[olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks]] — ClickHouse's MergeTree and Google Napa lean on LSM-trees, and BigQuery's Vortex WOS-to-ROS transition is the LSM pattern surfacing in OLAP.
 - [[storage-models-nsm-dsm-pax-and-column-store]] — LSM-trees and the NSM/DSM/PAX models are the two axes of physical storage design — write path versus column layout — that OLAP engines combine.
+- [[SSTables and LSM-Trees]] — the book's full walkthrough of the LSM write path (sorted memtable, WAL, SSTable flush, sparse index, background compaction) that this topic note synthesizes from Vu's persona snapshot.
+- [[Comparing B-Trees and LSM-Trees]] — the book's fuller mechanical case (write amplification, tail-latency compaction stalls, single-copy-per-key) for the LSM-vs-B-tree trade-off this note's "Comparisons" section summarizes.

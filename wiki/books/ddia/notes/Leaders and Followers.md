@@ -35,3 +35,4 @@ Leader-based replication (also called active/passive or master–slave) is the m
 - [[Leaderless Replication]] — abandoning the leader concept entirely
 - [[Fault-Tolerant Consensus]] — leader election is at heart a consensus problem
 - [[Partitioning and Replication]] — each partition gets its own leader in sharded systems
+- [[leader-follower-replication]] — Vu's note applies this same single-leader mechanism to Kafka partitions, showing the durability guarantee turning into a concrete cross-AZ cost problem in cloud deployments.

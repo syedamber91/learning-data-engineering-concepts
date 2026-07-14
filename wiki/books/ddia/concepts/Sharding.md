@@ -21,3 +21,6 @@ See [[Ch 06 - Partitioning]] for the full treatment.
 - [[Part II - Distributed Data]]
 - [[Partitioning and Replication]]
 - [[Partitioning by Key Range]]
+
+## Related in the other wiki
+- [[message-key-partitioning-strategies]] — Kafka never uses the word "sharding," but message-key routing is this note's disjoint-subset-per-node idea under Kafka's own name: the producer's key hash is functionally the shard key deciding which partition a message belongs to.

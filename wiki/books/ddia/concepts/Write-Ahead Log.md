@@ -34,3 +34,7 @@ durable, append-only state shows up — see [[Partitioned Logs]] and
 - [[The Meaning of ACID]]
 - [[The Output of Batch Workflows]]
 - [[Total Order Broadcast]]
+
+## Related in the other wiki
+
+- [[write-ahead-log]] — Vu's note grounds the same "log the change before applying it" principle in the LSM-tree memtable's durability story and log-based CDC, rather than DDIA's B-tree crash-recovery framing.

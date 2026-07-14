@@ -30,3 +30,6 @@ tolerance and [[Hadoop]]'s tool diversity possible.
 - [[Reduce-Side Joins and Grouping]]
 - [[Strategies for Rebalancing]]
 - [[The Output of Batch Workflows]]
+
+## Related in the other wiki
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — vutr's detail on the NameNode RAM-bound metadata design that caps HDFS's scale, and how S3's disaggregated microservices sidestepped that ceiling.

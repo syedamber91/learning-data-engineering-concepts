@@ -30,3 +30,4 @@ Parallelism is capped by partition count, and one slow message blocks everything
 - [[Implementation of Replication Logs]] — same leader/follower log mechanics
 - [[Change Data Capture]] — log brokers transport database change events
 - [[Log Compaction]] — keeps a full latest-value copy in bounded space
+- [[kafka]] — the offset-addressed, partition-parallel log described here in the abstract is exactly what vutr's notes trace from LinkedIn's original 1GB-segment design through to tiered and diskless storage.

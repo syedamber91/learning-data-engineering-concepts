@@ -25,3 +25,8 @@ is [[Log Compaction]] (keep latest value per key).
 - [[Snapshot Isolation and Repeatable Read]]
 - [[The Output of Batch Workflows]]
 - [[Writing to Column-Oriented Storage]]
+
+## Related in the other wiki
+- [[compaction]] — Vu's entity note on the same background merge process, naming Size-Tiered vs Leveled as the two strategies this note calls write- vs read-optimized.
+- [[sstable]] — the immutable sorted files that compaction merges and rewrites; Vu's note adds the sparse-index detail this note assumes.
+- [[memtable]] — the in-memory structure whose flushes are what compaction has to keep pace with; Vu's note is careful to note it's a sorted structure, not an append-only log.

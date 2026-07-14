@@ -33,3 +33,4 @@ The through-line here is that stream processing is a trade against batch's compl
 - [[data-pipeline-design-framework]] — The framework's dead-letter-queue routing and exactly-once correctness map onto Flink's stream processing, where exactly-once needs an idempotent sink.
 - [[kafka]] — Flink is the low-latency stream processor that consumes Kafka's log, and true exactly-once depends on watermarks plus an idempotent sink at the streaming boundary.
 - [[spark]] — The central axis is Flink vs Spark Structured Streaming — a true streaming engine versus micro-batching — and they share the RocksDB state backend.
+- [[Stream Joins]] — DDIA's note works through the three join shapes (stream-stream, stream-table, table-table) that a true streaming engine like Flink must execute, all state-keeping and order-sensitive exactly as this topic's synthesis frames it.

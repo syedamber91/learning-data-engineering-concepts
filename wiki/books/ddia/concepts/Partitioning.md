@@ -41,3 +41,6 @@ strategies, [[Rebalancing Partitions]], and [[Request Routing]]. Pairs with
 - [[Skewed Workloads and Relieving Hot Spots]]
 - [[Strategies for Rebalancing]]
 - [[The Birth of NoSQL]]
+
+## Related in the other wiki
+- [[partition]] — Kafka's partition operationalizes this concept directly: the unit a topic is split into so brokers and consumers each own a disjoint slice, with the "more consumers than partitions leaves some idle" rule echoing this note's skew/hot-spot concern about uneven load.

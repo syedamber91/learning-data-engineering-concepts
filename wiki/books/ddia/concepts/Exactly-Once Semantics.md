@@ -27,3 +27,6 @@ finish the job — the application-level identifier has to flow end to end.
 - [[Processing Streams]]
 - [[The End-to-End Argument for Databases]]
 - [[Timeliness and Integrity]]
+
+## Related in the other wiki
+- [[exactly-once-needs-idempotent-sink]] — this page's "make effects idempotent with end-to-end operation IDs" is precisely the rule vutr's note states directly: exactly-once ultimately depends on an idempotent sink.

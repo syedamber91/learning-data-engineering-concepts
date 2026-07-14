@@ -26,3 +26,4 @@ The source is the one part of the pipeline you don't fully control, so the CDC c
 - [[lsm-tree-storage-engines]] — Log-based CDC reads the source database's write-ahead log — the same durability journal an LSM-tree uses to guard its in-memory memtable.
 - [[kafka]] — Even a Kafka consumer is pull-model consumption, and Kafka is the canonical transport onto which CDC change streams are published.
 - [[data-pipeline-design-framework]] — CDC is the source stage of a pipeline — the part you don't control — and its DELETE-blindness feeds the missing-data detection problem the framework warns about.
+- [[Change Data Capture]] — DDIA's chapter-11 note details the log-based extraction mechanism (parsing the binlog/WAL, then log compaction for a latest-value copy) that this topic's [[log-based-cdc]] entry names as gentlest on the source but highest in complexity.
