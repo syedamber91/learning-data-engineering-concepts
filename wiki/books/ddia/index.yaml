@@ -48,12 +48,12 @@ chapters:
   Part III - Derived Data:
     file: chapters/Part III - Derived Data.md
     sources:
-    - partI.md
+    - partIII.md
     last_updated: '2026-07-15'
   Part II - Distributed Data:
     file: chapters/Part II - Distributed Data.md
     sources:
-    - partI.md
+    - partII.md
     last_updated: '2026-07-15'
   Part I - Foundations of Data Systems:
     file: chapters/Part I - Foundations of Data Systems.md

@@ -3,7 +3,7 @@ book: Designing Data-Intensive Applications
 type: part-moc
 tags: [ddia, distributed-systems]
 sources:
-  - raw/partI.md
+  - raw/partII.md
 ---
 # Part II – Distributed Data
 

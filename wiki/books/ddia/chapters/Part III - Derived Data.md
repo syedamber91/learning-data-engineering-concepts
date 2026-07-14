@@ -3,7 +3,7 @@ book: Designing Data-Intensive Applications
 type: part-moc
 tags: [ddia, derived-data]
 sources:
-  - raw/partI.md
+  - raw/partIII.md
 ---
 # Part III – Derived Data
 
