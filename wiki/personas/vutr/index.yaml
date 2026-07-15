@@ -1,1227 +1,2618 @@
 topics:
+  airbnb-data-infrastructure:
+    file: topics/airbnb-data-infrastructure.md
+    last_updated: '2026-07-15'
+    sources: 1
   airflow:
     file: topics/airflow.md
+    last_updated: '2026-07-15'
     sources: 1
-    last_updated: '2026-07-08'
-  spark:
-    file: topics/spark.md
-    sources: 15
-    last_updated: '2026-07-11'
-  kafka:
-    file: topics/kafka.md
-    sources: 21
-    last_updated: '2026-07-10'
-  iceberg:
-    file: topics/iceberg.md
-    sources: 1
-    last_updated: '2026-07-08'
-  storage-models-nsm-dsm-pax-and-column-store:
-    file: topics/storage-models-nsm-dsm-pax-and-column-store.md
-    sources: 1
-    last_updated: '2026-07-08'
-  parquet:
-    file: topics/parquet.md
-    sources: 1
-    last_updated: '2026-07-08'
-  olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks:
-    file: topics/olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks.md
-    sources: 1
-    last_updated: '2026-07-08'
-  lsm-tree-storage-engines:
-    file: topics/lsm-tree-storage-engines.md
-    sources: 1
-    last_updated: '2026-07-08'
-  dbt:
-    file: topics/dbt.md
-    sources: 1
-    last_updated: '2026-07-08'
-  data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa:
-    file: topics/data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa.md
-    sources: 1
-    last_updated: '2026-07-08'
-  data-engineering-career-roadmap-and-learning-philosophy:
-    file: topics/data-engineering-career-roadmap-and-learning-philosophy.md
-    sources: 1
-    last_updated: '2026-07-08'
-  flink:
-    file: topics/flink.md
-    sources: 1
-    last_updated: '2026-07-08'
-  sql-fundamentals-and-execution-model:
-    file: topics/sql-fundamentals-and-execution-model.md
-    sources: 1
-    last_updated: '2026-07-08'
   amazon-s3-gfs-hdfs-and-distributed-file-systems:
     file: topics/amazon-s3-gfs-hdfs-and-distributed-file-systems.md
+    last_updated: '2026-07-15'
     sources: 1
-    last_updated: '2026-07-08'
-  data-pipeline-design-framework:
-    file: topics/data-pipeline-design-framework.md
-    sources: 1
-    last_updated: '2026-07-08'
-  llms-ai-agents-and-vector-databases:
-    file: topics/llms-ai-agents-and-vector-databases.md
-    sources: 1
-    last_updated: '2026-07-08'
-  big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter:
-    file: topics/big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter.md
-    sources: 1
-    last_updated: '2026-07-08'
-  single-node-engines-duckdb-polars-vs-distributed-systems:
-    file: topics/single-node-engines-duckdb-polars-vs-distributed-systems.md
-    sources: 1
-    last_updated: '2026-07-08'
-  change-data-capture-cdc-and-data-sourcing:
-    file: topics/change-data-capture-cdc-and-data-sourcing.md
-    sources: 1
-    last_updated: '2026-07-08'
   apache-arrow:
     file: topics/apache-arrow.md
+    last_updated: '2026-07-15'
     sources: 1
-    last_updated: '2026-07-08'
-  history-of-data-engineering:
-    file: topics/history-of-data-engineering.md
-    sources: 1
-    last_updated: '2026-07-08'
   apache-pinot-druid-and-real-time-olap:
     file: topics/apache-pinot-druid-and-real-time-olap.md
+    last_updated: '2026-07-15'
     sources: 1
+  big-tech-case-studies-batch-2-apple-github-pinterest-canva:
+    file: topics/big-tech-case-studies-batch-2-apple-github-pinterest-canva.md
+    last_updated: '2026-07-15'
+    sources: 1
+  big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter:
+    file: topics/big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter.md
+    last_updated: '2026-07-15'
+    sources: 5
+  bigquery-internals:
+    file: topics/bigquery-internals.md
+    last_updated: '2026-07-15'
+    sources: 1
+  change-data-capture-cdc-and-data-sourcing:
+    file: topics/change-data-capture-cdc-and-data-sourcing.md
+    last_updated: '2026-07-15'
+    sources: 1
+  clickhouse-internals:
+    file: topics/clickhouse-internals.md
+    last_updated: '2026-07-15'
+    sources: 1
+  cloud-kubernetes-docker-infrastructure-tooling:
+    file: topics/cloud-kubernetes-docker-infrastructure-tooling.md
+    last_updated: '2026-07-15'
+    sources: 1
+  data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa:
+    file: topics/data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa.md
+    last_updated: '2026-07-15'
+    sources: 1
+  data-engineering-career-roadmap-and-learning-philosophy:
+    file: topics/data-engineering-career-roadmap-and-learning-philosophy.md
+    last_updated: '2026-07-15'
+    sources: 1
+  data-pipeline-design-framework:
+    file: topics/data-pipeline-design-framework.md
+    last_updated: '2026-07-15'
+    sources: 1
+  dbt:
+    file: topics/dbt.md
+    last_updated: '2026-07-15'
+    sources: 1
+  flink:
+    file: topics/flink.md
+    last_updated: '2026-07-15'
+    sources: 1
+  google-infrastructure:
+    file: topics/google-infrastructure.md
+    last_updated: '2026-07-15'
+    sources: 1
+  history-of-data-engineering:
+    file: topics/history-of-data-engineering.md
+    last_updated: '2026-07-15'
+    sources: 1
+  iceberg:
+    file: topics/iceberg.md
+    last_updated: '2026-07-15'
+    sources: 1
+  kafka:
+    file: topics/kafka.md
+    last_updated: '2026-07-10'
+    sources: 1
+  llms-ai-agents-and-vector-databases:
+    file: topics/llms-ai-agents-and-vector-databases.md
+    last_updated: '2026-07-15'
+    sources: 1
+  lsm-tree-storage-engines:
+    file: topics/lsm-tree-storage-engines.md
+    last_updated: '2026-07-15'
+    sources: 1
+  olap-cost-and-multi-engine-comparison:
+    file: topics/olap-cost-and-multi-engine-comparison.md
+    last_updated: '2026-07-15'
+    sources: 1
+  olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks:
+    file: topics/olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks.md
     last_updated: '2026-07-08'
+    sources: 1
+  parquet:
+    file: topics/parquet.md
+    last_updated: '2026-07-15'
+    sources: 1
+  single-node-engines-duckdb-polars-vs-distributed-systems:
+    file: topics/single-node-engines-duckdb-polars-vs-distributed-systems.md
+    last_updated: '2026-07-15'
+    sources: 1
+  snowflake-internals:
+    file: topics/snowflake-internals.md
+    last_updated: '2026-07-15'
+    sources: 1
+  spark:
+    file: topics/spark.md
+    last_updated: '2026-07-15'
+    sources: 1
+  sql-fundamentals-and-execution-model:
+    file: topics/sql-fundamentals-and-execution-model.md
+    last_updated: '2026-07-15'
+    sources: 1
+  storage-models-nsm-dsm-pax-and-column-store:
+    file: topics/storage-models-nsm-dsm-pax-and-column-store.md
+    last_updated: '2026-07-15'
+    sources: 1
+  weekly-newsletter-roundups-misc:
+    file: topics/weekly-newsletter-roundups-misc.md
+    last_updated: '2026-07-15'
+    sources: 1
 entities:
-  sequential-executor:
-    file: entities/sequential-executor.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  local-executor:
-    file: entities/local-executor.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  celery-executor:
-    file: entities/celery-executor.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  kubernetes-executor:
-    file: entities/kubernetes-executor.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  sensors:
-    file: entities/sensors.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  assets:
-    file: entities/assets.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  pools:
-    file: entities/pools.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  xcom:
-    file: entities/xcom.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  airflow-origin:
-    file: entities/airflow-origin.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  trigger-rules:
-    file: entities/trigger-rules.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  trigger-dag-run-operator:
-    file: entities/trigger-dag-run-operator.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  conditional-operators:
-    file: entities/conditional-operators.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  kafka-origin:
-    file: entities/kafka-origin.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  linkedin-kafka-scale:
-    file: entities/linkedin-kafka-scale.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  paypal-kafka-scale:
-    file: entities/paypal-kafka-scale.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  logical-offset:
-    file: entities/logical-offset.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  page-cache-storage:
-    file: entities/page-cache-storage.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  zero-copy-sendfile:
-    file: entities/zero-copy-sendfile.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  partition:
-    file: entities/partition.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  consumer-offsets-topic:
-    file: entities/consumer-offsets-topic.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
   acks-setting:
     file: entities/acks-setting.md
+    last_updated: '2026-07-08'
     topics:
     - kafka
-    last_updated: '2026-07-08'
-  kraft:
-    file: entities/kraft.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  tiered-storage-kip-405:
-    file: entities/tiered-storage-kip-405.md
-    topics:
-    - kafka
-    last_updated: '2026-07-08'
-  apache-iceberg:
-    file: entities/apache-iceberg.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  delta-lake:
-    file: entities/delta-lake.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  apache-hudi:
-    file: entities/apache-hudi.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  hudi-index:
-    file: entities/hudi-index.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  hudi-timeline:
-    file: entities/hudi-timeline.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  iceberg-metadata-layer:
-    file: entities/iceberg-metadata-layer.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  copy-on-write-vs-merge-on-read:
-    file: entities/copy-on-write-vs-merge-on-read.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  conditional-writes:
-    file: entities/conditional-writes.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  nsm:
-    file: entities/nsm.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
-  dsm:
-    file: entities/dsm.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
-  clickhouse:
-    file: entities/clickhouse.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  redshift:
-    file: entities/redshift.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  parquet:
-    file: entities/parquet.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  parquet-origin:
-    file: entities/parquet-origin.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  column-by-name:
-    file: entities/column-by-name.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  row-group:
-    file: entities/row-group.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  column-chunk:
-    file: entities/column-chunk.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  page:
-    file: entities/page.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  footer-filemetadata:
-    file: entities/footer-filemetadata.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  rle-dictionary:
-    file: entities/rle-dictionary.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  rle-bit-packing-hybrid:
-    file: entities/rle-bit-packing-hybrid.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  delta-encodings:
-    file: entities/delta-encodings.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  definition-repetition-levels:
-    file: entities/definition-repetition-levels.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  bigquery:
-    file: entities/bigquery.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  snowflake:
-    file: entities/snowflake.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  duckdb:
-    file: entities/duckdb.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    - single-node-engines-duckdb-polars-vs-distributed-systems
-    last_updated: '2026-07-08'
-  google-napa:
-    file: entities/google-napa.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  memtable:
-    file: entities/memtable.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  sstable:
-    file: entities/sstable.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  bloom-filter:
-    file: entities/bloom-filter.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  compaction:
-    file: entities/compaction.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  tombstone:
-    file: entities/tombstone.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  b-tree:
-    file: entities/b-tree.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  bigquery-vortex:
-    file: entities/bigquery-vortex.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  star-schema:
-    file: entities/star-schema.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  grain-declaration:
-    file: entities/grain-declaration.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  surrogate-keys:
-    file: entities/surrogate-keys.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  scd-type-2:
-    file: entities/scd-type-2.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  scd-type-1-and-3:
-    file: entities/scd-type-1-and-3.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  dbt:
-    file: entities/dbt.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  medallion-architecture:
-    file: entities/medallion-architecture.md
-    topics:
-    - dbt
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  one-big-table:
-    file: entities/one-big-table.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  dbt-origin-and-adoption:
-    file: entities/dbt-origin-and-adoption.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  semantic-layer-over-a-mess:
-    file: entities/semantic-layer-over-a-mess.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  data-warehouse:
-    file: entities/data-warehouse.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
-  data-lake:
-    file: entities/data-lake.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  lakehouse:
-    file: entities/lakehouse.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  data-mesh:
-    file: entities/data-mesh.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
-  lambda-architecture:
-    file: entities/lambda-architecture.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    - flink
-    last_updated: '2026-07-08'
-  kappa-architecture:
-    file: entities/kappa-architecture.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  three-biggest-mistakes:
-    file: entities/three-biggest-mistakes.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  recommended-learning-order:
-    file: entities/recommended-learning-order.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  fundamentals-that-never-become-obsolete:
-    file: entities/fundamentals-that-never-become-obsolete.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  nine-se-skills-for-des:
-    file: entities/nine-se-skills-for-des.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  data-foundation-supports-business:
-    file: entities/data-foundation-supports-business.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  senior-boring-signal:
-    file: entities/senior-boring-signal.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  apache-flink:
-    file: entities/apache-flink.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  chandy-lamport-checkpointing:
-    file: entities/chandy-lamport-checkpointing.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  watermark:
-    file: entities/watermark.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  flink-memorysegments:
-    file: entities/flink-memorysegments.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  rocksdb-state-store:
-    file: entities/rocksdb-state-store.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  dataflow-model:
-    file: entities/dataflow-model.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  relational-model:
-    file: entities/relational-model.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
-  selection-operator:
-    file: entities/selection-operator.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  group-by:
-    file: entities/group-by.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  window-functions:
-    file: entities/window-functions.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  nested-loop-join:
-    file: entities/nested-loop-join.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  hash-join:
-    file: entities/hash-join.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  cte:
-    file: entities/cte.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  amazon-s3:
-    file: entities/amazon-s3.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  s3-strong-consistency:
-    file: entities/s3-strong-consistency.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  gfs:
-    file: entities/gfs.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  gfs-record-append:
-    file: entities/gfs-record-append.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  hdfs:
-    file: entities/hdfs.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  hdfs-namenode-scaling-limit:
-    file: entities/hdfs-namenode-scaling-limit.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  prefix-as-folders:
-    file: entities/prefix-as-folders.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  sink:
-    file: entities/sink.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  source:
-    file: entities/source.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  middle-steps:
-    file: entities/middle-steps.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  dead-letter-queue:
-    file: entities/dead-letter-queue.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  checkpointing:
-    file: entities/checkpointing.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  semantic-schema-change:
-    file: entities/semantic-schema-change.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  llm:
-    file: entities/llm.md
-    topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  rag:
-    file: entities/rag.md
-    topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
   ai-agent:
     file: entities/ai-agent.md
+    last_updated: '2026-07-15'
     topics:
     - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  vector-embedding:
-    file: entities/vector-embedding.md
+  airbnb-gold-silver-hadoop-clusters:
+    file: entities/airbnb-gold-silver-hadoop-clusters.md
+    last_updated: '2026-07-15'
     topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  hnsw:
-    file: entities/hnsw.md
+    - airbnb-data-infrastructure
+  airflow-core-components:
+    file: entities/airflow-core-components.md
+    last_updated: '2026-07-15'
     topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  product-quantization:
-    file: entities/product-quantization.md
+    - airflow
+  airflow-origin:
+    file: entities/airflow-origin.md
+    last_updated: '2026-07-15'
     topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  semantic-layer:
-    file: entities/semantic-layer.md
+    - airflow
+  amazon-s3:
+    file: entities/amazon-s3.md
+    last_updated: '2026-07-15'
     topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  uber-lambda-kafka:
-    file: entities/uber-lambda-kafka.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  netflix-iceberg-maestro:
-    file: entities/netflix-iceberg-maestro.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  linkedin-kafka-beam:
-    file: entities/linkedin-kafka-beam.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  meta-velox-tectonic:
-    file: entities/meta-velox-tectonic.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  twitter-kappa-migration:
-    file: entities/twitter-kappa-migration.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  spotify-pubsub-scio:
-    file: entities/spotify-pubsub-scio.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  doordash-flink-iceberg:
-    file: entities/doordash-flink-iceberg.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  polars:
-    file: entities/polars.md
-    topics:
-    - single-node-engines-duckdb-polars-vs-distributed-systems
-    last_updated: '2026-07-08'
-  pandas:
-    file: entities/pandas.md
-    topics:
-    - single-node-engines-duckdb-polars-vs-distributed-systems
-    last_updated: '2026-07-08'
-  spark:
-    file: entities/spark.md
-    topics:
-    - single-node-engines-duckdb-polars-vs-distributed-systems
-    last_updated: '2026-07-08'
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
   apache-arrow:
     file: entities/apache-arrow.md
+    last_updated: '2026-07-15'
     topics:
+    - apache-arrow
     - single-node-engines-duckdb-polars-vs-distributed-systems
-    - apache-arrow
-    last_updated: '2026-07-08'
-  query-based-cdc:
-    file: entities/query-based-cdc.md
+  apache-avro:
+    file: entities/apache-avro.md
+    last_updated: '2026-07-15'
     topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  trigger-based-cdc:
-    file: entities/trigger-based-cdc.md
+    - parquet
+  apache-beam:
+    file: entities/apache-beam.md
+    last_updated: '2026-07-15'
     topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  log-based-cdc:
-    file: entities/log-based-cdc.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  write-ahead-log:
-    file: entities/write-ahead-log.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  read-replica:
-    file: entities/read-replica.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  secrets-manager:
-    file: entities/secrets-manager.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  arrow-ipc:
-    file: entities/arrow-ipc.md
-    topics:
-    - apache-arrow
-    last_updated: '2026-07-08'
-  arrow-flight:
-    file: entities/arrow-flight.md
-    topics:
-    - apache-arrow
-    last_updated: '2026-07-08'
-  record-batch:
-    file: entities/record-batch.md
-    topics:
-    - apache-arrow
-    last_updated: '2026-07-08'
-  simd-memory-alignment:
-    file: entities/simd-memory-alignment.md
-    topics:
-    - apache-arrow
-    last_updated: '2026-07-08'
-  hadoop-mapreduce:
-    file: entities/hadoop-mapreduce.md
-    topics:
-    - history-of-data-engineering
-    last_updated: '2026-07-08'
-  open-table-formats:
-    file: entities/open-table-formats.md
-    topics:
-    - history-of-data-engineering
-    - iceberg
-    last_updated: '2026-07-08'
-  apache-pinot:
-    file: entities/apache-pinot.md
-    topics:
-    - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
   apache-druid:
     file: entities/apache-druid.md
+    last_updated: '2026-07-15'
     topics:
     - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-  star-tree-index:
-    file: entities/star-tree-index.md
+  apache-flink:
+    file: entities/apache-flink.md
+    last_updated: '2026-07-15'
     topics:
-    - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-  pinot-broker:
-    file: entities/pinot-broker.md
+    - flink
+  apache-hive:
+    file: entities/apache-hive.md
+    last_updated: '2026-07-15'
     topics:
-    - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-  druid-broker:
-    file: entities/druid-broker.md
-    topics:
-    - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-  pinot-pql:
-    file: entities/pinot-pql.md
-    topics:
-    - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-concepts:
-  idempotency:
-    file: concepts/idempotency.md
-    topics:
-    - airflow
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  backfilling:
-    file: concepts/backfilling.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  orchestration-problem-space:
-    file: concepts/orchestration-problem-space.md
-    topics:
-    - airflow
-    last_updated: '2026-07-08'
-  occ-on-object-storage:
-    file: concepts/occ-on-object-storage.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  evaluate-before-adopting:
-    file: concepts/evaluate-before-adopting.md
-    topics:
-    - iceberg
-    last_updated: '2026-07-08'
-  oltp-vs-olap-access:
-    file: concepts/oltp-vs-olap-access.md
-    topics:
-    - storage-models-nsm-dsm-pax-and-column-store
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  pax-hybrid-layout:
-    file: concepts/pax-hybrid-layout.md
-    topics:
-    - parquet
-    - storage-models-nsm-dsm-pax-and-column-store
-    last_updated: '2026-07-08'
-  predicate-pushdown:
-    file: concepts/predicate-pushdown.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  cpu-bound-lakehouse:
-    file: concepts/cpu-bound-lakehouse.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  layout-over-code:
-    file: concepts/layout-over-code.md
-    topics:
-    - parquet
-    last_updated: '2026-07-08'
-  vectorized-vs-code-compilation:
-    file: concepts/vectorized-vs-code-compilation.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  shared-nothing-vs-shared-disk:
-    file: concepts/shared-nothing-vs-shared-disk.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  acid-in-olap:
-    file: concepts/acid-in-olap.md
-    topics:
-    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
-    last_updated: '2026-07-08'
-  sequential-vs-random-io:
-    file: concepts/sequential-vs-random-io.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  write-amplification-tradeoff:
-    file: concepts/write-amplification-tradeoff.md
-    topics:
-    - lsm-tree-storage-engines
-    last_updated: '2026-07-08'
-  dimensional-modeling:
-    file: concepts/dimensional-modeling.md
-    topics:
-    - dbt
-    last_updated: '2026-07-08'
-  elt-vs-etl:
-    file: concepts/elt-vs-etl.md
-    topics:
-    - dbt
     - history-of-data-engineering
-    last_updated: '2026-07-08'
-  data-modeling-is-not-dbt-modeling:
-    file: concepts/data-modeling-is-not-dbt-modeling.md
+  apache-hudi:
+    file: entities/apache-hudi.md
+    last_updated: '2026-07-15'
     topics:
-    - dbt
-    last_updated: '2026-07-08'
-  democratization-of-transformation:
-    file: concepts/democratization-of-transformation.md
+    - iceberg
+  apache-iceberg:
+    file: entities/apache-iceberg.md
+    last_updated: '2026-07-15'
     topics:
-    - dbt
-    last_updated: '2026-07-08'
-  architecture-vs-pattern:
-    file: concepts/architecture-vs-pattern.md
+    - iceberg
+  apache-pinot:
+    file: entities/apache-pinot.md
+    last_updated: '2026-07-15'
     topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  cap-vs-acid-consistency:
-    file: concepts/cap-vs-acid-consistency.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  every-decision-has-a-tradeoff:
-    file: concepts/every-decision-has-a-tradeoff.md
-    topics:
-    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
-    last_updated: '2026-07-08'
-  learn-only-tools-is-wrong:
-    file: concepts/learn-only-tools-is-wrong.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  problem-first-tool-selection:
-    file: concepts/problem-first-tool-selection.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  why-before-what-learning-strategy:
-    file: concepts/why-before-what-learning-strategy.md
-    topics:
-    - data-engineering-career-roadmap-and-learning-philosophy
-    last_updated: '2026-07-08'
-  batch-vs-stream-tradeoff:
-    file: concepts/batch-vs-stream-tradeoff.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  exactly-once-needs-idempotent-sink:
-    file: concepts/exactly-once-needs-idempotent-sink.md
-    topics:
-    - flink
-    last_updated: '2026-07-08'
-  sql-execution-order:
-    file: concepts/sql-execution-order.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  query-lifecycle:
-    file: concepts/query-lifecycle.md
-    topics:
-    - sql-fundamentals-and-execution-model
-    last_updated: '2026-07-08'
-  component-failure-as-normal:
-    file: concepts/component-failure-as-normal.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  object-storage-as-backbone:
-    file: concepts/object-storage-as-backbone.md
-    topics:
-    - amazon-s3-gfs-hdfs-and-distributed-file-systems
-    last_updated: '2026-07-08'
-  missing-data-vs-duplicates:
-    file: concepts/missing-data-vs-duplicates.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  clarifying-questions-before-tools:
-    file: concepts/clarifying-questions-before-tools.md
-    topics:
-    - data-pipeline-design-framework
-    last_updated: '2026-07-08'
-  model-selection:
-    file: concepts/model-selection.md
-    topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  text-to-sql:
-    file: concepts/text-to-sql.md
-    topics:
-    - llms-ai-agents-and-vector-databases
-    last_updated: '2026-07-08'
-  lambda-vs-kappa:
-    file: concepts/lambda-vs-kappa.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  batch-reprocessing-blindness:
-    file: concepts/batch-reprocessing-blindness.md
-    topics:
-    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
-    last_updated: '2026-07-08'
-  single-node-processing:
-    file: concepts/single-node-processing.md
-    topics:
-    - single-node-engines-duckdb-polars-vs-distributed-systems
-    last_updated: '2026-07-08'
-  silent-drift-from-hard-deletion:
-    file: concepts/silent-drift-from-hard-deletion.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  pull-model-consumption:
-    file: concepts/pull-model-consumption.md
-    topics:
-    - change-data-capture-cdc-and-data-sourcing
-    last_updated: '2026-07-08'
-  zero-copy-data-sharing:
-    file: concepts/zero-copy-data-sharing.md
+    - apache-pinot-druid-and-real-time-olap
+  arrow-flight:
+    file: entities/arrow-flight.md
+    last_updated: '2026-07-15'
     topics:
     - apache-arrow
+  arrow-ipc:
+    file: entities/arrow-ipc.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  artus-columnar-format:
+    file: entities/artus-columnar-format.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  assets:
+    file: entities/assets.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  aws-glue:
+    file: entities/aws-glue.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  b-plus-tree-index:
+    file: entities/b-plus-tree-index.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  b-tree:
+    file: entities/b-tree.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  bauplan:
+    file: entities/bauplan.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  big-metadata-cmeta:
+    file: entities/big-metadata-cmeta.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  biglake-managed-tables:
+    file: entities/biglake-managed-tables.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  biglake-tables:
+    file: entities/biglake-tables.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  bigquery-storage-api:
+    file: entities/bigquery-storage-api.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  bigquery-vortex:
+    file: entities/bigquery-vortex.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  bigquery:
+    file: entities/bigquery.md
     last_updated: '2026-07-08'
-  kimball-vs-inmon:
-    file: concepts/kimball-vs-inmon.md
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  bloom-filter:
+    file: entities/bloom-filter.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  byte-stream-split-encoding:
+    file: entities/byte-stream-split-encoding.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  capacitor-file-format:
+    file: entities/capacitor-file-format.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  celery-executor:
+    file: entities/celery-executor.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  chandy-lamport-checkpointing:
+    file: entities/chandy-lamport-checkpointing.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  clickhouse-keeper:
+    file: entities/clickhouse-keeper.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  clickhouse:
+    file: entities/clickhouse.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+    - clickhouse-internals
+  cloudkit:
+    file: entities/cloudkit.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-batch-2-apple-github-pinterest-canva
+  column-by-name:
+    file: entities/column-by-name.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  column-chunk:
+    file: entities/column-chunk.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  compaction:
+    file: entities/compaction.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  conditional-operators:
+    file: entities/conditional-operators.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  conditional-writes:
+    file: entities/conditional-writes.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  consumer-offsets-topic:
+    file: entities/consumer-offsets-topic.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  copy-on-write-vs-merge-on-read:
+    file: entities/copy-on-write-vs-merge-on-read.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  coresql:
+    file: entities/coresql.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  cte:
+    file: entities/cte.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  data-engineer-responsibility-and-business-value:
+    file: entities/data-engineer-responsibility-and-business-value.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  data-lake:
+    file: entities/data-lake.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  data-mesh:
+    file: entities/data-mesh.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+    - history-of-data-engineering
+  data-warehouse:
+    file: entities/data-warehouse.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+    - history-of-data-engineering
+  databus:
+    file: entities/databus.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  dataflow-model:
+    file: entities/dataflow-model.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  datahub:
+    file: entities/datahub.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  dbt-origin-and-adoption:
+    file: entities/dbt-origin-and-adoption.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  dbt:
+    file: entities/dbt.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  dead-letter-queue-and-bad-data-isolation:
+    file: entities/dead-letter-queue-and-bad-data-isolation.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  debezium:
+    file: entities/debezium.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  definition-repetition-levels:
+    file: entities/definition-repetition-levels.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  delta-encodings:
+    file: entities/delta-encodings.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  delta-lake:
+    file: entities/delta-lake.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  discord-derived-dag-system:
+    file: entities/discord-derived-dag-system.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  docker:
+    file: entities/docker.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  doordash-flink-iceberg:
+    file: entities/doordash-flink-iceberg.md
+    last_updated: '2026-07-08'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  dremel-query-engine:
+    file: entities/dremel-query-engine.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  druid-broker:
+    file: entities/druid-broker.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  druid-coordinator-node:
+    file: entities/druid-coordinator-node.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  druid-historical-node:
+    file: entities/druid-historical-node.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  druid-realtime-node:
+    file: entities/druid-realtime-node.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  dsm:
+    file: entities/dsm.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  duckdb:
+    file: entities/duckdb.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  espresso:
+    file: entities/espresso.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  facebook-laser-keyvalue-store:
+    file: entities/facebook-laser-keyvalue-store.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  facebook-stream-processors-puma-swift-stylus:
+    file: entities/facebook-stream-processors-puma-swift-stylus.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  flink-memorysegments:
+    file: entities/flink-memorysegments.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  footer-filemetadata:
+    file: entities/footer-filemetadata.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  foundationdb:
+    file: entities/foundationdb.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  gfs-record-append:
+    file: entities/gfs-record-append.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  gfs:
+    file: entities/gfs.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  git-mental-model-for-data-engineers:
+    file: entities/git-mental-model-for-data-engineers.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  github-merge-queue:
+    file: entities/github-merge-queue.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-batch-2-apple-github-pinterest-canva
+  google-napa:
+    file: entities/google-napa.md
+    last_updated: '2026-07-08'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  grain-declaration:
+    file: entities/grain-declaration.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  group-by:
+    file: entities/group-by.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  groupby-newsletter:
+    file: entities/groupby-newsletter.md
+    last_updated: '2026-07-15'
+    topics:
+    - weekly-newsletter-roundups-misc
+  hadoop-mapreduce:
+    file: entities/hadoop-mapreduce.md
+    last_updated: '2026-07-15'
     topics:
     - history-of-data-engineering
+  hash-join:
+    file: entities/hash-join.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  hdfs-checkpointnode-and-backupnode:
+    file: entities/hdfs-checkpointnode-and-backupnode.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hdfs-namenode-scaling-limit:
+    file: entities/hdfs-namenode-scaling-limit.md
     last_updated: '2026-07-08'
-  real-time-olap:
-    file: concepts/real-time-olap.md
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hdfs:
+    file: entities/hdfs.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hnsw:
+    file: entities/hnsw.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  holistics-aql:
+    file: entities/holistics-aql.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  hudi-index:
+    file: entities/hudi-index.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  hudi-timeline:
+    file: entities/hudi-timeline.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  iam-user-vs-role-based-auth-for-pipelines:
+    file: entities/iam-user-vs-role-based-auth-for-pipelines.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  iceberg-metadata-layer:
+    file: entities/iceberg-metadata-layer.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  kafka-origin:
+    file: entities/kafka-origin.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  kappa-architecture:
+    file: entities/kappa-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  keystone-real-time-platform:
+    file: entities/keystone-real-time-platform.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  kraft:
+    file: entities/kraft.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  kubernetes-executor:
+    file: entities/kubernetes-executor.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  kubernetes:
+    file: entities/kubernetes.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  lakehouse:
+    file: entities/lakehouse.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  lambda-architecture:
+    file: entities/lambda-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+    - flink
+  lance-file-format:
+    file: entities/lance-file-format.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  linkedin-data-infrastructure:
+    file: entities/linkedin-data-infrastructure.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  linkedin-kafka-scale:
+    file: entities/linkedin-kafka-scale.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  llm:
+    file: entities/llm.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  local-executor:
+    file: entities/local-executor.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  logdevice:
+    file: entities/logdevice.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  logical-offset:
+    file: entities/logical-offset.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  maestro-workflow-orchestrator:
+    file: entities/maestro-workflow-orchestrator.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  managed-beam-platform:
+    file: entities/managed-beam-platform.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  mantis-observability-agent:
+    file: entities/mantis-observability-agent.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  marmaray:
+    file: entities/marmaray.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  medallion-architecture:
+    file: entities/medallion-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  memtable:
+    file: entities/memtable.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  microsoft-fabric-and-synapse-analytics:
+    file: entities/microsoft-fabric-and-synapse-analytics.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  minerva:
+    file: entities/minerva.md
+    last_updated: '2026-07-15'
+    topics:
+    - airbnb-data-infrastructure
+  napa-serving-system:
+    file: entities/napa-serving-system.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  nested-loop-join:
+    file: entities/nested-loop-join.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  nimble-file-format:
+    file: entities/nimble-file-format.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  nine-software-engineering-skills-for-des:
+    file: entities/nine-software-engineering-skills-for-des.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  notion-block-model:
+    file: entities/notion-block-model.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  nsm:
+    file: entities/nsm.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  one-big-table:
+    file: entities/one-big-table.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  open-table-formats:
+    file: entities/open-table-formats.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+    - iceberg
+  orchestra:
+    file: entities/orchestra.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  page-cache-storage:
+    file: entities/page-cache-storage.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  page:
+    file: entities/page.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  pandas:
+    file: entities/pandas.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  parquet-origin:
+    file: entities/parquet-origin.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  parquet-physical-and-logical-types:
+    file: entities/parquet-physical-and-logical-types.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  parquet:
+    file: entities/parquet.md
+    last_updated: '2026-07-08'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+    - llms-ai-agents-and-vector-databases
+  partition:
+    file: entities/partition.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  paypal-kafka-scale:
+    file: entities/paypal-kafka-scale.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+  pinot-broker:
+    file: entities/pinot-broker.md
+    last_updated: '2026-07-15'
     topics:
     - apache-pinot-druid-and-real-time-olap
-    last_updated: '2026-07-08'
-  immutable-segment:
-    file: concepts/immutable-segment.md
+  pinot-cluster-components:
+    file: entities/pinot-cluster-components.md
+    last_updated: '2026-07-15'
     topics:
     - apache-pinot-druid-and-real-time-olap
+  pinot-pql:
+    file: entities/pinot-pql.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  plain-encoding:
+    file: entities/plain-encoding.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  polars:
+    file: entities/polars.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  policy-zone-manager:
+    file: entities/policy-zone-manager.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  pools:
+    file: entities/pools.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  presto:
+    file: entities/presto.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  procella:
+    file: entities/procella.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  product-quantization:
+    file: entities/product-quantization.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  project-nessie:
+    file: entities/project-nessie.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  rag:
+    file: entities/rag.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  recommended-learning-order-2026:
+    file: entities/recommended-learning-order-2026.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  record-batch:
+    file: entities/record-batch.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  redshift:
+    file: entities/redshift.md
     last_updated: '2026-07-08'
-  log-segments-and-offset-addressing:
-    file: concepts/log-segments-and-offset-addressing.md
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  page-cache-sequential-io-and-zero-copy:
-    file: concepts/page-cache-sequential-io-and-zero-copy.md
+    - storage-models-nsm-dsm-pax-and-column-store
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  relational-model:
+    file: entities/relational-model.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  message-batching-and-compression:
-    file: concepts/message-batching-and-compression.md
+    - sql-fundamentals-and-execution-model
+    - history-of-data-engineering
+  rle-bit-packing-hybrid:
+    file: entities/rle-bit-packing-hybrid.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  producer-send-path-and-acks:
-    file: concepts/producer-send-path-and-acks.md
+    - parquet
+  rle-dictionary:
+    file: entities/rle-dictionary.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  message-key-partitioning-strategies:
-    file: concepts/message-key-partitioning-strategies.md
+    - parquet
+  rocksdb-state-store:
+    file: entities/rocksdb-state-store.md
+    last_updated: '2026-07-08'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  pull-based-consumption-and-offset-commit:
-    file: concepts/pull-based-consumption-and-offset-commit.md
+    - flink
+  rockstorewidecolumn:
+    file: entities/rockstorewidecolumn.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  consumer-groups-and-partition-assignment:
-    file: concepts/consumer-groups-and-partition-assignment.md
+    - big-tech-case-studies-batch-2-apple-github-pinterest-canva
+  row-group:
+    file: entities/row-group.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  consumer-group-rebalancing:
-    file: concepts/consumer-group-rebalancing.md
+    - parquet
+  scale-appropriate-data-engineering:
+    file: entities/scale-appropriate-data-engineering.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  leader-follower-replication:
-    file: concepts/leader-follower-replication.md
+    - data-engineering-career-roadmap-and-learning-philosophy
+  scd-hybrid-types-5-6-7:
+    file: entities/scd-hybrid-types-5-6-7.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  partition-reassignment-and-cluster-balancing:
-    file: concepts/partition-reassignment-and-cluster-balancing.md
+    - dbt
+  scd-type-1-and-3:
+    file: entities/scd-type-1-and-3.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  zookeeper-to-kraft-metadata-management:
-    file: concepts/zookeeper-to-kraft-metadata-management.md
+    - dbt
+  scd-type-2:
+    file: entities/scd-type-2.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
+    - dbt
+  scd-type-4-mini-dimension:
+    file: entities/scd-type-4-mini-dimension.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  scribe:
+    file: entities/scribe.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  scuba:
+    file: entities/scuba.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  selection-operator:
+    file: entities/selection-operator.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  semantic-layer-over-a-mess:
+    file: entities/semantic-layer-over-a-mess.md
+    last_updated: '2026-07-08'
+    topics:
+    - dbt
+  semantic-schema-change:
+    file: entities/semantic-schema-change.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  senior-data-engineer-mindset-shifts:
+    file: entities/senior-data-engineer-mindset-shifts.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  sensors:
+    file: entities/sensors.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  sequential-executor:
+    file: entities/sequential-executor.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  snowflake-copy-into-and-event-driven-orchestration:
+    file: entities/snowflake-copy-into-and-event-driven-orchestration.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  snowflake-micro-partitions:
+    file: entities/snowflake-micro-partitions.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  snowflake:
+    file: entities/snowflake.md
+    last_updated: '2026-07-08'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  sort-merge-join:
+    file: entities/sort-merge-join.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  sparkle-etl-framework:
+    file: entities/sparkle-etl-framework.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  spotify-pubsub-scio:
+    file: entities/spotify-pubsub-scio.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  sstable:
+    file: entities/sstable.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  star-schema:
+    file: entities/star-schema.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  star-tree-index:
+    file: entities/star-tree-index.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  superluminal-execution-engine:
+    file: entities/superluminal-execution-engine.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  surrogate-keys:
+    file: entities/surrogate-keys.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  tectonic:
+    file: entities/tectonic.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
   tiered-storage-kip-405:
-    file: concepts/tiered-storage-kip-405.md
+    file: entities/tiered-storage-kip-405.md
+    last_updated: '2026-07-08'
     topics:
     - kafka
-    last_updated: '2026-07-10'
-  automq-wal-shared-storage:
-    file: concepts/automq-wal-shared-storage.md
+  tinybird:
+    file: entities/tinybird.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  warpstream-stateless-agent-architecture:
-    file: concepts/warpstream-stateless-agent-architecture.md
+    - clickhouse-internals
+  tombstone:
+    file: entities/tombstone.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  diskless-kafka-trade-off-framework:
-    file: concepts/diskless-kafka-trade-off-framework.md
+    - lsm-tree-storage-engines
+  trigger-dag-run-operator:
+    file: entities/trigger-dag-run-operator.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  broker-side-schema-and-semantic-validation:
-    file: concepts/broker-side-schema-and-semantic-validation.md
+    - airflow
+  trigger-rules:
+    file: entities/trigger-rules.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  kafka-iceberg-zero-etl:
-    file: concepts/kafka-iceberg-zero-etl.md
+    - airflow
+  trino:
+    file: entities/trino.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  zero-downtime-migration-dual-write:
-    file: concepts/zero-downtime-migration-dual-write.md
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  twitter-kappa-migration:
+    file: entities/twitter-kappa-migration.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  northguard-segment-level-replication:
-    file: concepts/northguard-segment-level-replication.md
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-data-platform:
+    file: entities/uber-data-platform.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  linkedin-multi-tier-clusters-and-audit:
-    file: concepts/linkedin-multi-tier-clusters-and-audit.md
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-ledgerstore:
+    file: entities/uber-ledgerstore.md
+    last_updated: '2026-07-15'
     topics:
-    - kafka
-    last_updated: '2026-07-10'
-  spark-origin-and-mapreduce-limitations:
-    file: concepts/spark-origin-and-mapreduce-limitations.md
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-remote-shuffle-service:
+    file: entities/uber-remote-shuffle-service.md
+    last_updated: '2026-07-15'
     topics:
     - spark
-    last_updated: '2026-07-11'
-  rdd-fundamentals-and-properties:
-    file: concepts/rdd-fundamentals-and-properties.md
+  unity-catalog:
+    file: entities/unity-catalog.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  lazy-evaluation-transformations-actions:
-    file: concepts/lazy-evaluation-transformations-actions.md
+    - iceberg
+  vector-embedding:
+    file: entities/vector-embedding.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  spark-application-architecture-and-execution-modes:
-    file: concepts/spark-application-architecture-and-execution-modes.md
+    - llms-ai-agents-and-vector-databases
+  velox:
+    file: entities/velox.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  jobs-stages-tasks-dag-and-dependencies:
-    file: concepts/jobs-stages-tasks-dag-and-dependencies.md
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  voldemort:
+    file: entities/voldemort.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  data-locality-and-speculative-execution:
-    file: concepts/data-locality-and-speculative-execution.md
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  vortex-file-format:
+    file: entities/vortex-file-format.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  catalyst-optimizer-phases:
-    file: concepts/catalyst-optimizer-phases.md
+    - parquet
+  vortex-storage-engine:
+    file: entities/vortex-storage-engine.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
+    - bigquery-internals
+  watermark:
+    file: entities/watermark.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  window-functions:
+    file: entities/window-functions.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  write-ahead-log:
+    file: entities/write-ahead-log.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+    - lsm-tree-storage-engines
+  xcom:
+    file: entities/xcom.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  youtube-cicd-framework:
+    file: entities/youtube-cicd-framework.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  zero-copy-sendfile:
+    file: entities/zero-copy-sendfile.md
+    last_updated: '2026-07-08'
+    topics:
+    - kafka
+concepts:
+  acid-in-olap:
+    file: concepts/acid-in-olap.md
+    last_updated: '2026-07-08'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
   adaptive-query-execution:
     file: concepts/adaptive-query-execution.md
+    last_updated: '2026-07-11'
     topics:
     - spark
-    last_updated: '2026-07-11'
-  executor-memory-model-and-caching:
-    file: concepts/executor-memory-model-and-caching.md
+  agent-intelligence-ladder:
+    file: concepts/agent-intelligence-ladder.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  agent-orchestration-layer:
+    file: concepts/agent-orchestration-layer.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  agentic-problem-solving-loop:
+    file: concepts/agentic-problem-solving-loop.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  ai-decision-vs-implementation-split:
+    file: concepts/ai-decision-vs-implementation-split.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  ai-models-as-data-consumers-and-serving-layers:
+    file: concepts/ai-models-as-data-consumers-and-serving-layers.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  airbnb-aqe-shuffle-partition-case-study:
+    file: concepts/airbnb-aqe-shuffle-partition-case-study.md
+    last_updated: '2026-07-15'
     topics:
     - spark
-    last_updated: '2026-07-11'
-  tungsten-and-jvm-object-overhead:
-    file: concepts/tungsten-and-jvm-object-overhead.md
+  airbnb-infrastructure-philosophy:
+    file: concepts/airbnb-infrastructure-philosophy.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  data-skew-and-oom:
-    file: concepts/data-skew-and-oom.md
+    - airbnb-data-infrastructure
+  airflow-concurrency-and-resource-control:
+    file: concepts/airflow-concurrency-and-resource-control.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  shuffle-writes-to-disk-and-external-shuffle-service:
-    file: concepts/shuffle-writes-to-disk-and-external-shuffle-service.md
+    - airflow
+  airflow-failure-handling-and-retries:
+    file: concepts/airflow-failure-handling-and-retries.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
-  sort-merge-join-vs-shuffle-hash-join:
-    file: concepts/sort-merge-join-vs-shuffle-hash-join.md
+    - airflow
+  airflow-resource-isolation-strategies:
+    file: concepts/airflow-resource-isolation-strategies.md
+    last_updated: '2026-07-15'
     topics:
-    - spark
-    last_updated: '2026-07-11'
+    - airflow
+  airflow-scheduling-cron-vs-event-driven:
+    file: concepts/airflow-scheduling-cron-vs-event-driven.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  approximate-nearest-neighbor-search:
+    file: concepts/approximate-nearest-neighbor-search.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  architecture-vs-pattern:
+    file: concepts/architecture-vs-pattern.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  arrow-columnar-array-layout:
+    file: concepts/arrow-columnar-array-layout.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  arrow-enables-location-independent-queries:
+    file: concepts/arrow-enables-location-independent-queries.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  arrow-table-and-chunked-arrays:
+    file: concepts/arrow-table-and-chunked-arrays.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  automq-object-batching-and-compaction:
+    file: concepts/automq-object-batching-and-compaction.md
+    last_updated: '2026-07-15'
+    topics:
+    - kafka
+  automq-stream-abstraction-and-kafka-internals:
+    file: concepts/automq-stream-abstraction-and-kafka-internals.md
+    last_updated: '2026-07-15'
+    topics:
+    - kafka
+  automq-traffic-tiering-and-rate-limiting:
+    file: concepts/automq-traffic-tiering-and-rate-limiting.md
+    last_updated: '2026-07-15'
+    topics:
+    - kafka
+  automq-wal-shared-storage:
+    file: concepts/automq-wal-shared-storage.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  aws-event-driven-fanout-architecture:
+    file: concepts/aws-event-driven-fanout-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  backfill-processing-strategies:
+    file: concepts/backfill-processing-strategies.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  backfilling-data-pipelines:
+    file: concepts/backfilling-data-pipelines.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  backfilling:
+    file: concepts/backfilling.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  batch-reprocessing-blindness:
+    file: concepts/batch-reprocessing-blindness.md
+    last_updated: '2026-07-08'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  batch-vs-stream-throughput-and-latency:
+    file: concepts/batch-vs-stream-throughput-and-latency.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  batch-vs-stream-tradeoff:
+    file: concepts/batch-vs-stream-tradeoff.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
   broadcast-join-and-bucket-join:
     file: concepts/broadcast-join-and-bucket-join.md
+    last_updated: '2026-07-11'
     topics:
     - spark
+  broker-side-schema-and-semantic-validation:
+    file: concepts/broker-side-schema-and-semantic-validation.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  business-rules-and-data-modeling-drift:
+    file: concepts/business-rules-and-data-modeling-drift.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  cap-vs-acid-consistency:
+    file: concepts/cap-vs-acid-consistency.md
+    last_updated: '2026-07-08'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  cascades-optimizer-and-runtime-adaptivity:
+    file: concepts/cascades-optimizer-and-runtime-adaptivity.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  catalyst-optimizer-phases:
+    file: concepts/catalyst-optimizer-phases.md
     last_updated: '2026-07-11'
-  resource-allocation-and-scheduling-modes:
-    file: concepts/resource-allocation-and-scheduling-modes.md
     topics:
     - spark
+  cdc-audit-log-and-compliance:
+    file: concepts/cdc-audit-log-and-compliance.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  cdc-operational-considerations:
+    file: concepts/cdc-operational-considerations.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  clarifying-questions-before-tools:
+    file: concepts/clarifying-questions-before-tools.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  clickhouse-insert-process-and-idempotency:
+    file: concepts/clickhouse-insert-process-and-idempotency.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  clickhouse-internal-data-warehouse-case-study:
+    file: concepts/clickhouse-internal-data-warehouse-case-study.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  clickhouse-replication-and-keeper-consensus:
+    file: concepts/clickhouse-replication-and-keeper-consensus.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  clickhouse-table-engines-and-integration-layer:
+    file: concepts/clickhouse-table-engines-and-integration-layer.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  clickhouse-vectorized-parallel-execution:
+    file: concepts/clickhouse-vectorized-parallel-execution.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  cloud-access-cost-and-observability-fundamentals:
+    file: concepts/cloud-access-cost-and-observability-fundamentals.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  cloud-compute-abstraction-spectrum:
+    file: concepts/cloud-compute-abstraction-spectrum.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  cloud-data-warehouse-elt-shift:
+    file: concepts/cloud-data-warehouse-elt-shift.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  cloud-regions-and-availability-zones:
+    file: concepts/cloud-regions-and-availability-zones.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  cloud-warehouse-compute-pricing-abstractions:
+    file: concepts/cloud-warehouse-compute-pricing-abstractions.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  cloud-warehouse-storage-pricing-dimensions:
+    file: concepts/cloud-warehouse-storage-pricing-dimensions.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  clustering-sort-order-and-z-ordering:
+    file: concepts/clustering-sort-order-and-z-ordering.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  colossus-and-borg-as-shared-substrate:
+    file: concepts/colossus-and-borg-as-shared-substrate.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  component-failure-as-normal:
+    file: concepts/component-failure-as-normal.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  concurrency-and-resource-isolation-in-serving:
+    file: concepts/concurrency-and-resource-isolation-in-serving.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  consumer-group-rebalancing:
+    file: concepts/consumer-group-rebalancing.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  consumer-groups-and-partition-assignment:
+    file: concepts/consumer-groups-and-partition-assignment.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  cpu-bound-lakehouse:
+    file: concepts/cpu-bound-lakehouse.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  creator-content-usage-accounting-at-scale:
+    file: concepts/creator-content-usage-accounting-at-scale.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-batch-2-apple-github-pinterest-canva
+  credentials-and-configuration-management:
+    file: concepts/credentials-and-configuration-management.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  data-access-control-layers:
+    file: concepts/data-access-control-layers.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  data-grain-and-serving-storage-shape:
+    file: concepts/data-grain-and-serving-storage-shape.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  data-lineage-signal-collection:
+    file: concepts/data-lineage-signal-collection.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  data-locality-and-speculative-execution:
+    file: concepts/data-locality-and-speculative-execution.md
     last_updated: '2026-07-11'
-  pyspark-architecture-and-py4j:
-    file: concepts/pyspark-architecture-and-py4j.md
     topics:
     - spark
+  data-modeling-as-organizational-blueprint:
+    file: concepts/data-modeling-as-organizational-blueprint.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  data-modeling-is-not-dbt-modeling:
+    file: concepts/data-modeling-is-not-dbt-modeling.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  data-pipeline-cicd-vs-software-cicd:
+    file: concepts/data-pipeline-cicd-vs-software-cicd.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  data-quality-contract-with-source:
+    file: concepts/data-quality-contract-with-source.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  data-quality-rules-and-anomaly-detection:
+    file: concepts/data-quality-rules-and-anomaly-detection.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  data-skew-and-oom:
+    file: concepts/data-skew-and-oom.md
     last_updated: '2026-07-11'
-  python-udf-overhead-and-arrow-optimization:
-    file: concepts/python-udf-overhead-and-arrow-optimization.md
     topics:
     - spark
-    last_updated: '2026-07-11'
-  spark-connect-architecture:
-    file: concepts/spark-connect-architecture.md
+  dataflow-triggers-and-refinement-modes:
+    file: concepts/dataflow-triggers-and-refinement-modes.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  dbt-incremental-race-condition:
+    file: concepts/dbt-incremental-race-condition.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  dbt-incremental-strategies-for-scd:
+    file: concepts/dbt-incremental-strategies-for-scd.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  definition-and-repetition-levels-dremel:
+    file: concepts/definition-and-repetition-levels-dremel.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  democratization-of-transformation:
+    file: concepts/democratization-of-transformation.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  devex-as-adoption-driver:
+    file: concepts/devex-as-adoption-driver.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  dimensional-modeling:
+    file: concepts/dimensional-modeling.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+  disaggregated-shuffle-service:
+    file: concepts/disaggregated-shuffle-service.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  discord-declarative-vs-imperative-orchestration:
+    file: concepts/discord-declarative-vs-imperative-orchestration.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  diskless-kafka-trade-off-framework:
+    file: concepts/diskless-kafka-trade-off-framework.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  docker-image-container-and-runtime:
+    file: concepts/docker-image-container-and-runtime.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  doordash-iceberg-realtime-migration:
+    file: concepts/doordash-iceberg-realtime-migration.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  duckdb-acid-and-mvcc:
+    file: concepts/duckdb-acid-and-mvcc.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  duckdb-embedded-analytics-model:
+    file: concepts/duckdb-embedded-analytics-model.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  duckdb-vector-formats:
+    file: concepts/duckdb-vector-formats.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  elt-vs-etl:
+    file: concepts/elt-vs-etl.md
+    last_updated: '2026-07-15'
+    topics:
+    - dbt
+    - history-of-data-engineering
+  ephemeral-storage-tiering-and-persistent-caching:
+    file: concepts/ephemeral-storage-tiering-and-persistent-caching.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  evaluate-before-adopting:
+    file: concepts/evaluate-before-adopting.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  every-decision-has-a-tradeoff:
+    file: concepts/every-decision-has-a-tradeoff.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  exactly-once-and-missing-data-detection:
+    file: concepts/exactly-once-and-missing-data-detection.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  exactly-once-needs-idempotent-sink:
+    file: concepts/exactly-once-needs-idempotent-sink.md
+    last_updated: '2026-07-08'
+    topics:
+    - flink
+  executor-memory-model-and-caching:
+    file: concepts/executor-memory-model-and-caching.md
+    last_updated: '2026-07-15'
     topics:
     - spark
+  feedback-loop-driven-learning:
+    file: concepts/feedback-loop-driven-learning.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  flink-networking-and-flow-control:
+    file: concepts/flink-networking-and-flow-control.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  flink-state-management-and-backends:
+    file: concepts/flink-state-management-and-backends.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  fundamentals-over-tools:
+    file: concepts/fundamentals-over-tools.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  gfs-consistency-model:
+    file: concepts/gfs-consistency-model.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  gfs-lease-and-write-pipeline:
+    file: concepts/gfs-lease-and-write-pipeline.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  gfs-metadata-and-operation-log:
+    file: concepts/gfs-metadata-and-operation-log.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  gfs-replica-management-and-fault-tolerance:
+    file: concepts/gfs-replica-management-and-fault-tolerance.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  gfs-snapshot-and-namespace-locking:
+    file: concepts/gfs-snapshot-and-namespace-locking.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  glue-data-catalog-and-crawlers:
+    file: concepts/glue-data-catalog-and-crawlers.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  glue-dynamicframe-and-schema-inference:
+    file: concepts/glue-dynamicframe-and-schema-inference.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  glue-serverless-execution-evolution:
+    file: concepts/glue-serverless-execution-evolution.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  hdfs-block-placement-and-replication-management:
+    file: concepts/hdfs-block-placement-and-replication-management.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hdfs-client-read-write-and-lease:
+    file: concepts/hdfs-client-read-write-and-lease.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hdfs-datanode-handshake-and-heartbeat:
+    file: concepts/hdfs-datanode-handshake-and-heartbeat.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hdfs-image-and-journal:
+    file: concepts/hdfs-image-and-journal.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  hive-object-storage-mismatch:
+    file: concepts/hive-object-storage-mismatch.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  iceberg-branching-and-wap-implementation:
+    file: concepts/iceberg-branching-and-wap-implementation.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  iceberg-hidden-partitioning-and-sort-order:
+    file: concepts/iceberg-hidden-partitioning-and-sort-order.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  idempotency:
+    file: concepts/idempotency.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+    - data-pipeline-design-framework
+  immutable-segment:
+    file: concepts/immutable-segment.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  immutable-storage-sets-and-dml:
+    file: concepts/immutable-storage-sets-and-dml.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  incremental-extraction-strategies:
+    file: concepts/incremental-extraction-strategies.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  incremental-view-maintenance-td-dd-dbsp:
+    file: concepts/incremental-view-maintenance-td-dd-dbsp.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  isolation-levels-and-mvcc:
+    file: concepts/isolation-levels-and-mvcc.md
+    last_updated: '2026-07-15'
+    topics:
+    - transactions
+  jobs-stages-tasks-dag-and-dependencies:
+    file: concepts/jobs-stages-tasks-dag-and-dependencies.md
     last_updated: '2026-07-11'
+    topics:
+    - spark
+  kafka-iceberg-zero-etl:
+    file: concepts/kafka-iceberg-zero-etl.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  kimball-vs-inmon:
+    file: concepts/kimball-vs-inmon.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  kubernetes-workload-abstractions:
+    file: concepts/kubernetes-workload-abstractions.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  lakehouse-build-decision-framework:
+    file: concepts/lakehouse-build-decision-framework.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  lakehouse-metadata-layer-as-translator:
+    file: concepts/lakehouse-metadata-layer-as-translator.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  lakehouse-query-performance-techniques:
+    file: concepts/lakehouse-query-performance-techniques.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa
+  lambda-vs-kappa:
+    file: concepts/lambda-vs-kappa.md
+    last_updated: '2026-07-08'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  layout-over-code:
+    file: concepts/layout-over-code.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  lazy-evaluation-transformations-actions:
+    file: concepts/lazy-evaluation-transformations-actions.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  leader-follower-replication:
+    file: concepts/leader-follower-replication.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  linkedin-multi-tier-clusters-and-audit:
+    file: concepts/linkedin-multi-tier-clusters-and-audit.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  linkedin-three-tier-service-architecture:
+    file: concepts/linkedin-three-tier-service-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  llm-training-pipeline:
+    file: concepts/llm-training-pipeline.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  locality-aware-scheduling-and-work-stealing:
+    file: concepts/locality-aware-scheduling-and-work-stealing.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  log-based-cdc:
+    file: concepts/log-based-cdc.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  log-segments-and-offset-addressing:
+    file: concepts/log-segments-and-offset-addressing.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  mapreduce-origins-and-limits:
+    file: concepts/mapreduce-origins-and-limits.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  materialization-strategies:
+    file: concepts/materialization-strategies.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  materialized-view-tradeoffs-and-streaming-convergence:
+    file: concepts/materialized-view-tradeoffs-and-streaming-convergence.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  mergetree-merge-and-mutation:
+    file: concepts/mergetree-merge-and-mutation.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  mergetree-storage-engine:
+    file: concepts/mergetree-storage-engine.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  message-batching-and-compression:
+    file: concepts/message-batching-and-compression.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  message-key-partitioning-strategies:
+    file: concepts/message-key-partitioning-strategies.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  meta-internal-data-stack-overview:
+    file: concepts/meta-internal-data-stack-overview.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  metadata-catalog-evolution-pull-to-push-to-log:
+    file: concepts/metadata-catalog-evolution-pull-to-push-to-log.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  min-max-pruning-and-dynamic-data-skipping:
+    file: concepts/min-max-pruning-and-dynamic-data-skipping.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  minerva-backfill-and-staging-environment:
+    file: concepts/minerva-backfill-and-staging-environment.md
+    last_updated: '2026-07-15'
+    topics:
+    - airbnb-data-infrastructure
+  minerva-data-versioning:
+    file: concepts/minerva-data-versioning.md
+    last_updated: '2026-07-15'
+    topics:
+    - airbnb-data-infrastructure
+  missing-data-vs-duplicates:
+    file: concepts/missing-data-vs-duplicates.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  model-selection-and-routing:
+    file: concepts/model-selection-and-routing.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  multi-agent-design-patterns:
+    file: concepts/multi-agent-design-patterns.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  netflix-batch-pipeline-four-steps:
+    file: concepts/netflix-batch-pipeline-four-steps.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  netflix-iceberg-ecosystem-and-migration:
+    file: concepts/netflix-iceberg-ecosystem-and-migration.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  netflix-simplicity-vs-flexibility-evolution:
+    file: concepts/netflix-simplicity-vs-flexibility-evolution.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  netflix-streaming-platform-build-and-failure-recovery:
+    file: concepts/netflix-streaming-platform-build-and-failure-recovery.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  northguard-segment-level-replication:
+    file: concepts/northguard-segment-level-replication.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  notion-postgres-to-datalake-migration:
+    file: concepts/notion-postgres-to-datalake-migration.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  object-storage-as-backbone:
+    file: concepts/object-storage-as-backbone.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  object-storage-as-data-lake-backbone:
+    file: concepts/object-storage-as-data-lake-backbone.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  object-storage-durability-erasure-coding:
+    file: concepts/object-storage-durability-erasure-coding.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  object-storage-operational-practices:
+    file: concepts/object-storage-operational-practices.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  occ-on-object-storage:
+    file: concepts/occ-on-object-storage.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  offline-realtime-query-merge:
+    file: concepts/offline-realtime-query-merge.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  olap-cost-control-client-side-practices:
+    file: concepts/olap-cost-control-client-side-practices.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  olap-data-skipping-zone-maps-partitioning-clustering:
+    file: concepts/olap-data-skipping-zone-maps-partitioning-clustering.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  olap-join-execution-and-broadcast-optimization:
+    file: concepts/olap-join-execution-and-broadcast-optimization.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  olap-metadata-object-storage-vs-transactional-db:
+    file: concepts/olap-metadata-object-storage-vs-transactional-db.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  olap-real-time-freshness-mechanisms:
+    file: concepts/olap-real-time-freshness-mechanisms.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  oltp-vs-olap-access:
+    file: concepts/oltp-vs-olap-access.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+    - sql-fundamentals-and-execution-model
+  orchestration-problem-space:
+    file: concepts/orchestration-problem-space.md
+    last_updated: '2026-07-15'
+    topics:
+    - airflow
+  outbox-pattern-and-dual-write-problem:
+    file: concepts/outbox-pattern-and-dual-write-problem.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  page-cache-sequential-io-and-zero-copy:
+    file: concepts/page-cache-sequential-io-and-zero-copy.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  parquet-random-access-limitation:
+    file: concepts/parquet-random-access-limitation.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  parquet-row-group-parallelism:
+    file: concepts/parquet-row-group-parallelism.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  parquet-write-read-process:
+    file: concepts/parquet-write-read-process.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  partition-reassignment-and-cluster-balancing:
+    file: concepts/partition-reassignment-and-cluster-balancing.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  partitioning-and-clustering-bigquery:
+    file: concepts/partitioning-and-clustering-bigquery.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  partitioning-schemes-across-systems:
+    file: concepts/partitioning-schemes-across-systems.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  pax-hybrid-layout:
+    file: concepts/pax-hybrid-layout.md
+    last_updated: '2026-07-15'
+    topics:
+    - storage-models-nsm-dsm-pax-and-column-store
+  persistent-message-bus-data-transfer:
+    file: concepts/persistent-message-bus-data-transfer.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  pet-project-retention-and-collaborative-practice:
+    file: concepts/pet-project-retention-and-collaborative-practice.md
+    last_updated: '2026-07-15'
+    topics:
+    - weekly-newsletter-roundups-misc
   photon-vectorized-engine:
     file: concepts/photon-vectorized-engine.md
+    last_updated: '2026-07-11'
     topics:
     - spark
+  physical-layout-partitioning-clustering-and-compaction:
+    file: concepts/physical-layout-partitioning-clustering-and-compaction.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  pipeline-failure-recovery-and-checkpointing:
+    file: concepts/pipeline-failure-recovery-and-checkpointing.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  predicate-pushdown:
+    file: concepts/predicate-pushdown.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  prefix-as-folders:
+    file: concepts/prefix-as-folders.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  presto-columnar-execution-optimizations:
+    file: concepts/presto-columnar-execution-optimizations.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  presto-coordinator-worker-scheduling:
+    file: concepts/presto-coordinator-worker-scheduling.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  presto-on-spark-architecture:
+    file: concepts/presto-on-spark-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  presto-resource-management-and-fault-tolerance:
+    file: concepts/presto-resource-management-and-fault-tolerance.md
+    last_updated: '2026-07-15'
+    topics:
+    - history-of-data-engineering
+  procella-caching-and-affinity-scheduling:
+    file: concepts/procella-caching-and-affinity-scheduling.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  procella-distributed-join-strategies:
+    file: concepts/procella-distributed-join-strategies.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  procella-stats-serving-mode:
+    file: concepts/procella-stats-serving-mode.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  procella-tail-latency-mitigation:
+    file: concepts/procella-tail-latency-mitigation.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  processing-layer-observability:
+    file: concepts/processing-layer-observability.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  producer-send-path-and-acks:
+    file: concepts/producer-send-path-and-acks.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  production-aligned-test-environments-via-config-rewriting:
+    file: concepts/production-aligned-test-environments-via-config-rewriting.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  pull-based-consumption-and-offset-commit:
+    file: concepts/pull-based-consumption-and-offset-commit.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  pull-vs-push-source-types:
+    file: concepts/pull-vs-push-source-types.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  push-based-vs-pull-based-dataflow:
+    file: concepts/push-based-vs-pull-based-dataflow.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  pyspark-architecture-and-py4j:
+    file: concepts/pyspark-architecture-and-py4j.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  python-udf-overhead-and-arrow-optimization:
+    file: concepts/python-udf-overhead-and-arrow-optimization.md
     last_updated: '2026-07-11'
+    topics:
+    - spark
+  query-based-cdc:
+    file: concepts/query-based-cdc.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  query-lifecycle:
+    file: concepts/query-lifecycle.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  raft-backed-coordination:
+    file: concepts/raft-backed-coordination.md
+    last_updated: '2026-07-15'
+    topics:
+    - consensus
+  rdd-fundamentals-and-properties:
+    file: concepts/rdd-fundamentals-and-properties.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  real-time-olap:
+    file: concepts/real-time-olap.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  redshift-code-generation-and-self-tuning-operations:
+    file: concepts/redshift-code-generation-and-self-tuning-operations.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  redshift-managed-storage-and-elastic-compute:
+    file: concepts/redshift-managed-storage-and-elastic-compute.md
+    last_updated: '2026-07-15'
+    topics:
+    - olap-cost-and-multi-engine-comparison
+  resource-allocation-and-scheduling-modes:
+    file: concepts/resource-allocation-and-scheduling-modes.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  s3-atomicity-and-conditional-writes:
+    file: concepts/s3-atomicity-and-conditional-writes.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  s3-strong-consistency:
+    file: concepts/s3-strong-consistency.md
+    last_updated: '2026-07-15'
+    topics:
+    - amazon-s3-gfs-hdfs-and-distributed-file-systems
+  safe-writes-and-schema-evolution-in-serving:
+    file: concepts/safe-writes-and-schema-evolution-in-serving.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  schema-change-severity-and-detection:
+    file: concepts/schema-change-severity-and-detection.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  schema-less-semi-structured-columnarization:
+    file: concepts/schema-less-semi-structured-columnarization.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  scribe-delivery-guarantees:
+    file: concepts/scribe-delivery-guarantees.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  scribe-read-path-and-ephemeral-cache:
+    file: concepts/scribe-read-path-and-ephemeral-cache.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  scribe-write-path-and-batching:
+    file: concepts/scribe-write-path-and-batching.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  segment-completion-protocol:
+    file: concepts/segment-completion-protocol.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-pinot-druid-and-real-time-olap
+  semantic-layer-and-data-modeling:
+    file: concepts/semantic-layer-and-data-modeling.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  sequential-vs-random-io:
+    file: concepts/sequential-vs-random-io.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  shared-foundations-consolidation:
+    file: concepts/shared-foundations-consolidation.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  shared-nothing-vs-shared-disk:
+    file: concepts/shared-nothing-vs-shared-disk.md
+    last_updated: '2026-07-08'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  shuffle-writes-to-disk-and-external-shuffle-service:
+    file: concepts/shuffle-writes-to-disk-and-external-shuffle-service.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  side-project-strategy-for-job-seeking:
+    file: concepts/side-project-strategy-for-job-seeking.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  simd-memory-alignment:
+    file: concepts/simd-memory-alignment.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  simplicity-over-complexity-in-pipeline-design:
+    file: concepts/simplicity-over-complexity-in-pipeline-design.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-engineering-career-roadmap-and-learning-philosophy
+  single-node-engine-market-gap:
+    file: concepts/single-node-engine-market-gap.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  single-node-processing:
+    file: concepts/single-node-processing.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  sink-first-requirements-gathering:
+    file: concepts/sink-first-requirements-gathering.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  snapshot-isolation-and-immutable-file-versioning:
+    file: concepts/snapshot-isolation-and-immutable-file-versioning.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  sort-merge-join-vs-shuffle-hash-join:
+    file: concepts/sort-merge-join-vs-shuffle-hash-join.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  source-access-trust-boundary:
+    file: concepts/source-access-trust-boundary.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  source-availability-and-sla:
+    file: concepts/source-availability-and-sla.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  source-constraints-and-schema-risk:
+    file: concepts/source-constraints-and-schema-risk.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  source-delete-handling:
+    file: concepts/source-delete-handling.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  source-performance-impact-by-type:
+    file: concepts/source-performance-impact-by-type.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  source-retention-and-replayability:
+    file: concepts/source-retention-and-replayability.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  spark-application-architecture-and-execution-modes:
+    file: concepts/spark-application-architecture-and-execution-modes.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  spark-bigquery-connector-vectorized-parquet-read:
+    file: concepts/spark-bigquery-connector-vectorized-parquet-read.md
+    last_updated: '2026-07-15'
+    topics:
+    - google-infrastructure
+  spark-checkpointing-and-exactly-once:
+    file: concepts/spark-checkpointing-and-exactly-once.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  spark-connect-architecture:
+    file: concepts/spark-connect-architecture.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  spark-in-memory-model-and-overhead:
+    file: concepts/spark-in-memory-model-and-overhead.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  spark-on-kubernetes-execution-model:
+    file: concepts/spark-on-kubernetes-execution-model.md
+    last_updated: '2026-07-15'
+    topics:
+    - cloud-kubernetes-docker-infrastructure-tooling
+  spark-origin-and-mapreduce-limitations:
+    file: concepts/spark-origin-and-mapreduce-limitations.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  spark-scheduler-oom-nondeterminism-and-skew-diagnostics:
+    file: concepts/spark-scheduler-oom-nondeterminism-and-skew-diagnostics.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  spark-shuffle-write-read-and-tuning:
+    file: concepts/spark-shuffle-write-read-and-tuning.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  spark-stateful-operations-and-state-store:
+    file: concepts/spark-stateful-operations-and-state-store.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  spark-structured-streaming-microbatch-and-triggers:
+    file: concepts/spark-structured-streaming-microbatch-and-triggers.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  spark-watermark-event-time-and-windowing:
+    file: concepts/spark-watermark-event-time-and-windowing.md
+    last_updated: '2026-07-15'
+    topics:
+    - spark
+  sparse-index-and-read-path:
+    file: concepts/sparse-index-and-read-path.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  spotify-event-delivery-architecture-evolution:
+    file: concepts/spotify-event-delivery-architecture-evolution.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  sql-execution-order:
+    file: concepts/sql-execution-order.md
+    last_updated: '2026-07-15'
+    topics:
+    - sql-fundamentals-and-execution-model
+  staging-area-raw-to-processed:
+    file: concepts/staging-area-raw-to-processed.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  stale-or-incorrect-data-handling:
+    file: concepts/stale-or-incorrect-data-handling.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  state-and-output-processing-semantics:
+    file: concepts/state-and-output-processing-semantics.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  storage-compute-disaggregation-bigquery:
+    file: concepts/storage-compute-disaggregation-bigquery.md
+    last_updated: '2026-07-15'
+    topics:
+    - bigquery-internals
+  stream-state-saving-mechanisms:
+    file: concepts/stream-state-saving-mechanisms.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  testing-data-pipeline-correctness:
+    file: concepts/testing-data-pipeline-correctness.md
+    last_updated: '2026-07-15'
+    topics:
+    - data-pipeline-design-framework
+  text-to-sql-challenges:
+    file: concepts/text-to-sql-challenges.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  text-vs-binary-file-formats:
+    file: concepts/text-vs-binary-file-formats.md
+    last_updated: '2026-07-15'
+    topics:
+    - parquet
+  tiered-storage-kip-405:
+    file: concepts/tiered-storage-kip-405.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  tinybird-ingestion-and-scaling:
+    file: concepts/tinybird-ingestion-and-scaling.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  tinybird-pipes-serving-and-dev-experience:
+    file: concepts/tinybird-pipes-serving-and-dev-experience.md
+    last_updated: '2026-07-15'
+    topics:
+    - clickhouse-internals
+  transformer-attention-and-parallelism:
+    file: concepts/transformer-attention-and-parallelism.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  trigger-based-cdc:
+    file: concepts/trigger-based-cdc.md
+    last_updated: '2026-07-15'
+    topics:
+    - change-data-capture-cdc-and-data-sourcing
+  tungsten-and-jvm-object-overhead:
+    file: concepts/tungsten-and-jvm-object-overhead.md
+    last_updated: '2026-07-11'
+    topics:
+    - spark
+  twitter-lambda-to-kappa-pipeline:
+    file: concepts/twitter-lambda-to-kappa-pipeline.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-data-platform-evolution:
+    file: concepts/uber-data-platform-evolution.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-data-quality-platform-architecture:
+    file: concepts/uber-data-quality-platform-architecture.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-data-quality-standardization:
+    file: concepts/uber-data-quality-standardization.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-flink-unified-platform:
+    file: concepts/uber-flink-unified-platform.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-gcp-batch-migration:
+    file: concepts/uber-gcp-batch-migration.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-hudi-etl-pipeline-and-impact:
+    file: concepts/uber-hudi-etl-pipeline-and-impact.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-hudi-query-and-write-taxonomy:
+    file: concepts/uber-hudi-query-and-write-taxonomy.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-kafka-scale-customizations:
+    file: concepts/uber-kafka-scale-customizations.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-multi-region-failover-and-backfilling:
+    file: concepts/uber-multi-region-failover-and-backfilling.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-oss-adoption-and-scaling-lessons:
+    file: concepts/uber-oss-adoption-and-scaling-lessons.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-pinot-upsert-mechanism:
+    file: concepts/uber-pinot-upsert-mechanism.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-presto-deployment-and-query-routing:
+    file: concepts/uber-presto-deployment-and-query-routing.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-realtime-infra-requirements:
+    file: concepts/uber-realtime-infra-requirements.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  uber-realtime-use-case-tradeoffs:
+    file: concepts/uber-realtime-use-case-tradeoffs.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  unified-batch-stream-pipelines-via-beam:
+    file: concepts/unified-batch-stream-pipelines-via-beam.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  vector-database-storage-row-vs-column:
+    file: concepts/vector-database-storage-row-vs-column.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  vector-quantization-and-compression:
+    file: concepts/vector-quantization-and-compression.md
+    last_updated: '2026-07-15'
+    topics:
+    - llms-ai-agents-and-vector-databases
+  vectorized-execution-engine:
+    file: concepts/vectorized-execution-engine.md
+    last_updated: '2026-07-15'
+    topics:
+    - single-node-engines-duckdb-polars-vs-distributed-systems
+  vectorized-vs-code-compilation:
+    file: concepts/vectorized-vs-code-compilation.md
+    last_updated: '2026-07-08'
+    topics:
+    - olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks
+  virtual-warehouse-isolation-and-shared-tenancy-economics:
+    file: concepts/virtual-warehouse-isolation-and-shared-tenancy-economics.md
+    last_updated: '2026-07-15'
+    topics:
+    - snowflake-internals
+  walmart-hudi-benchmark:
+    file: concepts/walmart-hudi-benchmark.md
+    last_updated: '2026-07-15'
+    topics:
+    - iceberg
+  warpstream-stateless-agent-architecture:
+    file: concepts/warpstream-stateless-agent-architecture.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  windowing-triggers-and-late-events:
+    file: concepts/windowing-triggers-and-late-events.md
+    last_updated: '2026-07-15'
+    topics:
+    - flink
+  write-amplification-tradeoff:
+    file: concepts/write-amplification-tradeoff.md
+    last_updated: '2026-07-15'
+    topics:
+    - lsm-tree-storage-engines
+  write-audit-publish-pattern:
+    file: concepts/write-audit-publish-pattern.md
+    last_updated: '2026-07-15'
+    topics:
+    - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+  zero-copy-data-sharing:
+    file: concepts/zero-copy-data-sharing.md
+    last_updated: '2026-07-15'
+    topics:
+    - apache-arrow
+  zero-downtime-migration-dual-write:
+    file: concepts/zero-downtime-migration-dual-write.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka
+  zookeeper-to-kraft-metadata-management:
+    file: concepts/zookeeper-to-kraft-metadata-management.md
+    last_updated: '2026-07-10'
+    topics:
+    - kafka

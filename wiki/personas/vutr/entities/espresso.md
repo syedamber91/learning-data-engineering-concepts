@@ -1,0 +1,21 @@
+---
+persona: vutr
+kind: entity
+sources:
+- raw/linkedin-data-infrastructure/diving-deep-into-linkedins-data-infrastructure.md
+last_updated: '2026-07-15'
+qc: passed
+slug: espresso
+topics:
+- big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+---
+
+Espresso is LinkedIn's distributed, scalable, timeline-consistent document store — another "live storage" system in [[linkedin-three-tier-service-architecture]] alongside [[voldemort]] — first deployed in 2011 to serve read traffic for features like company profiles, products, and reviews. Unlike Voldemort, it supports secondary indexing and local transactions.
+
+Its data model is URI-addressed: a database contains tables, a table contains documents identified by `http://<host>:<port>/<database>/<table>/<resource_id>/[<subresource_id>]`. A `resource_id` can point either at a single document or at a collection of related documents, each distinguished by a `subresource_id`. Every database, table, and document carries an Avro-format schema, and that schema defines the partition scheme — hash-based partitioning, or no partitioning at all (every document on every node). The document schema itself defines document structure and can be evolved by POSTing a new schema version, as long as the new version is compatible under Avro's schema-resolution rules; each stored document keeps the schema version it needs for deserialization alongside its serialized bytes. Fields can be decorated with indexing constraints, and documents can then be retrieved via those secondary indexes as HTTP query parameters. Because tables that share the same `resource_id` schema are guaranteed identical partitioning, Espresso can update several of them transactionally in one write.
+
+Four components make this work. The **router** inspects an incoming request's resource URI, applies the database's routing function to the `resource_id` to compute a partition ID, looks up the partition's current master storage node in the cluster manager's routing table, and forwards the request there. The **storage node** holds a consistent local view of every document routed to it and, per the document schema's constraints, can maintain a local secondary index; LinkedIn's original implementation used MySQL as the local datastore and Lucene for the local secondary index, with each document stored as a serialized byte stream keyed by its `resource_id`/`subresource_id`. Each storage node acts as master or slave for a given partition, and the replication factor comes from the database's schema. The **relay** is what makes Espresso's replication timeline-consistent, efficient, and robust — and it does this by riding on top of [[databus]]: each storage-node change is tagged with a transaction sequence number and written to that node's MySQL binlog, MySQL replication ships the binlog to a Databus relay, and other storage nodes pull from that Databus relay and apply changes locally in the same order they happened on the master. Efficiency comes from sharding — each storage node keeps a single MySQL binlog and offloads fan-out work to the Databus relay, which shards the log into per-partition event buffers so a slave subscribes only to its own master partition's changes. Robustness comes from writing a change to two places (the local binlog and the Databus relay) before it's considered committed, so a change surviving in Databus is recoverable even if the local write path fails. Finally, the **cluster manager** is built on Apache Helix, providing fault-tolerant rebalancing during scaling, load balancing based on node capacity and resource profile, service discovery via centralized cluster configuration, no-downtime server lifecycle management, and health checking.
+
+That relay design is also what gives Espresso its fault tolerance: if a master partition's node fails, a slave partition takes over only after first consuming every outstanding change from the Databus relay, and a newly added node is bootstrapped from a snapshot of the original master and then brought current from the Databus relay before it starts serving as a slave.
+
+*See also: [[voldemort]] · [[databus]] · [[linkedin-three-tier-service-architecture]] · [[linkedin-data-infrastructure]]*

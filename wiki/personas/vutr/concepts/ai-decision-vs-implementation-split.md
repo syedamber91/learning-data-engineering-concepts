@@ -1,0 +1,27 @@
+---
+persona: vutr
+kind: concept
+sources:
+- raw/data-engineering-career-roadmap-and-learning-philosophy-additional/how-does-ai-impact-data-engineers.md
+- raw/data-engineering-career-roadmap-and-learning-philosophy-additional/the-data-engineer-roadmap.md
+- raw/data-engineering-career-roadmap-and-learning-philosophy-additional/the-best-way-to-do-a-data-engineering.md
+last_updated: '2026-07-15'
+qc: passed
+slug: ai-decision-vs-implementation-split
+topics:
+- data-engineering-career-roadmap-and-learning-philosophy
+---
+
+Vu's answer to "will AI replace data engineers?" is built by splitting every major data engineering task into a **decision-making** phase and an **implementation** phase, then assessing AI's reliability on each separately — a structure he applies consistently across seven task categories: ingest/move data, model/transform data, ensure data quality, serve data to consumers, manage/operate systems, observe/monitor systems, and secure/govern data.
+
+The pattern that emerges is stable across all seven: **decision-making stays predominantly human**, because it depends on organizational context AI has no visibility into — how a source behaves under load versus what it claims to do, which business rule defines "active customer" or how revenue should be calculated (a negotiation "that requires organizational alignment... exists in a guy's head, and he left the company"), what counts as an acceptable staleness SLA, who should access which data at what granularity, or how many resources a job actually needs given a real budget. On data governance specifically he is unequivocal: "AI can't help with this" for the decision itself — access-control policy, retention windows, and compliance calls must be agreed at the organizational level, and unlike a bad transformation caught in testing, "the governance gap usually happens when the (serious) incidents happen."
+
+**Implementation, by contrast, is where AI is broadly useful** once the decision is made and clearly specified: writing ingestion code with retries and pagination, scaffolding physical schemas and ERD drafts from an agreed model, generating dbt tests or anomaly-detection scripts once you can state the rule, writing CI/CD pipelines and infrastructure-as-code, tuning a given SQL query (though he notes writing an optimized query *from scratch* has given him worse results), and drafting governance policy templates or audit-logging configuration for human review. Even here he attaches a consistent caveat: AI's implementation work still needs human review calibrated to the cost of being wrong — an incorrect transformation might be "caught during review or testing before it causes damage," but a masking rule missing one column leaks PII, and a retention job might delete a table that shouldn't be deleted.
+
+His tl;dr distills the split into a governing rule: "if you stop understanding problems, making decisions, evaluating trade-offs based on the current context and constraints, and communicating with others, you will be replaced by AI" — and if AI could ever do *those* things reliably, "we will be doomed; not just data engineers, but all humans." He also names a second-order effect independent of the decision/implementation split: even where headcount shrinks, remaining engineers may face *more* total work, not less, because of three compounding pressures — fewer engineers per company, leadership pressure assuming AI multiplies individual output, and extra review burden from "sloppy AI's work" causing bugs (his example: a single commit with 50+ file changes and 1000+ lines of diff that now needs careful human review).
+
+The article's second half argues the customer base itself is changing: AI models are now consumers of data engineering output too, which demands new skills layered on top of the classic ones — versioning and testing models (usually alongside AI engineers), handling more unstructured data (PDFs, images, video, not just nested table fields), and approximate-nearest-neighbor vector search alongside traditional OLAP point lookups and history scans. When AI itself becomes the analytics serving layer (a chat interface that turns a business question into SQL, executes it, and returns a chart), reliability now depends on supplying enough context (system prompts, MCP-exposed documents, a semantic layer as "information repository and guardrail," possibly a knowledge graph), granting the right tool permissions, coordinating multi-agent complexity, and managing LLM output inconsistency — asking the same question twice can yield two different framings, which he calls "a serious problem" for business decision-making requiring feedback loops, prompt tuning, and output governance that data engineers typically end up owning.
+
+This decision/implementation lens directly explains why "The Data Engineer Roadmap" places AI last in its learning order (see [[recommended-learning-order-2026]]) and why "the best way to do a data engineering [side project]" treats AI strictly as a second opinion on modeling and tool choices rather than a delegate for those decisions (see [[side-project-strategy-for-job-seeking]]) — in both cases the underlying claim is the same: you must already know what "good" looks like before you can supervise AI doing the implementation.
+
+*See also: [[recommended-learning-order-2026]] · [[side-project-strategy-for-job-seeking]] · [[feedback-loop-driven-learning]] · [[fundamentals-over-tools]]*

@@ -1,0 +1,21 @@
+---
+persona: vutr
+kind: entity
+sources:
+- raw/bigquery-internals/i-spent-8-hours-learning-how-google.md
+last_updated: '2026-07-15'
+qc: passed
+slug: big-metadata-cmeta
+topics:
+- bigquery-internals
+---
+
+Big Metadata is Google's answer to a problem specific to BigQuery's scale: a table can carry tens of thousands of columns and millions of physical blocks, and the more fine-grained (per-block, per-column) the metadata gets, the more useful it is for query and storage optimization — but fine-grained metadata for a table that large can itself reach tens of terabytes. Rather than store metadata alongside the data the way Delta Lake and Iceberg do, Google built a centralized metadata management system and — the paper's core idea — processes that metadata with the *same distributed query techniques used for the data itself*, so metadata scans and data scans compose into one query plan instead of metadata being a bottleneck bolted on the side.
+
+BigQuery's metadata splits into two kinds: **logical** metadata (table schema, partitioning/clustering settings, column/row-level access controls) and **physical** metadata (data-block locations, row counts, block-level lineage, statistics, per-column value properties — the equivalent of what a Delta Lake or Iceberg metadata layer tracks). Physical metadata is what Google calls "metadata" for the rest of the design. To make it queryable at scale, Google organizes each table's physical metadata into a companion metadata table called **CMETA**: one row per physical block, one column per tracked column-of-the-data (plus properties like min/max value or a value dictionary), stored — like the data itself — in Capacitor's columnar format (see [[capacitor-file-format]]). The columnar choice is deliberate: I/O scales with the number of columns a query actually references rather than the whole metadata table, so even a 10,000-column, tens-of-terabytes CMETA table only costs what the handful of referenced columns cost to scan.
+
+**Query processing** against CMETA is deferred deliberately. Loading full physical metadata before planning would slow every query — milliseconds for a 10GB table, minutes at petabyte scale — so the planner first builds a plan using only logical metadata, folds constants, and applies filters; only once the plan is otherwise ready is the query rewritten as a **semi-join** between the original query and CMETA over a `_block_locator` column (a semi-join returns matching rows from one side without pulling in the other side's columns — SQL's `IN` operator is a familiar instance). That CMETA semi-join is evaluated first to produce the list of blocks that actually need reading, and only those blocks — not the whole table, even at millions of blocks — get passed into the rest of the query; if the queried column also partitions the table, the number of returned blocks shrinks further. The **incremental generation** side keeps CMETA current under mutation: every block-level create/delete gets a timestamped entry in a highly available metadata change log (giving ACID guarantees across millions of block changes), and a background LSM-style compaction process merges that log into baseline-plus-delta Capacitor blocks, so metadata at any read timestamp is reconstructed by combining the baseline with the deltas since.
+
+CMETA also does work beyond simple block-skipping. In star/snowflake-schema **joins**, where filters land on a small dimension table but the expensive scan is the large fact table, Google delays processing the fact table's metadata until the dimension-table scan's results can be turned into filter expressions, then applies those derived filters against the fact table's CMETA to skip blocks exactly as if the filter had been written directly against the fact table. CMETA's per-column statistics also feed **query optimization**: BigQuery estimates query size (and picks parallelism/join strategy, e.g. broadcast vs. hash) by summing bytes scanned per table after CMETA-based block pruning, and the same statistics power the "dry run" feature that estimates data scanned without executing the query at all.
+
+*See also: [[capacitor-file-format]] · [[dremel-query-engine]] · [[vortex-storage-engine]]*

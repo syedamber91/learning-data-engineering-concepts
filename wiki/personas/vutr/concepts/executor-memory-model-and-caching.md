@@ -5,7 +5,8 @@ sources:
 - raw/spark/if-youre-learning-apache-spark-this.md
 - raw/spark/the-fastest-way-to-learn-spark-is.md
 - raw/spark/i-spent-8-hours-learning-apache-spark.md
-last_updated: '2026-07-11'
+- raw/spark/i-spent-8-hours-understanding-apache.md
+last_updated: '2026-07-15'
 qc: passed
 slug: executor-memory-model-and-caching
 topics:
@@ -27,3 +28,5 @@ This boundary used to be fixed — pre-1.6, storage couldn't touch execution's s
 **Caching** lives in the storage region and is lazy like any transformation — nothing materializes until an action fires. Storage levels: `MEMORY_ONLY` (unserialized, in memory), `MEMORY_AND_DISK` (spills to disk when memory's full), `DISK_ONLY` (serialized, disk-only), `OFF_HEAP`. Append `_SER` to store serialized (saves space, costs deserialization CPU), or `_X` for replication factor — `MEMORY_ONLY_SER_3` replicates cached data to 3 nodes for faster fault tolerance. `cache()` always uses `MEMORY_AND_DISK`; `persist()` lets you pick the level.
 
 The hands-on project makes the memory-vs-disk gap concrete: caching a 2.6GB on-disk Parquet file showed 3.7GB in memory — Parquet is Snappy-compressed on disk, and Spark deserializes/decompresses on read, so in-memory size always exceeds on-disk size. That gap is also why [[data-skew-and-oom|spill]] happens: in the same project, with `spark.executor.memory=2GB` and 2 cores, each task spilled 832MB (358.7MB to disk) — driven both by the parquet-expansion effect and by [[sort-merge-join-vs-shuffle-hash-join|SortAggregate's]] sort overhead. Doubling executor memory to 4GB (same core count) didn't shrink the spill at all — counterintuitive, and Vu flags it as unresolved, guessing it's tied to the SortAggregate mechanism rather than raw memory pressure. Meanwhile shrinking partition size (256MB → 128MB, doubling task count from 84 to 168) *halved* spill and cut per-task time from 35s to 12s, and raising executor cores from 2 to 4 (same memory) *increased* spill from 832MB to 1GB — more concurrent tasks sharing one memory pool shrinks each task's slice. The lesson: memory-per-task, not raw executor memory, is what controls spill.
+
+One more region sits entirely outside `spark.executor.memory` and everything above: **overhead memory** (`spark.executor.memoryOverhead`). This is additional memory allocated per executor process on top of the configured heap, covering things like interned strings and other native/VM overhead — its default minimum is 384MB, and it grows with executor size via `spark.executor.memoryOverheadFactor` (default 10% of `spark.executor.memory`). It's not just a fixed safety margin: if `spark.executor.pyspark.memory` isn't set explicitly, this same overhead region also doubles as the memory budget for the [[pyspark-architecture-and-py4j|PySpark executor process]] running alongside the JVM — so a PySpark job with heavy Python-side memory use can exhaust the overhead region even though the on-heap/unified memory math above looks fine.

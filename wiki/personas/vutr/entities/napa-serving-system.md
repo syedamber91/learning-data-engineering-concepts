@@ -1,0 +1,21 @@
+---
+persona: vutr
+kind: entity
+sources:
+- raw/bigquery-internals/i-spent-6-hours-learn-how-google.md
+last_updated: '2026-07-15'
+qc: passed
+slug: napa-serving-system
+topics:
+- bigquery-internals
+---
+
+Napa is the Google warehouse system that answers a different question than BigQuery/Dremel does. Where a Snowflake- or Databricks-style warehouse (BigQuery included) tolerates a query taking minutes because it's scanning and joining massive historical data, Napa serves analytical workloads that are simpler (fewer joins) but demand high-throughput ingestion, high data freshness, and sub-millisecond-to-millisecond response times, fed continuously by Google services with billions of users. Vu places Napa closer in spirit to Apache Pinot or Apache Druid — real-time OLAP — than to a traditional cloud warehouse. Its three stated requirements are robust, low-variance query performance regardless of load; high-throughput ingestion; and, notably, **flexibility** — Napa clients explicitly trade off data freshness, resource cost, and query performance against each other, and Napa is built to let them choose where on that triangle to sit.
+
+Architecturally Napa reuses Google's existing infrastructure rather than inventing new substrate: Colossus for storage, Spanner wherever strict transaction semantics are needed (chiefly metadata management), and F1 Query for serving, all coordinated by a Napa control plane. Napa leans on **materialized views**, sorted/indexed/range-partitioned by primary key(s), as its main lever for query speed — a different strategy from Snowflake or Databricks, which instead prune unnecessary data via min-max indexing (as in Parquet). For storage, Napa uses an LSM-tree, and like Vortex it splits data into a write-optimized (WO) format for high-throughput ingestion and a read-optimized (RO) format — sharing PAX-like characteristics with Parquet, BigQuery, and Snowflake's own formats — that WO data converts into via the LSM-tree's compaction process. Because deletes and updates in an LSM-tree are themselves just inserts, updates to one record can end up scattered across many files; compaction sorts records for binary search and coalesces those scattered updates so reads don't have to hunt across files for the current value, and Napa runs this compaction for both base tables and materialized views (falling back to on-the-fly aggregation at serving time if compaction hasn't caught up).
+
+The system decomposes into three independently scaled blocks — **ingestion** (accepts data, light transforms, durable writes/replication, with an adjustable worker count), **storage** (owns the data plus materialized-view maintenance), and **serving** — and that independence is exactly what lets Napa's freshness/performance/cost triangle be tuned per client. On the serving side, Napa answers queries from materialized views whenever possible instead of base tables, pushes filters down to storage, partitions an incoming query into thousands of subqueries using each LSM segment's local index, maintains a two-tier cache (per-worker RAM plus a shared distributed cache), prefetches data, and coalesces small I/Os.
+
+Napa makes the three-way trade-off concrete: sacrificing freshness (slower view maintenance, cheaper spot-instance workers, fewer files needing runtime merges) buys moderate cost and good performance; sacrificing performance (fewer materialized views, more files merged at query time, but more ingestion workers) buys higher freshness at low cost; and throwing more workers at ingestion, compaction, and view maintenance simultaneously buys both high freshness and good performance at higher resource cost. Vu draws the parallel across Google's own portfolio (and beyond): Vortex's WOS/ROS split and LSM-tree table management, ClickHouse's LSM-like MergeTree, Hudi's two-format design, Apache Paimon's LSM adoption, and RisingWave's Hummock storage engine are all instances of the same write-throughput-first pattern — and Vu frames Vortex as the more unusual case among them, since Google built it specifically because BigQuery's legacy batch storage engine couldn't be stretched to real-time analytics.
+
+*See also: [[google-napa]] · [[vortex-storage-engine]] · [[dremel-query-engine]]*

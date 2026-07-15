@@ -35,3 +35,6 @@ Note what's *not* on that list: nothing here says "here is my data, mutate it." 
 **Laziness is the other half of the mechanism, and it depends on immutability.** When you define an RDD, its data isn't computed or made available immediately -- nothing runs until an action triggers execution. Transformations like `map` or `filter` only *describe* how data should change; because the RDD is immutable, applying a transformation can't mutate the source, so Spark creates a new RDD representing the result instead of executing anything yet. Actions are what actually drive computation and produce output or stored data. The payoff of deferring execution this way is that Spark gets to look at the whole chain of transformations before running any of them and pick the most efficient way to execute it, rather than being forced to execute each step the moment it's declared.
 
 Put together: partitions give you the unit of parallel work, dependencies give you a lineage graph instead of replication, and immutability is what makes that lineage graph trustworthy enough to recompute from after a failure -- three properties from the same list, one mechanism.
+
+## Related in the other wiki
+- [[Beyond MapReduce]] — DDIA's higher-level framing of Spark's RDDs as the lineage-based recomputation that replaces MapReduce's forced disk materialization between every step.

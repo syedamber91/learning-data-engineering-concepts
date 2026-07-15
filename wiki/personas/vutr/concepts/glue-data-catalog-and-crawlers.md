@@ -1,0 +1,21 @@
+---
+persona: vutr
+kind: concept
+sources:
+- raw/cloud-kubernetes-docker-infrastructure-tooling/i-spent-6-hours-learning-aws-glue.md
+last_updated: '2026-07-15'
+qc: passed
+slug: glue-data-catalog-and-crawlers
+topics:
+- cloud-kubernetes-docker-infrastructure-tooling
+---
+
+As data lakes in stores like S3 grow, tracking metadata — schemas, physical locations, partitions — becomes critical for query planning, execution, discovery, and governance across whichever engines touch that data. Traditional databases kept this metadata inside their own proprietary internal catalog, usable only by that database's engine. The Hive Metastore broke that coupling for the Hadoop ecosystem, becoming a widely supported standard across Hive, Trino, and Spark — but it pushed the operational burden of running a relational-database backend (provisioning, scaling, patching) onto whoever ran it.
+
+The **Glue Data Catalog** is AWS's managed alternative: it offers public CRUD APIs for databases, tables, and partitions, with metadata covering data types, schema, partitioning method, and Hive Serialization/Deserialization info for compatibility. Query engines can consume that metadata as plain JSON, or through open-source adapters that translate it into Hive- or Spark-native form. Crucially, the Catalog follows Hive conventions for compatibility but does *not* strictly enforce Hive's data model — a deliberate trade-off that lets some tables be incompatible with a specific query engine in exchange for supporting a much broader range of use cases across the fast-evolving lake ecosystem. While S3 datasets are the primary use case, the same flexible model covers relational databases, NoSQL stores like MongoDB, and streaming sources like Kinesis and Kafka, via **connection objects** that carry the physical connection details (VPC setup, security groups, credentials or Secrets Manager references) and get referenced by tables and reused across multiple ETL jobs. Underneath, the Catalog runs on scalable, low-latency storage built for high availability, supporting hundreds of thousands of monthly users.
+
+As the number of partitions per table grew, a specific bottleneck emerged: query engines historically enumerated *every* partition for a table and filtered client-side, which becomes prohibitively slow once a table has millions of partitions. AWS's 2020 fix was **partition indexing** — letting customers build indexes on partition attributes so engines can push partition predicates directly to the Catalog and retrieve only the relevant partitions. The gain is negligible on small tables, but the source cites queries running up to 8.6x faster on tables with millions of partitions.
+
+Keeping that catalog accurate is the job of **crawlers**, which scan S3 data and automatically populate tables and partitions — necessary because Glue ETL scripts or Athena DDL alone can't cover cases like a large volume of pre-existing S3 data or datasets whose schema is unknown or actively changing. The crawling process runs in three stages. First, **listing and classification**: files within the given S3 prefixes are listed and batched for parallel processing; each file's format, compression, and schema get identified — reading only the first megabyte of each file to limit scanning cost — using classifiers tuned to specific formats (recognizing Avro's distinctive header, testing candidate delimiters for CSV, and so on), with metadata aggregated at the prefix level. Second, the **finalizer** turns those prefixes into actual tables and partitions: it treats Hive-style partition prefixes (the source's example: `/Transactions/US/2022-01-09`) as partitions of one table keyed on attributes like country and date, using a schema-similarity metric — the ratio of intersecting fields to the smaller schema's size — computed across sibling prefixes; prefixes above a similarity threshold are inferred as partitions of the same table, and prefixes below it become separate tables. Third, **recrawling** lets customers incrementally crawl only the S3 partitions added since the previous run, with an S3-events-based crawler able to target specifically the folders that changed.
+
+*See also: [[aws-glue]] · [[glue-dynamicframe-and-schema-inference]] · [[glue-serverless-execution-evolution]] · [[object-storage-as-data-lake-backbone]]*
