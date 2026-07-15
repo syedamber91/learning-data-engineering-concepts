@@ -12,7 +12,7 @@ topics:
 - big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
 ---
 
-LinkedIn's real-time infrastructure processes about 4 trillion events daily across roughly 3,000 pipelines for over 950 million users, sitting on top of a historical stack it built and mostly open-sourced itself: Kafka (2010/2011), the in-house Samza streaming engine, Voldemort (2008), Databus, Espresso (2011), and DataHub (open-sourced 2019, evolved from WhereHows in 2016).
+LinkedIn's real-time infrastructure processes about 4 trillion events daily across roughly 3,000 pipelines for over 950 million users, sitting on top of a historical stack it built mostly in-house: Kafka (built 2010, open-sourced 2011), the in-house Samza streaming engine, Voldemort (2008), Databus, and Espresso (2011) — plus DataHub, which LinkedIn did open-source (2019, evolved from WhereHows, itself open-sourced in 2016).
 
 Rather than replace its Lambda architecture — Samza for streaming, Spark for batch — the way Twitter pivoted its own pipeline fully to Kappa, LinkedIn kept the two-engine split and optimized around it: adopting Apache Beam let a single standardization-pipeline codebase run as either a real-time job or a periodic backfill job, cutting one pipeline's resource use roughly in half (from ~5,000 GB-hours of memory and ~4,000 CPU-hours to ~2,000/~1,700) and its processing time from 7.5 hours to 25 minutes ([[unified-batch-stream-pipelines-via-beam]], [[apache-beam]], [[managed-beam-platform]]).
 

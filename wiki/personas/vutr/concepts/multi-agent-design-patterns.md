@@ -20,6 +20,6 @@ Once a system commits to a team of specialist agents rather than one super-agent
 
 **Human-in-the-Loop** (the Safety Check) is the pattern for high-stakes actions: the agent pauses mid-task and asks a person for approval before proceeding, rather than acting autonomously all the way through. This same HITL idea also appears as one of an agent's "Executing Actions" tools alongside API wrappers and code execution — as a pattern it can gate an entire multi-agent workflow, and as a tool it can gate a single risky action within one agent's turn.
 
-These four patterns are presented as complementary building blocks rather than mutually exclusive architectures — a real system can combine a Coordinator that dispatches to a Sequential sub-pipeline, with an Iterative Refinement loop on one stage and an HITL gate before the final action.
+The source lists these as four distinct common patterns for organizing a multi-agent team, without framing them as explicitly combinable or giving a worked example of combining them.
 
 *See also: [[agent-orchestration-layer]] · [[ai-agent]] · [[agentic-problem-solving-loop]]*
