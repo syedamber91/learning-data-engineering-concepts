@@ -32,3 +32,7 @@ storage, [[Dataflow Through Databases]], service APIs, event logs.
 - [[The Merits of Schemas]]
 - [[The Output of Batch Workflows]]
 - [[Thrift and Protocol Buffers]]
+
+## Related in the other wiki
+- [[schema-change-severity-and-detection]] — vutr's concept ranks schema changes by severity (additive/rename-drop/type-change/semantic-change) for the pipeline-consumer side of exactly the same problem this page frames as backward/forward code-data compatibility, and names concrete defenses (schema registry, selective reads, ingestion-time validation) a data engineer applies when they don't control the producer's schema decisions.
+- [[safe-writes-and-schema-evolution-in-serving]] — vutr's concept names five concrete serving-layer strategies for this exact problem (native table-format evolution in Delta/Iceberg/Hudi, additive-only-nullable-columns, versioned tables/snapshots, schema registries for streaming, and CI-time schema-change tests), giving this page's abstract backward/forward compatibility framing a serving-layer-specific menu of mechanisms.

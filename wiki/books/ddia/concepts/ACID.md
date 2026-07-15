@@ -19,6 +19,7 @@ isolation spectrum in [[Weak Isolation Levels]] and [[Serializability]]. Contras
 BASE; see [[Isolation Levels]].
 
 ## Referenced In
+- [[lakehouse]] — vutr's notes on the Databricks lakehouse paper: open table formats (Delta Lake, Iceberg, Hudi) exist specifically to bolt these ACID guarantees onto plain object-storage files, which is the mechanism that lets the lakehouse claim warehouse-grade management features on lake-cheap storage.
 - [[Aiming for Correctness]]
 - [[Atomic Commit and Two-Phase Commit (2PC)]]
 - [[Ch 07 - Transactions]]

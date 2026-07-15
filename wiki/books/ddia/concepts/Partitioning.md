@@ -44,3 +44,4 @@ strategies, [[Rebalancing Partitions]], and [[Request Routing]]. Pairs with
 
 ## Related in the other wiki
 - [[partition]] — Kafka's partition operationalizes this concept directly: the unit a topic is split into so brokers and consumers each own a disjoint slice, with the "more consumers than partitions leaves some idle" rule echoing this note's skew/hot-spot concern about uneven load.
+- [[bigquery-internals]] — vutr's notes show a metadata-only version of this concept: BigQuery tags storage sets with a partition ID so a query's filter is applied by skipping irrelevant partitions at the metadata layer alone, and separately shows the same skew concern this note raises resurfacing inside Dremel's shuffle layer, resolved by dynamic runtime repartitioning rather than a fixed scheme.

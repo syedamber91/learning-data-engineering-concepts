@@ -3,7 +3,8 @@ persona: vutr
 kind: concept
 sources:
 - raw/spark/i-spent-6-hours-learning-pyspark.md
-last_updated: '2026-07-11'
+- raw/spark/i-spent-8-hours-understanding-apache.md
+last_updated: '2026-07-15'
 qc: passed
 slug: pyspark-architecture-and-py4j
 topics:
@@ -21,3 +22,5 @@ The trade-off here is narrow but real: PySpark adds one extra step to the pipeli
 This architecture is also the reason a Python [[python-udf-overhead-and-arrow-optimization|UDF]] is expensive in a way ordinary DataFrame code is not. In the driver-only picture above, execution stays entirely inside the JVM. Register a Python UDF, though, and Spark must spawn *additional* Python processes at the executor level to run that function. For each row, the JVM executor serializes the relevant data and ships it to a Python process via IPC; the Python process deserializes it, runs the user's function, and serializes the result back to the JVM. That round trip — not just the UDF logic itself — is why UDFs are slower than native Spark functions: they also can't benefit from Spark's own optimizations, [[catalyst-optimizer-phases|Catalyst]] and Tungsten, and they process one row at a time rather than in bulk.
 
 Why any of this was worth building: the numbers Vu cites from Databricks show the shift in who actually uses Spark. In 2013, 92% of users wrote Scala, 5% Python, 3% SQL. By 2020 that had flipped — 47% Python, 41% SQL, 12% Scala and other. Python became the dominant Spark interface despite carrying this Py4j/IPC tax, because it's the language data analysts and scientists already know, with libraries like NumPy, Pandas, and Scikit-learn, and it covers the whole pipeline from orchestration (Airflow) to stakeholder-facing apps (Streamlit). Scala being "faster" on paper didn't outweigh accessibility in practice, which is also the throughline into everything the ecosystem subsequently built to shrink that Py4j/IPC tax rather than eliminate the two-process model: Arrow-optimized UDFs, Pandas/vectorized UDFs, and eventually [[spark-connect-architecture|Spark Connect]], which removes the Py4j JVM-driver step altogether by talking to a remote Spark server over gRPC instead.
+
+The two-process split also has a direct memory-accounting consequence: the extra Python process(es) PySpark spawns at the executor level need their own memory, and by default that comes out of the same [[executor-memory-model-and-caching|overhead-memory region]] (`spark.executor.memoryOverhead`) Spark already sets aside for JVM/native overhead — `spark.executor.pyspark.memory` lets you carve out a separate, explicit budget for the Python side instead, but if it's left unset, heavy Python-side memory use (e.g. a large Pandas object materialized inside a UDF) competes with the JVM's own overhead needs in that one shared pool.

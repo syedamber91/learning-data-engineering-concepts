@@ -31,3 +31,8 @@ operation identifier. See also [[Exactly-Once Semantics]].
 - [[Single-Object and Multi-Object Operations]]
 - [[The End-to-End Argument for Databases]]
 - [[Timeliness and Integrity]]
+
+## Related in the other wiki
+- [[idempotency]] — vutr's concept covers exactly this property at the data-pipeline level, with concrete techniques (overwrite instead of append, MERGE/upsert, avoid non-deterministic functions like NOW()) for making a processing step idempotent end-to-end.
+- [[safe-writes-and-schema-evolution-in-serving]] — vutr's concept is the serving-layer instance of this same page: four named strategies (MERGE/upsert, overwrite-by-partition, dedup-on-write, append-with-dedup-on-read) for what a sink does when it receives the same logical write twice.
+- [[snowflake-copy-into-and-event-driven-orchestration]] — a concrete case where this property arrives "for free": Snowflake's COPY INTO tracks already-loaded files internally, so a repeated load doesn't duplicate rows without the pipeline author building any deduplication logic themselves.

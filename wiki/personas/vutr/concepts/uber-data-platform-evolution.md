@@ -1,0 +1,23 @@
+---
+persona: vutr
+kind: concept
+sources:
+- raw/uber-data-infrastructure-case-studies/ubers-big-data-revolution-from-mysql.md
+last_updated: '2026-07-15'
+qc: passed
+slug: uber-data-platform-evolution
+topics:
+- big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter
+---
+
+Uber's data platform history, as Vu retells it from Uber's own 2018 retrospective, moves through four generations, each one solving the previous generation's specific failure mode.
+
+**Generation 1 (pre-2014):** data lived in a handful of MySQL and PostgreSQL databases, fragmented enough that anyone wanting a holistic view had to manually consolidate it. This broke down as Uber expanded globally and data grew from terabytes toward petabytes. The fix was Uber's **first data warehouse**, built on Vertica for its speed, scalability, and column-oriented design, which let Uber standardize SQL as the company-wide access interface — within months the warehouse held tens of terabytes and hundreds of daily users. But the ETL feeding it was unreliable: there was no formal schema agreement between upstream producers and downstream consumers, so a source format change caused frequent ingestion failures, worsened by Uber's use of flexible JSON that made schema consistency hard to enforce; and a lack of standardization in ingestion jobs meant the same data got ingested multiple times with different transformations, adding pressure on upstream sources and duplicate-data storage costs.
+
+**Generation 2:** Hadoop became the new data lake, with raw data ingested there — instead of loading straight into Vertica — without transformation on the way in, reducing load on source systems. Consumption diversified: Presto for interactive queries, Spark for complex processing, Hive for large queries, with only tables needed for real-time SQL still carried into the warehouse — meaning backfills and recovery only had to touch data already in Hadoop, not the original sources. Apache Parquet's adoption was the single most consequential piece here, cutting storage costs and speeding analytical queries through columnar compression. By full onboarding, Uber was ingesting tens of petabytes into Hadoop. But Generation 2 hit three walls: (1) the accumulation of small files from ingestion and ad hoc/ETL jobs pressured the HDFS NameNode, which manages filesystem metadata in memory, to the point where millions of files made it struggle to keep up; (2) data latency was stuck at once every 24 hours — far too slow for demand forecasting or fraud detection; and (3) Hadoop's snapshot-based ingestion model couldn't do updates or deletes, so a single changed rider/driver rating or fare adjustment forced a full dataset reload from source.
+
+**Generation 3** targeted four pain points directly: HDFS's NameNode struggles past 10PB (worse past 50-100PB), mitigated with ViewFS (a virtual, unified-namespace filesystem across multiple HDFS clusters/directories) and HDFS NameNode Federation (splitting the namespace across multiple independent NameNodes) alongside moving data to separate clusters; the 24-hour latency, fixed by redesigning ingestion for incremental delivery of only new/updated data instead of full snapshots; the lack of update/delete support in Hadoop/Parquet; and ETL/modeling jobs that rebuilt entire tables on every run, fixed by shifting to incremental updates that pull only changed data. The tool Uber built to solve all four at once was **Apache Hudi** (Hadoop Upserts and Incremental) — upserts plus incremental ingestion meant Uber could ingest only new records/updates/deletes instead of reloading full datasets, cutting data latency from 24 hours to under an hour. Feeding Hudi was **Marmaray**, Uber's unified ingestion platform, which consumes Kafka changelogs (all upstream events sent to Kafka in a unified Avro encoding) via mini-batch Spark jobs every 10-15 minutes, keeping latency under 30 minutes ([[marmaray]]).
+
+**Generation 4 (looking ahead, as of the source article):** four stated priorities — stricter schema validation on upstream sources for data quality; pushing raw-data latency to five minutes and modeling latency to ten; moving off dedicated hardware toward containerization for more flexible resource management and scheduling; and standardizing changelogs across all upstream sources for a more unified, resilient ingestion approach. Separately, later Uber posts (May and September 2024) describe migrating the batch processing infrastructure to Google Cloud ([[uber-gcp-batch-migration]]).
+
+*See also: [[marmaray]] · [[uber-hudi-query-and-write-taxonomy]] · [[uber-gcp-batch-migration]] · [[uber-data-platform]]*

@@ -29,3 +29,4 @@ The bulk of a system's cost arrives after launch: fixing bugs, keeping it operat
 - [[Reliability]] — good operations practices directly prevent failures
 - [[Scalability]] — distribution decisions trade against simplicity
 - [[Thinking About Data Systems]] — maintainability as one of the three framing concerns
+- [[data-engineering-career-roadmap-and-learning-philosophy]] — vutr's own definition of software engineering as "building systems that keep working... even when the guy who created them has left" is a data-engineering-specific restatement of this note's maintainability framing; see that topic's [[nine-software-engineering-skills-for-des]] entity for the nine skills he derives from it.

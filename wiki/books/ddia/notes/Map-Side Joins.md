@@ -34,3 +34,6 @@ Pig ("replicated join"), Hive ("MapJoin" / bucketed map join), Cascading, Crunch
 - [[Partitioning by Hash of Key]] — the partitioning discipline both sides must share
 - [[Materialization of Intermediate State]] — dataflow engines choose among these join strategies
 - [[Column-Oriented Storage]] — warehouse engines pairing these joins with columnar scans
+
+## Related in the other wiki
+- [[sql-fundamentals-and-execution-model]] — vutr's [[hash-join]] note describes the same broadcast hash join one layer up, inside a single SQL query rather than a MapReduce job: the small ("build") table is shipped whole to every worker (Spark, Snowflake, BigQuery all do this), each worker builds its own in-memory hash table from it, and only the large table's assigned partition gets probed — this note's partitioned hash join is likewise the same disk-partitioning idea vutr's note calls Grace Hash Join, applied to job inputs instead of to a runtime memory spill.

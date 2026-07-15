@@ -36,3 +36,4 @@ Weather simulation and molecular-dynamics jobs (checkpoint/restart); EC2-style c
 - [[Approaches for Coping with Load]] — scaling philosophy behind commodity clusters
 - [[MapReduce]] — batch workloads that expect and survive node failures
 - [[Hardware Faults]] — component failure rates that motivate this design
+- [[cloud-kubernetes-docker-infrastructure-tooling]] — vutr's persona wiki traces this same cloud-side philosophy into a concrete mechanism: Kubernetes' controller reconciliation loop (desired state vs. observed actual state) automatically replacing a dead Pod rather than halting the cluster is the production instantiation of "tolerate dead nodes, don't restart from checkpoint" described here in the abstract.

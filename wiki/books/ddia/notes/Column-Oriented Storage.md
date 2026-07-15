@@ -29,3 +29,6 @@ Fact tables in a data warehouse can hold trillions of rows across petabytes, yet
 - [[Transaction Processing or Analytics]] — the workload split that motivates this storage family
 - [[Data Warehousing]] — the system context these engines live in
 - [[SSTables and LSM-Trees]] — the write-path machinery column stores borrow
+- [[bigquery-internals]] — vutr's notes ground this note's Dremel origin claim: BigQuery's own Capacitor format and Big Metadata/CMETA system apply the same columnar bet to both data and metadata, and its definition/repetition-level encoding (adopted directly by Parquet) is the mechanism this note's "Parquet... derived from Google's Dremel" line only names in passing.
+- [[apache-pinot-druid-and-real-time-olap]] — vutr's notes on Pinot and Druid apply this note's columnar rationale to a real-time-serving workload instead of a warehouse: both engines store immutable columnar segments, and Druid's real-time nodes even perform the row-to-column conversion this note describes live, on every flush from memory to disk.
+- [[parquet]] — vutr's notes work through Parquet's actual on-disk mechanics (row groups, column chunks, pages, dictionary/RLE/delta encodings, and the newer Lance/Nimble/Vortex alternatives) that this note's "Parquet... derived from Google's Dremel" line only names in passing.

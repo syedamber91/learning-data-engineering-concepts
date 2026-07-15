@@ -1,0 +1,19 @@
+---
+persona: vutr
+kind: concept
+sources:
+- raw/amazon-s3-gfs-hdfs-distributed-file-systems-additional/i-spent-8-hours-reading-the-paper-523.md
+last_updated: '2026-07-15'
+qc: passed
+slug: hdfs-block-placement-and-replication-management
+topics:
+- amazon-s3-gfs-hdfs-and-distributed-file-systems
+---
+
+HDFS's default block-placement policy is rack-aware, exploiting the common large-cluster fact that bandwidth within a rack (nodes sharing a switch) exceeds bandwidth between racks (traffic crossing one or more core switches). The rule is two-fold: no DataNode holds more than one replica of the same block, and — given enough racks in the cluster — no rack holds more than two replicas of the same block. New-block placement follows the same shape: with one existing replica, the second goes on a different rack; with two replicas on the same rack, the third goes to yet another rack, otherwise the third goes to a different node on the same rack as an existing replica.
+
+Keeping every block at its target replication count is an ongoing NameNode responsibility, driven by the block reports DataNodes send in (see [[hdfs-datanode-handshake-and-heartbeat]]). When a block has *more* replicas than needed, the NameNode removes one — without reducing the number of distinct racks represented, and preferring to remove from the DataNode with the least available disk space. When a block has *fewer* than needed, it goes into a **replication priority queue**: a block down to a single replica gets highest priority, while a block with more than two-thirds of its target replication gets lowest. A background thread continually scans the head of that queue to decide where new replicas should land, using the same placement rule as fresh block creation. There's a specific failure mode HDFS guards against here: if all of a block's replicas end up on one rack (say, after a rack-local re-replication), the NameNode treats the block as effectively under-replicated with respect to rack diversity, replicates it onto a different rack, and then — now over-replicated — removes an old copy, since the over-replication removal policy prefers preserving rack count.
+
+Three operational tools sit alongside this core loop. The **balancer** takes a target threshold (0,1) and a bandwidth cap as input, and moves replicas from over-utilized DataNodes to under-utilized ones until every node's utilization is within the threshold of the cluster-wide average — higher bandwidth caps reach balance faster but interfere more with live read/write traffic, and the balancer specifically avoids reducing replica or rack counts while doing this, minimizing cross-rack copying by preferring to copy from whichever existing replica is already on the destination rack. The **block scanner** runs periodically on each DataNode, verifying stored blocks against their checksums (logging each verification time in a human-readable log); a corruption caught this way — or by a client during a normal read — is reported to the NameNode, which marks the replica corrupt, schedules replication from a valid copy, and only deletes the corrupt replica once the desired replica count is restored from the good copy. **Decommissioning** lets an administrator retire a node cleanly: once a node is marked decommissioning (via the excluded-hosts list), the NameNode stops placing new replicas there and replicates its existing blocks elsewhere, only allowing the node's actual removal once every one of its blocks is confirmed replicated. Separately, HDFS's **DistCp** tool handles bulk inter/intra-cluster copying as a MapReduce job, with each map task copying part of the source data and the MapReduce framework itself handling scheduling, error detection, and recovery for the copy.
+
+*See also: [[hdfs]] · [[hdfs-client-read-write-and-lease]] · [[gfs-replica-management-and-fault-tolerance]]*

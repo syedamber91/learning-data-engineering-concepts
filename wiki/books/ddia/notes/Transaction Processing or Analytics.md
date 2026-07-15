@@ -27,3 +27,4 @@ sources:
 - [[Data Structures That Power Your Database]] — the OLTP-side engines this topic contrasts against
 - [[Column-Oriented Storage]] — how warehouses physically lay out those petabyte fact tables
 - [[Batch and Stream Processing]] — the derived-data systems that later chapters build on this OLTP/analytics split
+- [[apache-pinot-druid-and-real-time-olap]] — vutr's notes on Pinot and Druid ground a third access pattern this topic's OLTP/OLAP split doesn't name: real-time OLAP, which demands OLTP-grade latency and QPS on top of OLAP-style aggregate queries, answered by splitting fresh (Kafka-fed) data from durable, immutable columnar segments.

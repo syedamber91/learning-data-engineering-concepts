@@ -2,17 +2,16 @@
 persona: vutr
 kind: concept
 sources:
-- persona-snapshot
-last_updated: '2026-07-08'
+- raw/lsm-tree-storage-engines-additional/i-spent-the-weekend-learning-about.md
+last_updated: '2026-07-15'
 qc: passed
 slug: sequential-vs-random-io
 topics:
 - lsm-tree-storage-engines
 ---
 
-The whole point of the LSM-tree is that it converts random writes into sequential disk I/O, at the cost of potentially higher read and write amplification. This matters because RAM access is measured in nanoseconds whereas an HDD seek can take milliseconds — a difference of four to five orders of magnitude, so avoiding random seeks is enormously valuable.
+The gap between sequential and random I/O is the entire reason the LSM-tree exists as an alternative to the [[b-tree]]. A B+Tree write is random by construction: to change a 30-byte key-value pair, the engine reads the whole 4KB or 8KB page containing it, modifies those bytes in memory, and writes the *entire* page back to disk — a small logical write becoming a large physical one, wherever that page happens to sit.
 
-*See also: [[compaction]] · [[bigquery-vortex]] · [[bloom-filter]] · [[b-tree]] · [[memtable]] · [[write-ahead-log]]*
+The LSM-tree avoids that penalty on the hot path. Setting aside the [[write-ahead-log]] write, which both engines pay, the LSM-tree's heavy I/O is flushing the [[memtable]] to a new [[sstable]] — and because the Memtable is already sorted, that flush is a single sequential pass rather than an in-place page overwrite. Vu is explicit that this sequential-versus-random distinction is what lets the LSM-tree sustain higher write throughput than the B-Tree in most cases. Reads later have to reverse the search order (Memtable, then SSTables level by level), but the write side is where sequential I/O pays off.
 
-## Related in the other wiki
-- [[Other Indexing Structures]] — the book's in-memory-database section shows the extreme case of this note's I/O gap: no disk seeks at all once the index and data both live in RAM.
+*See also: [[memtable]] · [[sstable]] · [[b-tree]] · [[write-amplification-tradeoff]]*

@@ -33,3 +33,4 @@ The star-schema grocery warehouse of [[Stars and Snowflakes - Schemas for Analyt
 - [[Data Warehousing]] — the read-heavy setting where aggregate caches earn their keep
 - [[Materialization of Intermediate State]] — materialization as a theme in batch dataflow (Ch 10)
 - [[Observing Derived State]] — Ch 12 reframes materialized views as derived, incrementally-maintained data
+- [[airbnb-data-infrastructure]] — vutr's notes describe this exact pattern in production: Airbnb's Minerva computes a shared dimension once in its join stage and reuses it across every dimension set that needs it, rather than recomputing the aggregate per consumer

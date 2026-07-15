@@ -34,4 +34,4 @@ LinkedIn Databus, Facebook Wormhole, Yahoo! Sherpa; Bottled Water (PostgreSQL), 
 - [[Implementation of Replication Logs]] — the internal log CDC exposes
 - [[State, Streams, and Immutability]] — why changelogs are foundational
 - [[change-data-capture-cdc-and-data-sourcing]] — vutr's topic sorts the trigger-based and log-based extraction mechanisms this note describes onto a clean complexity/impact spectrum, and adds the DELETE-blindness failure mode of query-based CDC that this note doesn't cover.
-- [[log-based-cdc]] — vutr's entity for the log-based approach specifically: reading the replication log directly for the lowest source impact but the highest coupling to internal formats, matching this note's binlog/WAL extraction method.
+- [[log-based-cdc]] — vutr's concept for the log-based approach specifically: reading the replication log directly for the lowest source impact but the highest coupling to internal formats, matching this note's binlog/WAL extraction method. Now grounded in Vu's own CDC deep-dive, including the WAL/redo-log/binlog naming and the Debezium-to-Kafka pipeline shape.

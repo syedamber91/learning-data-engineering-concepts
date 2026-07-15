@@ -36,3 +36,4 @@ The grocery-retailer example (`fact_sales` with date, product, store, promotion,
 - [[Column-Oriented Storage]] — physical layout for querying wide fact tables
 - [[Aggregation - Data Cubes and Materialized Views]] — precomputed summaries over the star
 - [[Relational Model Versus Document Model]] — the modeling-diversity contrast on the OLTP side
+- [[dbt]] — vutr's notes work through this chapter's star schema as a hands-on dbt project: Kimball's four-step design process, surrogate-key-driven SCD Type 2 dimension tables, and a `fact_sale` table built with dbt incremental models rather than the grocery-retailer textbook example.

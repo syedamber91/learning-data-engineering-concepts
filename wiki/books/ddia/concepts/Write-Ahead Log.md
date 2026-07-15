@@ -38,3 +38,4 @@ durable, append-only state shows up — see [[Partitioned Logs]] and
 ## Related in the other wiki
 
 - [[write-ahead-log]] — Vu's note grounds the same "log the change before applying it" principle in the LSM-tree memtable's durability story and log-based CDC, rather than DDIA's B-tree crash-recovery framing.
+- [[log-based-cdc]] — Vu's concept names the same durability rule across three real DBMSs (Oracle's redo log, Postgres's WAL, MySQL's binlog) and explains why write-ahead logging's crash-recovery guarantee is exactly what makes the log the ideal, complete source for CDC to read from.

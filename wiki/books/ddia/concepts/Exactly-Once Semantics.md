@@ -30,3 +30,4 @@ finish the job — the application-level identifier has to flow end to end.
 
 ## Related in the other wiki
 - [[exactly-once-needs-idempotent-sink]] — this page's "make effects idempotent with end-to-end operation IDs" is precisely the rule vutr's note states directly: exactly-once ultimately depends on an idempotent sink.
+- [[exactly-once-and-missing-data-detection]] — vutr's concept works the source side of the same gap this page names: at-least-once delivery (Kafka's default) produces duplicates, offsets committed before processing completes produce silent data loss, and both failure modes need detection (record-count reconciliation, commit-after-processing) before an idempotent sink can even help.
