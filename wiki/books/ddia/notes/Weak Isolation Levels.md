@@ -36,3 +36,4 @@ Serializable isolation would let every transaction pretend it runs alone, but it
 - [[Detecting Concurrent Writes]] — the leaderless-replication version of the same write-conflict problem
 - [[Handling Write Conflicts]] — multi-leader conflict resolution, where lost-update prevention must be rethought
 - [[Transaction Processing or Analytics]] — the long-scan workloads that make consistent snapshots essential
+- [[transactions]] (vutr wiki) — the same read-committed/snapshot-isolation/MVCC ladder from a working data engineer's real posts, including PostgreSQL's concrete UPDATE-as-new-row-version mechanics this chapter describes more abstractly

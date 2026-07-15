@@ -43,6 +43,10 @@ topics:
     file: topics/cloud-kubernetes-docker-infrastructure-tooling.md
     last_updated: '2026-07-15'
     sources: 1
+  consensus:
+    file: topics/consensus.md
+    last_updated: '2026-07-15'
+    sources: 1
   data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa:
     file: topics/data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa.md
     last_updated: '2026-07-15'
@@ -93,7 +97,7 @@ topics:
     sources: 1
   olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks:
     file: topics/olap-engine-internals-bigquery-snowflake-clickhouse-redshift-duckdb-databricks.md
-    last_updated: '2026-07-08'
+    last_updated: '2026-07-15'
     sources: 1
   parquet:
     file: topics/parquet.md
@@ -117,6 +121,10 @@ topics:
     sources: 1
   storage-models-nsm-dsm-pax-and-column-store:
     file: topics/storage-models-nsm-dsm-pax-and-column-store.md
+    last_updated: '2026-07-15'
+    sources: 1
+  transactions:
+    file: topics/transactions.md
     last_updated: '2026-07-15'
     sources: 1
   weekly-newsletter-roundups-misc:

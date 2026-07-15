@@ -35,3 +35,4 @@ Serializable isolation is the strongest guarantee: even though transactions run 
 - [[Distributed Transactions and Consensus]] — extending these single-node techniques across nodes
 - [[Linearizability]] — the recency guarantee often confused with serializability (they compose as "strict serializability")
 - [[Transaction Processing or Analytics]] — why short OLTP transactions make serial execution plausible at all
+- [[transactions]] (vutr wiki) — SSI's optimistic detect-and-abort-at-commit approach and 2PL's pessimistic lock-until-end approach both appear there too, grounded in a data engineer's own posts rather than the book's formal treatment
