@@ -12,7 +12,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from typing import FrozenSet, List, Sequence, Tuple
+from typing import Dict, FrozenSet, List, Sequence, Tuple
 
 WIKI_SUBDIR = "wiki/personas"
 
@@ -58,3 +58,38 @@ def find_matches(sj_topic: str, hub_root: Path,
             if normalize(slug) == target:
                 out.append((persona, slug))
     return out
+
+
+BACKLINK_PREFIX = "**Also covered by:**"
+
+
+def backlink_line(persona: str, slug: str) -> str:
+    """A vault-root-relative, path-qualified Obsidian link. Never '../', never bare."""
+    return f"{BACKLINK_PREFIX} [[{WIKI_SUBDIR}/{persona}/topics/{slug}|{persona}]]"
+
+
+def apply_backlinks(hub_root: Path, persona: str,
+                    personas: Sequence[str]) -> Dict[str, List[str]]:
+    """Append one backlink line per genuine match to each of ``persona``'s topic notes.
+
+    Returns {topic_slug: [lines added]} for topics that changed; topics with no
+    match, or whose lines are already present, are absent. Run this AFTER all
+    synthesis — resolution_gate is single-persona-scoped and would flag a
+    cross-persona link as dangling if it ran over this output.
+    """
+    added: Dict[str, List[str]] = {}
+    topics_dir = hub_root / WIKI_SUBDIR / persona / "topics"
+    for slug in topic_slugs(hub_root, persona):
+        matches = find_matches(slug, hub_root, personas)
+        if not matches:
+            continue
+        path = topics_dir / f"{slug}.md"
+        text = path.read_text(encoding="utf-8")
+        new = [backlink_line(p, s) for p, s in matches
+               if backlink_line(p, s) not in text]
+        if not new:
+            continue
+        path.write_text(text.rstrip("\n") + "\n\n" + "\n".join(new) + "\n",
+                        encoding="utf-8")
+        added[slug] = new
+    return added
