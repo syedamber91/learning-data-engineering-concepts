@@ -47,3 +47,55 @@ def test_parse_lecture_rejects_missing_transcript():
     no_transcript = LECTURE.split("## Transcript")[0]
     with pytest.raises(ValueError, match="Transcript"):
         parse_lecture(no_transcript)
+
+
+import os
+from pathlib import Path
+
+from persona_wiki.udemy import lecture_id_from_filename, load_group_map
+
+GROUP_MAP = Path(__file__).resolve().parents[2] / "data" / "sj_lecture_groups.yaml"
+UDEMY_DIR = Path(
+    os.path.expanduser(
+        "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Udemy Vault/"
+        "lectures/system-design-lld-hld-from-basics-to-advanced"
+    )
+)
+
+
+def test_lecture_id_from_filename():
+    assert lecture_id_from_filename(
+        "1-adapter-pattern-structural-design-pattern-41932990.md") == "41932990"
+
+
+def test_lecture_id_from_filename_rejects_unnumbered():
+    with pytest.raises(ValueError):
+        lecture_id_from_filename("notes.md")
+
+
+def test_load_group_map_flattens_groups(tmp_path):
+    f = tmp_path / "m.yaml"
+    f.write_text(
+        'course_dir: "x"\ngroups:\n'
+        "  databases:\n    - 111   # SQL vs NoSQL\n    - 222\n"
+        "  case-studies:\n    - 333\n",
+        encoding="utf-8")
+    assert load_group_map(f) == {"111": "databases", "222": "databases",
+                                 "333": "case-studies"}
+
+
+def test_load_group_map_rejects_duplicate_id(tmp_path):
+    f = tmp_path / "m.yaml"
+    f.write_text('groups:\n  a:\n    - 111\n  b:\n    - 111\n', encoding="utf-8")
+    with pytest.raises(ValueError, match="111"):
+        load_group_map(f)
+
+
+@pytest.mark.skipif(not UDEMY_DIR.exists(), reason="Udemy Vault not present on this machine")
+def test_group_map_covers_every_lecture_exactly_once():
+    """The union of all group id-lists == the ids in the real course directory."""
+    mapped = set(load_group_map(GROUP_MAP))
+    on_disk = {lecture_id_from_filename(p.name) for p in UDEMY_DIR.glob("*.md")}
+    assert mapped - on_disk == set(), f"map lists unknown ids: {mapped - on_disk}"
+    assert on_disk - mapped == set(), f"lectures missing from map: {on_disk - mapped}"
+    assert len(on_disk) == 75

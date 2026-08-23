@@ -6,6 +6,8 @@ this)."""
 
 from __future__ import annotations
 
+import re
+from pathlib import Path
 from typing import Dict, Tuple
 
 import yaml
@@ -28,3 +30,28 @@ def parse_lecture(text: str) -> Tuple[dict, str]:
         raise ValueError(f"lecture note has no '{TRANSCRIPT_HEADING}' section")
     body = rest.split(TRANSCRIPT_HEADING, 1)[1]
     return fm, body.strip()
+
+
+_LECTURE_ID_RE = re.compile(r"-(\d+)\.md$")
+
+
+def lecture_id_from_filename(name: str) -> str:
+    """The trailing numeric Udemy lecture id: '1-adapter-...-41932990.md' -> '41932990'."""
+    m = _LECTURE_ID_RE.search(name)
+    if not m:
+        raise ValueError(f"no lecture id in filename: {name}")
+    return m.group(1)
+
+
+def load_group_map(path: Path) -> Dict[str, str]:
+    """lecture_id -> group slug, flattened from the YAML's nested ``groups:`` block."""
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    out: Dict[str, str] = {}
+    for group, ids in (data.get("groups") or {}).items():
+        for lecture_id in ids or []:
+            key = str(lecture_id)
+            if key in out:
+                raise ValueError(
+                    f"lecture id {key} listed in both '{out[key]}' and '{group}'")
+            out[key] = group
+    return out
