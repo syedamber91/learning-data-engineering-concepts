@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 import typer
 
@@ -146,3 +146,38 @@ def status(
     learner_root = _root(vault_dir, learner)
     for stage, val in stage_status(root, learner_root, topic).items():
         typer.echo(f"{stage}: {val}")
+
+
+@app.command()
+def ingest_udemy(
+    persona: str = typer.Option("sj", "--persona"),
+    course_dir: str = typer.Option(..., "--course-dir"),
+    group_map: str = typer.Option(..., "--group-map"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+) -> None:
+    """Copy Udemy lecture transcripts into the persona's raw/<group>/ layer."""
+    from .udemy import ingest_udemy as run_ingest_udemy, load_group_map
+    root = _root(vault_dir, persona)
+    gm = load_group_map(Path(group_map).expanduser())
+    res = run_ingest_udemy(Path(course_dir).expanduser(), root, gm,
+                           date.today().isoformat())
+    typer.echo(f"copied {len(res.copied)}, skipped {len(res.skipped)}, "
+               f"unmapped {len(res.unmapped)} -> {res.manifest}")
+    if res.unmapped:
+        typer.echo(f"unmapped lecture ids: {', '.join(sorted(res.unmapped))}", err=True)
+
+
+@app.command()
+def crosslink(
+    persona: str = typer.Option("sj", "--persona"),
+    against: List[str] = typer.Option(["lucsystemdesign", "sdcourse"], "--against",
+                                      help="sibling personas to match against; repeatable"),
+    vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
+) -> None:
+    """Append 'Also covered by' backlinks to a persona's topic notes."""
+    from .crosslink import apply_backlinks
+    hub = resolve_vault_dir(vault_dir)
+    added = apply_backlinks(hub, persona, list(against))
+    typer.echo(f"{len(added)} topic(s) gained backlinks")
+    for slug, lines in sorted(added.items()):
+        typer.echo(f"  {slug}: {len(lines)} link(s)")
