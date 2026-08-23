@@ -99,3 +99,78 @@ def test_group_map_covers_every_lecture_exactly_once():
     assert mapped - on_disk == set(), f"map lists unknown ids: {mapped - on_disk}"
     assert on_disk - mapped == set(), f"lectures missing from map: {on_disk - mapped}"
     assert len(on_disk) == 75
+
+
+import yaml
+
+from persona_wiki.udemy import ingest_udemy
+
+
+def make_course(tmp_path: Path) -> Path:
+    """Two fixture lectures destined for two different groups."""
+    d = tmp_path / "course"
+    d.mkdir()
+    (d / "1-adapter-pattern-41932990.md").write_text(LECTURE, encoding="utf-8")
+    (d / "2-sql-vs-nosql-41910228.md").write_text(
+        LECTURE.replace("Adapter Pattern (Structural Design Pattern)", "SQL vs NoSQL")
+               .replace("LLD (Low Level Design)", "HLD(High Level Design)")
+               .replace("41932990", "41910228"),
+        encoding="utf-8")
+    return d
+
+
+MAP = {"41932990": "structural-patterns", "41910228": "databases"}
+
+
+def test_ingest_udemy_routes_to_group_dir(tmp_path):
+    course, root = make_course(tmp_path), tmp_path / "wiki"
+    res = ingest_udemy(course, root, MAP, "2026-08-23")
+
+    assert sorted(res.copied) == [
+        "adapter-pattern-structural-design-pattern.md", "sql-vs-nosql.md"]
+    assert res.unmapped == []
+
+    note = root / "raw" / "structural-patterns" / "adapter-pattern-structural-design-pattern.md"
+    assert note.exists()
+    assert (root / "raw" / "databases" / "sql-vs-nosql.md").exists()
+
+    text = note.read_text(encoding="utf-8")
+    assert 'lecture_id: "41932990"' in text
+    assert 'instructor: "Shrayansh Jain"' in text
+    assert 'section: "LLD (Low Level Design)"' in text
+    assert "[00:00:00] Hey guys." in text
+    assert "Part of [[courses" not in text          # vault-local links gone
+    assert "topics:" not in text                    # auto-tagger junk dropped
+
+
+def test_ingest_udemy_writes_manifest_per_group(tmp_path):
+    course, root = make_course(tmp_path), tmp_path / "wiki"
+    ingest_udemy(course, root, MAP, "2026-08-23")
+    m = yaml.safe_load(
+        (root / "raw" / "databases" / "_manifest.yaml").read_text(encoding="utf-8"))
+    entry = m["sql-vs-nosql.md"]
+    assert entry["lecture_id"] == "41910228"
+    assert entry["copied"] == "2026-08-23"
+    assert entry["source"].endswith("2-sql-vs-nosql-41910228.md")
+
+
+def test_ingest_udemy_is_idempotent(tmp_path):
+    course, root = make_course(tmp_path), tmp_path / "wiki"
+    ingest_udemy(course, root, MAP, "2026-08-23")
+    # upstream mutates the source; re-run must NOT overwrite the ingested copy
+    (course / "1-adapter-pattern-41932990.md").write_text(
+        LECTURE.replace("Hey guys", "MUTATED"), encoding="utf-8")
+    res = ingest_udemy(course, root, MAP, "2026-08-24")
+    assert res.copied == []
+    assert sorted(res.skipped) == ["41910228", "41932990"]
+    kept = (root / "raw" / "structural-patterns"
+            / "adapter-pattern-structural-design-pattern.md").read_text(encoding="utf-8")
+    assert "MUTATED" not in kept
+
+
+def test_ingest_udemy_reports_unmapped_lecture(tmp_path):
+    course, root = make_course(tmp_path), tmp_path / "wiki"
+    res = ingest_udemy(course, root, {"41932990": "structural-patterns"}, "2026-08-23")
+    assert res.unmapped == ["41910228"]
+    assert res.copied == ["adapter-pattern-structural-design-pattern.md"]
+    assert not (root / "raw" / "databases").exists()
