@@ -1,0 +1,94 @@
+# sj (Shrayansh Jain) -- "System Design (LLD + HLD) from Basics to Advanced"
+# lecture_id -> raw/<group>/ . Titles are comments only; the id is the key.
+# Verified: 75 unique ids, no duplicates, no gaps against the course directory.
+course_dir: "system-design-lld-hld-from-basics-to-advanced"
+groups:
+  lld-foundations:
+    - 53198193   # What is LLD and Pattern Categories? Difference between Is-a & Has-a relationship
+    - 51802699   # SOLID Principles
+    - 41932786   # Liskov Substitution Principle (LSP) Solution
+    - 46258341   # MVC Design Pattern
+  creational-patterns:
+    - 41932808   # Builder Design Pattern (Creational Design Pattern)
+    - 51802741   # Factory & Abstract Factory pattern (Creational Design Pattern)
+    - 44184292   # Object Pool Design Pattern (Creational Design Pattern)
+  structural-patterns:
+    - 41932990   # Adapter Pattern (Structural Design Pattern)
+    - 41933000   # Bridge Design Pattern (Structural Design Pattern)
+    - 41933006   # Composite Pattern (Structural Design Pattern)
+    - 41933010   # Decorator Design Pattern (Structural Design Pattern)
+    - 41933036   # Facade Design Pattern (Structural Design Pattern)
+    - 41933022   # Flyweight Design Pattern (Structural Design Pattern)
+    - 51802799   # Proxy Design Pattern (Structural Pattern)
+  behavioral-patterns:
+    - 41932908   # Chain Of Responsibility Design Pattern (Behavioral Design Pattern)
+    - 41932852   # Command Design Pattern (Behavioral Design Pattern)
+    - 41932936   # Interpreter Pattern (Behavioral Design Pattern)
+    - 41932884   # Iterator Design Pattern (Behavioral Design Pattern)
+    - 41932918   # Mediator Design Pattern (Behavioral Design Pattern)
+    - 43255956   # Memento Design Pattern (Behavioral Design Pattern)
+    - 51802807   # Null Object Design Pattern (Behavioral Pattern)
+    - 51802719   # Observer Pattern (Behavioral Pattern)
+    - 51838767   # State Design Pattern (Behavioral) |  Design Vending Machine
+    - 51802707   # Strategy Design Pattern (Behavioral Pattern)
+    - 41932892   # Template Method Design Pattern (Behavioral Design Pattern)
+    - 46749155   # Visitor Design Pattern (Behavioral Design Pattern)
+  lld-case-studies:
+    - 51802749   # Design Parking Lot
+    - 51802759   # Design Tic-Tac-Toe Game
+    - 41933150   # LLD of Apply Coupons on Shopping Cart Products
+    - 41933106   # LLD of ATM
+    - 51837383   # LLD of BookMyShow | Design Movie Ticket Booking App
+    - 51802777   # LLD of Car Rental System
+    - 41933114   # LLD of Cricbuzz
+    - 51802773   # LLD of Elevator System
+    - 41933132   # LLD of Inventory Management System
+    - 46749161   # LLD of Payment Gateway
+    - 51802787   # LLD of Snake n Ladder Game
+    - 41933088   # LLD of Splitwise
+  databases:
+    - 41910228   # SQL vs NoSQL
+    - 51957799   # Database Indexing: B+ Tree, Data Page, Clustered and Non-Clustered Indexing
+    - 41910224   # Design a Key-Value Store || Dynamo DB
+    - 51958567   # Two Phase Locking (2PL)
+    - 51958517   # Concurrency Control in Distributed System | Optimistic & Pessimistic Concurrency
+  distributed-fundamentals:
+    - 51935679   # CAP Theorem (English Dubbed) | Better with 1.25x playback speed
+    - 52075453   # Consistent Hashing (English Dubbed) | Better with 1.25x playback speed
+    - 51957563   # Handle Distributed Transactions | Two-Phase Commit (2PC), 3PC and SAGA Pattern
+    - 49271235   # Dual Write Problem | Event Driven Microservices Patterns
+  resilience-patterns:
+    - 51935789   # Circuit Breaker Introduction
+    - 51768899   # Bulkhead Pattern Introduction
+    - 51863813   # Retry Pattern : Fault Tolerance in Distributed Microservices
+    - 45999743   # Thundering Herd Problem | Why Ticket Booking App goes down during peak traffic?
+    - 41910250   # Design High Availability System || Active Passive & Active Active Architecture
+  networking-and-edge:
+    - 41910262   # Load Balancer and Different Algorithms
+    - 41910254   # Proxy vs Reverse Proxy
+    - 47703509   # How DNS works? | System Design of Domain Name System
+    - 51935665   # Network Protocols (English Dubbed) | Better with 1.25x playback speed
+    - 46076321   # API GATEWAY and Microservices Architecture
+  authentication-and-security:
+    - 51959473   # JWT: JSON Web Token
+    - 41910424   # OAuth 2.0 expalined
+    - 51959447   # Symmetric & Asymmetric Encryption with Explanation of AES, Diffie-Hellman
+    - 48988689   # Attacks with Demo | CSRF, XSS, CORS and SQL Injection
+  architecture-styles:
+    - 41910180   # Introduction: Microservices (English Dubbed) | Better with 1.25x playback speed
+    - 41910134   # Microservices Patterns: SAGA Pattern, Strangler Pattern (English Dubbed)
+    - 47703349   # In How many Microservices we should divide Monolithic System
+    - 46154991   # Service Mesh and its Architecture in Microservices
+    - 51215461   # Service Discovery Introduction
+  messaging-and-streaming:
+    - 41910252   # Distributed Messaging Queue | Design Messaging Queue like Kafka, RabbitMQ
+  case-studies:
+    - 41910236   # Whatsapp System Design
+    - 41910210   # Design URL Shortening Service like TinyURL
+    - 52052749   # Scale from ZERO to MILLION User (English Dub) | Better with 1.25x playback speed
+    - 41910216   # Back-Of-The-Envelope Estimation for System Design Interview
+  caching-and-rate-limiting:
+    - 51956913   # Distributed Cache & Caching Strategies | Cache-Aside, Write-Through, Write-Back
+    - 41910244   # Design Rate Limiter
+    - 51526791   # Rate Limiter Algorithms
+    - 41910248   # Design Idempotent POST API || Handle Duplicate Request by Idempotency Handler
