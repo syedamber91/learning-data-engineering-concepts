@@ -34,3 +34,4 @@ This is essentially how Vertica (the commercialization of C-Store) handles write
 - [[SSTables and LSM-Trees]] — the write pattern being reused wholesale
 - [[Sort Order in Column Storage]] — the sorted files these merges must preserve
 - [[B-Trees]] — the update-in-place approach that is impossible here
+- 2nd edition: [[Column-Oriented Storage (2e)]] — the same material in the 2nd edition

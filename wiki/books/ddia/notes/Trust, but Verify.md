@@ -35,3 +35,4 @@ Rowhammer; MySQL uniqueness bug and PostgreSQL serializability bug; HDFS/S3 back
 - [[Byzantine Faults]] — the threat model distributed ledgers over-rotate on
 - [[State, Streams, and Immutability]] — immutable event logs that make audit feasible
 - [[Timeliness and Integrity]] — auditing is how integrity gets *verified*, not just hoped for
+- 2nd edition: [[Trust, but Verify (2e)]] — the same material in the 2nd edition

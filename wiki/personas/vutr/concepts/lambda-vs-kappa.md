@@ -16,3 +16,6 @@ Lambda runs parallel batch and stream paths and reconciles them, while Kappa col
 
 ## Related in the other wiki
 - [[Batch and Stream Processing]] — DDIA's discussion of lambda's dual-codebase costs and the unification alternative is the conceptual backdrop for the production choices (Uber/LinkedIn vs Twitter) this note surveys.
+
+## Related topics
+- [[Batch and Stream Processing (2e)]] — the production case studies behind the 2nd edition's verdict.

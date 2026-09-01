@@ -27,3 +27,4 @@ The chapter opens by distinguishing three styles of system: *services* (online �
 - [[MapReduce and Distributed Filesystems]] — the same pattern distributed across a cluster
 - [[Materialization of Intermediate State]] — pipes versus temp files, replayed at datacenter scale
 - [[Batch and Stream Processing]] — Chapter 12's retrospective on where these ideas lead
+- 2nd edition: [[Batch Processing with Unix Tools (2e)]] — the same material in the 2nd edition

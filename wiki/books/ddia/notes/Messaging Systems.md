@@ -34,3 +34,4 @@ ZeroMQ/nanomsg (brokerless), StatsD/Brubeck (UDP metrics), webhooks; JMS/AMQP br
 - [[Message-Passing Dataflow]] — Ch 4 view of message-based communication
 - [[Two-Phase Commit]] — brokers can join distributed transactions
 - [[Fault Tolerance]] — redelivery duplicates motivate exactly-once techniques
+- 2nd edition: [[Messaging Systems (2e)]] — the same material in the 2nd edition

@@ -31,3 +31,4 @@ Druid ingesting from [[Apache Kafka]], Pistachio using Kafka as a commit log, Ka
 - [[Event Sourcing]] — application-level immutable event logs
 - [[Change Data Capture]] — extracting the changelog from databases
 - [[Materialized Views]] — read views derived from the log
+- 2nd edition: [[State, Streams, and Immutability (2e)]] — the same material in the 2nd edition

@@ -24,3 +24,6 @@ Vu flags, without elaborating further, that this checkpoint process is also what
 ## Related in the other wiki
 - [[Fault Tolerance]] — DDIA's chapter-11 note describes Flink's barrier-based checkpointing as one of four exactly-once tactics (alongside microbatching, atomic commit, and idempotence), matching this note's account of a checkpoint barrier that splits the stream into pre/post-checkpoint state without pausing the application.
 - [[Exactly-Once Semantics]] — DDIA's concept names atomically committing outputs plus offsets as one route to exactly-once; this note's own account of Flink's barrier confirmation reaching the JobManager only once every task acknowledges is the same commit-coordination idea, one level more mechanical.
+
+## Related topics
+- [[Fault Tolerance (Stream Processing) (2e)]] — the algorithm behind Flink's barrier injection, named.

@@ -28,3 +28,4 @@ Whenever data must reach a process that shares no memory with the sender, it bec
 - [[Formats for Encoding Data]] — the encodings these channels carry
 - [[Messaging Systems]] — Chapter 11 expands the broker story
 - [[Request Routing]] — service discovery in partitioned systems
+- 2nd edition: [[Modes of Dataflow (2e)]] — the same material in the 2nd edition

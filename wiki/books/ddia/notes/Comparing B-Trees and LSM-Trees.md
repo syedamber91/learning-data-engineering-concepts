@@ -41,3 +41,4 @@ The contrasts here map to RocksDB/LevelDB/Cassandra/HBase (LSM side) versus Inno
 - [[Describing Performance]] — percentile latency framing used here
 - [[Compaction]] — the background process driving both LSM costs and gains
 - [[lsm-tree-storage-engines]] — Vu's own LSM-vs-B-tree comparison (his "Comparisons" section) independently reaches the same write-vs-read trade-off this chapter formalizes via write amplification.
+- 2nd edition: [[Comparing B-Trees and LSM-Trees (2e)]] — the same material in the 2nd edition

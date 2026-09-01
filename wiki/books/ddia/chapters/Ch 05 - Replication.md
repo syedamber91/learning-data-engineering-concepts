@@ -45,3 +45,4 @@ Replication serves high availability, disconnected operation, latency, and scala
 - next: [[Ch 06 - Partitioning]] — replication composes with splitting data across nodes
 - [[Ch 08 - The Trouble with Distributed Systems]] — the fault model underneath failover and quorums
 - [[Ch 09 - Consistency and Consensus]] — [[Consensus]], [[Linearizability]], and leader election done rigorously
+- 2nd edition: [[Ch 06 - Replication (2e)]] — the same material in the 2nd edition

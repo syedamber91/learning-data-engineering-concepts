@@ -37,3 +37,4 @@ Default isolation level in Oracle 11g, PostgreSQL, SQL Server 2012, and MemSQL. 
 - [[Single-Object and Multi-Object Operations]] — the email/counter dirty-read scenario
 - [[Snapshot Isolation and Repeatable Read]] — the next-stronger level, generalizing the two-version trick
 - [[Two-Phase Locking (2PL)]] — how locks extend when you want full serializability
+- 2nd edition: [[Read Committed (2e)]] — the same material in the 2nd edition

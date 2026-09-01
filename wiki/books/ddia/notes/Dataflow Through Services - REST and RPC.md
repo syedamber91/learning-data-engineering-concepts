@@ -36,3 +36,4 @@ REST/RESTful APIs, SOAP + WSDL + WS-*, OpenAPI/Swagger, EJB, Java RMI, DCOM, COR
 - [[Request Routing]] — service discovery's cousin in partitioned systems
 - [[Message-Passing Dataflow]] — the asynchronous alternative to request/response
 - [[Unreliable Networks]] — deeper dive into why networks defeat RPC
+- 2nd edition: [[Dataflow Through Services - REST and RPC (2e)]] — the same material in the 2nd edition

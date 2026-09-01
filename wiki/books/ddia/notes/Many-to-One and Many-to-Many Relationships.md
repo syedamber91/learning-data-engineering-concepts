@@ -35,3 +35,4 @@ LinkedIn-style profiles, entity pages for companies/schools, user-to-user recomm
 - [[Are Document Databases Repeating History]] — the 1970s faced the same problem
 - [[Graph-Like Data Models]] — the natural home for many-to-many-heavy data
 - [[Stars and Snowflakes - Schemas for Analytics]] — normalization in warehouse schemas
+- 2nd edition: [[Many-to-One and Many-to-Many Relationships (2e)]] — the same material in the 2nd edition

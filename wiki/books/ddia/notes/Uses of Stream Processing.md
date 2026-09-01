@@ -30,3 +30,4 @@ CEP: Esper, IBM InfoSphere Streams, Apama, TIBCO StreamBase, SQLstream. Analytic
 - [[State, Streams, and Immutability]] — why views derive from full event logs
 - [[Aggregation - Data Cubes and Materialized Views]] — the warehouse-side view concept
 - [[Message-Passing Dataflow]] — the actor/RPC world contrasted here
+- 2nd edition: [[Uses of Stream Processing (2e)]] — the same material in the 2nd edition

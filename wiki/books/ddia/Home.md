@@ -42,5 +42,10 @@ Cross-chapter ideas: [[Replication]], [[Partitioning]], [[Consensus]],
 [[Exactly-Once Semantics]], [[Apache Kafka]], [[ZooKeeper]] — full set in the
 `concepts/` folder.
 
+## 2nd edition
+The 2nd edition (Kleppmann & Riccomini) has its own vault next door:
+[[Home (2e)|DDIA 2nd edition]]. Every note there links back to its counterpart
+here, and every note here now carries a `2nd edition:` line in its Related section.
+
 ## Log
 - [[log|Ingestion Log]]

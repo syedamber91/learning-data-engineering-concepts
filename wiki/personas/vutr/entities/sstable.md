@@ -20,3 +20,7 @@ SSTables are created two ways: flushed directly from a frozen Memtable, or produ
 
 ## Related in the other wiki
 - [[SSTables and LSM-Trees]] — the book's fuller walkthrough of the same sparse-index and sorted-merge mechanics this entity describes from Vu's post.
+
+## Related topics
+- [[Log-Structured Storage (2e)]] — where the 2nd edition flushes and merges these files.
+- [[Compaction (2e)]] — the 2nd-edition concept page for the merge process.

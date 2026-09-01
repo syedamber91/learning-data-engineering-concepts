@@ -45,3 +45,4 @@ Dynamo-style stores (Riak, Cassandra, Voldemort) are explicitly optimized for wo
 - [[Writing to the Database When a Node Is Down]] — the quorum mechanics being qualified
 - [[What Makes a System Linearizable]] — the strong guarantee quorums don't reach
 - [[Monotonic Reads]] — one of the lag guarantees quorums fail to provide
+- 2nd edition: [[Writing to the Database When a Node Is Down (2e)]] — the same material in the 2nd edition

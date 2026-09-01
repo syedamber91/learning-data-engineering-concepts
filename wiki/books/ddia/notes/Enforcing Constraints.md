@@ -35,3 +35,4 @@ Twitter/Manhattan-style username claiming; Bayou's validate-on-replay heritage; 
 - [[Implementing Linearizable Systems]] — the same algorithm in Ch 9 dress
 - [[Partitioned Logs]] — the substrate providing per-partition total order
 - [[Handling Write Conflicts]] — conflict definitions the validating processor applies
+- 2nd edition: [[Enforcing Constraints (2e)]] — the same material in the 2nd edition

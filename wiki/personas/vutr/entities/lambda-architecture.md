@@ -19,3 +19,6 @@ He classifies Lambda (along with [[kappa-architecture]]) as more of a pattern th
 
 ## Related in the other wiki
 - [[Batch and Stream Processing]] — DDIA's fuller account of the same dual-path pattern (stream for fast approximate views, batch for corrected exact views) and its costs: duplicated logic, hard-to-merge joins, expensive reprocessing.
+
+## Related topics
+- [[Batch and Stream Processing (2e)]] — the 2nd edition now states plainly that Lambda has fallen out of use.

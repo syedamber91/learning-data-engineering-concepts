@@ -37,3 +37,4 @@ PostgreSQL foreign data wrappers (federation); CDC/event-log pipelines maintaini
 - [[Change Data Capture]] — the extraction mechanism for write synchronization
 - [[Keeping Systems in Sync]] — the Ch 11 problem this composition solves
 - [[Comparing Hadoop to Distributed Databases]] — breadth-over-depth argument's origin
+- 2nd edition: [[Composing Data Storage Technologies (2e)]] — the same material in the 2nd edition

@@ -33,3 +33,4 @@ VoltDB/H-Store, Redis, Datomic; airline-booking flow as the cautionary interacti
 - [[Two-Phase Locking (2PL)]] — the pessimistic locking alternative
 - [[Serializable Snapshot Isolation (SSI)]] — the optimistic alternative that scales past one core
 - [[Partitioning and Secondary Indexes]] — why secondary indexes resist partitioning
+- 2nd edition: [[Actual Serial Execution (2e)]] — the same material in the 2nd edition

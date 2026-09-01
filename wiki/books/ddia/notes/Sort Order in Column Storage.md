@@ -35,3 +35,4 @@ The several-sort-orders idea was introduced in the C-Store research system and c
 - [[Writing to Column-Oriented Storage]] — how writes cope with sorted layouts
 - [[SSTables and LSM-Trees]] — the same sorted-order-as-index insight for OLTP
 - [[Replication]] — redundancy repurposed to serve varied sort orders
+- 2nd edition: [[Column-Oriented Storage (2e)]] — the same material in the 2nd edition

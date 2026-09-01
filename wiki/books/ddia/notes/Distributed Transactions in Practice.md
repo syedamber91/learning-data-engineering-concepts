@@ -38,3 +38,4 @@ MySQL's 10x XA penalty; VoltDB and MySQL Cluster NDB internal transactions; JTA/
 - [[Keeping Systems in Sync]] — Chapter 11's alternative to heterogeneous 2PC
 - [[Messaging Systems]] — the brokers participating in these transactions
 - [[Fault-Tolerant Consensus]] — what a properly replicated coordinator would look like
+- 2nd edition: [[Distributed Transactions Across Different Systems (2e)]] — the same material in the 2nd edition

@@ -17,3 +17,6 @@ But the trade doesn't disappear inside the LSM-tree — it just moves into [[com
 The upshot Vu draws is that there's no free win — a B-Tree buys predictable, low-latency reads at the cost of write amplification on every random write; an LSM-tree buys write throughput by deferring and batching that cost into background compaction, and then has to choose, via Size-Tiered versus Leveled, exactly where along the read/write amplification spectrum it wants to sit.
 
 *See also: [[b-tree]] · [[compaction]] · [[sequential-vs-random-io]] · [[sstable]]*
+
+## Related topics
+- [[Comparing B-Trees and LSM-Trees (2e)]] — the number the whole 2nd-edition comparison turns on.

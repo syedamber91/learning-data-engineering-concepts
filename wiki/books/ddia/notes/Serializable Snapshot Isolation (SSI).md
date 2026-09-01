@@ -38,3 +38,4 @@ PostgreSQL serializable level since 9.1 (the first single-node use); FoundationD
 - [[Write Skew and Phantoms]] — the anomalies SSI's premise-checking eliminates
 - [[Two-Phase Locking (2PL)]] — the pessimistic counterpart and its index-range locks
 - [[Distributed Transactions and Consensus]] — serializability across nodes
+- 2nd edition: [[Serializable Snapshot Isolation (2e)]] — the same material in the 2nd edition

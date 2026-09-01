@@ -49,3 +49,4 @@ These hazards are why some operations teams prefer manual failover even when aut
 - [[Detecting Faults]] — the timeout problem in depth
 - [[The Truth Is Defined by the Majority]] — why a quorum decides leadership
 - [[Fault-Tolerant Consensus]] — the rigorous solution to electing a leader
+- 2nd edition: [[Handling Node Outages (2e)]] — the same material in the 2nd edition

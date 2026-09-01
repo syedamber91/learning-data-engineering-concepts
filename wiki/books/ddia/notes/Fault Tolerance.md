@@ -32,3 +32,4 @@ Spark Streaming, Apache Flink, Google Cloud Dataflow, VoltDB, [[Apache Kafka]] (
 - [[The Output of Batch Workflows]] — the batch fault model being emulated
 - [[exactly-once-needs-idempotent-sink]] — this note's idempotence tactic (storing the triggering Kafka offset with each write so replays are detected and skipped) is a concrete instance of vutr's general rule that exactly-once ultimately depends on an idempotent sink.
 - [[chandy-lamport-checkpointing]] — this note's description of Flink injecting barriers for periodic state snapshots without pausing the stream is exactly the Chandy-Lamport algorithm vutr's entity note names.
+- 2nd edition: [[Fault Tolerance (Stream Processing) (2e)]] — the same material in the 2nd edition

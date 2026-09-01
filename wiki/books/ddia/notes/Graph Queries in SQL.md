@@ -41,3 +41,4 @@ PostgreSQL, IBM DB2, Oracle, SQL Server (recursive CTE support); Neo4j/Cypher as
 - [[The Cypher Query Language]] — the concise counterpart
 - [[Property Graphs]] — the two-table relational encoding being queried
 - [[The Foundation - Datalog]] — recursion as a first-class rule mechanism
+- 2nd edition: [[Graph Queries in SQL (2e)]] — the same material in the 2nd edition

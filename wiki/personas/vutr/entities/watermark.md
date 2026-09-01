@@ -25,3 +25,8 @@ One nuance he flags but doesn't resolve: "Spark Structured Streaming and Flink i
 ## Related in the other wiki
 - [[Reasoning About Time]] — DDIA's note on event-time windowing, stragglers, and "watermark-style messages" is the book's version of this same never-certain, estimate-not-guarantee framing of watermarks.
 - [[Stream Joins]] — DDIA's stream-stream window join (matching events across streams within a bounded window, e.g. an hour) depends on the same eager-vs-relaxed timing trade-off this note describes for watermarks.
+
+## Related topics
+- [[Reasoning About Time (2e)]] — the 2nd edition's treatment of event time versus processing time.
+- [[Stream Joins (2e)]] — where the watermark decides a windowed join's answer.
+- [[Windowing (2e)]] — the 2nd-edition concept page.

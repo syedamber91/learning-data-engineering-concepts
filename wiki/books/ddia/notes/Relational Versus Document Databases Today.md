@@ -33,3 +33,4 @@ Document + many-to-many = complex, slow application code. Big documents waste I/
 - [[Column-Oriented Storage]] — a different locality strategy for analytics
 - [[Graph-Like Data Models]] — the escape hatch for interconnected data
 - [[Denormalization]] — the cost of avoiding joins
+- 2nd edition: [[When to Use Which Model (2e)]] — the same material in the 2nd edition

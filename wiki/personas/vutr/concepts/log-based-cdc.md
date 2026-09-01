@@ -17,3 +17,8 @@ Because it reads from log files instead of executing queries against live tables
 A typical log-based CDC pipeline, at the conceptual level, has five stages: (1) a transaction commits against the source database (e.g., Postgres, MySQL); (2) as part of normal durability, the database writes that transaction to its native transaction log before finalizing the change in the data files; (3) a log reader — usually a CDC connector, not something you build — continuously monitors the log for new records; (4) a log publisher, also handled by the connector, publishes each new log record to a message broker; (5) the broker (e.g., Apache Kafka) stores the log records reliably and decouples producers from consumers, so the source can generate hundreds of changes a minute without downstream consumers needing to keep up in lockstep — they can, for instance, just query all the changes from the last hour. Downstream consumers then subscribe to the relevant topics and process the change events however they need. Given its minimal source impact and low latency, this is why log-based CDC is the most widely adopted approach for continuous change synchronization.
 
 *See also: [[query-based-cdc]] · [[trigger-based-cdc]] · [[debezium]] · [[cdc-operational-considerations]] · [[write-ahead-log]]*
+
+## Related topics
+- [[Change Data Capture (2e)]] — the 2nd edition's treatment.
+- [[Event Sourcing and CQRS (2e)]] — the application-layer sibling: intent events written to the log rather than row changes extracted from it.
+- [[Write-Ahead Log (2e)]] — why the crash-recovery log makes an ideal CDC source.

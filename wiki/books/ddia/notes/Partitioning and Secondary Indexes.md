@@ -29,3 +29,4 @@ Primary-key partitioning works because the key alone determines the partition. [
 - [[Other Indexing Structures]] — Chapter 3's single-node secondary index foundations
 - [[Partitioning of Key-Value Data]] — the primary-key schemes these indexes complicate
 - [[The Slippery Concept of a Transaction]] — why index consistency needs transactions
+- 2nd edition: [[Sharding and Secondary Indexes (2e)]] — the same material in the 2nd edition

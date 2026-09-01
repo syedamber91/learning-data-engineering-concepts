@@ -21,3 +21,6 @@ Both structures share one cost: writing to a [[write-ahead-log]] before the data
 ## Related in the other wiki
 - [[B-Trees]] — the book's full mechanism (fixed-size pages, branching factor, node splits, WAL, latches, copy-on-write variants) behind the in-place, random-I/O trade-off this entity note summarizes from Vu's comparison.
 - [[Comparing B-Trees and LSM-Trees]] — DDIA's own worked-out version of the same read-vs-write trade this note frames through page rewrites versus sequential Memtable flushes.
+
+## Related topics
+- [[B-Trees (2e)]] — the 2nd edition's treatment, with expanded SSD material the 1st edition lacked.

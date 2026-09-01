@@ -38,3 +38,4 @@ Google's 200 ppm drift budget; the 35 ms internet-NTP floor; hours-wrong public 
 - [[Relying on Synchronized Clocks]] — sibling: what breaks when you trust anyway
 - [[Clock Skew]] — the cross-node divergence these mechanisms produce
 - [[Byzantine Faults]] — multi-server NTP outlier rejection as weak-lie defense
+- 2nd edition: [[Clock Synchronization and Accuracy (2e)]] — the same material in the 2nd edition

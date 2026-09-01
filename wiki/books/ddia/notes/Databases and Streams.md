@@ -30,3 +30,4 @@ Log-based brokers borrowed database ideas (durability, logs) for messaging; this
 - [[Transmitting Event Streams]] — the log-based transport these change streams ride on
 - [[Implementation of Replication Logs]] — the replication machinery CDC piggybacks on
 - [[Data Integration]] — Ch 12 generalizes this log-centric integration story
+- 2nd edition: [[Databases and Streams (2e)]] — the same material in the 2nd edition

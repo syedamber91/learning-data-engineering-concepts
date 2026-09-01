@@ -38,3 +38,4 @@ XA transactions and Java Transaction API expose 2PC to applications; WS-AtomicTr
 - [[Fault-Tolerant Consensus]] — elected coordinators and majority votes fix the blocking
 - [[Single-Object and Multi-Object Operations]] — why multi-object atomicity matters
 - [[The Meaning of ACID]] — the atomicity contract being upheld
+- 2nd edition: [[Two-Phase Commit (2e)]] — the same material in the 2nd edition

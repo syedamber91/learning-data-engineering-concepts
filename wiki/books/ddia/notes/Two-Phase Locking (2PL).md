@@ -39,3 +39,4 @@ MySQL/InnoDB and SQL Server serializable levels; DB2 repeatable read. Meeting-ro
 - [[Read Committed]] — the weaker, shorter-lived locking it builds on
 - [[Serializable Snapshot Isolation (SSI)]] — the optimistic, non-blocking successor
 - [[Snapshot Isolation and Repeatable Read]] — the opposite reader/writer blocking philosophy
+- 2nd edition: [[Two-Phase Locking (2e)]] — the same material in the 2nd edition

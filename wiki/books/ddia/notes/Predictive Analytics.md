@@ -29,3 +29,4 @@ Recidivism, loan-default, and insurance scoring; hiring filters using credit sco
 - [[Privacy and Tracking]] — the data collection that feeds these models
 - [[Designing Applications Around Dataflow]] — ML models as derivation functions in the pipeline
 - [[Batch and Stream Processing]] — the machinery that trains and applies them at scale
+- 2nd edition: [[Predictive Analytics (2e)]] — the same material in the 2nd edition

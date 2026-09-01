@@ -45,3 +45,4 @@ The standard no-downtime procedure has four steps:
 - [[Handling Node Outages]] — followers recover from crashes with the same catch-up replay
 - [[Implementation of Replication Logs]] — the change stream the follower consumes
 - [[Strategies for Rebalancing]] — moving data when partitions, not replicas, change
+- 2nd edition: [[Setting Up New Followers (2e)]] — the same material in the 2nd edition

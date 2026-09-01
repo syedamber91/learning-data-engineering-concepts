@@ -35,3 +35,4 @@ Storage engines split along the OLTP/OLAP fault line. OLTP systems face floods o
 - previous: [[Ch 02 - Data Models and Query Languages]] — data models and queries from the application's side
 - next: [[Ch 04 - Encoding and Evolution]] — how the stored bytes are encoded and kept evolvable
 - [[Ch 07 - Transactions]] — the transactional semantics B-tree engines are built to support
+- 2nd edition: [[Ch 04 - Storage and Retrieval (2e)]] — the same material in the 2nd edition

@@ -35,3 +35,4 @@ PostgreSQL, MySQL/InnoDB, Oracle, SQL Server; CouchDB, Datomic, LMDB (append-onl
 - [[Read Committed]] — the weaker level this generalizes (per-query vs per-transaction snapshots)
 - [[Serializable Snapshot Isolation (SSI)]] — bolting serializability checks onto MVCC
 - [[Skewed Workloads and Relieving Hot Spots]] — the other, unrelated meaning of "skew"
+- 2nd edition: [[Snapshot Isolation and Repeatable Read (2e)]] — the same material in the 2nd edition

@@ -36,3 +36,4 @@ The chapter separates an application's functional requirements (what it must do)
 - next: [[Ch 02 - Data Models and Query Languages]] — the first layer of design decisions: how data is represented and queried
 - [[Ch 08 - The Trouble with Distributed Systems]] — the fault taxonomy introduced here, taken to its distributed extreme
 - [[Ch 12 - The Future of Data Systems]] — revisits the Twitter timeline example after the full technical tour
+- 2nd edition: [[Ch 01 - Trade-Offs in Data Systems Architecture (2e)]], [[Ch 02 - Defining Nonfunctional Requirements (2e)]] — the 2nd edition split this across several notes

@@ -29,3 +29,4 @@ Datomic uses Datalog as its query language; Cascalog applies Datalog to querying
 - [[Triple-Stores and SPARQL]] — the triple model Datalog generalizes
 - [[The Cypher Query Language]] — the jump-straight-in style Datalog contrasts with
 - [[Graph Queries in SQL]] — recursive CTEs are SQL's clumsier answer to the same recursion
+- 2nd edition: [[Datalog - Recursive Relational Queries (2e)]] — the same material in the 2nd edition

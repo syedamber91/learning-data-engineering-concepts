@@ -37,3 +37,4 @@ Bitcask, the default storage engine in Riak, is essentially this design: memory-
 - [[SSTables and LSM-Trees]] — the sorted successor that lifts both limitations
 - [[B-Trees]] — the contrasting update-in-place indexing school
 - [[Compaction]] — the segment-merging mechanism introduced here
+- 2nd edition: [[Log-Structured Storage (2e)]] — the same material in the 2nd edition

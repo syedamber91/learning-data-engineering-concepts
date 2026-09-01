@@ -29,3 +29,4 @@ Kleppmann opens his forward-looking chapter with a claim the whole book has been
 - [[Keeping Systems in Sync]] — the Ch 11 problem this topic generalizes
 - [[Unbundling Databases]] — the architectural vision built on these integration ideas
 - [[Batch Processing with Unix Tools]] — batch-side foundations of the derivation machinery
+- 2nd edition: [[Data Integration (2e)]] — the same material in the 2nd edition

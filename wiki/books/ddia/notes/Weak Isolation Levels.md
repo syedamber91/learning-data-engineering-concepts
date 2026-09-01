@@ -37,3 +37,4 @@ Serializable isolation would let every transaction pretend it runs alone, but it
 - [[Handling Write Conflicts]] — multi-leader conflict resolution, where lost-update prevention must be rethought
 - [[Transaction Processing or Analytics]] — the long-scan workloads that make consistent snapshots essential
 - [[transactions]] (vutr wiki) — the same read-committed/snapshot-isolation/MVCC ladder from a working data engineer's real posts, including PostgreSQL's concrete UPDATE-as-new-row-version mechanics this chapter describes more abstractly
+- 2nd edition: [[Weak Isolation Levels (2e)]] — the same material in the 2nd edition

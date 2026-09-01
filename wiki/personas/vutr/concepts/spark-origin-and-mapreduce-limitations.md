@@ -27,3 +27,6 @@ Worth being precise about what's actually being traded off here: MapReduce's dis
 
 ## Related in the other wiki
 - [[MapReduce]] — DDIA's formal definition of the map/shuffle/reduce model and its retry-based fault tolerance, the mechanism this note explains Spark was built to replace.
+
+## Related topics
+- [[MapReduce (2e)]] — the 2nd edition keeps MapReduce for its concepts and declares it largely obsolete in practice — this note is why.

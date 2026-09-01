@@ -30,3 +30,7 @@ The trade-off is brutal honesty about compatibility. Most Kafka alternatives kee
 ## Related in the other wiki
 - [[Implementation of Replication Logs]] — DDIA catalogs the wire formats a replication log can take (WAL shipping, logical logs, etc.); Northguard's redesign shows a real system choosing the unit of replication (segment vs. whole partition) as an equally consequential design axis.
 - [[Replication]] — DDIA's Replication concept lays out why keeping copies in sync is hard in general; Northguard is a real-world redesign of that sync mechanism at finer (segment) granularity to fix Kafka's operational problems at LinkedIn scale.
+
+## Related topics
+- [[Implementation of Replication Logs (2e)]] — what unit of the log you ship and store — Northguard's answer is the segment.
+- [[Replication (2e)]] — the 2nd-edition concept page.
