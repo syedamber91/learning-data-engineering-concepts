@@ -39,3 +39,6 @@ This is the 1st edition's [[Leaders and Followers]], **renamed** to Single-Leade
 - [[Multi-Leader Replication (2e)]] and [[Leaderless Replication (2e)]] — the alternatives
 - [[Consensus (2e)]] — where automatic leader election gets its guarantees
 - 1st edition: [[Leaders and Followers]] — the same topic under its old name
+
+## In the vutr data-engineering wiki
+- [[leader-follower-replication]] — vutr applies this same single-leader mechanism to Kafka partitions, where the durability guarantee turns into a concrete cross-AZ replication *bill* — the cost pressure that produced the diskless brokers the 2nd edition now mentions.

@@ -41,3 +41,8 @@ Entirely new. In 2017 the 1st edition treated the data warehouse as a single pro
 - [[Column-Oriented Storage (2e)]] — what those storage formats actually do
 - [[Object Stores (2e)]] — the substrate underneath all of this
 - [[Data Warehousing (2e)]] — the data lake this evolved from
+
+## In the vutr data-engineering wiki
+- [[lakehouse]] — vutr's own treatment of the warehouse/lake convergence this section describes, from the table-format side (Iceberg, Delta) rather than the query-engine side.
+- [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — the wider architectural map this section sits inside — warehouse, lake, lakehouse, mesh — with the trade-offs stated as choices rather than a chronology.
+- [[bigquery-internals]] — one warehouse worked through end to end: Dremel, Capacitor, Colossus, and the storage/compute separation this section treats as the defining cloud-warehouse property.

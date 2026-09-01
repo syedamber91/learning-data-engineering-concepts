@@ -63,3 +63,7 @@ Essentially unchanged from the 1st edition's [[Reasoning About Time]] — the sa
 - [[Clock Synchronization and Accuracy (2e)]] — why device clocks can't be trusted
 - [[Monotonic Versus Time-of-Day Clocks (2e)]] — the clock the timestamps come from
 - 1st edition: [[Reasoning About Time]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[watermark]] — vutr's precise definition — max observed event time minus a threshold — is the mechanism behind this section's watermark messages for declaring a window done despite stragglers.
+- [[dataflow-model]] — the model this section credits with formalizing watermarks and corrections, traced to its core principle of never assuming completeness.

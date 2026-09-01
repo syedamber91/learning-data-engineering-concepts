@@ -35,3 +35,7 @@ The 1st edition's [[Operations - Automatic or Manual Rebalancing]] made the same
 - [[Principles for Scalability (2e)]] — the same autoscaling-versus-predictability caution
 - [[Handling Node Outages (2e)]] — the failure detection this interacts badly with
 - 1st edition: [[Operations - Automatic or Manual Rebalancing]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[partition-reassignment-and-cluster-balancing]] — Kafka's broker-side reassignment faces exactly this section's three requirements, with three different answers — the error-prone native tool, Cruise Control's plan-only automation, and AutoMQ's data-free metadata edit. The last of those is what this section's DynamoDB autoscaling example looks like when storage and compute are already separated.
+- [[consumer-group-rebalancing]] — the ownership-migration flavour of the same problem: Kafka reassigns partition *ownership* between consumers, and this section's availability-during-rebalance requirement maps onto Kafka's eager (whole group stops) vs. cooperative (only affected partitions pause) split.

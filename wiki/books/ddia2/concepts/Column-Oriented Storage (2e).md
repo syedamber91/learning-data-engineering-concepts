@@ -26,3 +26,6 @@ See [[Column-Oriented Storage (2e)]] and [[Data Storage for Analytics (2e)]].
 - [[Query Languages (2e)]]
 - [[Sharding by Hash of Key (2e)]]
 - [[Stars and Snowflakes - Schemas for Analytics (2e)]]
+
+## In the vutr data-engineering wiki
+- [[parquet]] — the mechanics of the format this page names — row groups, column chunks, pages, and the encodings that make columnar compression pay.

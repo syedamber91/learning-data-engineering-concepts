@@ -25,3 +25,6 @@ See [[B-Trees (2e)]] and the head-to-head in [[Comparing B-Trees and LSM-Trees (
 - [[Snapshot Isolation and Repeatable Read (2e)]]
 - [[Sorting Versus In-Memory Aggregation (2e)]]
 - [[Storage and Indexing for OLTP (2e)]]
+
+## In the vutr data-engineering wiki
+- [[b-tree]] — Vu's entity note on the same structure, framed by its write amplification.

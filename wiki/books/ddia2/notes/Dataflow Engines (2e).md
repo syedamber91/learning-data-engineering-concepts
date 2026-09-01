@@ -45,3 +45,7 @@ The 1st edition covered dataflow engines under "Beyond MapReduce," with a simila
 - [[Distributed Job Orchestration (2e)]] — the fault-tolerance consequence
 - [[Shuffling Data (2e)]] — how the operators are implemented
 - 1st edition: [[Beyond MapReduce]] — where the 1st edition covered dataflow engines
+
+## In the vutr data-engineering wiki
+- [[rdd-fundamentals-and-properties]] — vutr's mechanical breakdown of the lineage-based recomputation this section names as Spark's answer to MapReduce's forced disk materialization.
+- [[jobs-stages-tasks-dag-and-dependencies]] — how Spark's DAGScheduler draws stage boundaries at shuffle points — the mechanism behind this section's claim that dataflow engines sort only where needed.

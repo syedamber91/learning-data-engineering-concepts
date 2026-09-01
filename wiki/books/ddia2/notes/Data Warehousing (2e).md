@@ -39,3 +39,7 @@ The 1st edition's [[Data Warehousing]] note covered the warehouse, ETL, and the 
 - [[Extract-Transform-Load (2e)]] — ETL treated as a batch-processing workload
 - [[Stars and Snowflakes - Schemas for Analytics (2e)]] — the analysis-friendly schema ETL transforms into
 - 1st edition: [[Data Warehousing]] — the pre-lake, pre-HTAP version of this section
+
+## In the vutr data-engineering wiki
+- [[dbt]] — vutr turns the star schema into a hands-on project — Kimball's four-step design, surrogate-key SCD Type 2 dimensions, incremental `fact_sale` models.
+- [[airbnb-data-infrastructure]] — Minerva computing a shared dimension once and reusing it across every consuming dimension set — this section's denormalization argument running in production.

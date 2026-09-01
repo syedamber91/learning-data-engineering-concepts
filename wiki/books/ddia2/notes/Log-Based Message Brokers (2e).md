@@ -63,3 +63,6 @@ The 1st edition's [[Log-Based Message Broker]] covered the same log structure, p
 - [[Change Data Capture (2e)]] — what log brokers are used to transport
 - [[The Many Faces of Consensus (2e)]] — shared logs as consensus
 - 1st edition: [[Log-Based Message Broker]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[kafka]] — vutr's topic note is the production history behind this section's abstraction: LinkedIn's original 1GB-segment design, the acks/ISR durability contract, and the diskless rewrites (WarpStream, AutoMQ, Bufstream) that the 2nd edition now names in the text itself — the 1st edition predated all of them.

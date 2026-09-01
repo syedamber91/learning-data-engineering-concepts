@@ -17,3 +17,7 @@ Exactly-once delivery requires an idempotent sink — overwriting the whole tabl
 ## Related in the other wiki
 - [[Fault Tolerance]] — DDIA's chapter-11 note lists the concrete idempotence tactics (storing the triggering Kafka offset with each write so replays are detected and skipped) that make an idempotent sink possible in practice.
 - [[Exactly-Once Semantics]] — DDIA's concept page frames exactly-once as retries made invisible via atomic commit or idempotence with end-to-end operation IDs, the same idempotent-sink dependency this note states directly.
+
+## Related topics
+- [[Fault Tolerance (Stream Processing) (2e)]] — the 2nd edition's version, which prefers the more honest name "effectively-once."
+- [[Exactly-Once Semantics (2e)]] — the 2nd-edition concept page.

@@ -34,3 +34,6 @@ Entirely new as a topic here. The 1st edition discussed event sourcing, immutabl
 - [[State, Streams, and Immutability (2e)]] — the same idea in the stream-processing chapter
 - [[Systems of Record and Derived Data (2e)]] — the vocabulary this builds on
 - [[Evolvability - Making Change Easy (2e)]] — the irreversibility argument this feeds
+
+## In the vutr data-engineering wiki
+- [[log-based-cdc]] — event sourcing is this concept's application-layer sibling: write immutable intent events straight to the log instead of extracting row changes out of one.

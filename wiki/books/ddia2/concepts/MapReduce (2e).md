@@ -26,3 +26,6 @@ See [[MapReduce (2e)]] and [[Dataflow Engines (2e)]].
 - [[Query Languages (2e)]]
 - [[Shuffling Data (2e)]]
 - [[Simple Log Analysis (2e)]]
+
+## In the vutr data-engineering wiki
+- [[spark-origin-and-mapreduce-limitations]] — why Spark was built to replace this model, and why the 2nd edition can now call it obsolete.

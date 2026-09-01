@@ -27,3 +27,6 @@ See [[Log-Based Message Brokers (2e)]] and [[Log-Based Message Brokers (2e)]]. T
 - [[Microservices and Serverless (2e)]]
 - [[Request Routing (2e)]]
 - [[Serving Derived Data (2e)]]
+
+## In the vutr data-engineering wiki
+- [[kafka]] — vutr's topic is the production history behind this one-paragraph sketch, and now runs *past* the book: LinkedIn's Northguard rewrite is the same company walking back its own original design.

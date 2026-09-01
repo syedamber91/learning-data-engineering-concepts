@@ -26,3 +26,6 @@ See [[Change Data Capture (2e)]] and [[Keeping Systems in Sync (2e)]].
 - [[State, Streams, and Immutability (2e)]]
 - [[Stream Joins (2e)]]
 - [[The End-to-End Argument for Databases (2e)]]
+
+## In the vutr data-engineering wiki
+- [[log-based-cdc]] — reading the replication log directly, named across Oracle, Postgres, and MySQL.

@@ -46,3 +46,6 @@ The four steps, the mapper/reducer contract, and the functional-programming box 
 - [[Simple Log Analysis (2e)]] — the same four stages in Unix
 - [[Shuffling Data (2e)]] — the implicit sort in step 3
 - 1st edition: [[MapReduce]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[spark-origin-and-mapreduce-limitations]] — vutr's account of why Spark was built to replace exactly this model — the independent confirmation of the 2nd edition's much blunter verdict that MapReduce is now largely obsolete.

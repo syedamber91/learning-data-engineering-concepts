@@ -54,3 +54,6 @@ This is the 1st edition's Chapter 11, with a stable spine — the same three top
 - [[Event-Driven Architectures (2e)]] — message brokers from the encoding chapter
 - [[Event Sourcing and CQRS (2e)]] — the data-model view of the same idea
 - 1st edition: [[Ch 11 - Stream Processing]] — the chapter this one revises
+
+## In the vutr data-engineering wiki
+- [[kafka]] — vutr's Kafka topic is the single best companion to this chapter — where the book keeps the broker abstract, vutr traces one implementation's whole arc from LinkedIn's design bet to its cross-AZ cost problem.

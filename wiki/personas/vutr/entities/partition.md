@@ -16,3 +16,7 @@ LinkedIn made a partition the smallest unit of parallelism, so at any moment all
 
 ## Related in the other wiki
 - [[Partitioning]] — DDIA's general concept of splitting a dataset into disjoint subsets across nodes for scalability is exactly what a Kafka partition operationalizes, down to the "more consumers than partitions leaves some idle" failure mode echoing DDIA's skew/hot-spot concern.
+
+## Related topics
+- [[Sharding (2e)]] — the 2nd-edition concept page for the same idea.
+- [[Hot Spots (2e)]] — the uneven-load failure this unit is meant to prevent.

@@ -28,3 +28,7 @@ See [[B-Trees (2e)]] and [[Change Data Capture (2e)]].
 - [[JSON, XML, and Binary Variants (2e)]]
 - [[Log-Structured Storage (2e)]]
 - [[Monotonic Versus Time-of-Day Clocks (2e)]]
+
+## In the vutr data-engineering wiki
+- [[write-ahead-log]] — Vu grounds the same log-before-apply principle in the LSM memtable's durability story rather than the book's B-tree crash-recovery framing.
+- [[log-based-cdc]] — the same rule across three real DBMSs — Oracle's redo log, Postgres's WAL, MySQL's binlog — and why that crash-recovery guarantee makes the log the ideal complete source for CDC.

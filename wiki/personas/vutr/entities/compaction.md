@@ -23,3 +23,6 @@ Compaction's failure mode is falling behind the write rate: if it can't keep pac
 ## Related in the other wiki
 - [[Compaction]] — the book's account of compaction as the "background heartbeat" of LSM storage, including the same write-amplification cost when it falls behind on a write-heavy workload.
 - [[Log Compaction]] — DDIA generalizes SSTable merging into the log-compaction idea that also powers Kafka's compacted topics — the same superseded-record pruning this note describes for Size-Tiered and Leveled strategies, applied at a different layer.
+
+## Related topics
+- [[Compaction (2e)]] — the 2nd-edition concept page.

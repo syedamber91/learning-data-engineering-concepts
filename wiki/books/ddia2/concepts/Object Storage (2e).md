@@ -28,3 +28,6 @@ See [[Distributed Filesystems (2e)]] and [[Separation of Storage and Compute (2e
 - [[Distributed Job Orchestration (2e)]]
 - [[Distributed Locks and Leases (2e)]]
 - [[Distributed Versus Single-Node Systems (2e)]]
+
+## In the vutr data-engineering wiki
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — the GFS→HDFS→S3 lineage behind the 2nd edition's shift away from distributed filesystems.

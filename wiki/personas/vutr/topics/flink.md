@@ -34,3 +34,5 @@ Every mechanism in this topic traces back to the same fork: batch gets a bounded
 - [[spark]] — The central axis of this topic is Flink vs. Spark Structured Streaming: true per-record streaming with barrier-based checkpointing vs. micro-batching with RDD-lineage replay for fault tolerance; both engines also offer RocksDB as a pluggable state backend.
 - [[data-architecture-warehouse-lake-lakehouse-mesh-lambda-kappa]] — Lambda vs. Kappa is the streaming-architecture axis that topic covers generically; this topic's Dataflow-model triggers/refinement-modes material is the concrete mechanism behind why a single Dataflow-style pipeline can answer the same completeness problem Lambda solves with two.
 - [[big-tech-case-studies-uber-netflix-linkedin-meta-doordash-spotify-twitter]] — related to DoorDash's and Uber's own production use of Flink; see their own case-study topics for the specific architecture and mechanisms, which aren't sourced from this group's raw posts.
+- [[Stream Joins (2e)]] — the joins this engine actually executes.
+- [[Fault Tolerance (Stream Processing) (2e)]] — the barrier-based checkpointing that recovers their state.

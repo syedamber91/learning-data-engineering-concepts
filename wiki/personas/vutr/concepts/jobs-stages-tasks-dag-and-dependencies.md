@@ -36,3 +36,6 @@ The job is considered complete only when every stage in its DAG has finished, pr
 
 ## Related in the other wiki
 - [[Beyond MapReduce]] — DDIA's claim that dataflow engines "generalize map/reduce into freely composable operators and only sort where needed" is the high-level description of exactly this job → stage → task → DAG breakdown at shuffle boundaries.
+
+## Related topics
+- [[Dataflow Engines (2e)]] — why dataflow engines sort only where needed.

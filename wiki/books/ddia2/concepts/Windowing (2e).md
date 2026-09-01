@@ -27,3 +27,7 @@ See [[Reasoning About Time (2e)]].
 - [[Two-Phase Locking (2e)]]
 - [[Understanding Load (2e)]]
 - [[Use of Response Time Metrics (2e)]]
+
+## In the vutr data-engineering wiki
+- [[watermark]] — the mechanism that decides when a window is done.
+- [[dataflow-model]] — the model that formalized windows, watermarks, and corrections together.

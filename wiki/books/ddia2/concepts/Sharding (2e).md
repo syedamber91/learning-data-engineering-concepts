@@ -27,3 +27,7 @@ See [[Sharding of Key-Value Data (2e)]], [[Operations - Automatic Versus Manual 
 - [[Distributed Transactions (2e)]]
 - [[Enforcing Constraints (2e)]]
 - [[Exactly-Once Message Processing Revisited (2e)]]
+
+## In the vutr data-engineering wiki
+- [[message-key-partitioning-strategies]] — Kafka never says "sharding," but message-key routing is this idea under Kafka's own name: the producer's key hash is functionally the shard key.
+- [[partition]] — Kafka's partition operationalizes this directly — the unit a topic is split into so brokers and consumers each own a disjoint slice.

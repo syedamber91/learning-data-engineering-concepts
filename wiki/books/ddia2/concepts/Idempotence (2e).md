@@ -28,3 +28,7 @@ Usually achieved with a client-generated request ID carried end to end — see [
 - [[The Limitations of TCP (2e)]]
 - [[Timeliness and Integrity (2e)]]
 - [[Unreliable Networks (2e)]]
+
+## In the vutr data-engineering wiki
+- [[idempotency]] — this property at the data-pipeline level, with concrete techniques — overwrite instead of append, MERGE/upsert, avoid NOW().
+- [[safe-writes-and-schema-evolution-in-serving]] — the serving-layer instance: four named strategies for what a sink does when it receives the same logical write twice.

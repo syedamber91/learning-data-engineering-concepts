@@ -41,3 +41,8 @@ The 1st edition's [[Comparing B-Trees and LSM-Trees]] covered write amplificatio
 - [[Log-Structured Storage (2e)]] and [[B-Trees (2e)]] — the two contenders
 - [[Backpressure (2e)]] — the overload mechanism named here
 - 1st edition: [[Comparing B-Trees and LSM-Trees]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[lsm-tree-storage-engines]] — Vu's own LSM-vs-B-tree comparison independently reaches the same write-vs-read trade-off this section formalizes through write amplification.
+- [[write-amplification-tradeoff]] — vutr's isolated treatment of the single number this whole comparison turns on.
+- [[sequential-vs-random-io]] — the underlying hardware reason the trade-off exists at all — and the 2nd edition's expanded SSD material is arguing with exactly this.

@@ -20,3 +20,6 @@ See [[Log-Structured Storage (2e)]] and [[Comparing B-Trees and LSM-Trees (2e)]]
 - [[Multidimensional and Full-Text Indexes (2e)]]
 - [[Sorting Versus In-Memory Aggregation (2e)]]
 - [[Storage and Indexing for OLTP (2e)]]
+
+## In the vutr data-engineering wiki
+- [[lsm-tree-storage-engines]] — vutr's engine-level synthesis of the same write path, with OLAP examples the book doesn't reach.

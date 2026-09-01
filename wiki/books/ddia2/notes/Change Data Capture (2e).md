@@ -61,3 +61,7 @@ The 1st edition's [[Change Data Capture]] covered the same concept, the same lea
 - [[Implementation of Replication Logs (2e)]] — the logical log CDC reads
 - [[Event Sourcing and CQRS (2e)]] — the higher-abstraction alternative
 - 1st edition: [[Change Data Capture]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[change-data-capture-cdc-and-data-sourcing]] — vutr sorts the trigger-based and log-based extraction mechanisms onto a clean complexity/impact spectrum, and adds the DELETE-blindness failure mode of query-based CDC that the book doesn't cover.
+- [[log-based-cdc]] — the log-based approach specifically — lowest source impact, highest coupling to internal formats — with the WAL/redo-log/binlog naming and the Debezium-to-Kafka pipeline shape.

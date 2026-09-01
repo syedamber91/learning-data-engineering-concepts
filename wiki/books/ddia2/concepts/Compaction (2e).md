@@ -28,3 +28,8 @@ See [[Log-Structured Storage (2e)]] and [[Log-Based Message Brokers (2e)]].
 - [[Log-Structured Storage (2e)]]
 - [[Logical Clocks (2e)]]
 - [[Protocol Buffers (2e)]]
+
+## In the vutr data-engineering wiki
+- [[compaction]] — Vu's entity note names Size-Tiered vs Leveled as the two strategies this page calls write- and read-optimized.
+- [[sstable]] — the immutable sorted files compaction merges and rewrites.
+- [[memtable]] — the in-memory buffer whose flush rate compaction has to keep up with.

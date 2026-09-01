@@ -15,3 +15,6 @@ The ideal is exactly-once: for a given real-world event, exactly one data record
 Handling duplicates usually means deduplication on read, but Vu flags that the hard part isn't the dedup logic — it's finding the right key to dedup on, which sometimes isn't explicit in the source and requires profiling the data or asking around. For missing data, the practical countermeasures are tracking record counts at ingestion and comparing them against the source, validating that API pagination returns the expected total, and — for streams — committing offsets only after processing actually succeeds, rather than before.
 
 *See also: [[incremental-extraction-strategies]] · [[source-delete-handling]] · [[data-quality-contract-with-source]]*
+
+## Related topics
+- [[Exactly-Once Semantics (2e)]] — the 2nd-edition concept page.

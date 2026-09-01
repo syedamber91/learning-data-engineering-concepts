@@ -54,3 +54,9 @@ The 1st edition's [[Batch and Stream Processing]] covered the same material incl
 - [[Reasoning About Time (2e)]] — why event-time windowing is required
 - [[Evolvability - Making Change Easy (2e)]] — the irreversibility argument
 - 1st edition: [[Batch and Stream Processing]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[lambda-architecture]] — vutr's sharper verdict — Lambda "does not actually solve completeness — it just papers over the gap" — behind this section's account of its dual-codebase cost.
+- [[kappa-architecture]] — vutr's name for the unification alternative: replaying history through one stream-processing codebase via log replay, which the 2nd edition now reports as the winner.
+- [[lambda-vs-kappa]] — the production case studies (Uber/LinkedIn kept Lambda, Twitter pivoted to Kappa) behind the 2nd edition's verdict that Lambda has fallen out of use.
+- [[batch-vs-stream-throughput-and-latency]] — operationalizes this section's bounded-vs-unbounded framing into the two metrics that actually decide infrastructure, down to the same micro-batching trade-off.

@@ -27,3 +27,6 @@ See [[Skewed Workloads and Relieving Hot Spots (2e)]].
 - [[Snapshot Isolation and Repeatable Read (2e)]]
 - [[Trust, but Verify (2e)]]
 - [[Two-Phase Locking (2e)]]
+
+## In the vutr data-engineering wiki
+- [[partition]] — the "more consumers than partitions leaves some idle" rule is the consumer-side echo of the same uneven-load concern.

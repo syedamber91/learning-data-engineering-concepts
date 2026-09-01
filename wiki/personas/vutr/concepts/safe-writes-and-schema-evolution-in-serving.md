@@ -19,3 +19,6 @@ Vu Trinh groups three questions under "can the serving layer guarantee safe writ
 **Schema evolution** covers what happens when fields get added, removed, or promoted (INT → BIGINT). He names five distinct strategies rather than one: table formats with native evolution (Delta, Iceberg, Hudi — schema changes are metadata operations with no data rewrite, and the format tracks which schema version each file was written under); additive-only evolution (only ever add nullable columns, never rename/drop/retype — restrictive but safe when many downstream systems depend on the table); versioned tables/snapshots (publish `user_v2`, `user_v3` and migrate consumers over time — heavier, but appropriate when a change is too risky to apply in place); schema registries (Confluent, AWS Glue — for streaming, producers register schemas and consumers fetch them, with compatibility rules enforced at publish time so an incompatible change is rejected before it ships); and verifying schema changes at build/CI time against a simulated new schema, to catch breakage before it reaches a production dashboard.
 
 *See also: [[idempotency]] · [[physical-layout-partitioning-clustering-and-compaction]] · [[stale-or-incorrect-data-handling]]*
+
+## Related topics
+- [[Idempotence (2e)]] — the 2nd-edition concept page.

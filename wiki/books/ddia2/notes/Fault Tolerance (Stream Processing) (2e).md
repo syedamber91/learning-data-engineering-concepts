@@ -57,3 +57,7 @@ Essentially unchanged from the 1st edition's [[Fault Tolerance]] — the same mi
 - [[Distributed Job Orchestration (2e)]] — the batch fault-tolerance approaches
 - [[Distributed Locks and Leases (2e)]] — the fencing idempotence may need
 - 1st edition: [[Fault Tolerance]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[chandy-lamport-checkpointing]] — this section's description of Flink injecting barriers for periodic state snapshots without pausing the stream *is* the Chandy-Lamport algorithm, named.
+- [[exactly-once-needs-idempotent-sink]] — this section's idempotence tactic — storing the triggering offset with each write so replays are detected and skipped — is a concrete instance of vutr's general rule.

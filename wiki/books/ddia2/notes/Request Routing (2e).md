@@ -40,3 +40,6 @@ The 1st edition's [[Request Routing]] presented the same three approaches, the s
 - [[Dataflow Through Services - REST and RPC (2e)]] — service discovery, the sibling problem
 - [[Coordination Services (2e)]] — ZooKeeper and etcd examined properly
 - 1st edition: [[Request Routing]] — the same topic
+
+## In the vutr data-engineering wiki
+- [[consumer-groups-and-partition-assignment]] — the same routing question at consumer-group scope: Kafka's Group Coordinator holds authoritative membership while the group leader computes and propagates the partition assignment.

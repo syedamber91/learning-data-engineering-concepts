@@ -57,3 +57,8 @@ This note merges the 1st edition's [[Hash Indexes]] and [[SSTables and LSM-Trees
 - [[Comparing B-Trees and LSM-Trees (2e)]] — the head-to-head
 - [[Full-Text Search (2e)]] — Lucene applies this same design to inverted indexes
 - 1st edition: [[Hash Indexes]] and [[SSTables and LSM-Trees]] — the two notes this merges
+
+## In the vutr data-engineering wiki
+- [[lsm-tree-storage-engines]] — vutr's own synthesis of the LSM write path — sorted memtable, WAL, SSTable flush, bloom filter, compaction — mirrors this section's mechanism and extends it with OLAP-engine examples like BigQuery Vortex.
+- [[sstable]] — the immutable sorted files this section flushes and merges; Vu adds the sparse-index detail.
+- [[memtable]] — the in-memory structure whose flushes compaction must keep pace with — Vu is careful that it is a sorted structure, not an append-only log.

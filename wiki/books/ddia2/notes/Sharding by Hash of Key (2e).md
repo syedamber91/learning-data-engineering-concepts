@@ -52,3 +52,6 @@ The 1st edition's [[Partitioning by Hash of Key]] covered hashing, mod-N's failu
 - [[Skewed Workloads and Relieving Hot Spots (2e)]] — why uniform keys still aren't uniform load
 - [[Column-Oriented Storage (2e)]] — where warehouse clustering pays off
 - 1st edition: [[Partitioning by Hash of Key]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[message-key-partitioning-strategies]] — Kafka's producer partitioner hashes a non-null message key to pick a partition — the concrete production instance of the ordering-for-uniformity trade this section describes abstractly.

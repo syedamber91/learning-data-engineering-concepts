@@ -46,3 +46,6 @@ Very close to the 1st edition's [[B-Trees]] — the same 1970 origin, page struc
 - [[Comparing B-Trees and LSM-Trees (2e)]] — which one wins, and on what axis
 - [[Snapshot Isolation and Repeatable Read (2e)]] — where copy-on-write pays off again
 - 1st edition: [[B-Trees]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[b-tree]] — Vu's condensed entity note on the same in-place, page-splitting design, framed specifically around its write-amplification cost relative to an LSM-tree.

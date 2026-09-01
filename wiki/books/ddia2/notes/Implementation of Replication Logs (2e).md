@@ -51,3 +51,6 @@ Very close to the 1st edition's [[Implementation of Replication Logs]] — the s
 - [[Event Sourcing and CQRS (2e)]] — deterministic replay as a data model
 - [[B-Trees (2e)]] — where the WAL comes from
 - 1st edition: [[Implementation of Replication Logs]] — the same subtopic, plus triggers
+
+## In the vutr data-engineering wiki
+- [[northguard-segment-level-replication]] — LinkedIn's Northguard replicates at segment granularity rather than whole partitions — a granularity twist on this section's question of what unit of the log you actually ship and store.

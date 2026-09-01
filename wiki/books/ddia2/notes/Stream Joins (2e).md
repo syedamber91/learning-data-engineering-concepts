@@ -67,3 +67,7 @@ Essentially unchanged from the 1st edition's [[Stream Joins]] — the same three
 - [[Change Data Capture (2e)]] — how the table side stays current
 - [[Materializing and Updating Timelines (2e)]] — the timeline example in full
 - 1st edition: [[Stream Joins]] — the same subtopic
+
+## In the vutr data-engineering wiki
+- [[flink]] — vutr frames Flink as the engine that actually executes these joins, recovering their accumulated state via Chandy-Lamport checkpointing rather than batch-style restarts.
+- [[watermark]] — the eager-vs-relaxed watermark trade-off is the concrete timing mechanism behind this section's point that a windowed stream-stream join's answer depends on event ordering.

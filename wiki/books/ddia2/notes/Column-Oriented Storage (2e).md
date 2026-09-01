@@ -51,3 +51,8 @@ Consolidates four 1st-edition subtopics — [[Column-Oriented Storage]], [[Colum
 - [[Stars and Snowflakes - Schemas for Analytics (2e)]] — the fact tables being stored
 - [[Full-Text Search (2e)]] — postings lists as sparse bitmaps, the same trick
 - 1st edition: [[Column-Oriented Storage]], [[Column Compression]], [[Sort Order in Column Storage]], [[Writing to Column-Oriented Storage]] — the four notes this merges
+
+## In the vutr data-engineering wiki
+- [[parquet]] — vutr works through Parquet's actual on-disk mechanics (row groups, column chunks, pages, dictionary/RLE/delta encodings) plus the newer Lance/Nimble/Vortex alternatives — several of which the 2nd edition now names but does not unpack.
+- [[bigquery-internals]] — grounds the Dremel lineage: Capacitor and Big Metadata apply the same columnar bet to metadata as well as data, and Dremel's definition/repetition-level encoding is what Parquet adopted directly.
+- [[apache-pinot-druid-and-real-time-olap]] — the same columnar rationale applied to real-time serving rather than a warehouse — Druid's real-time nodes perform the row-to-column conversion live on every flush.

@@ -28,3 +28,6 @@ See [[Event Sourcing and CQRS (2e)]] and [[State, Streams, and Immutability (2e)
 - [[The End-to-End Argument for Databases (2e)]]
 - [[The Many Faces of Consensus (2e)]]
 - [[Timeliness and Integrity (2e)]]
+
+## In the vutr data-engineering wiki
+- [[log-based-cdc]] — the infrastructure-layer sibling — extracting row changes from a log rather than writing intent events to one.

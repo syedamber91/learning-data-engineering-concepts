@@ -27,3 +27,7 @@ See [[Single-Leader Replication (2e)]], [[Multi-Leader Replication (2e)]], and [
 - [[Database-Internal Distributed Transactions (2e)]]
 - [[Databases and Streams (2e)]]
 - [[Dataflow Engines (2e)]]
+
+## In the vutr data-engineering wiki
+- [[leader-follower-replication]] — Kafka's leader-follower partition replication as a concrete single-leader implementation of these trade-offs.
+- [[northguard-segment-level-replication]] — the same fault-tolerance goal pursued at a different granularity — segments, not whole partitions — to solve real operational problems at LinkedIn's scale.

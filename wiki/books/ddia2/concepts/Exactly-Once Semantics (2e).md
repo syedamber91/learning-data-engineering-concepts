@@ -27,3 +27,7 @@ See [[Fault Tolerance (Stream Processing) (2e)]]; the book prefers the more hone
 - [[Processing Streams (2e)]]
 - [[Serving Derived Data (2e)]]
 - [[Systems of Record and Derived Data (2e)]]
+
+## In the vutr data-engineering wiki
+- [[exactly-once-needs-idempotent-sink]] — the same rule stated flatly: exactly-once ultimately depends on an idempotent sink.
+- [[exactly-once-and-missing-data-detection]] — the source side of the same gap — at-least-once produces duplicates, offsets committed too early produce silent loss, and both need detection before an idempotent sink can help.

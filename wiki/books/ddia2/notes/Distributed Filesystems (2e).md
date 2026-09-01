@@ -49,3 +49,6 @@ The 1st edition covered HDFS inside [[MapReduce and Distributed Filesystems]], i
 - [[Object Stores (2e)]] — the increasingly common alternative
 - [[Shared-Memory, Shared-Disk, and Shared-Nothing Architectures (2e)]] — the architectural contrast
 - 1st edition: [[MapReduce and Distributed Filesystems]] — where HDFS was covered
+
+## In the vutr data-engineering wiki
+- [[amazon-s3-gfs-hdfs-and-distributed-file-systems]] — vutr traces the same GFS→HDFS→S3 lineage this section walks, and continues it inside Google as Colossus — the substrate under BigQuery and Procella.
