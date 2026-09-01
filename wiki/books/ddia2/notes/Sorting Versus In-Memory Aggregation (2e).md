@@ -29,10 +29,10 @@ sources:
 GNU Coreutils `sort` with automatic spilling and parallelisation; mergesort as the underlying algorithm.
 
 ## Since the 1st Edition
-Essentially unchanged from the 1st edition's [[Sorting Versus In-Memory Aggregation]] — the same working-set argument, the same mergesort explanation, and the same Coreutils note. The forward reference now points at **[[Sequential Versus Random Writes on SSDs]]** in Chapter 4, which the 1st edition did not have as a separate discussion.
+Essentially unchanged from the 1st edition's [[Simple Log Analysis]] — the same working-set argument, the same mergesort explanation, and the same Coreutils note. The forward reference now points at the SSD write-pattern discussion in [[Comparing B-Trees and LSM-Trees (2e)]], which the 1st edition did not have as a separate discussion.
 
 ## Related
 - up: [[Batch Processing with Unix Tools (2e)]] · chapter: [[Ch 11 - Batch Processing (2e)]]
 - [[Log-Structured Storage (2e)]] — the same sort-and-merge principle
 - [[Shuffling Data (2e)]] — the distributed version of this sort
-- 1st edition: [[Sorting Versus In-Memory Aggregation]] — the same subtopic
+- 1st edition: [[Simple Log Analysis]] — where the 1st edition made the same argument

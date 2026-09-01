@@ -28,10 +28,10 @@ Does the splitting of shards and rebalancing happen **automatically or manually*
 Couchbase and Riak (suggest-then-commit); DynamoDB (fully automatic, minutes-scale autoscaling).
 
 ## Since the 1st Edition
-The 1st edition's [[Automatic or Manual Rebalancing]] made the same argument, including the cascading-failure interaction with automatic failure detection and the recommendation for a human in the loop. **Added:** DynamoDB's minutes-scale autoscaling as a concrete example of how far automation has come, the note that shard splitting may be unable to keep up at maximum write throughput, and the preemptive-rebalancing use case with the Cyber Monday and World Cup examples.
+The 1st edition's [[Operations - Automatic or Manual Rebalancing]] made the same argument, including the cascading-failure interaction with automatic failure detection and the recommendation for a human in the loop. **Added:** DynamoDB's minutes-scale autoscaling as a concrete example of how far automation has come, the note that shard splitting may be unable to keep up at maximum write throughput, and the preemptive-rebalancing use case with the Cyber Monday and World Cup examples.
 
 ## Related
 - up: [[Sharding of Key-Value Data (2e)]] · chapter: [[Ch 07 - Sharding (2e)]]
 - [[Principles for Scalability (2e)]] — the same autoscaling-versus-predictability caution
 - [[Handling Node Outages (2e)]] — the failure detection this interacts badly with
-- 1st edition: [[Automatic or Manual Rebalancing]] — the same subtopic
+- 1st edition: [[Operations - Automatic or Manual Rebalancing]] — the same subtopic

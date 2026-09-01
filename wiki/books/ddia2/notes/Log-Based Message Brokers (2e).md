@@ -55,11 +55,11 @@ sources:
 Apache Kafka, Amazon Kinesis Streams, Google Cloud Pub/Sub; Kafka and Redpanda tiered storage; WarpStream, Confluent Freight, Bufstream storing everything in object storage as Iceberg tables.
 
 ## Since the 1st Edition
-The 1st edition's [[Log-Based Message Brokers]] covered the same log structure, partitions and offsets, the fan-out and coarse load-balancing comparison, consumer offsets as replication log sequence numbers, and the ring-buffer disk-space calculation. **New: tiered and object-storage-backed log brokers** — Kafka and Redpanda serving old messages from object stores, and **WarpStream, Confluent Freight, and Bufstream storing everything there as Iceberg tables**, which makes the same data readable by batch and warehouse jobs. **Also new:** the note that **Kafka now supports JMS/AMQP-style consumer groups**, blurring the distinction the subtopic is built around.
+The 1st edition's [[Log-Based Message Broker]] covered the same log structure, partitions and offsets, the fan-out and coarse load-balancing comparison, consumer offsets as replication log sequence numbers, and the ring-buffer disk-space calculation. **New: tiered and object-storage-backed log brokers** — Kafka and Redpanda serving old messages from object stores, and **WarpStream, Confluent Freight, and Bufstream storing everything there as Iceberg tables**, which makes the same data readable by batch and warehouse jobs. **Also new:** the note that **Kafka now supports JMS/AMQP-style consumer groups**, blurring the distinction the subtopic is built around.
 
 ## Related
 - up: [[Transmitting Event Streams (2e)]] · chapter: [[Ch 12 - Stream Processing (2e)]]
 - [[Messaging Systems (2e)]] — the transient alternative
 - [[Change Data Capture (2e)]] — what log brokers are used to transport
 - [[The Many Faces of Consensus (2e)]] — shared logs as consensus
-- 1st edition: [[Log-Based Message Brokers]] — the same subtopic
+- 1st edition: [[Log-Based Message Broker]] — the same subtopic

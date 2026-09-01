@@ -55,11 +55,11 @@ In practice you would have an index on `room_id` and/or on `start_time`/`end_tim
 MySQL/InnoDB and SQL Server (serializable via 2PL); Db2 (repeatable read via 2PL); index-range/next-key locking as the practical approximation of predicate locks.
 
 ## Since the 1st Edition
-Essentially unchanged from the 1st edition's [[Two-Phase Locking]] — the same lock modes, the same growing/shrinking phase explanation, the same 2PL-is-not-2PC warning, the same performance critique, and the same predicate-lock and index-range-lock treatment. Another very stable section, which fits: 2PL is a 1970s algorithm and nothing about it has changed.
+Essentially unchanged from the 1st edition's [[Two-Phase Locking (2PL)]] — the same lock modes, the same growing/shrinking phase explanation, the same 2PL-is-not-2PC warning, the same performance critique, and the same predicate-lock and index-range-lock treatment. Another very stable section, which fits: 2PL is a 1970s algorithm and nothing about it has changed.
 
 ## Related
 - up: [[Serializability (2e)]] · chapter: [[Ch 08 - Transactions (2e)]]
 - [[Serializable Snapshot Isolation (2e)]] — the optimistic alternative that fixes the performance problem
 - [[Write Skew and Phantoms (2e)]] — what predicate locks exist to prevent
 - [[Two-Phase Commit (2e)]] — the differently named, unrelated protocol
-- 1st edition: [[Two-Phase Locking]] — the same subtopic
+- 1st edition: [[Two-Phase Locking (2PL)]] — the same subtopic

@@ -44,4 +44,4 @@ The 1st edition covered dataflow engines under "Beyond MapReduce," with a simila
 - [[MapReduce (2e)]] — the model this improves on
 - [[Distributed Job Orchestration (2e)]] — the fault-tolerance consequence
 - [[Shuffling Data (2e)]] — how the operators are implemented
-- 1st edition: [[Dataflow Engines]] — the same subtopic
+- 1st edition: [[Beyond MapReduce]] — where the 1st edition covered dataflow engines

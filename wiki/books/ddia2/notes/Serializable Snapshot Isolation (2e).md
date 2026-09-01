@@ -53,11 +53,11 @@ The chapter has painted a bleak picture: **implementations of serializability th
 PostgreSQL serializable, SQL Server Hekaton, HyPer (single-node); CockroachDB, FoundationDB (distributed); BadgerDB (embedded).
 
 ## Since the 1st Edition
-The mechanism is unchanged from the 1st edition's [[Serializable Snapshot Isolation]] — the same optimistic/pessimistic framing, the same two detection cases with the same doctors example, and the same performance discussion. **Updated:** the systems roster now includes **CockroachDB, FoundationDB, and BadgerDB**, and the comparison to serial execution adds **FoundationDB's distributed conflict detection** as concrete evidence that SSI scales beyond one core — a claim the 1st edition could state only in principle.
+The mechanism is unchanged from the 1st edition's [[Serializable Snapshot Isolation (SSI)]] — the same optimistic/pessimistic framing, the same two detection cases with the same doctors example, and the same performance discussion. **Updated:** the systems roster now includes **CockroachDB, FoundationDB, and BadgerDB**, and the comparison to serial execution adds **FoundationDB's distributed conflict detection** as concrete evidence that SSI scales beyond one core — a claim the 1st edition could state only in principle.
 
 ## Related
 - up: [[Serializability (2e)]] · chapter: [[Ch 08 - Transactions (2e)]]
 - [[Snapshot Isolation and Repeatable Read (2e)]] — the foundation SSI builds on
 - [[Two-Phase Locking (2e)]] — the pessimistic alternative
 - [[Write Skew and Phantoms (2e)]] — the anomaly SSI detects
-- 1st edition: [[Serializable Snapshot Isolation]] — the same subtopic
+- 1st edition: [[Serializable Snapshot Isolation (SSI)]] — the same subtopic

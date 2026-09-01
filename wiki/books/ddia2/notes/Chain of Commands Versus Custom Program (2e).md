@@ -43,10 +43,10 @@ for count, url in top5:
 Python's `defaultdict` as the in-memory aggregation structure.
 
 ## Since the 1st Edition
-Unchanged in substance from the 1st edition's [[Chain of Commands Versus Custom Program]]; the 1st edition used Ruby for the equivalent script, **while the 2nd edition uses Python** — a small but telling modernisation.
+Unchanged in substance from the 1st edition's [[Simple Log Analysis]]; the 1st edition used Ruby for the equivalent script, **while the 2nd edition uses Python** — a small but telling modernisation.
 
 ## Related
 - up: [[Batch Processing with Unix Tools (2e)]] · chapter: [[Ch 11 - Batch Processing (2e)]]
 - [[Sorting Versus In-Memory Aggregation (2e)]] — the difference this sets up
 - [[Simple Log Analysis (2e)]] — the pipeline version
-- 1st edition: [[Chain of Commands Versus Custom Program]] — the same subtopic
+- 1st edition: [[Simple Log Analysis]] — where the 1st edition made the same comparison
