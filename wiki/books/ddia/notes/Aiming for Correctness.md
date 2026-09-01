@@ -32,3 +32,4 @@ Stateful systems remember mistakes forever, yet the tools we trust for correctne
 - [[The Slippery Concept of a Transaction]] — Ch 7's foundations being reassessed
 - [[Fault Tolerance]] — stream-processing exactly-once machinery this builds upon
 - [[Consistency Guarantees]] — Ch 9's vocabulary that timeliness/integrity refines
+- 2nd edition: [[Aiming for Correctness (2e)]] — the same material in the 2nd edition

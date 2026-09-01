@@ -44,3 +44,4 @@ Raft (etcd), Zab ([[ZooKeeper]]), Multi-Paxos, Viewstamped Replication; Jepsen-s
 - [[Handling Node Outages]] — the failover problem epochs solve safely
 - [[System Model and Reality]] — where FLP's asynchronous model lives
 - [[consensus]] (vutr wiki) — the systems-level "why Raft, why here" story (LinkedIn's Northguard, ZooKeeper's CP role) grounded in a data engineer's own posts; that topic explicitly points back here for the election-term/log-matching/quorum-commit mechanics its own sources don't cover
+- 2nd edition: [[Consensus (2e)]], [[Consensus in Practice (2e)]], [[The Many Faces of Consensus (2e)]] — the 2nd edition split this across several notes

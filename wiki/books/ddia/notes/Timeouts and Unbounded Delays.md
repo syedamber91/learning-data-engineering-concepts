@@ -30,3 +30,4 @@ Phi Accrual detector in Akka and Cassandra; TCP adaptive retransmission; UDP for
 - [[Detecting Faults]] — sibling: signals that precede timeout fallback
 - [[Synchronous Versus Asynchronous Networks]] — sibling: why no delay bound exists
 - [[Describing Performance]] — percentile thinking behind response-time distributions
+- 2nd edition: [[Timeouts and Unbounded Delays (2e)]] — the same material in the 2nd edition

@@ -36,3 +36,4 @@ Approach 2 inflates writes: at ~75 followers per average tweet, 4.6k tweets/sec 
 - [[Approaches for Coping with Load]] — what to do once load is described
 - [[Skewed Workloads and Relieving Hot Spots]] — Ch 6 on celebrity-style skew
 - [[Evolvability - Making Change Easy]] — "refactoring" between approaches 1 and 2 as an evolvability case
+- 2nd edition: [[Case Study - Social Network Home Timelines (2e)]], [[Understanding Load (2e)]] — the 2nd edition split this across several notes

@@ -34,3 +34,4 @@ Unix design principles — immutable inputs, output destined to feed some unknow
 - [[Home]] — book index
 - prev: [[Ch 09 - Consistency and Consensus]]
 - next: [[Ch 11 - Stream Processing]]
+- 2nd edition: [[Ch 11 - Batch Processing (2e)]] — the same material in the 2nd edition

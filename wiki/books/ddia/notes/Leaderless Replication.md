@@ -34,3 +34,4 @@ Single-leader and multi-leader replication both funnel each write through a node
 - [[Multi-Leader Replication]] — the other architecture that must resolve concurrent writes
 - [[Linearizability]] — the strong guarantee quorums fail to provide
 - [[Problems with Replication Lag]] — the anomalies that resurface here without their fixes
+- 2nd edition: [[Leaderless Replication (2e)]] — the same material in the 2nd edition

@@ -31,3 +31,4 @@ The chapter opens with a database you could write in two lines of Bash: `db_set`
 - [[Transaction Processing or Analytics]] — these indexes serve OLTP; analytics needs different machinery
 - [[Column-Oriented Storage]] — the analytics-side counterpart to these OLTP structures
 - [[Log Compaction]] — the keep-latest-value-per-key idea reused for logs elsewhere in the book
+- 2nd edition: [[Storage and Indexing for OLTP (2e)]] — the same material in the 2nd edition

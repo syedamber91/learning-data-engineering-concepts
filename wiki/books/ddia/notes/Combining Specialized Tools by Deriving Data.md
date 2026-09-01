@@ -35,3 +35,4 @@ PostgreSQL's built-in full-text search (adequate for simple cases) versus dedica
 - [[Ordering and Causality]] — theory behind the causal-dependency pitfalls
 - [[Partitioned Logs]] — why order is only per-partition at scale
 - [[Multi-Leader Replication]] — the cross-datacenter case that defeats total order
+- 2nd edition: [[Combining Specialized Tools by Deriving Data (2e)]] — the same material in the 2nd edition

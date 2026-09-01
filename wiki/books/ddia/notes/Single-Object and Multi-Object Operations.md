@@ -35,3 +35,4 @@ Unread-counter email example; 20 KB JSON document write; multi-put key-value API
 - [[Read Committed]] — the isolation level that prevents the dirty read shown here
 - [[Preventing Lost Updates]] — where compare-and-set and atomic ops reappear
 - [[Atomic Commit and Two-Phase Commit (2PC)]] — committing across multiple systems
+- 2nd edition: [[Single-Object and Multi-Object Operations (2e)]] — the same material in the 2nd edition

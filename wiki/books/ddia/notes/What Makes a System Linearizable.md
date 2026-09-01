@@ -38,3 +38,4 @@ The chapter's football-score story (Alice sees the result, Bob then reads a stal
 - [[Serializability]] — the contrast that trips everyone up
 - [[Serializable Snapshot Isolation (SSI)]] — serializable yet non-linearizable by design
 - [[Ordering and Causality]] — the total order this definition induces
+- 2nd edition: [[What Makes a System Linearizable (2e)]] — the same material in the 2nd edition

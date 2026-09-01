@@ -37,3 +37,4 @@ ASN.1 / DER / X.509 certificates; proprietary relational database wire protocols
 - [[Avro]] — schema registry and resolution in practice
 - [[JSON, XML, and Binary Variants]] — the schema-optional world being improved on
 - [[Relational Model Versus Document Model]] — the schema-on-read flexibility claim this rebuts
+- 2nd edition: [[The Merits of Schemas (2e)]] — the same material in the 2nd edition

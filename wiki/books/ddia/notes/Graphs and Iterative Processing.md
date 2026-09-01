@@ -33,3 +33,4 @@ PageRank; Apache Giraph, Spark's GraphX, Flink's Gelly (all Pregel implementatio
 - up: [[Beyond MapReduce]] · chapter: [[Ch 10 - Batch Processing]]
 - [[Materialization of Intermediate State]] — why per-iteration MapReduce jobs waste I/O
 - [[Reduce-Side Joins and Grouping]] — the mapper-as-message-sender idea Pregel extends
+- 2nd edition: [[Machine Learning (2e)]] — the same material in the 2nd edition

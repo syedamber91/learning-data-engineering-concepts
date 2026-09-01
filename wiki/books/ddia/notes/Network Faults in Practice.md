@@ -30,3 +30,4 @@ Sharks biting undersea cables; the 12-faults-per-month datacenter study; redunda
 - [[Partitioning]] — the storage sense of "partition" this term clashes with
 - [[Split Brain]] — the classic disaster a network partition can trigger
 - [[Detecting Faults]] — sibling: what signals you get when things break
+- 2nd edition: [[Network Faults in Practice (2e)]] — the same material in the 2nd edition

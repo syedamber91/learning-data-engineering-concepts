@@ -37,3 +37,4 @@ Finally, three dataflow scenarios show where these compatibility properties matt
 - [[Evolvability - Making Change Easy]] — Ch 1's design goal that this chapter's compatibility rules operationalize
 - [[Relational Model Versus Document Model]] — schema-on-write vs schema-on-read, the data-model side of schema change
 - [[Messaging Systems]] — Ch 11 deepens the broker-based dataflow introduced here
+- 2nd edition: [[Ch 05 - Encoding and Evolution (2e)]] — the same material in the 2nd edition

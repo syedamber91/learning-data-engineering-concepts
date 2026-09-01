@@ -29,3 +29,4 @@ A single computer is designed to be all-or-nothing: when hardware is healthy, th
 - [[Unreliable Networks]] — the first concrete source of partial failure
 - [[Unreliable Clocks]] — the second: timing you cannot trust
 - [[Knowledge, Truth, and Lies]] — how to reason once certainty is gone
+- 2nd edition: [[Faults and Partial Failures (2e)]] — the same material in the 2nd edition

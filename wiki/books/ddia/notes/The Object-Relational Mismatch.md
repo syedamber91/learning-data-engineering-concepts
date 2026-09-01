@@ -37,3 +37,4 @@ ORMs: ActiveRecord, Hibernate. Vendors with structured XML/JSON column support: 
 - [[Many-to-One and Many-to-Many Relationships]] — where the document tree breaks down
 - [[The Birth of NoSQL]] — schema frustration as a NoSQL driver
 - [[Formats for Encoding Data]] — serialization side of the same boundary
+- 2nd edition: [[The Object-Relational Mismatch (2e)]] — the same material in the 2nd edition

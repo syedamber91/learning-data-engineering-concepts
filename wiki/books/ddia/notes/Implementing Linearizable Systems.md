@@ -41,3 +41,4 @@ You *can* rescue Dynamo-style reads/writes: readers must perform synchronous [[R
 - [[Sloppy Quorums and Hinted Handoff]] — the availability feature that forfeits recency
 - [[Fault-Tolerant Consensus]] — the machinery that actually works
 - [[Detecting Concurrent Writes]] — why LWW discards causal order
+- 2nd edition: [[Implementing Linearizable Systems (2e)]] — the same material in the 2nd edition

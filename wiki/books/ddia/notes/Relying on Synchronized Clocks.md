@@ -32,3 +32,4 @@ Cassandra and Riak LWW; Spanner + TrueTime with GPS/atomic clocks; Snowflake ID 
 - [[Snapshot Isolation and Repeatable Read]] — the guarantee Spanner distributes
 - [[Ordering and Causality]] — Ch 9's ordering theory
 - [[Handling Write Conflicts]] — where conflict resolution strategies live
+- 2nd edition: [[Relying on Synchronized Clocks (2e)]] — the same material in the 2nd edition

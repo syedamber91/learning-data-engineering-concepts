@@ -32,3 +32,4 @@ Fencing-token property specification; quorum amnesia via lost stable storage; fi
 - [[Fault-Tolerant Consensus]] — algorithms proved within these models
 - [[Eventual Consistency]] — the liveness property named here
 - [[Limitations of Quorum Consistency]] — quorum conditions that storage amnesia breaks
+- 2nd edition: [[System Model and Reality (2e)]] — the same material in the 2nd edition

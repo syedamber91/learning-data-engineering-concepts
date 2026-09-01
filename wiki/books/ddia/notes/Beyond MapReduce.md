@@ -30,3 +30,4 @@ sources:
 - [[Processing Streams]] — the stream-processing continuation of this arc
 - [[rdd-fundamentals-and-properties]] — vutr's mechanical breakdown of the RDD lineage-based recomputation this note names as Spark's answer to MapReduce's forced disk materialization.
 - [[jobs-stages-tasks-dag-and-dependencies]] — vutr's concrete account of how Spark's DAGScheduler draws stage boundaries at shuffle points, the mechanism behind this note's claim that dataflow engines "only sort where needed."
+- 2nd edition: [[Dataflow Engines (2e)]] — the same material in the 2nd edition

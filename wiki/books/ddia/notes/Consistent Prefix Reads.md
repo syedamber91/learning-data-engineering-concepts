@@ -45,3 +45,4 @@ The Poons/Cake dialog (borrowed from Terry Pratchett) is the canonical example; 
 - [[Multi-Leader Replication Topologies]] — writes overtaking each other between leaders
 - [[Partitioning of Key-Value Data]] — why independent partitions lose global order
 - [[Detecting Concurrent Writes]] — happens-before machinery for tracking causality
+- 2nd edition: [[Problems with Replication Lag (2e)]] — the same material in the 2nd edition

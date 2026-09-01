@@ -40,3 +40,4 @@ Apache Thrift (also BinaryProtocol/CompactProtocol/DenseProtocol variants), Prot
 - [[Avro]] — tag-free alternative resolving schemas by field name
 - [[The Merits of Schemas]] — the broader case for schema-driven binary formats
 - [[Dataflow Through Services - REST and RPC]] — gRPC carries these bytes between services
+- 2nd edition: [[Protocol Buffers (2e)]] — the same material in the 2nd edition

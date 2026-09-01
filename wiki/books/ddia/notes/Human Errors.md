@@ -39,3 +39,4 @@ The best systems layer several complementary defenses:
 - [[Software Errors]] — bugs humans write; this note covers mistakes humans make operating
 - [[Operability - Making Life Easy for Operations]] — the maintainability face of the same concern
 - [[How Important Is Reliability]] — why this diligence matters even in mundane apps
+- 2nd edition: [[Humans and Reliability (2e)]] — the same material in the 2nd edition

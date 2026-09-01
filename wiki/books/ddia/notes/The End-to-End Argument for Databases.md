@@ -36,3 +36,4 @@ The double money transfer; browser POST retry; Post/Redirect/Get's limits; the `
 - [[Atomic Commit and Two-Phase Commit (2PC)]] — why even 2PC can't cover the last hop
 - [[Enforcing Constraints]] — where the end-to-end request ID meets a uniqueness check
 - [[State, Streams, and Immutability]] — immutability as the recovery-friendly baseline
+- 2nd edition: [[The End-to-End Argument for Databases (2e)]] — the same material in the 2nd edition

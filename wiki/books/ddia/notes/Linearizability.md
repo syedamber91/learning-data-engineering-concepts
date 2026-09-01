@@ -32,3 +32,4 @@ Also called atomic consistency, [[Strong Consistency]], immediate consistency, o
 - [[Ordering and Causality]] — linearizability implies causal consistency
 - [[Total Order Broadcast]] — the construction equivalent to linearizable CAS
 - [[Serializability]] — the frequently confused transaction-level cousin
+- 2nd edition: [[Linearizability (2e)]] — the same material in the 2nd edition

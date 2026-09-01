@@ -30,3 +30,4 @@ ISDN's 4,000 frames/second circuits; ATM as Ethernet's failed 1980s competitor; 
 - [[Process Pauses]] — the same static-vs-dynamic trade-off applied to CPUs
 - [[Backpressure]] — flow control in packet networks
 - [[Describing Performance]] — latency percentiles shaped by these choices
+- 2nd edition: [[Synchronous Versus Asynchronous Networks (2e)]] — the same material in the 2nd edition

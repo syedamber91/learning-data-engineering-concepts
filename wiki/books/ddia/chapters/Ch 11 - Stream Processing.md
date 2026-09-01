@@ -38,3 +38,4 @@ Stream processing is batch processing done continuously on never-ending input, w
 - [[Total Order Broadcast]] — the ordering principle beneath log-based derivation
 - [[Implementation of Replication Logs]] — databases were streaming all along
 - [[kafka]] — vutr's topic note is the production-scale reality behind this chapter's log-based-broker abstraction: LinkedIn's original offset-addressed log design, the rebalancing and cross-AZ cost problems it created at scale, and the diskless/tiered-storage rewrites that followed.
+- 2nd edition: [[Ch 12 - Stream Processing (2e)]] — the same material in the 2nd edition

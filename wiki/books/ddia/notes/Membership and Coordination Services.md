@@ -43,3 +43,4 @@ ZooKeeper (Zab), etcd (Raft), Consul, Google Chubby, Apache Curator, Apache Book
 - [[The Truth Is Defined by the Majority]] — fencing tokens and lease pitfalls from Ch 8
 - [[Detecting Faults]] — why timeout-based liveness needs agreement on top
 - [[Request Routing]] — Ch 6's use of ZooKeeper for partition-to-node maps
+- 2nd edition: [[Coordination Services (2e)]] — the same material in the 2nd edition

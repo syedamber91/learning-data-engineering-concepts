@@ -45,3 +45,4 @@ by dataflow engines in [[Beyond MapReduce]]. Appears early as a query pattern in
 
 ## Related in the other wiki
 - [[spark-origin-and-mapreduce-limitations]] — vutr's account of why Spark was built to replace exactly this map/shuffle/reduce model and its disk-based retry fault tolerance.
+- 2nd edition: [[MapReduce (2e)]] — the same material in the 2nd edition

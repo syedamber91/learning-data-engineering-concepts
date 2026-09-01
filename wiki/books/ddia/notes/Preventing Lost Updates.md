@@ -34,3 +34,4 @@ MongoDB, Redis, PostgreSQL, Oracle, SQL Server, MySQL/InnoDB, Riak 2.0; counter,
 - [[Write Skew and Phantoms]] — the generalization when transactions update *different* objects
 - [[Multi-Leader Replication]] — why single-copy assumptions break
 - [[Linearizability]] — the formal "single up-to-date copy" guarantee
+- 2nd edition: [[Preventing Lost Updates (2e)]] — the same material in the 2nd edition

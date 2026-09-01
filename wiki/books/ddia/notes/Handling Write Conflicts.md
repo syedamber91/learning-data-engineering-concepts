@@ -40,3 +40,4 @@ Bucardo (on-write handlers), CouchDB (on-read siblings), Riak 2.0 (CRDTs), Ether
 - [[Detecting Concurrent Writes]] — same problem in leaderless systems, plus LWW's dangers
 - [[Use Cases for Multi-Leader Replication]] — why we accept this pain at all
 - [[Multi-Leader Replication Topologies]] — how conflicting writes travel between leaders
+- 2nd edition: [[Dealing with Conflicting Writes (2e)]] — the same material in the 2nd edition

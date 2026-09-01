@@ -34,3 +34,4 @@ Bitmap-indexed compressed columns are a staple of warehouse engines like Vertica
 - [[Sort Order in Column Storage]] — sorting creates long runs that compress even better
 - [[Writing to Column-Oriented Storage]] — the write-path cost of compressed layouts
 - [[Data Warehousing]] — the query patterns these encodings serve
+- 2nd edition: [[Column-Oriented Storage (2e)]] — the same material in the 2nd edition
