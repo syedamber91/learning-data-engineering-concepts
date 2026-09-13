@@ -1,0 +1,159 @@
+# krish-naik (Krish Naik) -- "Ultimate RAG Bootcamp Using Langchain,LangGraph & Langsmith"
+# lecture_id -> raw/<group>/ . Titles are comments only; the id is the key.
+# Skipped on purpose: VS Code/Anaconda installation, Roleplay (no teaching content).
+instructor: "Krish Naik"
+course_dir: "ultimate-rag-bootcamp-using-langchain-langgraph-langsmith"
+groups:
+  rag-foundations:
+    - 51170785   # Introduction
+    - 51170793   # Introduction To RAG
+    - 51170803   # Some Examples And Advantages Of Using RAG
+    - 51170807   # Business Uecases Impact With RAG
+    - 51186125   # Prompt Engineering Vs FineTuning Vs RAG
+    - 51186109   # Data Ingestion And Preprocessing
+    - 51188123   # Query Processing And Output Generation Phase
+  data-ingestion-and-chunking:
+    - 51188505   # Project Structure And Environment Set Up With UV Package
+    - 51191537   # Document Structure In LangChain
+    - 51191673   # Ingesting And Parsing Text Data Using Document Loaders
+    - 51299019   # Text Splitting Techniques
+    - 51299031   # Ingestion And Parsing PDF Documents
+    - 51299041   # Handling Common PDF Issues
+    - 51299057   # Ingestion And Data Parsing  Word Documents
+    - 51299479   # Parsing CSV And Excel Files
+    - 51299491   # Json files Parsing And Processing
+    - 51536473   # SQL Databases Parsing And Processing
+    - 51679117   # Semantic Chunking With RAG
+    - 51681355   # Semantic Chunking With Python
+    - 51681439   # Building RAG Pipeline With Semantic Chunker
+    - 51686853   # Semantic Chunking With Langchain
+  embeddings-and-vector-stores:
+    - 51536475   # Introduction To Embeddings And Vector Databases
+    - 51540349   # Visualization Of Embedding And Consine Similarity
+    - 51542691   # Creating Your First Embeddings With HuggingFace Embedding Models
+    - 51557251   # Getting Started With OPENAI Embeddings
+    - 51557981   # Sematic And Similarity Search Uing Open AI Embedding Models
+    - 51575581   # Vector Stores Vs Vector Databases
+    - 51576429   # Building Tradition RAG With ChromaDb Vector Store-Part 1
+    - 51576523   # Building Traditional RAG With ChromaDB Vector Store-Part 2
+    - 51632473   # Building Traditional RAG With ChromaDB Vector Store- Part 3
+    - 51633367   # Building RAG Pipeline Using LCEL(Langchain Expression Language)
+    - 51634343   # Adding New Documents To Existing Vector Store
+    - 51635947   # Advanced RAG Techniques-Conversational Memory
+    - 51655091   # How To Use GROQ LLM
+    - 51662149   # Building a RAG System with LangChain and FAISS- Part 1
+    - 51662829   # Building a RAG System with LangChain and FAISS- Part 2
+    - 51862895   # InMemory Vector Store
+    - 51862899   # Working With Full Fledged DataStax Astra VectorDB
+    - 51881021   # Working With PineCone VectorStore DB
+  retrieval-strategies:
+    - 51687453   # Combining Dense And Sparse Matrix
+    - 51701289   # Benefits Of Combining Dense And Sparse Search
+    - 51701317   # Combining Dense And Sparse Retriever With Langchain
+    - 51705007   # Reranking Hybrid Search Statergy
+    - 51706027   # Reranking Hybrid Statergy Implementation
+    - 51720399   # Maximal Marginal Relevance Theoretical Explanation
+    - 51733721   # MMR Retriever Implementation
+    - 51734147   # When To And When Not To Use MMR
+    - 51734961   # Query Expansion Technique
+    - 51736951   # Query Expansion Technique Implementation
+    - 51738979   # Query Decomposition Understanding And Implementation
+    - 51758353   # HyDE Technique And Implementation
+  multimodal-rag:
+    - 51773765   # Introduction To MultiModal RAG
+    - 51774435   # MultiModal RAG Implementation (PDF With Text And Images)
+  langchain-and-agents-intro:
+    - 51798273   # AI Agents Vs Agentic AI
+    - 51798285   # Some More Examples For AI Agents And Agentic AI
+    - 53967937   # Intro To Langchain Updates
+    - 53967945   # Creating Virtual Environment Using UV Package
+    - 53967951   # Create Agents Using Langchain
+    - 53967957   # Invoke And Batch Streaming
+    - 53967965   # Tools In Langchain
+    - 53967969   # Messages Types In Langchain
+    - 53967975   # LLM structured Output With Langchain Using Pydantic
+    - 53967979   # LLM structured Output With Langchain Using TypeDict
+    - 53967987   # LLM Structured Output With Langchain Using Data Classes
+    - 53967993   # MiddleWare Summarization With Langchain
+    - 53967997   # Human In the Loop Middleware With Langchain
+  langgraph-and-agent-architecture:
+    - 51798295   # Getting Started With LangGraph
+    - 51798337   # Langgraph Environment Set Up
+    - 51798341   # Setting Up OpenAI API Key
+    - 51798343   # Setting Up Groq API Key
+    - 51798345   # Setting Up LangSmith API Key
+    - 51798349   # Build Simple Graph Uing LangGraph
+    - 51798353   # Simple Graph Construction and Workflow
+    - 51798359   # Create LLM Powered Chatbot Using Langgraph
+    - 51798367   # State Schema With Data Classes
+    - 51798373   # Pydantic Data Validation
+    - 51798381   # Introduction To Router In LangGraph
+    - 51798391   # Chains Using Langgraph
+    - 51798411   # Tools And Tools Node Integration-Part 1
+    - 51798413   # Tools And Tools Node Integration- Part 2
+    - 51918501   # Building Chatbot With Multiple Tool Integration-Part1
+    - 51918503   # Building Chatbot With Multiple Tool Integration-Part2
+    - 51798421   # Agents And ReACT Agent Architecture
+    - 51798427   # ReAct Agent Architecture Implementation
+    - 51798431   # Agent With Memory Implementation
+    - 51798439   # Different Streaming Techniques
+    - 51798447   # Streaming Using Astream And Stream Events
+    - 51901905   # Debugging Wiht LangGraph Studio And Langsmith
+  agentic-rag-patterns:
+    - 51798469   # Traditional RAG Vs Agentic RAG
+    - 51819557   # Detailed Agentic RAG Project Implementation- Part 1
+    - 51819591   # Detailed Agentic RAG Implementation-Part 2
+    - 51819907   # Build A Basic RAG With LangGraph
+    - 51820079   # ReAct Agent Architecture Implementation With LangGraph
+    - 51823173   # Tool Creation For RAG Agents With LangGraph
+    - 51823847   # Chain OF Thoughts Implementation With RAG
+    - 51834681   # Self Reflection Understanding and Implementation
+    - 51834855   # Query Planning And Decomposition With Implementation
+    - 51835249   # Iterative Retrieval With Self Reflection
+    - 51837193   # Answer synthesis From Multiple sources
+    - 51837343   # Autonomous RAG Summary
+    - 51857365   # Multi Agents Network With RAG
+    - 51857513   # MultiAgent With RAG Implementation
+    - 51862373   # Supervisor Multi Agent RAG Implementation
+    - 51862785   # Hierarichal Agents With RAG Understanding And Implementation
+  self-correcting-rag:
+    - 51841565   # Corrective RAG Detailed Explanation
+    - 51841571   # Corrective RAG Detailed Implementation
+    - 51841575   # Adaptive RAG Theoretical Understanding
+    - 51841583   # Adaptive RAG Implementation
+  memory-and-caching:
+    - 51873803   # RAG With Persistant Memory With LangGraph
+    - 51873811   # Agent Rag With Persistant Memory With LangGraph
+    - 51874825   # What Is CAG And Its Basic Implementation
+    - 51875089   # Advance CAG Implementation With LangGraph
+  vectorless-and-graph-rag:
+    - 56092784   # Vectorless RAG With Page Index Tutorials
+    - 56093052   # Traditional Vs Vectorless RAG
+    - 51841283   # Introduction To Graph Databases And Cypher Query Language With Langchain
+    - 51841291   # What is Knowledge Graph
+    - 51841299   # Creating Your Neo4j AuraDB Database Instance
+    - 51841309   # RDBMS VS Graph Database
+    - 51841311   # Neo4j Property Graph Data Model
+    - 51841313   # Getting Started With Cypher Query Language
+    - 51841319   # Intermediate To Advance Cypher Query Language
+    - 51841355   # Getting Started-Creating Environment
+    - 51841359   # Inserting Data In Graph DB With Python And Langchain
+    - 51841361   # Creating GraphQuery Chain With Langchain
+    - 51841365   # Prompting Statergies GraphDB With LLM
+  guardrails-gateways-evaluation:
+    - 56092526   # Guardrails with LangChain
+    - 56589661   # LLM Gateways And Implementation
+    - 51903173   # Evaluation Of Chatbot- Data Input Creation With Schema
+    - 51903297   # Evaluation Of Chatbots- Defining Metrics LLM AS A JUDGE
+    - 51903331   # Evaluation  OF Chatbots - Running Evaluation Metrics With Different LLMS
+    - 51916341   # RAG Evaluation- Build RAG And Create Test Dataset
+    - 51916351   # RAG Evaluation- Build Evaluators With Metrics
+  end-to-end-project:
+    - 52225935   # Project Demo
+    - 52225943   # Creating Environment With UV Package Manager
+    - 52225997   # Defining Project Structure
+    - 52226357   # Document Ingestion And Document Processing Implementation
+    - 52226561   # VectorStore, Retriever And RAG State Implementation
+    - 52226723   # Graph Builder And Node Implementation Integration
+    - 52227543   # Build React Agent Architecture With Retriever And Wikipedia
+    - 52227867   # Building Streamlit App With React Agent RAG

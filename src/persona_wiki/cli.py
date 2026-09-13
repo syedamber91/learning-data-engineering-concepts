@@ -156,11 +156,12 @@ def ingest_udemy(
     vault_dir: Optional[str] = typer.Option(None, "--vault-dir"),
 ) -> None:
     """Copy Udemy lecture transcripts into the persona's raw/<group>/ layer."""
-    from .udemy import ingest_udemy as run_ingest_udemy, load_group_map
+    from .udemy import ingest_udemy as run_ingest_udemy, load_group_map, load_instructor
     root = _root(vault_dir, persona)
     gm = load_group_map(Path(group_map).expanduser())
     res = run_ingest_udemy(Path(course_dir).expanduser(), root, gm,
-                           date.today().isoformat())
+                           date.today().isoformat(),
+                           instructor=load_instructor(Path(group_map).expanduser()))
     typer.echo(f"copied {len(res.copied)}, skipped {len(res.skipped)}, "
                f"unmapped {len(res.unmapped)} -> {res.manifest}")
     if res.unmapped:
