@@ -36,3 +36,4 @@ A stale sports score is harmless; a stale lock is not. This section identifies t
 - [[Membership and Coordination Services]] — how ZooKeeper packages these primitives
 - [[Reading Your Own Writes]] — the cheaper per-channel alternative
 - [[Timeliness and Integrity]] — loosening constraints instead of paying for recency
+- 2nd edition: [[Relying on Linearizability (2e)]] — the same material in the 2nd edition

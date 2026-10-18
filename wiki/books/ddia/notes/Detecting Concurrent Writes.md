@@ -47,3 +47,4 @@ Cassandra (LWW-only), Riak (optional LWW, siblings, CRDTs, dotted version vector
 
 ## Related in the other wiki
 - [[message-key-partitioning-strategies]] — Kafka sidesteps this note's concurrent-write problem by construction rather than detection: routing every message for a given key to one partition, consumed by exactly one consumer, gives that key a single sequential writer, so there is no concurrent write to reconcile with version vectors in the first place.
+- 2nd edition: [[Detecting Concurrent Writes (2e)]] — the same material in the 2nd edition

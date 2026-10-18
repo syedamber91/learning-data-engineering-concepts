@@ -33,3 +33,6 @@ One more consequence worth internalizing: because the broker tracks consumption 
 
 ## Related in the other wiki
 - [[Rebalancing Partitions]] — DDIA's requirement that rebalancing not interrupt availability is precisely what separates Kafka's eager rebalancing (whole group stops) from cooperative rebalancing (only the affected partitions pause) — the same fairness-vs-availability trade-off DDIA describes for storage nodes, here applied to consumer ownership instead of data location.
+
+## Related topics
+- [[Operations - Automatic Versus Manual Rebalancing (2e)]] — the storage-side version of the same ownership-migration problem.

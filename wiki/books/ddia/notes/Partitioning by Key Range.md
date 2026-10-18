@@ -34,3 +34,4 @@ Bigtable pioneered the approach; HBase (its open-source counterpart) and Rethink
 - [[Skewed Workloads and Relieving Hot Spots]] — when key design alone isn't enough
 - [[Strategies for Rebalancing]] — dynamic partitioning suits key ranges
 - [[B-Trees]] — range-splitting mirrors B-tree top-level page splits
+- 2nd edition: [[Sharding by Key Range (2e)]] — the same material in the 2nd edition

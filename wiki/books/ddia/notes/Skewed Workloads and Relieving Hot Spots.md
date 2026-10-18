@@ -34,3 +34,4 @@ No named system solves this out of the box; the technique lives in application c
 - [[Partitioning by Hash of Key]] — why hashing alone can't help identical keys
 - [[Partitioning by Key Range]] — the other scheme's own hot-spot story (timestamps)
 - [[Describing Load]] — Chapter 1's fan-out framing of the same celebrity workload
+- 2nd edition: [[Skewed Workloads and Relieving Hot Spots (2e)]] — the same material in the 2nd edition

@@ -31,3 +31,6 @@ Vu's lakehouse notes are built directly on Databricks' 2020 CIDR paper, "Lakehou
 
 ## Related in the other wiki
 - [[ACID]] — DDIA's account of the transaction safety properties (atomicity, consistency, isolation, durability) that the lakehouse's metadata layer (Delta Lake, Iceberg, Hudi) is specifically built to bolt onto otherwise-plain object storage files.
+
+## Related topics
+- [[Cloud Data Warehouses (2e)]] — new in the 2nd edition — the query-engine side of the same convergence this note covers from the table-format side.

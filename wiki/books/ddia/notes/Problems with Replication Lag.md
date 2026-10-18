@@ -34,3 +34,4 @@ Read-scaling architectures pile up asynchronous followers and spread read traffi
 - [[Limitations of Quorum Consistency]] — leaderless systems fail these guarantees too
 - [[Consistency Guarantees]] — the broader hierarchy these models sit in
 - [[Linearizability]] — the strongest read guarantee, contrasted in Chapter 9
+- 2nd edition: [[Problems with Replication Lag (2e)]] — the same material in the 2nd edition

@@ -31,3 +31,4 @@ Databases, [[Hadoop]], and operating systems are all information-management syst
 - [[Databases and Streams]] — Ch 11 groundwork: the change log as first-class citizen
 - [[The Unix Philosophy]] — composable small tools, the unbundled tradition
 - [[Aiming for Correctness]] — how to keep unbundled dataflow correct
+- 2nd edition: [[Unbundling Databases (2e)]] — the same material in the 2nd edition

@@ -38,3 +38,4 @@ No one tool serves every use case, so applications must compose several speciali
 - previous: [[Ch 11 - Stream Processing]] — the event-log machinery this chapter generalizes
 - [[Keeping Systems in Sync]] — Ch 11 statement of the integration problem
 - [[Total Order Broadcast]] — the theoretical backbone of log-based constraint enforcement
+- 2nd edition: [[Ch 13 - A Philosophy of Streaming Systems (2e)]], [[Ch 14 - Doing the Right Thing (2e)]] — the 2nd edition split this across several notes

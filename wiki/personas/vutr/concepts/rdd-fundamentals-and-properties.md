@@ -38,3 +38,6 @@ Put together: partitions give you the unit of parallel work, dependencies give y
 
 ## Related in the other wiki
 - [[Beyond MapReduce]] — DDIA's higher-level framing of Spark's RDDs as the lineage-based recomputation that replaces MapReduce's forced disk materialization between every step.
+
+## Related topics
+- [[Dataflow Engines (2e)]] — lineage-based recomputation as Spark's answer to MapReduce's forced materialization.

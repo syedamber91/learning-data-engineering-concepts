@@ -34,3 +34,4 @@ Cassandra and MongoDB (MD5), Voldemort (FNV), MongoDB ≥2.4 hash-sharding; Riak
 - [[SSTables and LSM-Trees]] — Cassandra's in-partition sort order lives here
 - [[Strategies for Rebalancing]] — hash ranges enable fixed and per-node partition schemes
 - [[message-key-partitioning-strategies]] — Kafka's producer partitioner hashes a non-null message key to pick a partition, the concrete real-world instance of hash partitioning trading key ordering for uniform routing that this note describes abstractly.
+- 2nd edition: [[Sharding by Hash of Key (2e)]] — the same material in the 2nd edition

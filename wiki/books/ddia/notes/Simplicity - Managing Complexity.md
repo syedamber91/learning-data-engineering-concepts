@@ -37,3 +37,4 @@ The prime tool is **abstraction**: hide implementation detail behind a clean, un
 - [[Query Languages for Data]] — Ch 2 develops SQL, the star abstraction example
 - [[Thinking About Data Systems]] — composite systems raise the abstraction question
 - [[data-engineering-career-roadmap-and-learning-philosophy]] — vutr's own repeated anecdote (building a full CDC-plus-Dataflow real-time pipeline for a daily-refresh requirement, retold nearly verbatim across two articles) is a concrete, career-stakes case of choosing accidental complexity this note's abstraction-as-remedy argument warns against; see that topic's [[simplicity-over-complexity-in-pipeline-design]] concept.
+- 2nd edition: [[Simplicity - Managing Complexity (2e)]] — the same material in the 2nd edition

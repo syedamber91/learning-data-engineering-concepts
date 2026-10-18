@@ -32,3 +32,4 @@ sources:
 - [[Partitioning by Hash of Key]] — the Chapter 6 mechanism reused in the shuffle
 - [[hadoop-mapreduce]] — vutr's brief history of MapReduce's decline (Google dropped it internally by 2014) after enterprises struggled to tailor processing logic to its rigid paradigm.
 - [[google-infrastructure]] — vutr's notes on Colossus, Google's internal successor to GFS, running underneath YouTube's Procella query engine and BigQuery's Dremel — the same GFS lineage this note traces into HDFS, continued inside Google rather than rebuilt as an open-source clone.
+- 2nd edition: [[Batch Processing in Distributed Systems (2e)]], [[Distributed Filesystems (2e)]] — the 2nd edition split this across several notes

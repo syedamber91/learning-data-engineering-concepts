@@ -28,3 +28,7 @@ The correct mental model, then: leader-follower replication is how shared-nothin
 ## Related in the other wiki
 - [[Leaders and Followers]] — DDIA's chapter explains the general single-leader replication model — writes serialized through one leader, followers apply in order — that Kafka's partition leader/follower mechanism is a concrete instance of.
 - [[Replication]] — DDIA's Replication concept frames the fault-tolerance/read-scaling trade-offs this Kafka-specific mechanism instantiates in a single, concrete leader-based system.
+
+## Related topics
+- [[Single-Leader Replication (2e)]] — the 2nd edition's treatment, now sitting alongside its new sync-engine and local-first material.
+- [[Replication (2e)]] — the 2nd-edition concept page.

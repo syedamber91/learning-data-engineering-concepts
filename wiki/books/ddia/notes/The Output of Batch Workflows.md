@@ -34,3 +34,4 @@ Google search indexing; Lucene/Solr index builds on Hadoop; LinkedIn's Voldemort
 - [[Comparing Hadoop to Distributed Databases]] — where such workflows sit versus MPP warehouses
 - [[Materialization of Intermediate State]] — the same output discipline inside multi-job workflows
 - [[State, Streams, and Immutability]] — immutability elevated to a system-design principle
+- 2nd edition: [[Batch Use Cases (2e)]], [[Serving Derived Data (2e)]] — the 2nd edition split this across several notes

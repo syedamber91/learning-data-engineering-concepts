@@ -33,3 +33,4 @@ JSON (browser-native via JavaScript), XML, CSV, MessagePack, BSON, Smile, WBXML,
 - [[Thrift and Protocol Buffers]] — schemas let field names be dropped entirely
 - [[The Merits of Schemas]] — why schema-driven beats schema-optional
 - [[Dataflow Through Services - REST and RPC]] — where JSON dominates in practice
+- 2nd edition: [[JSON, XML, and Binary Variants (2e)]] — the same material in the 2nd edition

@@ -33,3 +33,4 @@ OLTP database + Redis-style cache + Elasticsearch-style index + warehouse is the
 - [[Change Data Capture]] — the stream-based fix for dual-write drift
 - [[Multi-Leader Replication]] — why independent leaders conflict
 - [[Total Order Broadcast]] — state machine replication needs one agreed order
+- 2nd edition: [[Keeping Systems in Sync (2e)]] — the same material in the 2nd edition

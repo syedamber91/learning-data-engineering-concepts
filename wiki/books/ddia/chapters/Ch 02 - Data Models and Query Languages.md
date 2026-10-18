@@ -35,3 +35,4 @@ Data began as one big tree (the hierarchical model), which handled one-to-many w
 - part: [[Part I - Foundations of Data Systems]] · home: [[Home]]
 - previous: [[Ch 01 - Reliable, Scalable, and Maintainable Applications]] — the qualities any data system must deliver, whatever its model
 - next: [[Ch 03 - Storage and Retrieval]] — implementing these models: how storage engines lay data on disk
+- 2nd edition: [[Ch 03 - Data Models and Query Languages (2e)]] — the same material in the 2nd edition

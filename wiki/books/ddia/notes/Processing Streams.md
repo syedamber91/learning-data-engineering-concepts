@@ -30,3 +30,4 @@ Once a stream exists, three things can be done with it: write its events into a 
 - [[Databases and Streams]] — change streams as operator input, materialized views as output
 - [[Batch and Stream Processing]] — Ch 12 on unifying the two paradigms
 - [[Reduce-Side Joins and Grouping]] — the batch join machinery streams must replace
+- 2nd edition: [[Processing Streams (2e)]] — the same material in the 2nd edition

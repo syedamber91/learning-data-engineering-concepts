@@ -40,3 +40,4 @@ nginx access logs as input; `awk`, `sed`, `grep`, `sort`, `uniq`, `xargs`, `head
 - [[The Unix Philosophy]] — why these tools compose so well
 - [[MapReduce Job Execution]] — the same four steps, distributed
 - [[SSTables and LSM-Trees]] — identical spill-and-merge sorting principle
+- 2nd edition: [[Chain of Commands Versus Custom Program (2e)]], [[Simple Log Analysis (2e)]], [[Sorting Versus In-Memory Aggregation (2e)]] — the 2nd edition split this across several notes

@@ -36,3 +36,4 @@ Evolvability is tightly coupled to the previous principle: the ease of modifying
 - [[Simplicity - Managing Complexity]] — simplicity is evolvability's precondition
 - [[Describing Load]] — the Twitter migration referenced here
 - [[Formats for Encoding Data]] — Ch 4: schema evolution makes data change safe
+- 2nd edition: [[Evolvability - Making Change Easy (2e)]] — the same material in the 2nd edition

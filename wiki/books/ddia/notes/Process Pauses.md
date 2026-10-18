@@ -39,3 +39,4 @@ Minutes-long JVM stop-the-world pauses; HotSpot CMS; live VM migration; Amazon E
 - [[Fencing Tokens]] — the defense against stale lease holders
 - [[Leader Election]] — leases as the leadership mechanism at risk
 - [[Synchronous Versus Asynchronous Networks]] — same static-allocation trade-off for CPU time
+- 2nd edition: [[Process Pauses (2e)]] — the same material in the 2nd edition

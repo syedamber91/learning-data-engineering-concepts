@@ -38,3 +38,4 @@ Related: [[apache-pinot]] · [[apache-druid]] · [[real-time-olap]] · [[immutab
 - [[lsm-tree-storage-engines]] — Druid's real-time-node flow (in-memory buffer, periodic disk persistence, background merge into an immutable block) mirrors the LSM-tree pattern of turning writes into immutable files resolved by compaction, applied to segments instead of SSTables.
 - [[Transaction Processing or Analytics]] — DDIA's OLTP-vs-OLAP access-pattern split is the general framing this topic's real-time-OLAP requirements (low latency AND high QPS AND analytical) sit on top of and push past.
 - [[Column-Oriented Storage]] — DDIA's general columnar-storage rationale (read only the columns a query needs, compress per-column) is the storage idea Pinot's and Druid's immutable segments both implement for a real-time-serving workload.
+- [[Column-Oriented Storage (2e)]] — the same columnar rationale, applied to a warehouse rather than a real-time serving workload.

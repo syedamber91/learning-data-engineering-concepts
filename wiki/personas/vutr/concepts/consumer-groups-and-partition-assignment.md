@@ -32,3 +32,6 @@ Note what the group does *not* solve: how consumers fetch and track position. Co
 
 ## Related in the other wiki
 - [[Request Routing]] — the Group Coordinator (authoritative membership) plus group leader (computes and propagates the assignment) is a concrete instance of DDIA's request-routing problem: some component must hold the authoritative partition-assignment map and notify participants of every change.
+
+## Related topics
+- [[Request Routing (2e)]] — the same who-knows-the-map question at storage-node scope.

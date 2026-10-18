@@ -34,3 +34,4 @@ Many-to-many relationships are the fault line between data models: trees suit do
 - [[Query Languages for Data]] — the declarative principle all three graph languages inherit
 - [[Are Document Databases Repeating History]] — the CODASYL story the network-model comparison answers
 - [[Graphs and Iterative Processing]] — Ch 10 processes graphs at Pregel scale
+- 2nd edition: [[Graph-Like Data Models (2e)]] — the same material in the 2nd edition

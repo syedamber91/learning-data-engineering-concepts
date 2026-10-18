@@ -34,3 +34,4 @@ Full-text search index as the canonical boundary; offline-first mobile apps; Eve
 - [[State, Streams, and Immutability]] — state/log duality underpinning replayable views
 - [[Request Routing]] — routing read events to the right partition
 - [[Enforcing Constraints]] — multi-partition writes, the twin of multi-partition reads
+- 2nd edition: [[Observing Derived State (2e)]] — the same material in the 2nd edition

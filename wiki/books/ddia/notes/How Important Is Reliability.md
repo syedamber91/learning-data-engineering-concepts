@@ -37,3 +37,4 @@ The pitfall isn't making these trades — it's making them *unconsciously*. Cutt
 - [[Human Errors]] — the defenses this obligation pays for
 - [[Hardware Faults]] — the baseline fault class every app faces
 - [[Approaches for Coping with Load]] — the parallel argument about premature scaling in startups
+- 2nd edition: [[Humans and Reliability (2e)]] — the same material in the 2nd edition

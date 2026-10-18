@@ -34,3 +34,4 @@ Codd's relational model organized data as unordered collections of tuples and, a
 - [[Graph-Like Data Models]] — the model of choice once many-to-many dominates
 - [[Data Structures That Power Your Database]] — Ch 3 implements what these models promise
 - [[The Merits of Schemas]] — Ch 4's case for explicit schemas
+- 2nd edition: [[Relational Versus Document Models (2e)]] — the same material in the 2nd edition

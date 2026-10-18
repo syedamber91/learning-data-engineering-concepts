@@ -1,0 +1,26 @@
+book: Designing Data-Intensive Applications (2nd Edition)
+author: Martin Kleppmann and Chris Riccomini
+publisher: O'Reilly, 2025
+source: local PDF, converted to Markdown with microsoft/markitdown
+note: |
+  The 2nd edition has 14 chapters and no Part divisions (the 1st edition's
+  Part I/II/III split was dropped). Section hierarchy for the note tree was
+  taken from the PDF's own outline (241 entries, 3 levels) rather than
+  inferred from the flattened text.
+files:
+  - preface.md
+  - ch01.md
+  - ch02.md
+  - ch03.md
+  - ch04.md
+  - ch05.md
+  - ch06.md
+  - ch07.md
+  - ch08.md
+  - ch09.md
+  - ch10.md
+  - ch11.md
+  - ch12.md
+  - ch13.md
+  - ch14.md
+  - glossary.md

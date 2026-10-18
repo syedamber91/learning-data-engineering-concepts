@@ -42,3 +42,4 @@ Two layers where the fix can live:
 - [[Consistency Guarantees]] — the menu of stronger models in Ch 9
 - [[Reading Your Own Writes]] — the app-level patch this note argues to lift into the DB
 - [[The Cost of Linearizability]] — what the strongest guarantee costs
+- 2nd edition: [[Solutions for Replication Lag (2e)]] — the same material in the 2nd edition

@@ -29,3 +29,4 @@ Batch jobs read and write files; streaming needs an equivalent transport. The un
 - [[Processing Streams]] — what consumers actually do with the transported events
 - [[Message-Passing Dataflow]] — Ch 4 first pass over message brokers as dataflow
 - [[The Output of Batch Workflows]] — the batch repeatability that log-based messaging restores
+- 2nd edition: [[Transmitting Event Streams (2e)]] — the same material in the 2nd edition

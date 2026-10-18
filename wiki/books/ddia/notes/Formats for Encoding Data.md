@@ -31,3 +31,4 @@ Programs keep data in two shapes: CPU-friendly in-memory structures (objects, tr
 - [[Modes of Dataflow]] — where these encodings actually travel
 - [[Evolvability - Making Change Easy]] — the Chapter 1 goal encoding choices serve
 - [[Relational Model Versus Document Model]] — the schema-on-read debate schemas resolve
+- 2nd edition: [[Formats for Encoding Data (2e)]] — the same material in the 2nd edition

@@ -32,3 +32,4 @@ Linux `CLOCK_REALTIME` vs `CLOCK_MONOTONIC`; Java `currentTimeMillis()` vs `nano
 - [[Timeouts and Unbounded Delays]] — timeouts, the monotonic clock's main customer
 - [[Clock Skew]] — divergence between nodes' wall clocks
 - [[Lamport Timestamps]] — logical alternative when ordering matters
+- 2nd edition: [[Monotonic Versus Time-of-Day Clocks (2e)]] — the same material in the 2nd edition

@@ -38,3 +38,4 @@ Dynamo-style stores — Riak, Cassandra, Voldemort — all expose configurable `
 - [[Handling Node Outages]] — how leader-based systems handle the same failure, via failover
 - [[Limitations of Quorum Consistency]] — the fine print on `w + r > n`
 - [[Sloppy Quorums and Hinted Handoff]] — relaxing which nodes may count toward `w`
+- 2nd edition: [[Writing to the Database When a Node Is Down (2e)]] — the same material in the 2nd edition

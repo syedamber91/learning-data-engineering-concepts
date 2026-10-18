@@ -33,3 +33,6 @@ maintaining views ([[Databases and Streams]]), and the unbundled-database vision
 - [[Part III - Derived Data]]
 - [[Partitioned Logs]]
 - [[Unbundling Databases]]
+
+## Related
+- 2nd edition: [[Systems of Record and Derived Data (2e)]] — the same material in the 2nd edition

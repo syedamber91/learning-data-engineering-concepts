@@ -35,3 +35,4 @@ Pig (skewed join), Crunch (sharded join), Hive (skewed-key metadata), LinkedIn-s
 - [[Skewed Workloads and Relieving Hot Spots]] — same hot-key problem in partitioned stores
 - [[Stars and Snowflakes - Schemas for Analytics]] — fact/dimension framing of the join
 - [[Stream Joins]] — the streaming counterpart of these algorithms
+- 2nd edition: [[Joins and Grouping (2e)]] — the same material in the 2nd edition

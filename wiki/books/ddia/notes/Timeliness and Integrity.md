@@ -36,3 +36,4 @@ Credit-card settlement lag vs. sum errors; airline/hotel overbooking; overdraft 
 - [[The Cost of Linearizability]] — what strict timeliness charges you
 - [[Handling Write Conflicts]] — conflict resolution kin of compensating transactions
 - [[Trust, but Verify]] — auditing as integrity's enforcement arm
+- 2nd edition: [[Timeliness and Integrity (2e)]] — the same material in the 2nd edition

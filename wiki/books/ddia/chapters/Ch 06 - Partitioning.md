@@ -36,3 +36,4 @@ Secondary indexes must themselves be partitioned, two ways: *document-partitione
 - previous: [[Ch 05 - Replication]] — copies of each partition; replication schemes compose with partitioning
 - next: [[Ch 07 - Transactions]] — what happens when operations span partitions
 - [[Ch 09 - Consistency and Consensus]] — the agreement machinery behind routing metadata and coordination services
+- 2nd edition: [[Ch 07 - Sharding (2e)]] — the same material in the 2nd edition

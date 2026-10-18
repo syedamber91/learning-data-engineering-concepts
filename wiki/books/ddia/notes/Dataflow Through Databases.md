@@ -33,3 +33,4 @@ Relational `ALTER TABLE` with null defaults, MySQL's table rewrites, LinkedIn Es
 - [[Avro]] — the writer/reader resolution machinery Espresso relies on
 - [[Data Warehousing]] — destination for latest-schema archival dumps
 - [[Column Compression]] — why Parquet suits the analytics copy
+- 2nd edition: [[Dataflow Through Databases (2e)]] — the same material in the 2nd edition

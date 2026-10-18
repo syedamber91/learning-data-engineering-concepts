@@ -45,3 +45,4 @@ The chapter's running examples: social-network profiles, comment threads, custom
 - [[Unreliable Clocks]] — why wall-clock timestamps are risky
 - [[Eventual Consistency]] — the weak baseline this guarantee strengthens
 - [[Request Routing]] — steering reads to the right node
+- 2nd edition: [[Problems with Replication Lag (2e)]] — the same material in the 2nd edition

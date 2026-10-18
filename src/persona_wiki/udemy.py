@@ -47,6 +47,15 @@ def lecture_id_from_filename(name: str) -> str:
     return m.group(1)
 
 
+INSTRUCTOR = "Shrayansh Jain"
+
+
+def load_instructor(path: Path) -> str:
+    """Optional top-level ``instructor:`` in the group-map YAML; defaults to INSTRUCTOR."""
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return str(data.get("instructor") or INSTRUCTOR)
+
+
 def load_group_map(path: Path) -> Dict[str, str]:
     """lecture_id -> group slug, flattened from the YAML's nested ``groups:`` block."""
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
@@ -61,7 +70,6 @@ def load_group_map(path: Path) -> Dict[str, str]:
     return out
 
 
-INSTRUCTOR = "Shrayansh Jain"
 
 _FM_ORDER = ("title", "instructor", "course", "section",
              "lecture_id", "url", "duration", "captured_at")
@@ -73,11 +81,12 @@ class UdemyIngestResult(IngestResult):
     unmapped: List[str] = field(default_factory=list)
 
 
-def render_raw_note(fm: dict, body: str, lecture_id: str) -> str:
+def render_raw_note(fm: dict, body: str, lecture_id: str,
+                    instructor: str = INSTRUCTOR) -> str:
     """The raw/ note: provenance frontmatter + the transcript, nothing else."""
     kept = {
         "title": fm.get("title", ""),
-        "instructor": INSTRUCTOR,
+        "instructor": instructor,
         "course": fm.get("course", ""),
         "section": fm.get("section", ""),
         "lecture_id": lecture_id,
@@ -91,7 +100,7 @@ def render_raw_note(fm: dict, body: str, lecture_id: str) -> str:
 
 
 def ingest_udemy(course_dir: Path, root: Path, group_map: Dict[str, str],
-                 stamp: str) -> UdemyIngestResult:
+                 stamp: str, instructor: str = INSTRUCTOR) -> UdemyIngestResult:
     """Transform every lecture in ``course_dir`` into ``root/raw/<group>/``.
 
     Idempotent: a lecture is skipped when its id is already in the group's
@@ -130,7 +139,7 @@ def ingest_udemy(course_dir: Path, root: Path, group_map: Dict[str, str],
             res.skipped.append(lecture_id)
             continue
 
-        dst.write_text(render_raw_note(fm, body, lecture_id), encoding="utf-8")
+        dst.write_text(render_raw_note(fm, body, lecture_id, instructor), encoding="utf-8")
         manifest[name] = {"source": str(src), "copied": stamp,
                           "lecture_id": lecture_id}
         res.copied.append(name)

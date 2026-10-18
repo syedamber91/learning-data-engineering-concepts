@@ -41,3 +41,6 @@ Vu's account of the LSM-tree centers on one inversion: instead of updating data 
 - [[Comparing B-Trees and LSM-Trees]] — the book's fuller mechanical case (write amplification, tail-latency compaction stalls, single-copy-per-key) for the LSM-vs-B-tree trade-off this topic's "Comparisons" section covers through the page-rewrite-vs-sequential-flush contrast.
 - [[llms-ai-agents-and-vector-databases]] — that topic's [[vector-database-storage-row-vs-column]] concept names Weaviate's vector storage as a key-value store built on the same Memtable/SSTable/compaction LSM-tree mechanics this topic works out in full depth, one more instance of the pattern recurring outside OLTP and OLAP.
 - [[change-data-capture-cdc-and-data-sourcing]] — that topic's [[log-based-cdc]] names the database's write-ahead log (WAL/redo log/binlog) as the ideal CDC source precisely because write-ahead logging guarantees durability before data files are touched — the same "log the change first" principle this topic's write-ahead-log entity grounds in the LSM-tree memtable's own durability story.
+- [[Log-Structured Storage (2e)]] — the 2nd edition renames the 1st edition's "SSTables and LSM-Trees" and broadens it beyond the LSM label.
+- [[Comparing B-Trees and LSM-Trees (2e)]] — the head-to-head, now argued against modern SSD behaviour.
+- [[LSM-Trees (2e)]] — the 2nd-edition concept page.

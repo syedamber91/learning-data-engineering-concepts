@@ -31,3 +31,4 @@ After networks that lie by silence, clocks that lie by drift, and processes that
 - [[Limitations of Quorum Consistency]] — quorum mechanics from Ch 5
 - [[Membership and Coordination Services]] — ZooKeeper's role in leader/lock truth
 - [[Eventual Consistency]] — a liveness property, as this topic clarifies
+- 2nd edition: [[Distributed Locks and Leases (2e)]], [[Knowledge, Truth, and Lies (2e)]], [[The Majority Rules (2e)]] — the 2nd edition split this across several notes

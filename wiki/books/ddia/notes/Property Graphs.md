@@ -35,3 +35,4 @@ Neo4j, Titan, InfiniteGraph (property graph); contrast with the triple-store fam
 - [[The Cypher Query Language]] — the query language built for this model
 - [[Many-to-One and Many-to-Many Relationships]] — the problem graphs solve natively
 - [[Graph Queries in SQL]] — emulating this model relationally
+- 2nd edition: [[Property Graphs (2e)]] — the same material in the 2nd edition

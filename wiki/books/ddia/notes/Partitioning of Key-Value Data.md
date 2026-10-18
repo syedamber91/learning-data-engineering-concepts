@@ -30,3 +30,4 @@ If every node takes a fair share, ten nodes should handle roughly ten times the 
 - [[Partitioning and Replication]] — the layer beneath: partitions are themselves replicated
 - [[Partitioning and Secondary Indexes]] — what happens when access isn't by primary key
 - [[SSTables and LSM-Trees]] — sorted storage that makes in-partition range scans cheap
+- 2nd edition: [[Sharding of Key-Value Data (2e)]] — the same material in the 2nd edition

@@ -40,3 +40,6 @@ In the book: [[Partitioning and Secondary Indexes]] (Ch 6); rebuilt as
 - [[Sort Order in Column Storage]]
 - [[The Output of Batch Workflows]]
 - [[The Slippery Concept of a Transaction]]
+
+## Related
+- 2nd edition: [[Global Secondary Indexes (2e)]], [[Local Secondary Indexes (2e)]], [[Multicolumn and Secondary Indexes (2e)]] — the 2nd edition split this across several notes

@@ -33,3 +33,4 @@ A system is informally reliable when it does what users expect, tolerates mistak
 - [[Maintainability]] — operations quality feeds directly into reliability
 - [[Faults and Partial Failures]] — Ch 8 extends fault thinking to distributed systems
 - [[Handling Node Outages]] — Ch 5's replication answer to machine loss
+- 2nd edition: [[Reliability and Fault Tolerance (2e)]] — the same material in the 2nd edition

@@ -40,3 +40,4 @@ Spark (microbatches), Apache Flink (stream-first batch), Storm (lambda's speed l
 - [[kappa-architecture]] — vutr's name for the "unification instead" alternative this note describes: replaying history through one stream-processing codebase via log replay.
 - [[lambda-vs-kappa]] — vutr's production case studies (Uber/LinkedIn kept Lambda, Twitter pivoted to Kappa) showing how real teams resolved the trade-off this note lays out.
 - [[batch-vs-stream-throughput-and-latency]] — vutr's concept operationalizes this note's bounded-vs-unbounded framing into the two concrete metrics that actually decide infrastructure: throughput (data volume over time window) for batch, and throughput-vs-latency as two separate, interacting constraints for streaming, down to the same micro-batching trade-off this note's Spark/Flink examples illustrate.
+- 2nd edition: [[Batch and Stream Processing (2e)]] — the same material in the 2nd edition

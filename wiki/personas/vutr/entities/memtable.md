@@ -20,3 +20,6 @@ The Memtable is explicitly a temporary buffer, not the durable copy — a machin
 
 ## Related in the other wiki
 - [[SSTables and LSM-Trees]] — DDIA's account of "sorting in memory first" as the trick that turns segment merges into cheap, mergesort-like passes matches Vu's description of the Memtable as a sorted, not append-only, write buffer.
+
+## Related topics
+- [[Log-Structured Storage (2e)]] — the write path this buffer sits at the head of.

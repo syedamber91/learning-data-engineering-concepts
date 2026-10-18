@@ -43,3 +43,4 @@ InnoDB, SQL Server, PostGIS/PostgreSQL, HyperDex, Lucene, Memcached, VoltDB, Mem
 - [[Many-to-One and Many-to-Many Relationships]] — why joins need secondary indexes
 - [[write-amplification-tradeoff]] — the clustered/covering-index trade-off here (read speed bought with write overhead and extra storage) is the same pay-now-for-read-later tax Vu frames as write amplification for B+Trees vs LSM-trees.
 - [[sequential-vs-random-io]] — the in-memory databases described here are the extreme case of this concept's I/O gap: no disk seeks at all once the index and data both live in RAM.
+- 2nd edition: [[Full-Text Search (2e)]], [[Keeping Everything in Memory (2e)]], [[Multicolumn and Secondary Indexes (2e)]], [[Multidimensional and Full-Text Indexes (2e)]], [[Storing Values Within the Index (2e)]] — the 2nd edition split this across several notes

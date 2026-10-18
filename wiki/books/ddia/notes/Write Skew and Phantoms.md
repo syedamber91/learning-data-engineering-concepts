@@ -37,3 +37,4 @@ PostgreSQL, MySQL/InnoDB, Oracle, SQL Server (all fail to detect it at their sna
 - [[Preventing Lost Updates]] — the special case with same-object updates
 - [[Two-Phase Locking (2PL)]] — predicate/index-range locks that finally stop phantoms
 - [[Serializable Snapshot Isolation (SSI)]] — optimistic detection of outdated premises
+- 2nd edition: [[Write Skew and Phantoms (2e)]] — the same material in the 2nd edition

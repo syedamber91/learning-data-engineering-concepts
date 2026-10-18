@@ -36,3 +36,4 @@ Apache Avro, Hadoop object container files, LinkedIn Espresso, Avro RPC, Apache 
 - [[Dataflow Through Databases]] — Espresso applies Avro's [[Schema Evolution]] to storage
 - [[MapReduce and Distributed Filesystems]] — the Hadoop batch world Avro was built for
 - [[parquet]] — vutr's notes contrast Avro's row-oriented, schema-resolution design (built for Kafka-style streaming and record-at-a-time CDC) against Parquet's columnar layout built for analytical scans; the two are commonly paired in the same pipeline, Avro on the wire and Parquet at rest.
+- 2nd edition: [[Avro (2e)]] — the same material in the 2nd edition

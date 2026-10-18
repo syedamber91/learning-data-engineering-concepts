@@ -32,3 +32,4 @@ Couchbase, Riak, and Voldemort exemplify propose-then-confirm rebalancing. Couch
 - [[Strategies for Rebalancing]] — the mechanics being triggered automatically or manually
 - [[Detecting Faults]] — why "node seems dead" is an unreliable signal
 - [[Operability - Making Life Easy for Operations]] — the operations philosophy behind human-in-the-loop
+- 2nd edition: [[Operations - Automatic Versus Manual Rebalancing (2e)]] — the same material in the 2nd edition

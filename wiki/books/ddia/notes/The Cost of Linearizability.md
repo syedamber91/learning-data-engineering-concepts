@@ -38,3 +38,4 @@ Multi-core x86 memory models; multi-datacenter single-leader vs multi-leader dep
 - [[Ordering and Causality]] — causal consistency dodges this cost
 - [[Timeouts and Unbounded Delays]] — why delay uncertainty is high in practice
 - [[The End-to-End Argument for Databases]] — Chapter 12's correctness-without-linearizability agenda
+- 2nd edition: [[The Cost of Linearizability (2e)]] — the same material in the 2nd edition

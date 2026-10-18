@@ -46,3 +46,4 @@ MySQL (statement → row-based binlog), VoltDB, PostgreSQL and Oracle (WAL shipp
 - [[B-Trees]] — why a WAL exists for page-overwriting engines
 - [[Setting Up New Followers]] — new replicas replay this same log
 - [[northguard-segment-level-replication]] — Northguard's choice to replicate at segment granularity rather than whole partitions is a granularity twist on the same replication-log implementation question: what unit of the log do you actually ship and store.
+- 2nd edition: [[Implementation of Replication Logs (2e)]] — the same material in the 2nd edition

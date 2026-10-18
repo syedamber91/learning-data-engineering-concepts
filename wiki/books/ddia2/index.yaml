@@ -1,0 +1,1936 @@
+book: Designing Data-Intensive Applications (2nd Edition)
+edition: 2
+authors:
+- Martin Kleppmann
+- Chris Riccomini
+home: Home (2e).md
+log: log (2e).md
+first_edition_vault: ../ddia
+chapters:
+  Ch 01 - Trade-Offs in Data Systems Architecture (2e):
+    file: chapters/Ch 01 - Trade-Offs in Data Systems Architecture (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    type: chapter-moc
+  Ch 02 - Defining Nonfunctional Requirements (2e):
+    file: chapters/Ch 02 - Defining Nonfunctional Requirements (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: chapter-moc
+  Ch 03 - Data Models and Query Languages (2e):
+    file: chapters/Ch 03 - Data Models and Query Languages (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    type: chapter-moc
+  Ch 04 - Storage and Retrieval (2e):
+    file: chapters/Ch 04 - Storage and Retrieval (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    type: chapter-moc
+  Ch 05 - Encoding and Evolution (2e):
+    file: chapters/Ch 05 - Encoding and Evolution (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    type: chapter-moc
+  Ch 06 - Replication (2e):
+    file: chapters/Ch 06 - Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    type: chapter-moc
+  Ch 07 - Sharding (2e):
+    file: chapters/Ch 07 - Sharding (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: chapter-moc
+  Ch 08 - Transactions (2e):
+    file: chapters/Ch 08 - Transactions (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    type: chapter-moc
+  Ch 09 - The Trouble with Distributed Systems (2e):
+    file: chapters/Ch 09 - The Trouble with Distributed Systems (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    type: chapter-moc
+  Ch 10 - Consistency and Consensus (2e):
+    file: chapters/Ch 10 - Consistency and Consensus (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    type: chapter-moc
+  Ch 11 - Batch Processing (2e):
+    file: chapters/Ch 11 - Batch Processing (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    type: chapter-moc
+  Ch 12 - Stream Processing (2e):
+    file: chapters/Ch 12 - Stream Processing (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    type: chapter-moc
+  Ch 13 - A Philosophy of Streaming Systems (2e):
+    file: chapters/Ch 13 - A Philosophy of Streaming Systems (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    type: chapter-moc
+  Ch 14 - Doing the Right Thing (2e):
+    file: chapters/Ch 14 - Doing the Right Thing (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    type: chapter-moc
+notes:
+  Actual Serial Execution (2e):
+    file: notes/Actual Serial Execution (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Serializability
+    type: subtopic
+  Aiming for Correctness (2e):
+    file: notes/Aiming for Correctness (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    type: topic
+  Analytics (2e):
+    file: notes/Analytics (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Use Cases
+    type: subtopic
+  Average, Median, and Percentiles (2e):
+    file: notes/Average, Median, and Percentiles (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Describing Performance
+    type: subtopic
+  Avro (2e):
+    file: notes/Avro (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Formats for Encoding Data
+    type: subtopic
+  B-Trees (2e):
+    file: notes/B-Trees (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Batch Processing Models (2e):
+    file: notes/Batch Processing Models (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    type: topic
+  Batch Processing in Distributed Systems (2e):
+    file: notes/Batch Processing in Distributed Systems (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    type: topic
+  Batch Processing with Unix Tools (2e):
+    file: notes/Batch Processing with Unix Tools (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    type: topic
+  Batch Use Cases (2e):
+    file: notes/Batch Use Cases (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    type: topic
+  Batch and Stream Processing (2e):
+    file: notes/Batch and Stream Processing (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Data Integration
+    type: subtopic
+  Bias and Discrimination (2e):
+    file: notes/Bias and Discrimination (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Predictive Analytics
+    type: subtopic
+  Byzantine Faults (2e):
+    file: notes/Byzantine Faults (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Knowledge, Truth, and Lies
+    type: subtopic
+  Case Study - Social Network Home Timelines (2e):
+    file: notes/Case Study - Social Network Home Timelines (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: topic
+  Chain of Commands Versus Custom Program (2e):
+    file: notes/Chain of Commands Versus Custom Program (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing with Unix Tools
+    type: subtopic
+  Change Data Capture (2e):
+    file: notes/Change Data Capture (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Databases and Streams
+    type: subtopic
+  Characterizing Transaction Processing and Analytics (2e):
+    file: notes/Characterizing Transaction Processing and Analytics (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Operational Versus Analytical Systems
+    type: subtopic
+  Clock Synchronization and Accuracy (2e):
+    file: notes/Clock Synchronization and Accuracy (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Clocks
+    type: subtopic
+  Cloud Computing Versus Supercomputing (2e):
+    file: notes/Cloud Computing Versus Supercomputing (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Distributed Versus Single-Node Systems
+    type: subtopic
+  Cloud Data Warehouses (2e):
+    file: notes/Cloud Data Warehouses (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Data Storage for Analytics
+    type: subtopic
+  Cloud Native System Architecture (2e):
+    file: notes/Cloud Native System Architecture (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Cloud Versus Self-Hosting
+    type: subtopic
+  Cloud Versus Self-Hosting (2e):
+    file: notes/Cloud Versus Self-Hosting (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    type: topic
+  Column-Oriented Storage (2e):
+    file: notes/Column-Oriented Storage (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Data Storage for Analytics
+    type: subtopic
+  Combining Specialized Tools by Deriving Data (2e):
+    file: notes/Combining Specialized Tools by Deriving Data (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Data Integration
+    type: subtopic
+  Comparing B-Trees and LSM-Trees (2e):
+    file: notes/Comparing B-Trees and LSM-Trees (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Composing Data Storage Technologies (2e):
+    file: notes/Composing Data Storage Technologies (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Unbundling Databases
+    type: subtopic
+  Consensus (2e):
+    file: notes/Consensus (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    type: topic
+  Consensus in Practice (2e):
+    file: notes/Consensus in Practice (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Consensus
+    type: subtopic
+  Consent and Freedom of Choice (2e):
+    file: notes/Consent and Freedom of Choice (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  Coordination Services (2e):
+    file: notes/Coordination Services (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Consensus
+    type: subtopic
+  Data Integration (2e):
+    file: notes/Data Integration (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    type: topic
+  Data Storage for Analytics (2e):
+    file: notes/Data Storage for Analytics (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    type: topic
+  Data Systems, Law, and Society (2e):
+    file: notes/Data Systems, Law, and Society (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    type: topic
+  Data Warehousing (2e):
+    file: notes/Data Warehousing (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Operational Versus Analytical Systems
+    type: subtopic
+  Data as Assets and Power (2e):
+    file: notes/Data as Assets and Power (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  DataFrames (2e):
+    file: notes/DataFrames (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  DataFrames, Matrices, and Arrays (2e):
+    file: notes/DataFrames, Matrices, and Arrays (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    type: topic
+  Database-Internal Distributed Transactions (2e):
+    file: notes/Database-Internal Distributed Transactions (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Distributed Transactions
+    type: subtopic
+  Databases and Streams (2e):
+    file: notes/Databases and Streams (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    type: topic
+  Dataflow Engines (2e):
+    file: notes/Dataflow Engines (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  Dataflow Through Databases (2e):
+    file: notes/Dataflow Through Databases (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Modes of Dataflow
+    type: subtopic
+  Dataflow Through Services - REST and RPC (2e):
+    file: notes/Dataflow Through Services - REST and RPC (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Modes of Dataflow
+    type: subtopic
+  Datalog - Recursive Relational Queries (2e):
+    file: notes/Datalog - Recursive Relational Queries (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  Dealing with Conflicting Writes (2e):
+    file: notes/Dealing with Conflicting Writes (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Multi-Leader Replication
+    type: subtopic
+  Describing Performance (2e):
+    file: notes/Describing Performance (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: topic
+  Designing Applications Around Dataflow (2e):
+    file: notes/Designing Applications Around Dataflow (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Unbundling Databases
+    type: subtopic
+  Detecting Concurrent Writes (2e):
+    file: notes/Detecting Concurrent Writes (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Leaderless Replication
+    type: subtopic
+  Distributed Filesystems (2e):
+    file: notes/Distributed Filesystems (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing in Distributed Systems
+    type: subtopic
+  Distributed Job Orchestration (2e):
+    file: notes/Distributed Job Orchestration (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing in Distributed Systems
+    type: subtopic
+  Distributed Locks and Leases (2e):
+    file: notes/Distributed Locks and Leases (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Knowledge, Truth, and Lies
+    type: subtopic
+  Distributed Transactions (2e):
+    file: notes/Distributed Transactions (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    type: topic
+  Distributed Transactions Across Different Systems (2e):
+    file: notes/Distributed Transactions Across Different Systems (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Distributed Transactions
+    type: subtopic
+  Distributed Versus Single-Node Systems (2e):
+    file: notes/Distributed Versus Single-Node Systems (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    type: topic
+  Durable Execution and Workflows (2e):
+    file: notes/Durable Execution and Workflows (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Modes of Dataflow
+    type: subtopic
+  Enforcing Constraints (2e):
+    file: notes/Enforcing Constraints (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Aiming for Correctness
+    type: subtopic
+  Event Sourcing and CQRS (2e):
+    file: notes/Event Sourcing and CQRS (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    type: topic
+  Event-Driven Architectures (2e):
+    file: notes/Event-Driven Architectures (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Modes of Dataflow
+    type: subtopic
+  Evolvability - Making Change Easy (2e):
+    file: notes/Evolvability - Making Change Easy (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Maintainability
+    type: subtopic
+  Exactly-Once Message Processing Revisited (2e):
+    file: notes/Exactly-Once Message Processing Revisited (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Distributed Transactions
+    type: subtopic
+  Extract-Transform-Load (2e):
+    file: notes/Extract-Transform-Load (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Use Cases
+    type: subtopic
+  Fault Detection (2e):
+    file: notes/Fault Detection (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Networks
+    type: subtopic
+  Fault Tolerance (2e):
+    file: notes/Fault Tolerance (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Reliability and Fault Tolerance
+    type: subtopic
+  Fault Tolerance (Stream Processing) (2e):
+    file: notes/Fault Tolerance (Stream Processing) (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Processing Streams
+    type: subtopic
+  Faults and Partial Failures (2e):
+    file: notes/Faults and Partial Failures (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    type: topic
+  Feedback Loops (2e):
+    file: notes/Feedback Loops (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Predictive Analytics
+    type: subtopic
+  Formal Methods and Randomized Testing (2e):
+    file: notes/Formal Methods and Randomized Testing (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Knowledge, Truth, and Lies
+    type: subtopic
+  Formats for Encoding Data (2e):
+    file: notes/Formats for Encoding Data (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    type: topic
+  Full-Text Search (2e):
+    file: notes/Full-Text Search (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Multidimensional and Full-Text Indexes
+    type: subtopic
+  Geographically Distributed Operation (2e):
+    file: notes/Geographically Distributed Operation (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Multi-Leader Replication
+    type: subtopic
+  Global Secondary Indexes (2e):
+    file: notes/Global Secondary Indexes (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding and Secondary Indexes
+    type: subtopic
+  Graph Queries in SQL (2e):
+    file: notes/Graph Queries in SQL (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  Graph-Like Data Models (2e):
+    file: notes/Graph-Like Data Models (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    type: topic
+  GraphQL (2e):
+    file: notes/GraphQL (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  Handling Node Outages (2e):
+    file: notes/Handling Node Outages (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  Hardware and Software Faults (2e):
+    file: notes/Hardware and Software Faults (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Reliability and Fault Tolerance
+    type: subtopic
+  Humans and Reliability (2e):
+    file: notes/Humans and Reliability (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Reliability and Fault Tolerance
+    type: subtopic
+  ID Generators and Logical Clocks (2e):
+    file: notes/ID Generators and Logical Clocks (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    type: topic
+  Implementation of Replication Logs (2e):
+    file: notes/Implementation of Replication Logs (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  Implementing Linearizable Systems (2e):
+    file: notes/Implementing Linearizable Systems (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Linearizability
+    type: subtopic
+  JSON, XML, and Binary Variants (2e):
+    file: notes/JSON, XML, and Binary Variants (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Formats for Encoding Data
+    type: subtopic
+  Joins and Grouping (2e):
+    file: notes/Joins and Grouping (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  Keeping Everything in Memory (2e):
+    file: notes/Keeping Everything in Memory (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Keeping Systems in Sync (2e):
+    file: notes/Keeping Systems in Sync (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Databases and Streams
+    type: subtopic
+  Knowledge, Truth, and Lies (2e):
+    file: notes/Knowledge, Truth, and Lies (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    type: topic
+  Language-Specific Formats (2e):
+    file: notes/Language-Specific Formats (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Formats for Encoding Data
+    type: subtopic
+  Latency and Response Time (2e):
+    file: notes/Latency and Response Time (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Describing Performance
+    type: subtopic
+  Leaderless Replication (2e):
+    file: notes/Leaderless Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    type: topic
+  Legislation and Self-Regulation (2e):
+    file: notes/Legislation and Self-Regulation (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  Linearizability (2e):
+    file: notes/Linearizability (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    type: topic
+  Linearizable ID Generators (2e):
+    file: notes/Linearizable ID Generators (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: ID Generators and Logical Clocks
+    type: subtopic
+  Local Secondary Indexes (2e):
+    file: notes/Local Secondary Indexes (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding and Secondary Indexes
+    type: subtopic
+  Log-Based Message Brokers (2e):
+    file: notes/Log-Based Message Brokers (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Transmitting Event Streams
+    type: subtopic
+  Log-Structured Storage (2e):
+    file: notes/Log-Structured Storage (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Logical Clocks (2e):
+    file: notes/Logical Clocks (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: ID Generators and Logical Clocks
+    type: subtopic
+  Machine Learning (2e):
+    file: notes/Machine Learning (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Use Cases
+    type: subtopic
+  Maintainability (2e):
+    file: notes/Maintainability (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: topic
+  Many-to-One and Many-to-Many Relationships (2e):
+    file: notes/Many-to-One and Many-to-Many Relationships (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Relational Versus Document Models
+    type: subtopic
+  MapReduce (2e):
+    file: notes/MapReduce (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  Materialized Views and Data Cubes (2e):
+    file: notes/Materialized Views and Data Cubes (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Data Storage for Analytics
+    type: subtopic
+  Materializing and Updating Timelines (2e):
+    file: notes/Materializing and Updating Timelines (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Case Study - Social Network Home Timelines
+    type: subtopic
+  Messaging Systems (2e):
+    file: notes/Messaging Systems (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Transmitting Event Streams
+    type: subtopic
+  Microservices and Serverless (2e):
+    file: notes/Microservices and Serverless (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Distributed Versus Single-Node Systems
+    type: subtopic
+  Modes of Dataflow (2e):
+    file: notes/Modes of Dataflow (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    type: topic
+  Monotonic Versus Time-of-Day Clocks (2e):
+    file: notes/Monotonic Versus Time-of-Day Clocks (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Clocks
+    type: subtopic
+  Multi-Leader Replication (2e):
+    file: notes/Multi-Leader Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    type: topic
+  Multi-Region Operation (2e):
+    file: notes/Multi-Region Operation (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Leaderless Replication
+    type: subtopic
+  Multicolumn and Secondary Indexes (2e):
+    file: notes/Multicolumn and Secondary Indexes (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Multidimensional and Full-Text Indexes (2e):
+    file: notes/Multidimensional and Full-Text Indexes (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    type: topic
+  Network Faults in Practice (2e):
+    file: notes/Network Faults in Practice (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Networks
+    type: subtopic
+  Normalization, Denormalization, and Joins (2e):
+    file: notes/Normalization, Denormalization, and Joins (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Relational Versus Document Models
+    type: subtopic
+  Object Stores (2e):
+    file: notes/Object Stores (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing in Distributed Systems
+    type: subtopic
+  Observing Derived State (2e):
+    file: notes/Observing Derived State (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Unbundling Databases
+    type: subtopic
+  Operability - Making Life Easy for Operations (2e):
+    file: notes/Operability - Making Life Easy for Operations (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Maintainability
+    type: subtopic
+  Operational Versus Analytical Systems (2e):
+    file: notes/Operational Versus Analytical Systems (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    type: topic
+  Operations - Automatic Versus Manual Rebalancing (2e):
+    file: notes/Operations - Automatic Versus Manual Rebalancing (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding of Key-Value Data
+    type: subtopic
+  Operations in the Cloud Era (2e):
+    file: notes/Operations in the Cloud Era (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Cloud Versus Self-Hosting
+    type: subtopic
+  Predictive Analytics (2e):
+    file: notes/Predictive Analytics (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    type: topic
+  Preventing Lost Updates (2e):
+    file: notes/Preventing Lost Updates (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Weak Isolation Levels
+    type: subtopic
+  Principles for Scalability (2e):
+    file: notes/Principles for Scalability (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Scalability
+    type: subtopic
+  Privacy and Tracking (2e):
+    file: notes/Privacy and Tracking (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    type: topic
+  Privacy and Use of Data (2e):
+    file: notes/Privacy and Use of Data (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  Problems with Distributed Systems (2e):
+    file: notes/Problems with Distributed Systems (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Distributed Versus Single-Node Systems
+    type: subtopic
+  Problems with Replication Lag (2e):
+    file: notes/Problems with Replication Lag (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  Process Pauses (2e):
+    file: notes/Process Pauses (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Clocks
+    type: subtopic
+  Processing Streams (2e):
+    file: notes/Processing Streams (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    type: topic
+  Property Graphs (2e):
+    file: notes/Property Graphs (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  Pros and Cons of Cloud Services (2e):
+    file: notes/Pros and Cons of Cloud Services (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Cloud Versus Self-Hosting
+    type: subtopic
+  Pros and Cons of Sharding (2e):
+    file: notes/Pros and Cons of Sharding (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: topic
+  Protocol Buffers (2e):
+    file: notes/Protocol Buffers (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Formats for Encoding Data
+    type: subtopic
+  Query Execution - Compilation and Vectorization (2e):
+    file: notes/Query Execution - Compilation and Vectorization (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Data Storage for Analytics
+    type: subtopic
+  Query Languages (2e):
+    file: notes/Query Languages (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  Read Committed (2e):
+    file: notes/Read Committed (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Weak Isolation Levels
+    type: subtopic
+  Reasoning About Time (2e):
+    file: notes/Reasoning About Time (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Processing Streams
+    type: subtopic
+  Relational Versus Document Models (2e):
+    file: notes/Relational Versus Document Models (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    type: topic
+  Reliability and Fault Tolerance (2e):
+    file: notes/Reliability and Fault Tolerance (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: topic
+  Relying on Linearizability (2e):
+    file: notes/Relying on Linearizability (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Linearizability
+    type: subtopic
+  Relying on Synchronized Clocks (2e):
+    file: notes/Relying on Synchronized Clocks (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Clocks
+    type: subtopic
+  Remembering the Industrial Revolution (2e):
+    file: notes/Remembering the Industrial Revolution (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  Representing Users, Posts, and Follows (2e):
+    file: notes/Representing Users, Posts, and Follows (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Case Study - Social Network Home Timelines
+    type: subtopic
+  Request Routing (2e):
+    file: notes/Request Routing (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: topic
+  Responsibility and Accountability (2e):
+    file: notes/Responsibility and Accountability (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Predictive Analytics
+    type: subtopic
+  Scalability (2e):
+    file: notes/Scalability (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    type: topic
+  Serializability (2e):
+    file: notes/Serializability (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    type: topic
+  Serializable Snapshot Isolation (2e):
+    file: notes/Serializable Snapshot Isolation (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Serializability
+    type: subtopic
+  Serving Derived Data (2e):
+    file: notes/Serving Derived Data (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Use Cases
+    type: subtopic
+  Setting Up New Followers (2e):
+    file: notes/Setting Up New Followers (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  Sharding and Secondary Indexes (2e):
+    file: notes/Sharding and Secondary Indexes (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: topic
+  Sharding by Hash of Key (2e):
+    file: notes/Sharding by Hash of Key (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding of Key-Value Data
+    type: subtopic
+  Sharding by Key Range (2e):
+    file: notes/Sharding by Key Range (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding of Key-Value Data
+    type: subtopic
+  Sharding for Multitenancy (2e):
+    file: notes/Sharding for Multitenancy (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: topic
+  Sharding of Key-Value Data (2e):
+    file: notes/Sharding of Key-Value Data (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    type: topic
+  Shared-Memory, Shared-Disk, and Shared-Nothing Architectures (2e):
+    file: notes/Shared-Memory, Shared-Disk, and Shared-Nothing Architectures (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Scalability
+    type: subtopic
+  Shuffling Data (2e):
+    file: notes/Shuffling Data (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing Models
+    type: subtopic
+  Simple Log Analysis (2e):
+    file: notes/Simple Log Analysis (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing with Unix Tools
+    type: subtopic
+  Simplicity - Managing Complexity (2e):
+    file: notes/Simplicity - Managing Complexity (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Maintainability
+    type: subtopic
+  Single-Leader Replication (2e):
+    file: notes/Single-Leader Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    type: topic
+  Single-Leader Versus Leaderless Replication Performance (2e):
+    file: notes/Single-Leader Versus Leaderless Replication Performance (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Leaderless Replication
+    type: subtopic
+  Single-Object and Multi-Object Operations (2e):
+    file: notes/Single-Object and Multi-Object Operations (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: What Exactly Is a Transaction
+    type: subtopic
+  Skewed Workloads and Relieving Hot Spots (2e):
+    file: notes/Skewed Workloads and Relieving Hot Spots (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    chapter: 7
+    topic: Sharding of Key-Value Data
+    type: subtopic
+  Snapshot Isolation and Repeatable Read (2e):
+    file: notes/Snapshot Isolation and Repeatable Read (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Weak Isolation Levels
+    type: subtopic
+  Solutions for Replication Lag (2e):
+    file: notes/Solutions for Replication Lag (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  Sorting Versus In-Memory Aggregation (2e):
+    file: notes/Sorting Versus In-Memory Aggregation (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    chapter: 11
+    topic: Batch Processing with Unix Tools
+    type: subtopic
+  Stars and Snowflakes - Schemas for Analytics (2e):
+    file: notes/Stars and Snowflakes - Schemas for Analytics (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Relational Versus Document Models
+    type: subtopic
+  State, Streams, and Immutability (2e):
+    file: notes/State, Streams, and Immutability (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Databases and Streams
+    type: subtopic
+  Storage and Indexing for OLTP (2e):
+    file: notes/Storage and Indexing for OLTP (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    type: topic
+  Storing Values Within the Index (2e):
+    file: notes/Storing Values Within the Index (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Storage and Indexing for OLTP
+    type: subtopic
+  Stream Joins (2e):
+    file: notes/Stream Joins (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Processing Streams
+    type: subtopic
+  Surveillance (2e):
+    file: notes/Surveillance (2e).md
+    sources:
+    - ch14.md
+    last_updated: '2026-09-02'
+    chapter: 14
+    topic: Privacy and Tracking
+    type: subtopic
+  Sync Engines and Local-First Software (2e):
+    file: notes/Sync Engines and Local-First Software (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Multi-Leader Replication
+    type: subtopic
+  Synchronous Versus Asynchronous Networks (2e):
+    file: notes/Synchronous Versus Asynchronous Networks (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Networks
+    type: subtopic
+  Synchronous Versus Asynchronous Replication (2e):
+    file: notes/Synchronous Versus Asynchronous Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Single-Leader Replication
+    type: subtopic
+  System Model and Reality (2e):
+    file: notes/System Model and Reality (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Knowledge, Truth, and Lies
+    type: subtopic
+  Systems of Record and Derived Data (2e):
+    file: notes/Systems of Record and Derived Data (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    chapter: 1
+    topic: Operational Versus Analytical Systems
+    type: subtopic
+  The Cost of Linearizability (2e):
+    file: notes/The Cost of Linearizability (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Linearizability
+    type: subtopic
+  The Cypher Query Language (2e):
+    file: notes/The Cypher Query Language (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  The End-to-End Argument for Databases (2e):
+    file: notes/The End-to-End Argument for Databases (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Aiming for Correctness
+    type: subtopic
+  The Limitations of TCP (2e):
+    file: notes/The Limitations of TCP (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Networks
+    type: subtopic
+  The Majority Rules (2e):
+    file: notes/The Majority Rules (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Knowledge, Truth, and Lies
+    type: subtopic
+  The Many Faces of Consensus (2e):
+    file: notes/The Many Faces of Consensus (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Consensus
+    type: subtopic
+  The Meaning of ACID (2e):
+    file: notes/The Meaning of ACID (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: What Exactly Is a Transaction
+    type: subtopic
+  The Merits of Schemas (2e):
+    file: notes/The Merits of Schemas (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    chapter: 5
+    topic: Formats for Encoding Data
+    type: subtopic
+  The Object-Relational Mismatch (2e):
+    file: notes/The Object-Relational Mismatch (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Relational Versus Document Models
+    type: subtopic
+  Timeliness and Integrity (2e):
+    file: notes/Timeliness and Integrity (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Aiming for Correctness
+    type: subtopic
+  Timeouts and Unbounded Delays (2e):
+    file: notes/Timeouts and Unbounded Delays (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    topic: Unreliable Networks
+    type: subtopic
+  Transmitting Event Streams (2e):
+    file: notes/Transmitting Event Streams (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    type: topic
+  Triple Stores and SPARQL (2e):
+    file: notes/Triple Stores and SPARQL (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Graph-Like Data Models
+    type: subtopic
+  Trust, but Verify (2e):
+    file: notes/Trust, but Verify (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    topic: Aiming for Correctness
+    type: subtopic
+  Two-Phase Commit (2e):
+    file: notes/Two-Phase Commit (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Distributed Transactions
+    type: subtopic
+  Two-Phase Locking (2e):
+    file: notes/Two-Phase Locking (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Serializability
+    type: subtopic
+  Unbundling Databases (2e):
+    file: notes/Unbundling Databases (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    chapter: 13
+    type: topic
+  Understanding Load (2e):
+    file: notes/Understanding Load (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Scalability
+    type: subtopic
+  Unreliable Clocks (2e):
+    file: notes/Unreliable Clocks (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    type: topic
+  Unreliable Networks (2e):
+    file: notes/Unreliable Networks (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    chapter: 9
+    type: topic
+  Use of Response Time Metrics (2e):
+    file: notes/Use of Response Time Metrics (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    chapter: 2
+    topic: Describing Performance
+    type: subtopic
+  Uses of Stream Processing (2e):
+    file: notes/Uses of Stream Processing (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    chapter: 12
+    topic: Processing Streams
+    type: subtopic
+  Vector Embeddings (2e):
+    file: notes/Vector Embeddings (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    chapter: 4
+    topic: Multidimensional and Full-Text Indexes
+    type: subtopic
+  Weak Isolation Levels (2e):
+    file: notes/Weak Isolation Levels (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    type: topic
+  What Exactly Is a Transaction (2e):
+    file: notes/What Exactly Is a Transaction (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    type: topic
+  What Makes a System Linearizable (2e):
+    file: notes/What Makes a System Linearizable (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    chapter: 10
+    topic: Linearizability
+    type: subtopic
+  When to Use Which Model (2e):
+    file: notes/When to Use Which Model (2e).md
+    sources:
+    - ch03.md
+    last_updated: '2026-09-02'
+    chapter: 3
+    topic: Relational Versus Document Models
+    type: subtopic
+  Write Skew and Phantoms (2e):
+    file: notes/Write Skew and Phantoms (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    chapter: 8
+    topic: Weak Isolation Levels
+    type: subtopic
+  Writing to the Database When a Node Is Down (2e):
+    file: notes/Writing to the Database When a Node Is Down (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    chapter: 6
+    topic: Leaderless Replication
+    type: subtopic
+concepts:
+  ACID (2e):
+    file: concepts/ACID (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    type: concept
+  Apache Kafka (2e):
+    file: concepts/Apache Kafka (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  B-Trees (2e):
+    file: concepts/B-Trees (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    type: concept
+  Backpressure (2e):
+    file: concepts/Backpressure (2e).md
+    sources:
+    - ch12.md
+    - ch02.md
+    last_updated: '2026-09-02'
+    type: concept
+  Byzantine Faults (2e):
+    file: concepts/Byzantine Faults (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    type: concept
+  Causality (2e):
+    file: concepts/Causality (2e).md
+    sources:
+    - ch10.md
+    - ch09.md
+    last_updated: '2026-09-02'
+    type: concept
+  Change Data Capture (2e):
+    file: concepts/Change Data Capture (2e).md
+    sources:
+    - ch12.md
+    - ch13.md
+    last_updated: '2026-09-02'
+    type: concept
+  Clock Skew (2e):
+    file: concepts/Clock Skew (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    type: concept
+  Column-Oriented Storage (2e):
+    file: concepts/Column-Oriented Storage (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    type: concept
+  Compaction (2e):
+    file: concepts/Compaction (2e).md
+    sources:
+    - ch04.md
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Consensus (2e):
+    file: concepts/Consensus (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    type: concept
+  Consistent Hashing (2e):
+    file: concepts/Consistent Hashing (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    type: concept
+  Derived Data (2e):
+    file: concepts/Derived Data (2e).md
+    sources:
+    - ch13.md
+    last_updated: '2026-09-02'
+    type: concept
+  Event Sourcing (2e):
+    file: concepts/Event Sourcing (2e).md
+    sources:
+    - ch03.md
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Eventual Consistency (2e):
+    file: concepts/Eventual Consistency (2e).md
+    sources:
+    - ch06.md
+    - ch10.md
+    last_updated: '2026-09-02'
+    type: concept
+  Exactly-Once Semantics (2e):
+    file: concepts/Exactly-Once Semantics (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Fencing Tokens (2e):
+    file: concepts/Fencing Tokens (2e).md
+    sources:
+    - ch09.md
+    last_updated: '2026-09-02'
+    type: concept
+  Hot Spots (2e):
+    file: concepts/Hot Spots (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    type: concept
+  Idempotence (2e):
+    file: concepts/Idempotence (2e).md
+    sources:
+    - ch12.md
+    - ch13.md
+    last_updated: '2026-09-02'
+    type: concept
+  LSM-Trees (2e):
+    file: concepts/LSM-Trees (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    type: concept
+  Linearizability (2e):
+    file: concepts/Linearizability (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    type: concept
+  MapReduce (2e):
+    file: concepts/MapReduce (2e).md
+    sources:
+    - ch11.md
+    last_updated: '2026-09-02'
+    type: concept
+  Materialized Views (2e):
+    file: concepts/Materialized Views (2e).md
+    sources:
+    - ch04.md
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Object Storage (2e):
+    file: concepts/Object Storage (2e).md
+    sources:
+    - ch01.md
+    - ch11.md
+    last_updated: '2026-09-02'
+    type: concept
+  Observability (2e):
+    file: concepts/Observability (2e).md
+    sources:
+    - ch02.md
+    last_updated: '2026-09-02'
+    type: concept
+  Quorum (2e):
+    file: concepts/Quorum (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    type: concept
+  Replication (2e):
+    file: concepts/Replication (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    type: concept
+  Schema Evolution (2e):
+    file: concepts/Schema Evolution (2e).md
+    sources:
+    - ch05.md
+    last_updated: '2026-09-02'
+    type: concept
+  Separation of Storage and Compute (2e):
+    file: concepts/Separation of Storage and Compute (2e).md
+    sources:
+    - ch01.md
+    - ch04.md
+    - ch11.md
+    last_updated: '2026-09-02'
+    type: concept
+  Serializability (2e):
+    file: concepts/Serializability (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    type: concept
+  Sharding (2e):
+    file: concepts/Sharding (2e).md
+    sources:
+    - ch07.md
+    last_updated: '2026-09-02'
+    type: concept
+  Single-Node Systems (2e):
+    file: concepts/Single-Node Systems (2e).md
+    sources:
+    - ch01.md
+    last_updated: '2026-09-02'
+    type: concept
+  Snapshot Isolation (2e):
+    file: concepts/Snapshot Isolation (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    type: concept
+  Split Brain (2e):
+    file: concepts/Split Brain (2e).md
+    sources:
+    - ch06.md
+    - ch09.md
+    - ch10.md
+    last_updated: '2026-09-02'
+    type: concept
+  Stream-Table Join (2e):
+    file: concepts/Stream-Table Join (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Sync Engines (2e):
+    file: concepts/Sync Engines (2e).md
+    sources:
+    - ch06.md
+    last_updated: '2026-09-02'
+    type: concept
+  Total Order Broadcast (2e):
+    file: concepts/Total Order Broadcast (2e).md
+    sources:
+    - ch10.md
+    last_updated: '2026-09-02'
+    type: concept
+  Two-Phase Commit (2e):
+    file: concepts/Two-Phase Commit (2e).md
+    sources:
+    - ch08.md
+    last_updated: '2026-09-02'
+    type: concept
+  Vector Search (2e):
+    file: concepts/Vector Search (2e).md
+    sources:
+    - ch04.md
+    last_updated: '2026-09-02'
+    type: concept
+  Windowing (2e):
+    file: concepts/Windowing (2e).md
+    sources:
+    - ch12.md
+    last_updated: '2026-09-02'
+    type: concept
+  Write-Ahead Log (2e):
+    file: concepts/Write-Ahead Log (2e).md
+    sources:
+    - ch04.md
+    - ch08.md
+    last_updated: '2026-09-02'
+    type: concept

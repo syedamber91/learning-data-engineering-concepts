@@ -33,3 +33,4 @@ Single-leader replication has one choke point: every write must reach the one le
 - [[Leaderless Replication]] — the other conflict-embracing architecture
 - [[Detecting Concurrent Writes]] — shared machinery for concurrency detection
 - [[Consistent Prefix Reads]] — the causality anomaly that reappears between leaders
+- 2nd edition: [[Multi-Leader Replication (2e)]] — the same material in the 2nd edition

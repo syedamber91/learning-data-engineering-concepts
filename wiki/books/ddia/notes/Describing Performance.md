@@ -31,3 +31,4 @@ High percentiles — *tail latencies* — matter commercially. Amazon specifies 
 - [[Describing Load]] — the load parameters these metrics respond to
 - [[Approaches for Coping with Load]] — architecture choices these numbers drive
 - [[Timeouts and Unbounded Delays]] — Ch 8 on variable delay in distributed systems
+- 2nd edition: [[Describing Performance (2e)]] — the same material in the 2nd edition

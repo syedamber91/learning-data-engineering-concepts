@@ -41,3 +41,4 @@ Commercial-era brokers (TIBCO, IBM WebSphere, webMethods); open-source RabbitMQ,
 - [[Partitioned Logs]] — Kafka's log-structured take on the broker
 - [[Language-Specific Formats]] — why Akka's default serializer blocks upgrades
 - [[Idempotence]] — deduplication concern shared with RPC retries
+- 2nd edition: [[Event-Driven Architectures (2e)]] — the same material in the 2nd edition

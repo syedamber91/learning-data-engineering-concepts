@@ -31,3 +31,4 @@ The systems in this book are shared-nothing: independent machines, each with pri
 - [[Handling Node Outages]] — failover decisions that hinge on fault detection
 - [[Backpressure]] — TCP flow control as a source of sender-side queueing
 - [[Detecting Concurrent Writes]] — what happens when messages race
+- 2nd edition: [[Unreliable Networks (2e)]] — the same material in the 2nd edition

@@ -35,3 +35,4 @@ The verdict: acceptable only for very transient purposes (e.g., short-lived cach
 - [[JSON, XML, and Binary Variants]] — the cross-language textual alternative
 - [[Thrift and Protocol Buffers]] — schema-driven formats that fix these flaws
 - [[Evolvability - Making Change Easy]] — the design goal these formats undermine
+- 2nd edition: [[Language-Specific Formats (2e)]] — the same material in the 2nd edition

@@ -45,3 +45,4 @@ Every major relational database (e.g., MySQL's InnoDB, SQL Server, PostgreSQL) i
 - [[Write-Ahead Log]] — crash-recovery backbone of in-place updates
 - [[Other Indexing Structures]] — clustered/covering indexes built on B-trees
 - [[b-tree]] — Vu's condensed entity note on the same in-place, page-splitting design, framed specifically around its write-amplification cost relative to an LSM-tree.
+- 2nd edition: [[B-Trees (2e)]] — the same material in the 2nd edition

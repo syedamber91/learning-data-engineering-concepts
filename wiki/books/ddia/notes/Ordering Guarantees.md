@@ -31,3 +31,4 @@ Ordering has recurred throughout the book: the leader in single-leader [[Replica
 - [[Detecting Concurrent Writes]] — happened-before in leaderless stores
 - [[Distributed Transactions and Consensus]] — where finalizing the order leads
 - [[Partitioned Logs]] — the log abstraction reappearing in stream processing
+- 2nd edition: [[ID Generators and Logical Clocks (2e)]], [[Linearizable ID Generators (2e)]], [[Logical Clocks (2e)]], [[The Many Faces of Consensus (2e)]] — the 2nd edition split this across several notes

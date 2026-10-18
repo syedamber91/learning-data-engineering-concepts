@@ -40,3 +40,4 @@ Three families of problems define distributed systems. Packets — and their rep
 - next: [[Ch 09 - Consistency and Consensus]] — the solutions to these problems
 - [[Problems with Replication Lag]] — Ch 5 anomalies rooted in these faults
 - [[Handling Node Outages]] — failover mechanics that need fault detection
+- 2nd edition: [[Ch 09 - The Trouble with Distributed Systems (2e)]] — the same material in the 2nd edition

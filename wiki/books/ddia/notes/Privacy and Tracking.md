@@ -28,3 +28,4 @@ Separate from what algorithms *decide* is what data collection itself *is*. When
 - [[Predictive Analytics]] — what the collected data gets used to decide
 - [[Combining Specialized Tools by Deriving Data]] — the derived datasets consent can't cover
 - [[State, Streams, and Immutability]] — immutability vs. the duty to purge
+- 2nd edition: [[Privacy and Tracking (2e)]] — the same material in the 2nd edition

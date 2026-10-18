@@ -35,3 +35,4 @@ Two forces changed that. Growing data and compute demands push applications onto
 - [[Software Errors]] — the correlated, systematic counterpart to random hardware faults
 - [[Handling Node Outages]] — Ch 5: replication as software machine-tolerance
 - [[Replication]] — core technique for surviving machine loss
+- 2nd edition: [[Hardware and Software Faults (2e)]] — the same material in the 2nd edition

@@ -36,3 +36,4 @@ Three routes deliver serializability. Literal serial execution works when transa
 - previous: [[Ch 06 - Partitioning]] — partial failure across partitions is exactly what transactions must tame
 - next: [[Ch 08 - The Trouble with Distributed Systems]] — the fault landscape when transactions span machines
 - [[Ch 09 - Consistency and Consensus]] — distributed transactions, atomic commit, and [[Two-Phase Commit]]
+- 2nd edition: [[Ch 08 - Transactions (2e)]], [[What Exactly Is a Transaction (2e)]] — the 2nd edition split this across several notes

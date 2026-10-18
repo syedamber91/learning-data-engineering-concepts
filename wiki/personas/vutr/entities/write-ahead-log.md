@@ -21,3 +21,6 @@ The payoff shows up on crash recovery: if the machine goes down, the [[memtable]
 
 ## Related in the other wiki
 - [[Write-Ahead Log]] — DDIA traces the same "record before applying" principle back to B-tree crash recovery and forward to replication logs and CDC — the general form of the durability guarantee this note grounds specifically in Vu's LSM-tree write path.
+
+## Related topics
+- [[Write-Ahead Log (2e)]] — the 2nd-edition concept page.

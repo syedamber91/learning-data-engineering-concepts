@@ -18,3 +18,6 @@ Like [[lambda-architecture]], Vu classifies Kappa as a pattern rather than a ful
 
 ## Related in the other wiki
 - [[Batch and Stream Processing]] — DDIA's "unification instead" alternative — replaying history through one stream-processing codebase via log replay and exactly-once semantics — describes the same idea this note names as Kappa.
+
+## Related topics
+- [[Batch and Stream Processing (2e)]] — the 2nd edition reports this as the approach that won.

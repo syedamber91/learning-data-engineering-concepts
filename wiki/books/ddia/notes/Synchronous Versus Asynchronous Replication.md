@@ -45,3 +45,4 @@ When a leader forwards a write to its followers, it has a choice: block until a 
 - [[Problems with Replication Lag]] — anomalies caused by lagging followers
 - [[Eventual Consistency]] — the guarantee async followers actually give
 - [[Fault-Tolerant Consensus]] — theory linking replication and agreement
+- 2nd edition: [[Synchronous Versus Asynchronous Replication (2e)]] — the same material in the 2nd edition

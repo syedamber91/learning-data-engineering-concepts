@@ -39,3 +39,4 @@ Linearizability puts every operation on one totally ordered timeline against a s
 - next: [[Ch 10 - Batch Processing]] — Part III begins with derived data
 - [[Serializable Snapshot Isolation (SSI)]] — serializability, the isolation guarantee not to confuse with linearizability
 - [[Leaders and Followers]] — single-leader replication, consensus's everyday disguise
+- 2nd edition: [[Ch 10 - Consistency and Consensus (2e)]] — the same material in the 2nd edition

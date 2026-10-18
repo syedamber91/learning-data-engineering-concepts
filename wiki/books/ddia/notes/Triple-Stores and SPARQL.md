@@ -40,3 +40,4 @@ Datomic, AllegroGraph (triple-stores); Turtle/N3, RDF/XML (formats); Apache Jena
 - [[Property Graphs]] — the equivalent model in other words
 - [[The Cypher Query Language]] — pattern matching descended from SPARQL
 - [[The Foundation - Datalog]] — triples generalized to predicate(subject, object)
+- 2nd edition: [[Triple Stores and SPARQL (2e)]] — the same material in the 2nd edition

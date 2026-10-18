@@ -35,3 +35,4 @@ The system's side of the bargain — good *operability* — means making routine
 - [[Human Errors]] — monitoring and rollback serve both reliability and operability
 - [[Simplicity - Managing Complexity]] — a comprehensible system is an operable one
 - [[Hardware Faults]] — machine-independence enables zero-downtime maintenance
+- 2nd edition: [[Operability - Making Life Easy for Operations (2e)]] — the same material in the 2nd edition

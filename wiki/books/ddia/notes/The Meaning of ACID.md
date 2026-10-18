@@ -35,3 +35,4 @@ The transactional style dates to IBM System R (1975) and survives nearly unchang
 - [[Snapshot Isolation and Repeatable Read]] — what Oracle's "serializable" really is
 - [[Reliability]] — why perfect durability can't exist
 - [[CAP Theorem]] — yet another, different meaning of "consistency"
+- 2nd edition: [[The Meaning of ACID (2e)]] — the same material in the 2nd edition

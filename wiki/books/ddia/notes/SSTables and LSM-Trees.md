@@ -46,3 +46,4 @@ LevelDB and RocksDB are embeddable LSM libraries (LevelDB is an alternative Riak
 - [[Partitioned Logs]] — logs as a cross-system data backbone
 - [[lsm-tree-storage-engines]] — vutr's own synthesis of the LSM write path (sorted memtable, WAL, SSTable flush, bloom filter, compaction) mirrors this note's mechanism, extended with Vu's OLAP-engine examples like BigQuery Vortex.
 - [[big-tech-case-studies-batch-2-apple-github-pinterest-canva]] — this note's own examples name both RocksDB and Cassandra as concrete LSM-tree implementations; vutr's curated case studies put RocksDB directly underneath Pinterest's Rockstorewidecolumn and Cassandra alongside FoundationDB inside Apple's CloudKit.
+- 2nd edition: [[Log-Structured Storage (2e)]] — the same material in the 2nd edition

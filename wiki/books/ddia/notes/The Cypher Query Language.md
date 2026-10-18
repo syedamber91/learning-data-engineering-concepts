@@ -42,3 +42,4 @@ Neo4j (origin system); syntactic kinship with SPARQL ([[Triple-Stores and SPARQL
 - [[Property Graphs]] — the data model Cypher queries
 - [[Graph Queries in SQL]] — the same query, painfully, in SQL
 - [[Declarative Queries on the Web]] — why leaving strategy to the engine wins
+- 2nd edition: [[The Cypher Query Language (2e)]] — the same material in the 2nd edition

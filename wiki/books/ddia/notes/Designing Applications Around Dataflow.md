@@ -34,3 +34,4 @@ Oz, Juttle, Elm, Bloom, VisiCalc; Mesos/YARN/Docker/Kubernetes; tuple spaces; Ka
 - [[Stream Joins]] — mechanics and time-dependence of the enrichment join
 - [[Dataflow Through Services - REST and RPC]] — the synchronous style being replaced
 - [[Event Sourcing]] — the log-of-events substrate this pattern assumes
+- 2nd edition: [[Designing Applications Around Dataflow (2e)]] — the same material in the 2nd edition

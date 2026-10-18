@@ -31,3 +31,4 @@ Applications lean on clocks constantly — has this request timed out, what is t
 - [[Snapshot Isolation and Repeatable Read]] — the isolation level Spanner globalizes
 - [[Ordering and Causality]] — Ch 9's deeper treatment of event ordering
 - [[Lamport Timestamps]] — logical clocks as the safe alternative
+- 2nd edition: [[Unreliable Clocks (2e)]] — the same material in the 2nd edition

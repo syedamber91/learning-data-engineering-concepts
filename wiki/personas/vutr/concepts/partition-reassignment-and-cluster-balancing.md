@@ -24,3 +24,6 @@ Start with the misconception: adding a broker to a Kafka cluster does not balanc
 
 ## Related in the other wiki
 - [[Rebalancing Partitions]] — DDIA's three requirements for a good rebalance (fair load afterwards, availability during, minimal data moved) are the yardstick against which Kafka's reassignment mechanisms — the error-prone native tool, Cruise Control's planning, and AutoMQ's data-free metadata edit — should be judged.
+
+## Related topics
+- [[Operations - Automatic Versus Manual Rebalancing (2e)]] — the 2nd edition adds DynamoDB's minutes-scale autoscaling and the warning that shard splitting may not keep up at peak write throughput.

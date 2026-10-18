@@ -30,3 +30,4 @@ Flight control systems; Bitcoin and peer-to-peer blockchains; the Two Generals a
 - [[System Model and Reality]] — sibling: Byzantine as the harshest node-failure model
 - [[Fault-Tolerant Consensus]] — Ch 9 consensus in the non-Byzantine setting
 - [[Consensus]] — the agreement problem the generals dramatize
+- 2nd edition: [[Byzantine Faults (2e)]] — the same material in the 2nd edition

@@ -27,3 +27,7 @@ The paper's own design principles, as Vu lists them: never rely on any notion of
 ## Related in the other wiki
 - [[Reasoning About Time]] — DDIA's note on the ambiguity of event-time vs. processing-time windows credits the Dataflow model with formalizing watermarks and corrections, the same never-assume-completeness principle detailed here.
 - [[Dataflow]] — DDIA's broader concept ("which process produces data that which process consumes," culminating in Ch.12's "the log is the API") is the general idea; this note is the specific, named Google model — with its own four design questions and unbounded/bounded terminology — that also happens to share the word.
+
+## Related topics
+- [[Reasoning About Time (2e)]] — the model the 2nd edition credits with formalizing watermarks and corrections.
+- [[Windowing (2e)]] — the 2nd-edition concept page.

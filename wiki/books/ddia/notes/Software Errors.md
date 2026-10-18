@@ -38,3 +38,4 @@ There is no single fix for systematic faults; the defense is an accumulation of 
 - [[Human Errors]] — the third fault class: the people running the system
 - [[Unreliable Clocks]] — Ch 8: why time-related assumptions are especially treacherous
 - [[Faults and Partial Failures]] — Ch 8: fault reasoning at distributed scale
+- 2nd edition: [[Hardware and Software Faults (2e)]] — the same material in the 2nd edition

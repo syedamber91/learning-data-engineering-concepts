@@ -31,3 +31,4 @@ A system that is reliable today can degrade tomorrow simply because load grew �
 - [[Maintainability]] — distributed designs trade simplicity for scale
 - [[Partitioning]] — the book's core mechanism for scaling out
 - [[Replication]] — companion mechanism for distributing load
+- 2nd edition: [[Scalability (2e)]] — the same material in the 2nd edition

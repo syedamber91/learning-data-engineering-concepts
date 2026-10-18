@@ -41,3 +41,4 @@ The standard implementation: pin each user to a single replica — for instance,
 - [[Reading Your Own Writes]] — sibling guarantee for one's own writes
 - [[Consistent Prefix Reads]] — sibling guarantee for causal order
 - [[Limitations of Quorum Consistency]] — why quorums don't grant this either
+- 2nd edition: [[Problems with Replication Lag (2e)]] — the same material in the 2nd edition

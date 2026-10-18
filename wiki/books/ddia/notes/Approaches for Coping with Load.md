@@ -34,3 +34,4 @@ A crucial asymmetry: distributing *stateless* services is easy; making *stateful
 - [[Describing Performance]] — the metrics that tell you when to re-architect
 - [[Rebalancing Partitions]] — Ch 6 on automatic vs. manual scaling operations
 - [[Replication]] — with partitioning, the machinery of scale-out
+- 2nd edition: [[Shared-Memory, Shared-Disk, and Shared-Nothing Architectures (2e)]] — the same material in the 2nd edition

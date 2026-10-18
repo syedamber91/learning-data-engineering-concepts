@@ -15,3 +15,6 @@ The gap between sequential and random I/O is the entire reason the LSM-tree exis
 The LSM-tree avoids that penalty on the hot path. Setting aside the [[write-ahead-log]] write, which both engines pay, the LSM-tree's heavy I/O is flushing the [[memtable]] to a new [[sstable]] — and because the Memtable is already sorted, that flush is a single sequential pass rather than an in-place page overwrite. Vu is explicit that this sequential-versus-random distinction is what lets the LSM-tree sustain higher write throughput than the B-Tree in most cases. Reads later have to reverse the search order (Memtable, then SSTables level by level), but the write side is where sequential I/O pays off.
 
 *See also: [[memtable]] · [[sstable]] · [[b-tree]] · [[write-amplification-tradeoff]]*
+
+## Related topics
+- [[Comparing B-Trees and LSM-Trees (2e)]] — the 2nd edition argues this trade-off explicitly against how SSDs actually behave, which the 1st edition largely assumed.

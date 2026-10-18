@@ -22,3 +22,7 @@ The property has one hard requirement he calls out explicitly: it has to be end-
 This is also a design decision that recurs by name across every layer he writes about, not just orchestration: the same overwrite/MERGE/no-non-deterministic-functions logic he applies to a processing step, he applies again to serving-layer writes, where the added twist is that the *sink itself* — not just the job re-running — has to detect and absorb a duplicate logical write (see the serving-side treatment in [[safe-writes-and-schema-evolution-in-serving]]).
 
 *See also: [[kubernetes-executor]] · [[assets]] · [[celery-executor]] · [[trigger-rules]] · [[local-executor]] · [[xcom]] · [[pipeline-failure-recovery-and-checkpointing]] · [[backfilling-data-pipelines]]*
+
+## Related topics
+- [[Idempotence (2e)]] — the 2nd-edition concept page.
+- [[The End-to-End Argument for Databases (2e)]] — the request-ID mechanism the book builds this on.

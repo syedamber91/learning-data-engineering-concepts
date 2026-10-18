@@ -29,3 +29,4 @@ The book's closing argument steps outside engineering: every system is built for
 - [[Thinking About Data Systems]] — Ch 1's framing of what we're responsible for building
 - [[Observing Derived State]] — the same dataflow machinery, aimed at people
 - [[Aiming for Correctness]] — correctness toward systems; this topic is correctness toward humans
+- 2nd edition: [[Ch 14 - Doing the Right Thing (2e)]] — the same material in the 2nd edition
