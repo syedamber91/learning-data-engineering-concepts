@@ -6,9 +6,16 @@
         "source": "directory",
         "path": "./vendor/claude-obsidian"
       }
+    },
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
     }
   },
   "enabledPlugins": {
-    "claude-obsidian@agricidaniel-claude-obsidian": true
+    "claude-obsidian@agricidaniel-claude-obsidian": true,
+    "mattpocock-skills@mattpocock": true
   }
 }
